@@ -290,16 +290,19 @@ class LinkedList:
     def split(str initial_data_string, str delim):
         """ Creates linked list from passed string
 
-        :param delim:
-        :param initial_data_string:
+        :param delim: (str) Split string using delim
+        :param initial_data_string: (str)   String value to split by delim
         :return:
         """
         ll = LinkedList()
         cdef str chunk = ""
+        cdef str val
         for val in initial_data_string:
             if val != delim:
                 chunk += val
             else:
                 ll.append(chunk)
                 chunk = ""
+        if chunk != "":
+            ll.append(chunk)
         return ll

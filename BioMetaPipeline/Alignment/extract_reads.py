@@ -12,8 +12,10 @@ def parse_filter_string(filter_string):
     :return:
     """
     data_string_as_list = LinkedList.split(filter_string, ",")
-    print(data_string_as_list)
-    filter_dict = {}
+    filter_dict = {"MAPPING": data_string_as_list[0],
+                   "QUAL_MIN": data_string_as_list[1],
+                   "PAIRING": data_string_as_list[2]}
+    return filter_dict
 
 
 if __name__ == "__main__":
@@ -27,5 +29,4 @@ if __name__ == "__main__":
     ap = ArgParse(args_list, description="Collected reads matching criteria")
 
     # bamfile = pysam.AlignmentFile(ap.args.alignment_file, "rb")
-    parse_filter_string(ap.args.filter_string)
 
