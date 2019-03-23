@@ -285,3 +285,21 @@ class LinkedList:
         while i < self.length:
             self.__next__()
             i += 1
+
+    @staticmethod
+    def split(str initial_data_string, str delim):
+        """ Creates linked list from passed string
+
+        :param delim:
+        :param initial_data_string:
+        :return:
+        """
+        ll = LinkedList()
+        cdef str chunk = ""
+        for val in initial_data_string:
+            if val != delim:
+                chunk += val
+            else:
+                ll.append(chunk)
+                chunk = ""
+        return ll

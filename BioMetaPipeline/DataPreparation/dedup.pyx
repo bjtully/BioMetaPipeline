@@ -3,8 +3,8 @@
 import os
 import luigi
 import subprocess
-from Accessories.ops import get_prefix
-from Pipeline.DataPreparation.zip import Gunzip
+from BioMetaPipeline.Accessories.ops import get_prefix
+from BioMetaPipeline.DataPreparation.zip import Gunzip
 
 
 class Dedup(luigi.Task):

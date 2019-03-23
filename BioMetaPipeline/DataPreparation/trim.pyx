@@ -3,7 +3,7 @@
 import os
 import luigi
 import subprocess
-from Accessories.ops import get_prefix
+from BioMetaPipeline.Accessories.ops import get_prefix
 
 class Trim(luigi.Task):
     added_flags = luigi.ListParameter(default=[])

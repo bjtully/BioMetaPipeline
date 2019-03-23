@@ -1,7 +1,7 @@
 import os
 import luigi
 import subprocess
-from Accessories.ops import get_prefix
+from BioMetaPipeline.Accessories.ops import get_prefix
 
 
 class Sambamba(luigi.Task):

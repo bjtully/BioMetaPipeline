@@ -3,12 +3,12 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "name": "Pipeline.Accessories.DataStructures.linked_list",
+        "name": "BioMetaPipeline.Accessories.DataStructures.linked_list",
         "sources": [
             "Accessories/DataStructures/linked_list.pyx"
         ]
     },
-    "module_name": "Pipeline.Accessories.DataStructures.linked_list"
+    "module_name": "BioMetaPipeline.Accessories.DataStructures.linked_list"
 }
 END: Cython Metadata */
 
@@ -479,8 +479,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__Pipeline__Accessories__DataStructures__linked_list
-#define __PYX_HAVE_API__Pipeline__Accessories__DataStructures__linked_list
+#define __PYX_HAVE__BioMetaPipeline__Accessories__DataStructures__linked_list
+#define __PYX_HAVE_API__BioMetaPipeline__Accessories__DataStructures__linked_list
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -685,16 +685,16 @@ static const char *__pyx_f[] = {
 };
 
 /*--- Type declarations ---*/
-struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__;
+struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__;
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":120
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":120
  *             return self
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
  *         """ Creates iterator that yields values of nodes
  * 
  */
-struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ {
+struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ {
   PyObject_HEAD
   PyObject *__pyx_v_self;
 };
@@ -995,8 +995,22 @@ static PyObject* __Pyx__CallUnboundCMethod0(__Pyx_CachedCFunction* cfunc, PyObje
 #define __Pyx_CallUnboundCMethod0(cfunc, self)  __Pyx__CallUnboundCMethod0(cfunc, self)
 #endif
 
+/* ArgTypeTest.proto */
+static CYTHON_INLINE int __Pyx_ArgTypeTest(PyObject *obj, PyTypeObject *type, int none_allowed,
+    const char *name, int exact);
+
+/* unicode_iter.proto */
+static CYTHON_INLINE int __Pyx_init_unicode_iteration(
+    PyObject* ustring, Py_ssize_t *length, void** data, int *kind);
+
 /* IncludeStringH.proto */
 #include <string.h>
+
+/* BytesEquals.proto */
+static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals);
+
+/* UnicodeEquals.proto */
+static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int equals);
 
 /* FetchCommonType.proto */
 static PyTypeObject* __Pyx_FetchCommonType(PyTypeObject* type);
@@ -1156,18 +1170,22 @@ static int __Pyx_check_binary_version(void);
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 
-/* Module declarations from 'Pipeline.Accessories.DataStructures.linked_list' */
-static PyTypeObject *__pyx_ptype_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ = 0;
-#define __Pyx_MODULE_NAME "Pipeline.Accessories.DataStructures.linked_list"
-int __pyx_module_is_main_Pipeline__Accessories__DataStructures__linked_list = 0;
+/* Module declarations from 'BioMetaPipeline.Accessories.DataStructures.linked_list' */
+static PyTypeObject *__pyx_ptype_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ = 0;
+#define __Pyx_MODULE_NAME "BioMetaPipeline.Accessories.DataStructures.linked_list"
+int __pyx_module_is_main_BioMetaPipeline__Accessories__DataStructures__linked_list = 0;
 
-/* Implementation of 'Pipeline.Accessories.DataStructures.linked_list' */
+/* Implementation of 'BioMetaPipeline.Accessories.DataStructures.linked_list' */
+static PyObject *__pyx_builtin_staticmethod;
 static PyObject *__pyx_builtin_TypeError;
 static PyObject *__pyx_builtin_ValueError;
 static const char __pyx_k_i[] = "i";
+static const char __pyx_k__5[] = "";
+static const char __pyx_k_ll[] = "ll";
 static const char __pyx_k_doc[] = "__doc__";
 static const char __pyx_k_len[] = "__len__";
 static const char __pyx_k_pop[] = "pop";
+static const char __pyx_k_val[] = "val";
 static const char __pyx_k_Node[] = "Node";
 static const char __pyx_k_args[] = "args";
 static const char __pyx_k_data[] = "data";
@@ -1185,10 +1203,13 @@ static const char __pyx_k_send[] = "send";
 static const char __pyx_k_step[] = "step";
 static const char __pyx_k_stop[] = "stop";
 static const char __pyx_k_test[] = "__test__";
+static const char __pyx_k_chunk[] = "chunk";
 static const char __pyx_k_close[] = "close";
+static const char __pyx_k_delim[] = "delim";
 static const char __pyx_k_index[] = "index";
 static const char __pyx_k_other[] = "other";
 static const char __pyx_k_slots[] = "__slots__";
+static const char __pyx_k_split[] = "split";
 static const char __pyx_k_start[] = "start";
 static const char __pyx_k_throw[] = "throw";
 static const char __pyx_k_value[] = "value";
@@ -1215,10 +1236,12 @@ static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_old_length[] = "old_length";
 static const char __pyx_k_Node___init[] = "Node.__init__";
 static const char __pyx_k_move_to_end[] = "_move_to_end";
+static const char __pyx_k_staticmethod[] = "staticmethod";
 static const char __pyx_k_old_next_node[] = "old_next_node";
 static const char __pyx_k_LinkedList_pop[] = "LinkedList.pop";
 static const char __pyx_k_Value_not_found[] = "Value not found";
 static const char __pyx_k_LinkedList___len[] = "LinkedList.__len__";
+static const char __pyx_k_LinkedList_split[] = "LinkedList.split";
 static const char __pyx_k_LinkedList___iadd[] = "LinkedList.__iadd__";
 static const char __pyx_k_LinkedList___init[] = "LinkedList.__init__";
 static const char __pyx_k_LinkedList___isub[] = "LinkedList.__isub__";
@@ -1231,6 +1254,7 @@ static const char __pyx_k_LinkedList_remove[] = "LinkedList.remove";
 static const char __pyx_k_LinkedList_to_list[] = "LinkedList.to_list";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_Invalid_type_passed[] = "Invalid type passed";
+static const char __pyx_k_initial_data_string[] = "initial_data_string";
 static const char __pyx_k_LinkedList___delitem[] = "LinkedList.__delitem__";
 static const char __pyx_k_LinkedList___getitem[] = "LinkedList.__getitem__";
 static const char __pyx_k_LinkedList___setitem[] = "LinkedList.__setitem__";
@@ -1239,8 +1263,9 @@ static const char __pyx_k_LinkedList__move_to_end[] = "LinkedList._move_to_end";
 static const char __pyx_k_Item_must_be_int_or_slice[] = "Item must be int or slice";
 static const char __pyx_k_Index_must_be_less_that_length[] = "Index must be less that length";
 static const char __pyx_k_Accessories_DataStructures_linke[] = "Accessories/DataStructures/linked_list.pyx";
-static const char __pyx_k_Pipeline_Accessories_DataStructu[] = "Pipeline.Accessories.DataStructures.linked_list";
+static const char __pyx_k_BioMetaPipeline_Accessories_Data[] = "BioMetaPipeline.Accessories.DataStructures.linked_list";
 static PyObject *__pyx_kp_s_Accessories_DataStructures_linke;
+static PyObject *__pyx_n_s_BioMetaPipeline_Accessories_Data;
 static PyObject *__pyx_kp_u_Index_must_be_less_that_length;
 static PyObject *__pyx_kp_u_Invalid_type_passed;
 static PyObject *__pyx_kp_u_Item_must_be_int_or_slice;
@@ -1261,19 +1286,22 @@ static PyObject *__pyx_n_s_LinkedList_append;
 static PyObject *__pyx_n_s_LinkedList_insert;
 static PyObject *__pyx_n_s_LinkedList_pop;
 static PyObject *__pyx_n_s_LinkedList_remove;
+static PyObject *__pyx_n_s_LinkedList_split;
 static PyObject *__pyx_n_s_LinkedList_to_list;
 static PyObject *__pyx_n_s_Node;
 static PyObject *__pyx_n_s_Node___init;
-static PyObject *__pyx_n_s_Pipeline_Accessories_DataStructu;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_kp_u_Value_not_found;
+static PyObject *__pyx_kp_u__5;
 static PyObject *__pyx_n_s_append;
 static PyObject *__pyx_n_s_args;
+static PyObject *__pyx_n_s_chunk;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_close;
 static PyObject *__pyx_n_s_contains;
 static PyObject *__pyx_n_s_data;
+static PyObject *__pyx_n_s_delim;
 static PyObject *__pyx_n_s_delitem;
 static PyObject *__pyx_n_s_doc;
 static PyObject *__pyx_n_s_getitem;
@@ -1283,6 +1311,7 @@ static PyObject *__pyx_n_s_index;
 static PyObject *__pyx_n_s_init;
 static PyObject *__pyx_n_s_initial;
 static PyObject *__pyx_n_u_initial;
+static PyObject *__pyx_n_s_initial_data_string;
 static PyObject *__pyx_n_s_insert;
 static PyObject *__pyx_n_s_isub;
 static PyObject *__pyx_n_s_item;
@@ -1290,6 +1319,7 @@ static PyObject *__pyx_n_s_iter;
 static PyObject *__pyx_n_s_len;
 static PyObject *__pyx_n_s_length;
 static PyObject *__pyx_n_u_length;
+static PyObject *__pyx_n_s_ll;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_metaclass;
 static PyObject *__pyx_n_s_module;
@@ -1312,34 +1342,38 @@ static PyObject *__pyx_n_s_self;
 static PyObject *__pyx_n_s_send;
 static PyObject *__pyx_n_s_setitem;
 static PyObject *__pyx_n_s_slots;
+static PyObject *__pyx_n_s_split;
 static PyObject *__pyx_n_s_start;
+static PyObject *__pyx_n_s_staticmethod;
 static PyObject *__pyx_n_s_step;
 static PyObject *__pyx_n_s_stop;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_throw;
 static PyObject *__pyx_n_s_to_list;
 static PyObject *__pyx_n_s_to_return;
+static PyObject *__pyx_n_s_val;
 static PyObject *__pyx_n_s_value;
 static PyObject *__pyx_n_u_value;
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_4Node___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_args); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_2append(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_4insert(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_index, PyObject *__pyx_v_value); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_6to_list(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_8pop(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_10__len__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_12__next__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_14__iter__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_17__iadd__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_other); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_19__isub__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_other); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_21__contains__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_23remove(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_25__getitem__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_item); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_27__setitem__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_index, PyObject *__pyx_v_value); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_29__delitem__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_index); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_31__repr__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_33_move_to_end(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_i); /* proto */
-static PyObject *__pyx_tp_new_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_4Node___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_args); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_2append(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_4insert(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_index, PyObject *__pyx_v_value); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_6to_list(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_8pop(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_10__len__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_12__next__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_14__iter__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_17__iadd__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_other); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_19__isub__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_other); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_21__contains__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_23remove(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_25__getitem__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_item); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_27__setitem__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_index, PyObject *__pyx_v_value); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_29__delitem__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_index); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_31__repr__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_33_move_to_end(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_i); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_35split(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_initial_data_string, PyObject *__pyx_v_delim); /* proto */
+static PyObject *__pyx_tp_new_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static __Pyx_CachedCFunction __pyx_umethod_PyList_Type_pop = {0, &__pyx_n_s_pop, 0, 0, 0};
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
@@ -1348,44 +1382,46 @@ static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
-static PyObject *__pyx_tuple__5;
-static PyObject *__pyx_tuple__7;
-static PyObject *__pyx_tuple__9;
-static PyObject *__pyx_tuple__11;
-static PyObject *__pyx_tuple__13;
-static PyObject *__pyx_tuple__15;
-static PyObject *__pyx_tuple__17;
-static PyObject *__pyx_tuple__19;
-static PyObject *__pyx_tuple__21;
-static PyObject *__pyx_tuple__23;
-static PyObject *__pyx_tuple__25;
-static PyObject *__pyx_tuple__27;
-static PyObject *__pyx_tuple__29;
-static PyObject *__pyx_tuple__31;
-static PyObject *__pyx_tuple__33;
-static PyObject *__pyx_tuple__35;
-static PyObject *__pyx_tuple__37;
-static PyObject *__pyx_tuple__39;
-static PyObject *__pyx_codeobj__6;
-static PyObject *__pyx_codeobj__8;
-static PyObject *__pyx_codeobj__10;
-static PyObject *__pyx_codeobj__12;
-static PyObject *__pyx_codeobj__14;
-static PyObject *__pyx_codeobj__16;
-static PyObject *__pyx_codeobj__18;
-static PyObject *__pyx_codeobj__20;
-static PyObject *__pyx_codeobj__22;
-static PyObject *__pyx_codeobj__24;
-static PyObject *__pyx_codeobj__26;
-static PyObject *__pyx_codeobj__28;
-static PyObject *__pyx_codeobj__30;
-static PyObject *__pyx_codeobj__32;
-static PyObject *__pyx_codeobj__34;
-static PyObject *__pyx_codeobj__36;
-static PyObject *__pyx_codeobj__38;
-static PyObject *__pyx_codeobj__40;
+static PyObject *__pyx_tuple__6;
+static PyObject *__pyx_tuple__8;
+static PyObject *__pyx_tuple__10;
+static PyObject *__pyx_tuple__12;
+static PyObject *__pyx_tuple__14;
+static PyObject *__pyx_tuple__16;
+static PyObject *__pyx_tuple__18;
+static PyObject *__pyx_tuple__20;
+static PyObject *__pyx_tuple__22;
+static PyObject *__pyx_tuple__24;
+static PyObject *__pyx_tuple__26;
+static PyObject *__pyx_tuple__28;
+static PyObject *__pyx_tuple__30;
+static PyObject *__pyx_tuple__32;
+static PyObject *__pyx_tuple__34;
+static PyObject *__pyx_tuple__36;
+static PyObject *__pyx_tuple__38;
+static PyObject *__pyx_tuple__40;
+static PyObject *__pyx_tuple__42;
+static PyObject *__pyx_codeobj__7;
+static PyObject *__pyx_codeobj__9;
+static PyObject *__pyx_codeobj__11;
+static PyObject *__pyx_codeobj__13;
+static PyObject *__pyx_codeobj__15;
+static PyObject *__pyx_codeobj__17;
+static PyObject *__pyx_codeobj__19;
+static PyObject *__pyx_codeobj__21;
+static PyObject *__pyx_codeobj__23;
+static PyObject *__pyx_codeobj__25;
+static PyObject *__pyx_codeobj__27;
+static PyObject *__pyx_codeobj__29;
+static PyObject *__pyx_codeobj__31;
+static PyObject *__pyx_codeobj__33;
+static PyObject *__pyx_codeobj__35;
+static PyObject *__pyx_codeobj__37;
+static PyObject *__pyx_codeobj__39;
+static PyObject *__pyx_codeobj__41;
+static PyObject *__pyx_codeobj__43;
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":7
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":7
  *     __slots__ = ['value', 'next_node']
  * 
  *     def __init__(self, value):             # <<<<<<<<<<<<<<
@@ -1394,9 +1430,9 @@ static PyObject *__pyx_codeobj__40;
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_4Node_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_4Node_1__init__ = {"__init__", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_4Node_1__init__, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_4Node_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_4Node_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_4Node_1__init__ = {"__init__", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_4Node_1__init__, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_4Node_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   PyObject *__pyx_v_value = 0;
   PyObject *__pyx_r = 0;
@@ -1444,23 +1480,23 @@ static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 7, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.Node.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.Node.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_4Node___init__(__pyx_self, __pyx_v_self, __pyx_v_value);
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_4Node___init__(__pyx_self, __pyx_v_self, __pyx_v_value);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_4Node___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_4Node___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":8
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":8
  * 
  *     def __init__(self, value):
  *         self.value = value             # <<<<<<<<<<<<<<
@@ -1469,7 +1505,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_value, __pyx_v_value) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":9
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":9
  *     def __init__(self, value):
  *         self.value = value
  *         self.next_node = None             # <<<<<<<<<<<<<<
@@ -1478,7 +1514,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_next_node, Py_None) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":7
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":7
  *     __slots__ = ['value', 'next_node']
  * 
  *     def __init__(self, value):             # <<<<<<<<<<<<<<
@@ -1490,7 +1526,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.Node.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.Node.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -1498,7 +1534,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":15
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":15
  *     __slots__ = ['length', 'node', 'initial']
  * 
  *     def __init__(self, *args):             # <<<<<<<<<<<<<<
@@ -1507,10 +1543,10 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList___init__[] = " Initializer\n\n        :param args:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_1__init__ = {"__init__", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_1__init__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList___init__};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList___init__[] = " Initializer\n\n        :param args:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_1__init__ = {"__init__", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_1__init__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList___init__};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   PyObject *__pyx_v_args = 0;
   PyObject *__pyx_r = 0;
@@ -1560,11 +1596,11 @@ static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 15, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList___init__(__pyx_self, __pyx_v_self, __pyx_v_args);
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList___init__(__pyx_self, __pyx_v_self, __pyx_v_args);
 
   /* function exit code */
   __Pyx_XDECREF(__pyx_v_args);
@@ -1572,7 +1608,7 @@ static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_args) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_args) {
   PyObject *__pyx_v_data = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -1584,7 +1620,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   int __pyx_t_6;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":20
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":20
  *         :param args:
  *         """
  *         self.length = 0             # <<<<<<<<<<<<<<
@@ -1593,7 +1629,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_length, __pyx_int_0) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":21
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":21
  *         """
  *         self.length = 0
  *         self.node = None             # <<<<<<<<<<<<<<
@@ -1602,7 +1638,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, Py_None) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":22
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":22
  *         self.length = 0
  *         self.node = None
  *         self.initial = None             # <<<<<<<<<<<<<<
@@ -1611,7 +1647,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_initial, Py_None) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":23
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":23
  *         self.node = None
  *         self.initial = None
  *         if args:             # <<<<<<<<<<<<<<
@@ -1621,7 +1657,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_t_1 = (__pyx_v_args != Py_None) && (PyTuple_GET_SIZE(__pyx_v_args) != 0);
   if (__pyx_t_1) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":24
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":24
  *         self.initial = None
  *         if args:
  *             if len(args) == 1:             # <<<<<<<<<<<<<<
@@ -1632,7 +1668,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_t_1 = ((__pyx_t_2 == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":25
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":25
  *         if args:
  *             if len(args) == 1:
  *                 for data in args[0]:             # <<<<<<<<<<<<<<
@@ -1684,7 +1720,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
         __Pyx_XDECREF_SET(__pyx_v_data, __pyx_t_3);
         __pyx_t_3 = 0;
 
-        /* "Pipeline/Accessories/DataStructures/linked_list.pyx":26
+        /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":26
  *             if len(args) == 1:
  *                 for data in args[0]:
  *                     self.append(data)             # <<<<<<<<<<<<<<
@@ -1693,7 +1729,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
         __pyx_t_6 = __Pyx_PyObject_Append(__pyx_v_self, __pyx_v_data); if (unlikely(__pyx_t_6 == -1)) __PYX_ERR(0, 26, __pyx_L1_error)
 
-        /* "Pipeline/Accessories/DataStructures/linked_list.pyx":25
+        /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":25
  *         if args:
  *             if len(args) == 1:
  *                 for data in args[0]:             # <<<<<<<<<<<<<<
@@ -1703,7 +1739,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
       }
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":24
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":24
  *         self.initial = None
  *         if args:
  *             if len(args) == 1:             # <<<<<<<<<<<<<<
@@ -1713,7 +1749,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
       goto __pyx_L4;
     }
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":28
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":28
  *                     self.append(data)
  *             else:
  *                 for data in args:             # <<<<<<<<<<<<<<
@@ -1733,7 +1769,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
         __Pyx_XDECREF_SET(__pyx_v_data, __pyx_t_3);
         __pyx_t_3 = 0;
 
-        /* "Pipeline/Accessories/DataStructures/linked_list.pyx":29
+        /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":29
  *             else:
  *                 for data in args:
  *                     self.append(data)             # <<<<<<<<<<<<<<
@@ -1742,7 +1778,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
         __pyx_t_6 = __Pyx_PyObject_Append(__pyx_v_self, __pyx_v_data); if (unlikely(__pyx_t_6 == -1)) __PYX_ERR(0, 29, __pyx_L1_error)
 
-        /* "Pipeline/Accessories/DataStructures/linked_list.pyx":28
+        /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":28
  *                     self.append(data)
  *             else:
  *                 for data in args:             # <<<<<<<<<<<<<<
@@ -1754,7 +1790,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     }
     __pyx_L4:;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":23
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":23
  *         self.node = None
  *         self.initial = None
  *         if args:             # <<<<<<<<<<<<<<
@@ -1763,7 +1799,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":15
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":15
  *     __slots__ = ['length', 'node', 'initial']
  * 
  *     def __init__(self, *args):             # <<<<<<<<<<<<<<
@@ -1777,7 +1813,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_data);
@@ -1786,7 +1822,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":31
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":31
  *                     self.append(data)
  * 
  *     def append(self, value):             # <<<<<<<<<<<<<<
@@ -1795,10 +1831,10 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_3append(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_2append[] = " Add to end of LinkedList\n\n        :param value:\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_3append = {"append", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_3append, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_2append};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_3append(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_3append(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_2append[] = " Add to end of LinkedList\n\n        :param value:\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_3append = {"append", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_3append, METH_VARARGS|METH_KEYWORDS, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_2append};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_3append(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   PyObject *__pyx_v_value = 0;
   PyObject *__pyx_r = 0;
@@ -1846,18 +1882,18 @@ static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("append", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 31, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.append", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.append", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_2append(__pyx_self, __pyx_v_self, __pyx_v_value);
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_2append(__pyx_self, __pyx_v_self, __pyx_v_value);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_2append(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_2append(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
   PyObject *__pyx_v_new_node = 0;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -1869,7 +1905,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   int __pyx_t_6;
   __Pyx_RefNannySetupContext("append", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":37
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":37
  *         :return:
  *         """
  *         cdef object new_node = Node(value)             # <<<<<<<<<<<<<<
@@ -1924,7 +1960,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_v_new_node = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":38
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":38
  *         """
  *         cdef object new_node = Node(value)
  *         if not self.initial:             # <<<<<<<<<<<<<<
@@ -1938,7 +1974,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_t_6 = ((!__pyx_t_5) != 0);
   if (__pyx_t_6) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":39
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":39
  *         cdef object new_node = Node(value)
  *         if not self.initial:
  *             self.initial = new_node             # <<<<<<<<<<<<<<
@@ -1947,7 +1983,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_initial, __pyx_v_new_node) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":38
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":38
  *         """
  *         cdef object new_node = Node(value)
  *         if not self.initial:             # <<<<<<<<<<<<<<
@@ -1957,7 +1993,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     goto __pyx_L3;
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":41
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":41
  *             self.initial = new_node
  *         else:
  *             self.node.next_node = new_node             # <<<<<<<<<<<<<<
@@ -1972,7 +2008,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   }
   __pyx_L3:;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":42
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":42
  *         else:
  *             self.node.next_node = new_node
  *         self.node = new_node             # <<<<<<<<<<<<<<
@@ -1981,7 +2017,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, __pyx_v_new_node) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":43
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":43
  *             self.node.next_node = new_node
  *         self.node = new_node
  *         self.length += 1             # <<<<<<<<<<<<<<
@@ -1996,7 +2032,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_length, __pyx_t_2) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":31
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":31
  *                     self.append(data)
  * 
  *     def append(self, value):             # <<<<<<<<<<<<<<
@@ -2012,7 +2048,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.append", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.append", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_new_node);
@@ -2021,7 +2057,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":45
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":45
  *         self.length += 1
  * 
  *     def insert(self, int index, value):             # <<<<<<<<<<<<<<
@@ -2030,10 +2066,10 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_5insert(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_4insert[] = " Insert at given index\n\n        :param index:\n        :param value:\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_5insert = {"insert", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_5insert, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_4insert};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_5insert(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_5insert(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_4insert[] = " Insert at given index\n\n        :param index:\n        :param value:\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_5insert = {"insert", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_5insert, METH_VARARGS|METH_KEYWORDS, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_4insert};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_5insert(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   int __pyx_v_index;
   PyObject *__pyx_v_value = 0;
@@ -2092,18 +2128,18 @@ static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("insert", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 45, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.insert", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.insert", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_4insert(__pyx_self, __pyx_v_self, __pyx_v_index, __pyx_v_value);
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_4insert(__pyx_self, __pyx_v_self, __pyx_v_index, __pyx_v_value);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_4insert(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_index, PyObject *__pyx_v_value) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_4insert(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_index, PyObject *__pyx_v_value) {
   PyObject *__pyx_v_new_node = 0;
   int __pyx_v_i;
   PyObject *__pyx_v_old_next_node = 0;
@@ -2118,7 +2154,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("insert", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":52
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":52
  *         :return:
  *         """
  *         assert index < self.length, "Index must be less that length"             # <<<<<<<<<<<<<<
@@ -2143,7 +2179,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   }
   #endif
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":53
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":53
  *         """
  *         assert index < self.length, "Index must be less that length"
  *         cdef object new_node = Node(value)             # <<<<<<<<<<<<<<
@@ -2198,7 +2234,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_v_new_node = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":54
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":54
  *         assert index < self.length, "Index must be less that length"
  *         cdef object new_node = Node(value)
  *         self.node = self.initial             # <<<<<<<<<<<<<<
@@ -2210,7 +2246,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, __pyx_t_3) < 0) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":55
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":55
  *         cdef object new_node = Node(value)
  *         self.node = self.initial
  *         cdef int i = 0             # <<<<<<<<<<<<<<
@@ -2219,7 +2255,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   __pyx_v_i = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":56
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":56
  *         self.node = self.initial
  *         cdef int i = 0
  *         if index == 0:             # <<<<<<<<<<<<<<
@@ -2229,7 +2265,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_t_4 = ((__pyx_v_index == 0) != 0);
   if (__pyx_t_4) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":57
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":57
  *         cdef int i = 0
  *         if index == 0:
  *             self.node = new_node             # <<<<<<<<<<<<<<
@@ -2238,7 +2274,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, __pyx_v_new_node) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":58
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":58
  *         if index == 0:
  *             self.node = new_node
  *             self.node.next_node = self.initial             # <<<<<<<<<<<<<<
@@ -2253,7 +2289,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":59
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":59
  *             self.node = new_node
  *             self.node.next_node = self.initial
  *             self.initial = self.node             # <<<<<<<<<<<<<<
@@ -2265,7 +2301,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_initial, __pyx_t_2) < 0) __PYX_ERR(0, 59, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":60
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":60
  *             self.node.next_node = self.initial
  *             self.initial = self.node
  *             self.length += 1             # <<<<<<<<<<<<<<
@@ -2280,7 +2316,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_length, __pyx_t_3) < 0) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":61
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":61
  *             self.initial = self.node
  *             self.length += 1
  *             self._move_to_end(0)             # <<<<<<<<<<<<<<
@@ -2294,7 +2330,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":62
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":62
  *             self.length += 1
  *             self._move_to_end(0)
  *             return             # <<<<<<<<<<<<<<
@@ -2305,7 +2341,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":56
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":56
  *         self.node = self.initial
  *         cdef int i = 0
  *         if index == 0:             # <<<<<<<<<<<<<<
@@ -2314,7 +2350,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":63
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":63
  *             self._move_to_end(0)
  *             return
  *         elif index < 0:             # <<<<<<<<<<<<<<
@@ -2324,7 +2360,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_t_4 = ((__pyx_v_index < 0) != 0);
   if (__pyx_t_4) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":64
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":64
  *             return
  *         elif index < 0:
  *             index = index + self.length             # <<<<<<<<<<<<<<
@@ -2343,7 +2379,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_v_index = __pyx_t_6;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":63
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":63
  *             self._move_to_end(0)
  *             return
  *         elif index < 0:             # <<<<<<<<<<<<<<
@@ -2352,7 +2388,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":65
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":65
  *         elif index < 0:
  *             index = index + self.length
  *         while i < index - 1:             # <<<<<<<<<<<<<<
@@ -2363,7 +2399,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_t_4 = ((__pyx_v_i < (__pyx_v_index - 1)) != 0);
     if (!__pyx_t_4) break;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":66
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":66
  *             index = index + self.length
  *         while i < index - 1:
  *             self.__next__()             # <<<<<<<<<<<<<<
@@ -2392,7 +2428,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":67
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":67
  *         while i < index - 1:
  *             self.__next__()
  *             i += 1             # <<<<<<<<<<<<<<
@@ -2402,7 +2438,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_v_i = (__pyx_v_i + 1);
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":68
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":68
  *             self.__next__()
  *             i += 1
  *         cdef object old_next_node = self.node.next_node             # <<<<<<<<<<<<<<
@@ -2417,7 +2453,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_v_old_next_node = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":69
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":69
  *             i += 1
  *         cdef object old_next_node = self.node.next_node
  *         self.node.next_node = new_node             # <<<<<<<<<<<<<<
@@ -2429,7 +2465,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_t_3, __pyx_n_s_next_node, __pyx_v_new_node) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":70
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":70
  *         cdef object old_next_node = self.node.next_node
  *         self.node.next_node = new_node
  *         self.__next__()             # <<<<<<<<<<<<<<
@@ -2458,7 +2494,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":71
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":71
  *         self.node.next_node = new_node
  *         self.__next__()
  *         self.node.next_node = old_next_node             # <<<<<<<<<<<<<<
@@ -2470,7 +2506,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_t_3, __pyx_n_s_next_node, __pyx_v_old_next_node) < 0) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":72
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":72
  *         self.__next__()
  *         self.node.next_node = old_next_node
  *         self.length += 1             # <<<<<<<<<<<<<<
@@ -2485,7 +2521,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_length, __pyx_t_5) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":73
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":73
  *         self.node.next_node = old_next_node
  *         self.length += 1
  *         self._move_to_end(i)             # <<<<<<<<<<<<<<
@@ -2544,7 +2580,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":45
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":45
  *         self.length += 1
  * 
  *     def insert(self, int index, value):             # <<<<<<<<<<<<<<
@@ -2561,7 +2597,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.insert", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.insert", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_new_node);
@@ -2571,7 +2607,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":75
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":75
  *         self._move_to_end(i)
  * 
  *     def to_list(self):             # <<<<<<<<<<<<<<
@@ -2580,21 +2616,21 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_7to_list(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_6to_list[] = " Creates and returns python list of values\n\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_7to_list = {"to_list", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_7to_list, METH_O, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_6to_list};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_7to_list(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_7to_list(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_6to_list[] = " Creates and returns python list of values\n\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_7to_list = {"to_list", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_7to_list, METH_O, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_6to_list};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_7to_list(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("to_list (wrapper)", 0);
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_6to_list(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_6to_list(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_6to_list(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_6to_list(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   int __pyx_v_i;
   PyObject *__pyx_v_to_return = 0;
   PyObject *__pyx_r = NULL;
@@ -2606,7 +2642,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   int __pyx_t_5;
   __Pyx_RefNannySetupContext("to_list", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":80
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":80
  *         :return:
  *         """
  *         cdef int i = 0             # <<<<<<<<<<<<<<
@@ -2615,7 +2651,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   __pyx_v_i = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":81
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":81
  *         """
  *         cdef int i = 0
  *         cdef list to_return = []             # <<<<<<<<<<<<<<
@@ -2627,7 +2663,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_v_to_return = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":82
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":82
  *         cdef int i = 0
  *         cdef list to_return = []
  *         self.node = self.initial             # <<<<<<<<<<<<<<
@@ -2639,7 +2675,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, __pyx_t_1) < 0) __PYX_ERR(0, 82, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":83
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":83
  *         cdef list to_return = []
  *         self.node = self.initial
  *         while i < self.length:             # <<<<<<<<<<<<<<
@@ -2658,7 +2694,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (!__pyx_t_4) break;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":84
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":84
  *         self.node = self.initial
  *         while i < self.length:
  *             to_return.append(self.node.value)             # <<<<<<<<<<<<<<
@@ -2673,7 +2709,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_to_return, __pyx_t_2); if (unlikely(__pyx_t_5 == -1)) __PYX_ERR(0, 84, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":85
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":85
  *         while i < self.length:
  *             to_return.append(self.node.value)
  *             self.__next__()             # <<<<<<<<<<<<<<
@@ -2702,7 +2738,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":86
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":86
  *             to_return.append(self.node.value)
  *             self.__next__()
  *             i += 1             # <<<<<<<<<<<<<<
@@ -2712,7 +2748,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_v_i = (__pyx_v_i + 1);
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":87
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":87
  *             self.__next__()
  *             i += 1
  *         return to_return             # <<<<<<<<<<<<<<
@@ -2724,7 +2760,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_r = __pyx_v_to_return;
   goto __pyx_L0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":75
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":75
  *         self._move_to_end(i)
  * 
  *     def to_list(self):             # <<<<<<<<<<<<<<
@@ -2737,7 +2773,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.to_list", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.to_list", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_to_return);
@@ -2746,7 +2782,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":89
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":89
  *         return to_return
  * 
  *     def pop(self):             # <<<<<<<<<<<<<<
@@ -2755,21 +2791,21 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_9pop(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_8pop[] = " Remove and return last value in LinkedList\n\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_9pop = {"pop", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_9pop, METH_O, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_8pop};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_9pop(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_9pop(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_8pop[] = " Remove and return last value in LinkedList\n\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_9pop = {"pop", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_9pop, METH_O, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_8pop};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_9pop(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("pop (wrapper)", 0);
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_8pop(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_8pop(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_8pop(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_8pop(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   int __pyx_v_i;
   PyObject *__pyx_v_to_return = 0;
   PyObject *__pyx_r = NULL;
@@ -2780,7 +2816,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("pop", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":94
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":94
  *         :return:
  *         """
  *         cdef int i = 0             # <<<<<<<<<<<<<<
@@ -2789,7 +2825,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   __pyx_v_i = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":95
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":95
  *         """
  *         cdef int i = 0
  *         self.node = self.initial             # <<<<<<<<<<<<<<
@@ -2801,7 +2837,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, __pyx_t_1) < 0) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":96
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":96
  *         cdef int i = 0
  *         self.node = self.initial
  *         while i < self.length - 2:             # <<<<<<<<<<<<<<
@@ -2823,7 +2859,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (!__pyx_t_4) break;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":97
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":97
  *         self.node = self.initial
  *         while i < self.length - 2:
  *             self.__next__()             # <<<<<<<<<<<<<<
@@ -2852,7 +2888,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":98
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":98
  *         while i < self.length - 2:
  *             self.__next__()
  *             i += 1             # <<<<<<<<<<<<<<
@@ -2862,7 +2898,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_v_i = (__pyx_v_i + 1);
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":99
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":99
  *             self.__next__()
  *             i += 1
  *         cdef object to_return = self.node.next_node.value             # <<<<<<<<<<<<<<
@@ -2880,7 +2916,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_v_to_return = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":100
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":100
  *             i += 1
  *         cdef object to_return = self.node.next_node.value
  *         self.node.next_node = None             # <<<<<<<<<<<<<<
@@ -2892,7 +2928,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_next_node, Py_None) < 0) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":101
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":101
  *         cdef object to_return = self.node.next_node.value
  *         self.node.next_node = None
  *         self.length -= 1             # <<<<<<<<<<<<<<
@@ -2907,7 +2943,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_length, __pyx_t_3) < 0) __PYX_ERR(0, 101, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":102
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":102
  *         self.node.next_node = None
  *         self.length -= 1
  *         return to_return             # <<<<<<<<<<<<<<
@@ -2919,7 +2955,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_r = __pyx_v_to_return;
   goto __pyx_L0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":89
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":89
  *         return to_return
  * 
  *     def pop(self):             # <<<<<<<<<<<<<<
@@ -2932,7 +2968,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.pop", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.pop", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_to_return);
@@ -2941,7 +2977,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":104
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":104
  *         return to_return
  * 
  *     def __len__(self):             # <<<<<<<<<<<<<<
@@ -2950,27 +2986,27 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_11__len__(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_10__len__[] = " Return length property\n\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_11__len__ = {"__len__", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_11__len__, METH_O, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_10__len__};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_11__len__(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_11__len__(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_10__len__[] = " Return length property\n\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_11__len__ = {"__len__", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_11__len__, METH_O, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_10__len__};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_11__len__(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__len__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_10__len__(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_10__len__(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_10__len__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_10__len__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__len__", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":109
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":109
  *         :return:
  *         """
  *         return self.length             # <<<<<<<<<<<<<<
@@ -2984,7 +3020,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":104
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":104
  *         return to_return
  * 
  *     def __len__(self):             # <<<<<<<<<<<<<<
@@ -2995,7 +3031,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__len__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__len__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -3003,7 +3039,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":111
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":111
  *         return self.length
  * 
  *     def __next__(self):             # <<<<<<<<<<<<<<
@@ -3012,21 +3048,21 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_13__next__(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_12__next__[] = " Sets node as next node's value, if available\n\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_13__next__ = {"__next__", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_13__next__, METH_O, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_12__next__};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_13__next__(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_13__next__(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_12__next__[] = " Sets node as next node's value, if available\n\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_13__next__ = {"__next__", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_13__next__, METH_O, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_12__next__};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_13__next__(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__next__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_12__next__(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_12__next__(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_12__next__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_12__next__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3034,7 +3070,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   int __pyx_t_3;
   __Pyx_RefNannySetupContext("__next__", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":116
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":116
  *         :return:
  *         """
  *         if self.node.next_node:             # <<<<<<<<<<<<<<
@@ -3050,7 +3086,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":117
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":117
  *         """
  *         if self.node.next_node:
  *             self.node = self.node.next_node             # <<<<<<<<<<<<<<
@@ -3065,7 +3101,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, __pyx_t_1) < 0) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":118
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":118
  *         if self.node.next_node:
  *             self.node = self.node.next_node
  *             return self             # <<<<<<<<<<<<<<
@@ -3077,7 +3113,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_r = __pyx_v_self;
     goto __pyx_L0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":116
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":116
  *         :return:
  *         """
  *         if self.node.next_node:             # <<<<<<<<<<<<<<
@@ -3086,7 +3122,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":111
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":111
  *         return self.length
  * 
  *     def __next__(self):             # <<<<<<<<<<<<<<
@@ -3100,16 +3136,16 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__next__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__next__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
-static PyObject *__pyx_gb_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_16generator(__pyx_CoroutineObject *__pyx_generator, PyObject *__pyx_sent_value); /* proto */
+static PyObject *__pyx_gb_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_16generator(__pyx_CoroutineObject *__pyx_generator, PyObject *__pyx_sent_value); /* proto */
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":120
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":120
  *             return self
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
@@ -3118,28 +3154,28 @@ static PyObject *__pyx_gb_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_15__iter__(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_14__iter__[] = " Creates iterator that yields values of nodes\n\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_15__iter__ = {"__iter__", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_15__iter__, METH_O, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_14__iter__};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_15__iter__(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_15__iter__(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_14__iter__[] = " Creates iterator that yields values of nodes\n\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_15__iter__ = {"__iter__", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_15__iter__, METH_O, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_14__iter__};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_15__iter__(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__iter__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_14__iter__(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_14__iter__(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_14__iter__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
-  struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *__pyx_cur_scope;
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_14__iter__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+  struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *__pyx_cur_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__iter__", 0);
-  __pyx_cur_scope = (struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *)__pyx_tp_new_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__(__pyx_ptype_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__, __pyx_empty_tuple, NULL);
+  __pyx_cur_scope = (struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *)__pyx_tp_new_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__(__pyx_ptype_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__, __pyx_empty_tuple, NULL);
   if (unlikely(!__pyx_cur_scope)) {
-    __pyx_cur_scope = ((struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *)Py_None);
+    __pyx_cur_scope = ((struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *)Py_None);
     __Pyx_INCREF(Py_None);
     __PYX_ERR(0, 120, __pyx_L1_error)
   } else {
@@ -3149,7 +3185,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_16generator, (PyObject *) __pyx_cur_scope, __pyx_n_s_iter, __pyx_n_s_LinkedList___iter, __pyx_n_s_Pipeline_Accessories_DataStructu); if (unlikely(!gen)) __PYX_ERR(0, 120, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_16generator, (PyObject *) __pyx_cur_scope, __pyx_n_s_iter, __pyx_n_s_LinkedList___iter, __pyx_n_s_BioMetaPipeline_Accessories_Data); if (unlikely(!gen)) __PYX_ERR(0, 120, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -3157,7 +3193,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__iter__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__iter__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_DECREF(((PyObject *)__pyx_cur_scope));
   __Pyx_XGIVEREF(__pyx_r);
@@ -3165,9 +3201,9 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-static PyObject *__pyx_gb_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_16generator(__pyx_CoroutineObject *__pyx_generator, PyObject *__pyx_sent_value) /* generator body */
+static PyObject *__pyx_gb_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_16generator(__pyx_CoroutineObject *__pyx_generator, PyObject *__pyx_sent_value) /* generator body */
 {
-  struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *__pyx_cur_scope = ((struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *)__pyx_generator->closure);
+  struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *__pyx_cur_scope = ((struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *)__pyx_generator->closure);
   PyObject *__pyx_r = NULL;
   PyObject *__pyx_t_1 = NULL;
   int __pyx_t_2;
@@ -3184,7 +3220,7 @@ static PyObject *__pyx_gb_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L3_first_run:;
   if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 120, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":125
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":125
  *         :return:
  *         """
  *         self.node = self.initial             # <<<<<<<<<<<<<<
@@ -3196,7 +3232,7 @@ static PyObject *__pyx_gb_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_node, __pyx_t_1) < 0) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":126
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":126
  *         """
  *         self.node = self.initial
  *         while self.node:             # <<<<<<<<<<<<<<
@@ -3210,7 +3246,7 @@ static PyObject *__pyx_gb_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (!__pyx_t_2) break;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":127
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":127
  *         self.node = self.initial
  *         while self.node:
  *             yield self.node.value             # <<<<<<<<<<<<<<
@@ -3232,7 +3268,7 @@ static PyObject *__pyx_gb_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_L6_resume_from_yield:;
     if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 127, __pyx_L1_error)
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":128
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":128
  *         while self.node:
  *             yield self.node.value
  *             self.node = self.node.next_node             # <<<<<<<<<<<<<<
@@ -3248,7 +3284,7 @@ static PyObject *__pyx_gb_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":129
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":129
  *             yield self.node.value
  *             self.node = self.node.next_node
  *         self.node = self.initial             # <<<<<<<<<<<<<<
@@ -3260,7 +3296,7 @@ static PyObject *__pyx_gb_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_node, __pyx_t_1) < 0) __PYX_ERR(0, 129, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":130
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":130
  *             self.node = self.node.next_node
  *         self.node = self.initial
  *         self._move_to_end(0)             # <<<<<<<<<<<<<<
@@ -3275,7 +3311,7 @@ static PyObject *__pyx_gb_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":120
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":120
  *             return self
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
@@ -3298,7 +3334,7 @@ static PyObject *__pyx_gb_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":132
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":132
  *         self._move_to_end(0)
  * 
  *     def __iadd__(self, other):             # <<<<<<<<<<<<<<
@@ -3307,10 +3343,10 @@ static PyObject *__pyx_gb_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_18__iadd__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_17__iadd__[] = " Overload method for combining 2 LinkedLists\n\n        :param other: LinkedList\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_18__iadd__ = {"__iadd__", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_18__iadd__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_17__iadd__};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_18__iadd__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_18__iadd__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_17__iadd__[] = " Overload method for combining 2 LinkedLists\n\n        :param other: LinkedList\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_18__iadd__ = {"__iadd__", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_18__iadd__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_17__iadd__};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_18__iadd__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   PyObject *__pyx_v_other = 0;
   PyObject *__pyx_r = 0;
@@ -3358,18 +3394,18 @@ static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__iadd__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 132, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__iadd__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__iadd__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_17__iadd__(__pyx_self, __pyx_v_self, __pyx_v_other);
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_17__iadd__(__pyx_self, __pyx_v_self, __pyx_v_other);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_17__iadd__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_other) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_17__iadd__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_other) {
   PyObject *__pyx_v_value = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -3384,7 +3420,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   PyObject *__pyx_t_9 = NULL;
   __Pyx_RefNannySetupContext("__iadd__", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":139
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":139
  *         """
  *         cdef int old_length
  *         if isinstance(other, list) or isinstance(other, tuple) or isinstance(other, set):             # <<<<<<<<<<<<<<
@@ -3411,7 +3447,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":140
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":140
  *         cdef int old_length
  *         if isinstance(other, list) or isinstance(other, tuple) or isinstance(other, set):
  *             for value in other:             # <<<<<<<<<<<<<<
@@ -3460,7 +3496,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
       __Pyx_XDECREF_SET(__pyx_v_value, __pyx_t_7);
       __pyx_t_7 = 0;
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":141
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":141
  *         if isinstance(other, list) or isinstance(other, tuple) or isinstance(other, set):
  *             for value in other:
  *                 self.append(value)             # <<<<<<<<<<<<<<
@@ -3469,7 +3505,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
       __pyx_t_8 = __Pyx_PyObject_Append(__pyx_v_self, __pyx_v_value); if (unlikely(__pyx_t_8 == -1)) __PYX_ERR(0, 141, __pyx_L1_error)
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":140
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":140
  *         cdef int old_length
  *         if isinstance(other, list) or isinstance(other, tuple) or isinstance(other, set):
  *             for value in other:             # <<<<<<<<<<<<<<
@@ -3479,7 +3515,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":142
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":142
  *             for value in other:
  *                 self.append(value)
  *             return self             # <<<<<<<<<<<<<<
@@ -3491,7 +3527,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_r = __pyx_v_self;
     goto __pyx_L0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":139
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":139
  *         """
  *         cdef int old_length
  *         if isinstance(other, list) or isinstance(other, tuple) or isinstance(other, set):             # <<<<<<<<<<<<<<
@@ -3500,7 +3536,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":143
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":143
  *                 self.append(value)
  *             return self
  *         elif isinstance(other, LinkedList):             # <<<<<<<<<<<<<<
@@ -3514,7 +3550,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_t_3 = (__pyx_t_1 != 0);
   if (__pyx_t_3) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":144
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":144
  *             return self
  *         elif isinstance(other, LinkedList):
  *             self.node.next_node = other.initial             # <<<<<<<<<<<<<<
@@ -3529,7 +3565,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":145
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":145
  *         elif isinstance(other, LinkedList):
  *             self.node.next_node = other.initial
  *             self.length += other.length             # <<<<<<<<<<<<<<
@@ -3547,7 +3583,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_length, __pyx_t_9) < 0) __PYX_ERR(0, 145, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":146
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":146
  *             self.node.next_node = other.initial
  *             self.length += other.length
  *             self.node = self.initial             # <<<<<<<<<<<<<<
@@ -3559,7 +3595,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, __pyx_t_9) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":147
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":147
  *             self.length += other.length
  *             self.node = self.initial
  *             self._move_to_end(0)             # <<<<<<<<<<<<<<
@@ -3573,7 +3609,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":148
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":148
  *             self.node = self.initial
  *             self._move_to_end(0)
  *             return self             # <<<<<<<<<<<<<<
@@ -3585,7 +3621,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_r = __pyx_v_self;
     goto __pyx_L0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":143
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":143
  *                 self.append(value)
  *             return self
  *         elif isinstance(other, LinkedList):             # <<<<<<<<<<<<<<
@@ -3594,7 +3630,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":150
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":150
  *             return self
  *         else:
  *             raise TypeError, "Invalid type passed"             # <<<<<<<<<<<<<<
@@ -3606,7 +3642,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __PYX_ERR(0, 150, __pyx_L1_error)
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":132
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":132
  *         self._move_to_end(0)
  * 
  *     def __iadd__(self, other):             # <<<<<<<<<<<<<<
@@ -3619,7 +3655,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__iadd__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__iadd__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_value);
@@ -3628,7 +3664,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":152
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":152
  *             raise TypeError, "Invalid type passed"
  * 
  *     def __isub__(self, other):             # <<<<<<<<<<<<<<
@@ -3637,10 +3673,10 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_20__isub__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_19__isub__[] = " Overload method for removing an iterable of values from LinkedList\n\n        :param other:\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_20__isub__ = {"__isub__", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_20__isub__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_19__isub__};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_20__isub__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_20__isub__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_19__isub__[] = " Overload method for removing an iterable of values from LinkedList\n\n        :param other:\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_20__isub__ = {"__isub__", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_20__isub__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_19__isub__};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_20__isub__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   PyObject *__pyx_v_other = 0;
   PyObject *__pyx_r = 0;
@@ -3688,18 +3724,18 @@ static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__isub__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 152, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__isub__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__isub__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_19__isub__(__pyx_self, __pyx_v_self, __pyx_v_other);
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_19__isub__(__pyx_self, __pyx_v_self, __pyx_v_other);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_19__isub__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_other) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_19__isub__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_other) {
   PyObject *__pyx_v_value = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -3712,7 +3748,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("__isub__", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":158
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":158
  *         :return:
  *         """
  *         for value in other:             # <<<<<<<<<<<<<<
@@ -3761,7 +3797,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_XDECREF_SET(__pyx_v_value, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":159
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":159
  *         """
  *         for value in other:
  *             self.remove(value)             # <<<<<<<<<<<<<<
@@ -3815,7 +3851,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":158
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":158
  *         :return:
  *         """
  *         for value in other:             # <<<<<<<<<<<<<<
@@ -3825,7 +3861,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":160
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":160
  *         for value in other:
  *             self.remove(value)
  *         return self             # <<<<<<<<<<<<<<
@@ -3837,7 +3873,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_r = __pyx_v_self;
   goto __pyx_L0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":152
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":152
  *             raise TypeError, "Invalid type passed"
  * 
  *     def __isub__(self, other):             # <<<<<<<<<<<<<<
@@ -3852,7 +3888,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__isub__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__isub__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_value);
@@ -3861,7 +3897,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":162
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":162
  *         return self
  * 
  *     def __contains__(self, value):             # <<<<<<<<<<<<<<
@@ -3870,10 +3906,10 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_22__contains__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_21__contains__[] = " Determines if value in list\n        Returns bool based on search\n\n        :param value:\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_22__contains__ = {"__contains__", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_22__contains__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_21__contains__};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_22__contains__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_22__contains__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_21__contains__[] = " Determines if value in list\n        Returns bool based on search\n\n        :param value:\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_22__contains__ = {"__contains__", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_22__contains__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_21__contains__};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_22__contains__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   PyObject *__pyx_v_value = 0;
   PyObject *__pyx_r = 0;
@@ -3921,18 +3957,18 @@ static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__contains__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 162, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__contains__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__contains__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_21__contains__(__pyx_self, __pyx_v_self, __pyx_v_value);
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_21__contains__(__pyx_self, __pyx_v_self, __pyx_v_value);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_21__contains__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_21__contains__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_v_i;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -3944,7 +3980,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("__contains__", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":169
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":169
  *         :return:
  *         """
  *         self.node = self.initial             # <<<<<<<<<<<<<<
@@ -3956,7 +3992,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, __pyx_t_1) < 0) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":170
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":170
  *         """
  *         self.node = self.initial
  *         cdef int i = 0             # <<<<<<<<<<<<<<
@@ -3965,7 +4001,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   __pyx_v_i = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":171
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":171
  *         self.node = self.initial
  *         cdef int i = 0
  *         while i < self.length:             # <<<<<<<<<<<<<<
@@ -3984,7 +4020,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (!__pyx_t_4) break;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":172
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":172
  *         cdef int i = 0
  *         while i < self.length:
  *             if self.node.value == value:             # <<<<<<<<<<<<<<
@@ -4002,7 +4038,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (__pyx_t_4) {
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":173
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":173
  *         while i < self.length:
  *             if self.node.value == value:
  *                 self._move_to_end(i)             # <<<<<<<<<<<<<<
@@ -4061,7 +4097,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":174
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":174
  *             if self.node.value == value:
  *                 self._move_to_end(i)
  *                 return True             # <<<<<<<<<<<<<<
@@ -4073,7 +4109,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
       __pyx_r = Py_True;
       goto __pyx_L0;
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":172
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":172
  *         cdef int i = 0
  *         while i < self.length:
  *             if self.node.value == value:             # <<<<<<<<<<<<<<
@@ -4082,7 +4118,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
     }
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":175
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":175
  *                 self._move_to_end(i)
  *                 return True
  *             self.__next__()             # <<<<<<<<<<<<<<
@@ -4111,7 +4147,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":176
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":176
  *                 return True
  *             self.__next__()
  *             i += 1             # <<<<<<<<<<<<<<
@@ -4121,7 +4157,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_v_i = (__pyx_v_i + 1);
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":177
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":177
  *             self.__next__()
  *             i += 1
  *         self._move_to_end(i)             # <<<<<<<<<<<<<<
@@ -4180,7 +4216,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":178
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":178
  *             i += 1
  *         self._move_to_end(i)
  *         return False             # <<<<<<<<<<<<<<
@@ -4192,7 +4228,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_r = Py_False;
   goto __pyx_L0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":162
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":162
  *         return self
  * 
  *     def __contains__(self, value):             # <<<<<<<<<<<<<<
@@ -4207,7 +4243,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__contains__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__contains__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4215,7 +4251,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":180
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":180
  *         return False
  * 
  *     def remove(self, value):             # <<<<<<<<<<<<<<
@@ -4224,10 +4260,10 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_24remove(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_23remove[] = " Removes first occurrence of value\n        Looks for value and calls __delitem__ if found\n\n        :param value:\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_24remove = {"remove", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_24remove, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_23remove};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_24remove(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_24remove(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_23remove[] = " Removes first occurrence of value\n        Looks for value and calls __delitem__ if found\n\n        :param value:\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_24remove = {"remove", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_24remove, METH_VARARGS|METH_KEYWORDS, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_23remove};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_24remove(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   PyObject *__pyx_v_value = 0;
   PyObject *__pyx_r = 0;
@@ -4275,18 +4311,18 @@ static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("remove", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 180, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.remove", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.remove", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_23remove(__pyx_self, __pyx_v_self, __pyx_v_value);
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_23remove(__pyx_self, __pyx_v_self, __pyx_v_value);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_23remove(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_23remove(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_v_i;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -4299,7 +4335,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("remove", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":187
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":187
  *         :return:
  *         """
  *         self.node = self.initial             # <<<<<<<<<<<<<<
@@ -4311,7 +4347,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, __pyx_t_1) < 0) __PYX_ERR(0, 187, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":188
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":188
  *         """
  *         self.node = self.initial
  *         cdef int i = 0             # <<<<<<<<<<<<<<
@@ -4320,7 +4356,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   __pyx_v_i = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":189
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":189
  *         self.node = self.initial
  *         cdef int i = 0
  *         while i < self.length:             # <<<<<<<<<<<<<<
@@ -4339,7 +4375,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (!__pyx_t_4) break;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":190
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":190
  *         cdef int i = 0
  *         while i < self.length:
  *             if self.node.value == value:             # <<<<<<<<<<<<<<
@@ -4357,7 +4393,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (__pyx_t_4) {
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":191
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":191
  *         while i < self.length:
  *             if self.node.value == value:
  *                 break             # <<<<<<<<<<<<<<
@@ -4366,7 +4402,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
       goto __pyx_L4_break;
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":190
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":190
  *         cdef int i = 0
  *         while i < self.length:
  *             if self.node.value == value:             # <<<<<<<<<<<<<<
@@ -4375,7 +4411,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
     }
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":192
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":192
  *             if self.node.value == value:
  *                 break
  *             self.__next__()             # <<<<<<<<<<<<<<
@@ -4404,7 +4440,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":193
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":193
  *                 break
  *             self.__next__()
  *             i += 1             # <<<<<<<<<<<<<<
@@ -4415,7 +4451,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   }
   __pyx_L4_break:;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":194
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":194
  *             self.__next__()
  *             i += 1
  *         if i == self.length and self.node.value != value:             # <<<<<<<<<<<<<<
@@ -4449,7 +4485,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L7_bool_binop_done:;
   if (__pyx_t_4) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":195
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":195
  *             i += 1
  *         if i == self.length and self.node.value != value:
  *             raise ValueError, "Value not found"             # <<<<<<<<<<<<<<
@@ -4459,7 +4495,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_Raise(__pyx_builtin_ValueError, __pyx_kp_u_Value_not_found, 0, 0);
     __PYX_ERR(0, 195, __pyx_L1_error)
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":194
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":194
  *             self.__next__()
  *             i += 1
  *         if i == self.length and self.node.value != value:             # <<<<<<<<<<<<<<
@@ -4468,7 +4504,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":196
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":196
  *         if i == self.length and self.node.value != value:
  *             raise ValueError, "Value not found"
  *         self.__delitem__(i)             # <<<<<<<<<<<<<<
@@ -4527,7 +4563,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":180
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":180
  *         return False
  * 
  *     def remove(self, value):             # <<<<<<<<<<<<<<
@@ -4544,7 +4580,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.remove", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.remove", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4552,7 +4588,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":198
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":198
  *         self.__delitem__(i)
  * 
  *     def __getitem__(self, item):             # <<<<<<<<<<<<<<
@@ -4561,10 +4597,10 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_26__getitem__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_25__getitem__[] = " Returns value at location or slice\n        Passing a slice creates list and returns given slice of list\n\n        :param item:\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_26__getitem__ = {"__getitem__", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_26__getitem__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_25__getitem__};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_26__getitem__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_26__getitem__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_25__getitem__[] = " Returns value at location or slice\n        Passing a slice creates list and returns given slice of list\n\n        :param item:\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_26__getitem__ = {"__getitem__", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_26__getitem__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_25__getitem__};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_26__getitem__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   PyObject *__pyx_v_item = 0;
   PyObject *__pyx_r = 0;
@@ -4612,18 +4648,18 @@ static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__getitem__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 198, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__getitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__getitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_25__getitem__(__pyx_self, __pyx_v_self, __pyx_v_item);
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_25__getitem__(__pyx_self, __pyx_v_self, __pyx_v_item);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_25__getitem__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_item) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_25__getitem__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_item) {
   PyObject *__pyx_v_to_return = 0;
   int __pyx_v_i;
   PyObject *__pyx_r = NULL;
@@ -4638,7 +4674,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_RefNannySetupContext("__getitem__", 0);
   __Pyx_INCREF(__pyx_v_item);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":205
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":205
  *         :return:
  *         """
  *         cdef object to_return = None             # <<<<<<<<<<<<<<
@@ -4648,7 +4684,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_INCREF(Py_None);
   __pyx_v_to_return = Py_None;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":206
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":206
  *         """
  *         cdef object to_return = None
  *         self.node = self.initial             # <<<<<<<<<<<<<<
@@ -4660,7 +4696,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, __pyx_t_1) < 0) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":207
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":207
  *         cdef object to_return = None
  *         self.node = self.initial
  *         cdef int i = 0             # <<<<<<<<<<<<<<
@@ -4669,7 +4705,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   __pyx_v_i = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":208
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":208
  *         self.node = self.initial
  *         cdef int i = 0
  *         if isinstance(item, slice):             # <<<<<<<<<<<<<<
@@ -4680,7 +4716,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":209
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":209
  *         cdef int i = 0
  *         if isinstance(item, slice):
  *             return self.to_list()[item.start : item.stop : item.step]             # <<<<<<<<<<<<<<
@@ -4727,7 +4763,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_t_6 = 0;
     goto __pyx_L0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":208
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":208
  *         self.node = self.initial
  *         cdef int i = 0
  *         if isinstance(item, slice):             # <<<<<<<<<<<<<<
@@ -4736,7 +4772,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":210
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":210
  *         if isinstance(item, slice):
  *             return self.to_list()[item.start : item.stop : item.step]
  *         elif isinstance(item, int):             # <<<<<<<<<<<<<<
@@ -4747,7 +4783,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_t_2 = (__pyx_t_3 != 0);
   if (__pyx_t_2) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":211
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":211
  *             return self.to_list()[item.start : item.stop : item.step]
  *         elif isinstance(item, int):
  *             assert item < self.length, "Index must be less that length"             # <<<<<<<<<<<<<<
@@ -4769,7 +4805,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     }
     #endif
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":212
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":212
  *         elif isinstance(item, int):
  *             assert item < self.length, "Index must be less that length"
  *             if item == 0:             # <<<<<<<<<<<<<<
@@ -4782,7 +4818,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     if (__pyx_t_2) {
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":213
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":213
  *             assert item < self.length, "Index must be less that length"
  *             if item == 0:
  *                 return self.initial.value             # <<<<<<<<<<<<<<
@@ -4799,7 +4835,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
       __pyx_t_6 = 0;
       goto __pyx_L0;
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":212
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":212
  *         elif isinstance(item, int):
  *             assert item < self.length, "Index must be less that length"
  *             if item == 0:             # <<<<<<<<<<<<<<
@@ -4808,7 +4844,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
     }
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":214
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":214
  *             if item == 0:
  *                 return self.initial.value
  *             elif item < 0:             # <<<<<<<<<<<<<<
@@ -4820,7 +4856,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     if (__pyx_t_2) {
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":215
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":215
  *                 return self.initial.value
  *             elif item < 0:
  *                 item = item + self.length             # <<<<<<<<<<<<<<
@@ -4835,7 +4871,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
       __Pyx_DECREF_SET(__pyx_v_item, __pyx_t_7);
       __pyx_t_7 = 0;
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":214
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":214
  *             if item == 0:
  *                 return self.initial.value
  *             elif item < 0:             # <<<<<<<<<<<<<<
@@ -4844,7 +4880,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
     }
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":216
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":216
  *             elif item < 0:
  *                 item = item + self.length
  *             while i < item:             # <<<<<<<<<<<<<<
@@ -4860,7 +4896,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       if (!__pyx_t_2) break;
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":217
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":217
  *                 item = item + self.length
  *             while i < item:
  *                 self.node = self.node.next_node             # <<<<<<<<<<<<<<
@@ -4875,7 +4911,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
       if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, __pyx_t_7) < 0) __PYX_ERR(0, 217, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "Pipeline/Accessories/DataStructures/linked_list.pyx":218
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":218
  *             while i < item:
  *                 self.node = self.node.next_node
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -4885,7 +4921,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
       __pyx_v_i = (__pyx_v_i + 1);
     }
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":219
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":219
  *                 self.node = self.node.next_node
  *                 i += 1
  *             to_return = self.node.value             # <<<<<<<<<<<<<<
@@ -4900,7 +4936,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF_SET(__pyx_v_to_return, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":220
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":220
  *                 i += 1
  *             to_return = self.node.value
  *             self._move_to_end(i)             # <<<<<<<<<<<<<<
@@ -4959,7 +4995,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":221
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":221
  *             to_return = self.node.value
  *             self._move_to_end(i)
  *             return to_return             # <<<<<<<<<<<<<<
@@ -4971,7 +5007,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_r = __pyx_v_to_return;
     goto __pyx_L0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":210
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":210
  *         if isinstance(item, slice):
  *             return self.to_list()[item.start : item.stop : item.step]
  *         elif isinstance(item, int):             # <<<<<<<<<<<<<<
@@ -4980,7 +5016,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":222
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":222
  *             self._move_to_end(i)
  *             return to_return
  *         raise TypeError, "Item must be int or slice"             # <<<<<<<<<<<<<<
@@ -4990,7 +5026,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_Raise(__pyx_builtin_TypeError, __pyx_kp_u_Item_must_be_int_or_slice, 0, 0);
   __PYX_ERR(0, 222, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":198
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":198
  *         self.__delitem__(i)
  * 
  *     def __getitem__(self, item):             # <<<<<<<<<<<<<<
@@ -5005,7 +5041,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__getitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__getitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_to_return);
@@ -5015,7 +5051,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":224
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":224
  *         raise TypeError, "Item must be int or slice"
  * 
  *     def __setitem__(self, int index, value):             # <<<<<<<<<<<<<<
@@ -5024,10 +5060,10 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_28__setitem__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_27__setitem__[] = " Sets value at index\n\n        :param index:\n        :param value:\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_28__setitem__ = {"__setitem__", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_28__setitem__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_27__setitem__};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_28__setitem__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_28__setitem__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_27__setitem__[] = " Sets value at index\n\n        :param index:\n        :param value:\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_28__setitem__ = {"__setitem__", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_28__setitem__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_27__setitem__};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_28__setitem__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   int __pyx_v_index;
   PyObject *__pyx_v_value = 0;
@@ -5086,18 +5122,18 @@ static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__setitem__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 224, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__setitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__setitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_27__setitem__(__pyx_self, __pyx_v_self, __pyx_v_index, __pyx_v_value);
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_27__setitem__(__pyx_self, __pyx_v_self, __pyx_v_index, __pyx_v_value);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_27__setitem__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_index, PyObject *__pyx_v_value) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_27__setitem__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_index, PyObject *__pyx_v_value) {
   int __pyx_v_i;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -5110,7 +5146,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   int __pyx_t_7;
   __Pyx_RefNannySetupContext("__setitem__", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":231
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":231
  *         :return:
  *         """
  *         assert index < self.length, "Index must be less that length"             # <<<<<<<<<<<<<<
@@ -5135,7 +5171,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   }
   #endif
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":232
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":232
  *         """
  *         assert index < self.length, "Index must be less that length"
  *         self.node = self.initial             # <<<<<<<<<<<<<<
@@ -5147,7 +5183,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, __pyx_t_3) < 0) __PYX_ERR(0, 232, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":233
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":233
  *         assert index < self.length, "Index must be less that length"
  *         self.node = self.initial
  *         cdef int i = 0             # <<<<<<<<<<<<<<
@@ -5156,7 +5192,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   __pyx_v_i = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":234
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":234
  *         self.node = self.initial
  *         cdef int i = 0
  *         if index == 0:             # <<<<<<<<<<<<<<
@@ -5166,7 +5202,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_t_4 = ((__pyx_v_index == 0) != 0);
   if (__pyx_t_4) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":235
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":235
  *         cdef int i = 0
  *         if index == 0:
  *             self.node.value = value             # <<<<<<<<<<<<<<
@@ -5178,7 +5214,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     if (__Pyx_PyObject_SetAttrStr(__pyx_t_3, __pyx_n_s_value, __pyx_v_value) < 0) __PYX_ERR(0, 235, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":236
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":236
  *         if index == 0:
  *             self.node.value = value
  *             self._move_to_end(i)             # <<<<<<<<<<<<<<
@@ -5237,7 +5273,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":237
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":237
  *             self.node.value = value
  *             self._move_to_end(i)
  *             return             # <<<<<<<<<<<<<<
@@ -5248,7 +5284,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":234
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":234
  *         self.node = self.initial
  *         cdef int i = 0
  *         if index == 0:             # <<<<<<<<<<<<<<
@@ -5257,7 +5293,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":238
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":238
  *             self._move_to_end(i)
  *             return
  *         if index < 0:             # <<<<<<<<<<<<<<
@@ -5267,7 +5303,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_t_4 = ((__pyx_v_index < 0) != 0);
   if (__pyx_t_4) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":239
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":239
  *             return
  *         if index < 0:
  *             index = index + self.length             # <<<<<<<<<<<<<<
@@ -5286,7 +5322,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_v_index = __pyx_t_7;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":238
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":238
  *             self._move_to_end(i)
  *             return
  *         if index < 0:             # <<<<<<<<<<<<<<
@@ -5295,7 +5331,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":240
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":240
  *         if index < 0:
  *             index = index + self.length
  *         while i < index:             # <<<<<<<<<<<<<<
@@ -5306,7 +5342,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_t_4 = ((__pyx_v_i < __pyx_v_index) != 0);
     if (!__pyx_t_4) break;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":241
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":241
  *             index = index + self.length
  *         while i < index:
  *             self.__next__()             # <<<<<<<<<<<<<<
@@ -5335,7 +5371,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":242
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":242
  *         while i < index:
  *             self.__next__()
  *             i += 1             # <<<<<<<<<<<<<<
@@ -5345,7 +5381,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_v_i = (__pyx_v_i + 1);
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":243
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":243
  *             self.__next__()
  *             i += 1
  *         self.node.value = value             # <<<<<<<<<<<<<<
@@ -5357,7 +5393,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_t_6, __pyx_n_s_value, __pyx_v_value) < 0) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":244
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":244
  *             i += 1
  *         self.node.value = value
  *         self._move_to_end(i)             # <<<<<<<<<<<<<<
@@ -5416,7 +5452,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":224
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":224
  *         raise TypeError, "Item must be int or slice"
  * 
  *     def __setitem__(self, int index, value):             # <<<<<<<<<<<<<<
@@ -5433,7 +5469,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__setitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__setitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -5441,7 +5477,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":246
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":246
  *         self._move_to_end(i)
  * 
  *     def __delitem__(self, int index):             # <<<<<<<<<<<<<<
@@ -5450,10 +5486,10 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_30__delitem__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_29__delitem__[] = " Deletes value at index\n\n        :param index:\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_30__delitem__ = {"__delitem__", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_30__delitem__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_29__delitem__};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_30__delitem__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_30__delitem__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_29__delitem__[] = " Deletes value at index\n\n        :param index:\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_30__delitem__ = {"__delitem__", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_30__delitem__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_29__delitem__};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_30__delitem__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   int __pyx_v_index;
   PyObject *__pyx_r = 0;
@@ -5501,18 +5537,18 @@ static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__delitem__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 246, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__delitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__delitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_29__delitem__(__pyx_self, __pyx_v_self, __pyx_v_index);
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_29__delitem__(__pyx_self, __pyx_v_self, __pyx_v_index);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_29__delitem__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_index) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_29__delitem__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_index) {
   int __pyx_v_i;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -5525,7 +5561,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("__delitem__", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":252
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":252
  *         :return:
  *         """
  *         assert index < self.length, "Index must be less that length"             # <<<<<<<<<<<<<<
@@ -5550,7 +5586,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   }
   #endif
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":253
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":253
  *         """
  *         assert index < self.length, "Index must be less that length"
  *         cdef int i = 0             # <<<<<<<<<<<<<<
@@ -5559,7 +5595,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   __pyx_v_i = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":254
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":254
  *         assert index < self.length, "Index must be less that length"
  *         cdef int i = 0
  *         if index == 0:             # <<<<<<<<<<<<<<
@@ -5569,7 +5605,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_t_4 = ((__pyx_v_index == 0) != 0);
   if (__pyx_t_4) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":255
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":255
  *         cdef int i = 0
  *         if index == 0:
  *             self.initial = self.initial.next_node             # <<<<<<<<<<<<<<
@@ -5584,7 +5620,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_initial, __pyx_t_2) < 0) __PYX_ERR(0, 255, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":256
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":256
  *         if index == 0:
  *             self.initial = self.initial.next_node
  *             self.node = self.initial             # <<<<<<<<<<<<<<
@@ -5596,7 +5632,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, __pyx_t_2) < 0) __PYX_ERR(0, 256, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":257
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":257
  *             self.initial = self.initial.next_node
  *             self.node = self.initial
  *             self.length -= 1             # <<<<<<<<<<<<<<
@@ -5611,7 +5647,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_length, __pyx_t_3) < 0) __PYX_ERR(0, 257, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":258
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":258
  *             self.node = self.initial
  *             self.length -= 1
  *             self._move_to_end(0)             # <<<<<<<<<<<<<<
@@ -5625,7 +5661,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":259
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":259
  *             self.length -= 1
  *             self._move_to_end(0)
  *             return             # <<<<<<<<<<<<<<
@@ -5636,7 +5672,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":254
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":254
  *         assert index < self.length, "Index must be less that length"
  *         cdef int i = 0
  *         if index == 0:             # <<<<<<<<<<<<<<
@@ -5645,7 +5681,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":260
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":260
  *             self._move_to_end(0)
  *             return
  *         elif index == self.length - 1:             # <<<<<<<<<<<<<<
@@ -5666,7 +5702,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_4) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":261
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":261
  *             return
  *         elif index == self.length - 1:
  *             self.pop()             # <<<<<<<<<<<<<<
@@ -5677,7 +5713,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":260
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":260
  *             self._move_to_end(0)
  *             return
  *         elif index == self.length - 1:             # <<<<<<<<<<<<<<
@@ -5687,7 +5723,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     goto __pyx_L3;
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":262
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":262
  *         elif index == self.length - 1:
  *             self.pop()
  *         elif index < 0:             # <<<<<<<<<<<<<<
@@ -5697,7 +5733,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_t_4 = ((__pyx_v_index < 0) != 0);
   if (__pyx_t_4) {
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":263
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":263
  *             self.pop()
  *         elif index < 0:
  *             index = index + self.length             # <<<<<<<<<<<<<<
@@ -5716,7 +5752,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_index = __pyx_t_5;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":262
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":262
  *         elif index == self.length - 1:
  *             self.pop()
  *         elif index < 0:             # <<<<<<<<<<<<<<
@@ -5726,7 +5762,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   }
   __pyx_L3:;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":264
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":264
  *         elif index < 0:
  *             index = index + self.length
  *         self.node = self.initial             # <<<<<<<<<<<<<<
@@ -5738,7 +5774,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_node, __pyx_t_2) < 0) __PYX_ERR(0, 264, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":265
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":265
  *             index = index + self.length
  *         self.node = self.initial
  *         while i < index - 1:             # <<<<<<<<<<<<<<
@@ -5749,7 +5785,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_t_4 = ((__pyx_v_i < (__pyx_v_index - 1)) != 0);
     if (!__pyx_t_4) break;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":266
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":266
  *         self.node = self.initial
  *         while i < index - 1:
  *             self.__next__()             # <<<<<<<<<<<<<<
@@ -5778,7 +5814,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":267
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":267
  *         while i < index - 1:
  *             self.__next__()
  *             i += 1             # <<<<<<<<<<<<<<
@@ -5788,7 +5824,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __pyx_v_i = (__pyx_v_i + 1);
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":268
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":268
  *             self.__next__()
  *             i += 1
  *         self.node.next_node = self.node.next_node.next_node             # <<<<<<<<<<<<<<
@@ -5809,7 +5845,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":269
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":269
  *             i += 1
  *         self.node.next_node = self.node.next_node.next_node
  *         self.length -= 1             # <<<<<<<<<<<<<<
@@ -5824,7 +5860,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_length, __pyx_t_2) < 0) __PYX_ERR(0, 269, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":270
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":270
  *         self.node.next_node = self.node.next_node.next_node
  *         self.length -= 1
  *         self._move_to_end(i)             # <<<<<<<<<<<<<<
@@ -5883,7 +5919,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":246
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":246
  *         self._move_to_end(i)
  * 
  *     def __delitem__(self, int index):             # <<<<<<<<<<<<<<
@@ -5900,7 +5936,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__delitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__delitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -5908,7 +5944,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":272
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":272
  *         self._move_to_end(i)
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -5917,21 +5953,21 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_32__repr__(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_31__repr__[] = " Creates list and returns string representation\n\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_32__repr__ = {"__repr__", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_32__repr__, METH_O, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_31__repr__};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_32__repr__(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_32__repr__(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_31__repr__[] = " Creates list and returns string representation\n\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_32__repr__ = {"__repr__", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_32__repr__, METH_O, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_31__repr__};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_32__repr__(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__repr__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_31__repr__(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_31__repr__(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_31__repr__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_31__repr__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -5940,7 +5976,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":277
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":277
  *         :return:
  *         """
  *         return self.to_list().__repr__()             # <<<<<<<<<<<<<<
@@ -5993,7 +6029,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":272
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":272
  *         self._move_to_end(i)
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -6007,7 +6043,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList.__repr__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.__repr__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -6015,7 +6051,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-/* "Pipeline/Accessories/DataStructures/linked_list.pyx":279
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":279
  *         return self.to_list().__repr__()
  * 
  *     def _move_to_end(self, int i):             # <<<<<<<<<<<<<<
@@ -6024,10 +6060,10 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_34_move_to_end(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_33_move_to_end[] = " Protected member for moving pointer to end of list, starting at index i\n\n        :param i:\n        :return:\n        ";
-static PyMethodDef __pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_34_move_to_end = {"_move_to_end", (PyCFunction)__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_34_move_to_end, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_33_move_to_end};
-static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_34_move_to_end(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_34_move_to_end(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_33_move_to_end[] = " Protected member for moving pointer to end of list, starting at index i\n\n        :param i:\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_34_move_to_end = {"_move_to_end", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_34_move_to_end, METH_VARARGS|METH_KEYWORDS, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_33_move_to_end};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_34_move_to_end(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   int __pyx_v_i;
   PyObject *__pyx_r = 0;
@@ -6075,18 +6111,18 @@ static PyObject *__pyx_pw_8Pipeline_11Accessories_14DataStructures_11linked_list
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("_move_to_end", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 279, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList._move_to_end", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList._move_to_end", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_33_move_to_end(__pyx_self, __pyx_v_self, __pyx_v_i);
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_33_move_to_end(__pyx_self, __pyx_v_self, __pyx_v_i);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_33_move_to_end(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_i) {
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_33_move_to_end(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_i) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -6095,7 +6131,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("_move_to_end", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":285
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":285
  *         :return:
  *         """
  *         while i < self.length:             # <<<<<<<<<<<<<<
@@ -6114,11 +6150,12 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (!__pyx_t_4) break;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":286
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":286
  *         """
  *         while i < self.length:
  *             self.__next__()             # <<<<<<<<<<<<<<
  *             i += 1
+ * 
  */
     __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_next); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 286, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
@@ -6142,15 +6179,17 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "Pipeline/Accessories/DataStructures/linked_list.pyx":287
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":287
  *         while i < self.length:
  *             self.__next__()
  *             i += 1             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
  */
     __pyx_v_i = (__pyx_v_i + 1);
   }
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":279
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":279
  *         return self.to_list().__repr__()
  * 
  *     def _move_to_end(self, int i):             # <<<<<<<<<<<<<<
@@ -6165,7 +6204,7 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("Pipeline.Accessories.DataStructures.linked_list.LinkedList._move_to_end", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList._move_to_end", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -6173,14 +6212,252 @@ static PyObject *__pyx_pf_8Pipeline_11Accessories_14DataStructures_11linked_list
   return __pyx_r;
 }
 
-static struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *__pyx_freelist_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__[8];
-static int __pyx_freecount_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ = 0;
+/* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":290
+ * 
+ *     @staticmethod
+ *     def split(str initial_data_string, str delim):             # <<<<<<<<<<<<<<
+ *         """ Creates linked list from passed string
+ * 
+ */
 
-static PyObject *__pyx_tp_new_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+/* Python wrapper */
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_36split(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_35split[] = " Creates linked list from passed string\n\n        :param delim:\n        :param initial_data_string:\n        :return:\n        ";
+static PyMethodDef __pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_36split = {"split", (PyCFunction)__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_36split, METH_VARARGS|METH_KEYWORDS, __pyx_doc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_35split};
+static PyObject *__pyx_pw_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_36split(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_initial_data_string = 0;
+  PyObject *__pyx_v_delim = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("split (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_initial_data_string,&__pyx_n_s_delim,0};
+    PyObject* values[2] = {0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_initial_data_string)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_delim)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("split", 1, 2, 2, 1); __PYX_ERR(0, 290, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "split") < 0)) __PYX_ERR(0, 290, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+    }
+    __pyx_v_initial_data_string = ((PyObject*)values[0]);
+    __pyx_v_delim = ((PyObject*)values[1]);
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("split", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 290, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.split", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_initial_data_string), (&PyUnicode_Type), 1, "initial_data_string", 1))) __PYX_ERR(0, 290, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_delim), (&PyUnicode_Type), 1, "delim", 1))) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_r = __pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_35split(__pyx_self, __pyx_v_initial_data_string, __pyx_v_delim);
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_35split(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_initial_data_string, PyObject *__pyx_v_delim) {
+  PyObject *__pyx_v_ll = NULL;
+  PyObject *__pyx_v_chunk = 0;
+  PyObject *__pyx_v_val = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  Py_ssize_t __pyx_t_5;
+  Py_ssize_t __pyx_t_6;
+  void *__pyx_t_7;
+  int __pyx_t_8;
+  int __pyx_t_9;
+  Py_ssize_t __pyx_t_10;
+  int __pyx_t_11;
+  int __pyx_t_12;
+  __Pyx_RefNannySetupContext("split", 0);
+
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":297
+ *         :return:
+ *         """
+ *         ll = LinkedList()             # <<<<<<<<<<<<<<
+ *         cdef str chunk = ""
+ *         for val in initial_data_string:
+ */
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_LinkedList); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 297, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  if (__pyx_t_3) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 297, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  } else {
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 297, __pyx_L1_error)
+  }
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_ll = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":298
+ *         """
+ *         ll = LinkedList()
+ *         cdef str chunk = ""             # <<<<<<<<<<<<<<
+ *         for val in initial_data_string:
+ *             while val != delim:
+ */
+  __Pyx_INCREF(__pyx_kp_u__5);
+  __pyx_v_chunk = __pyx_kp_u__5;
+
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":299
+ *         ll = LinkedList()
+ *         cdef str chunk = ""
+ *         for val in initial_data_string:             # <<<<<<<<<<<<<<
+ *             while val != delim:
+ *                 chunk += val
+ */
+  if (unlikely(__pyx_v_initial_data_string == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' is not iterable");
+    __PYX_ERR(0, 299, __pyx_L1_error)
+  }
+  __Pyx_INCREF(__pyx_v_initial_data_string);
+  __pyx_t_4 = __pyx_v_initial_data_string;
+  __pyx_t_9 = __Pyx_init_unicode_iteration(__pyx_t_4, (&__pyx_t_6), (&__pyx_t_7), (&__pyx_t_8)); if (unlikely(__pyx_t_9 == -1)) __PYX_ERR(0, 299, __pyx_L1_error)
+  for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_6; __pyx_t_10++) {
+    __pyx_t_5 = __pyx_t_10;
+    __pyx_t_1 = PyUnicode_FromOrdinal(__Pyx_PyUnicode_READ(__pyx_t_8, __pyx_t_7, __pyx_t_5)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 299, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_XDECREF_SET(__pyx_v_val, __pyx_t_1);
+    __pyx_t_1 = 0;
+
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":300
+ *         cdef str chunk = ""
+ *         for val in initial_data_string:
+ *             while val != delim:             # <<<<<<<<<<<<<<
+ *                 chunk += val
+ *             ll.append(chunk)
+ */
+    while (1) {
+      __pyx_t_11 = (__Pyx_PyUnicode_Equals(__pyx_v_val, __pyx_v_delim, Py_NE)); if (unlikely(__pyx_t_11 < 0)) __PYX_ERR(0, 300, __pyx_L1_error)
+      if (!__pyx_t_11) break;
+
+      /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":301
+ *         for val in initial_data_string:
+ *             while val != delim:
+ *                 chunk += val             # <<<<<<<<<<<<<<
+ *             ll.append(chunk)
+ *             chunk = ""
+ */
+      __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_v_chunk, __pyx_v_val); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      if (!(likely(PyUnicode_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "unicode", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 301, __pyx_L1_error)
+      __Pyx_DECREF_SET(__pyx_v_chunk, ((PyObject*)__pyx_t_1));
+      __pyx_t_1 = 0;
+    }
+
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":302
+ *             while val != delim:
+ *                 chunk += val
+ *             ll.append(chunk)             # <<<<<<<<<<<<<<
+ *             chunk = ""
+ *         return ll
+ */
+    __pyx_t_12 = __Pyx_PyObject_Append(__pyx_v_ll, __pyx_v_chunk); if (unlikely(__pyx_t_12 == -1)) __PYX_ERR(0, 302, __pyx_L1_error)
+
+    /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":303
+ *                 chunk += val
+ *             ll.append(chunk)
+ *             chunk = ""             # <<<<<<<<<<<<<<
+ *         return ll
+ */
+    __Pyx_INCREF(__pyx_kp_u__5);
+    __Pyx_DECREF_SET(__pyx_v_chunk, __pyx_kp_u__5);
+  }
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":304
+ *             ll.append(chunk)
+ *             chunk = ""
+ *         return ll             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v_ll);
+  __pyx_r = __pyx_v_ll;
+  goto __pyx_L0;
+
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":290
+ * 
+ *     @staticmethod
+ *     def split(str initial_data_string, str delim):             # <<<<<<<<<<<<<<
+ *         """ Creates linked list from passed string
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("BioMetaPipeline.Accessories.DataStructures.linked_list.LinkedList.split", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_ll);
+  __Pyx_XDECREF(__pyx_v_chunk);
+  __Pyx_XDECREF(__pyx_v_val);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *__pyx_freelist_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__[8];
+static int __pyx_freecount_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ = 0;
+
+static PyObject *__pyx_tp_new_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
   PyObject *o;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__)))) {
-    o = (PyObject*)__pyx_freelist_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__[--__pyx_freecount_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__];
-    memset(o, 0, sizeof(struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__));
+  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__)))) {
+    o = (PyObject*)__pyx_freelist_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__[--__pyx_freecount_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__];
+    memset(o, 0, sizeof(struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__));
     (void) PyObject_INIT(o, t);
     PyObject_GC_Track(o);
   } else {
@@ -6190,41 +6467,41 @@ static PyObject *__pyx_tp_new_8Pipeline_11Accessories_14DataStructures_11linked_
   return o;
 }
 
-static void __pyx_tp_dealloc_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__(PyObject *o) {
-  struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *p = (struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *)o;
+static void __pyx_tp_dealloc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__(PyObject *o) {
+  struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *p = (struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *)o;
   PyObject_GC_UnTrack(o);
   Py_CLEAR(p->__pyx_v_self);
-  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__)))) {
-    __pyx_freelist_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__[__pyx_freecount_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__++] = ((struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *)o);
+  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__)))) {
+    __pyx_freelist_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__[__pyx_freecount_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__++] = ((struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *)o);
   } else {
     (*Py_TYPE(o)->tp_free)(o);
   }
 }
 
-static int __pyx_tp_traverse_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__(PyObject *o, visitproc v, void *a) {
+static int __pyx_tp_traverse_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__(PyObject *o, visitproc v, void *a) {
   int e;
-  struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *p = (struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *)o;
+  struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *p = (struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *)o;
   if (p->__pyx_v_self) {
     e = (*v)(p->__pyx_v_self, a); if (e) return e;
   }
   return 0;
 }
 
-static int __pyx_tp_clear_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__(PyObject *o) {
+static int __pyx_tp_clear_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__(PyObject *o) {
   PyObject* tmp;
-  struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *p = (struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *)o;
+  struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *p = (struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ *)o;
   tmp = ((PyObject*)p->__pyx_v_self);
   p->__pyx_v_self = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
 
-static PyTypeObject __pyx_type_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ = {
+static PyTypeObject __pyx_type_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ = {
   PyVarObject_HEAD_INIT(0, 0)
-  "Pipeline.Accessories.DataStructures.linked_list.__pyx_scope_struct____iter__", /*tp_name*/
-  sizeof(struct __pyx_obj_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__), /*tp_basicsize*/
+  "BioMetaPipeline.Accessories.DataStructures.linked_list.__pyx_scope_struct____iter__", /*tp_name*/
+  sizeof(struct __pyx_obj_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__, /*tp_dealloc*/
+  __pyx_tp_dealloc_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__, /*tp_dealloc*/
   0, /*tp_print*/
   0, /*tp_getattr*/
   0, /*tp_setattr*/
@@ -6246,8 +6523,8 @@ static PyTypeObject __pyx_type_8Pipeline_11Accessories_14DataStructures_11linked
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
   0, /*tp_doc*/
-  __pyx_tp_traverse_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__, /*tp_traverse*/
-  __pyx_tp_clear_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__, /*tp_clear*/
+  __pyx_tp_traverse_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__, /*tp_traverse*/
+  __pyx_tp_clear_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__, /*tp_clear*/
   0, /*tp_richcompare*/
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
@@ -6262,7 +6539,7 @@ static PyTypeObject __pyx_type_8Pipeline_11Accessories_14DataStructures_11linked
   0, /*tp_dictoffset*/
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__, /*tp_new*/
+  __pyx_tp_new_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -6301,6 +6578,7 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Accessories_DataStructures_linke, __pyx_k_Accessories_DataStructures_linke, sizeof(__pyx_k_Accessories_DataStructures_linke), 0, 0, 1, 0},
+  {&__pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_k_BioMetaPipeline_Accessories_Data, sizeof(__pyx_k_BioMetaPipeline_Accessories_Data), 0, 0, 1, 1},
   {&__pyx_kp_u_Index_must_be_less_that_length, __pyx_k_Index_must_be_less_that_length, sizeof(__pyx_k_Index_must_be_less_that_length), 0, 1, 0, 0},
   {&__pyx_kp_u_Invalid_type_passed, __pyx_k_Invalid_type_passed, sizeof(__pyx_k_Invalid_type_passed), 0, 1, 0, 0},
   {&__pyx_kp_u_Item_must_be_int_or_slice, __pyx_k_Item_must_be_int_or_slice, sizeof(__pyx_k_Item_must_be_int_or_slice), 0, 1, 0, 0},
@@ -6321,19 +6599,22 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_LinkedList_insert, __pyx_k_LinkedList_insert, sizeof(__pyx_k_LinkedList_insert), 0, 0, 1, 1},
   {&__pyx_n_s_LinkedList_pop, __pyx_k_LinkedList_pop, sizeof(__pyx_k_LinkedList_pop), 0, 0, 1, 1},
   {&__pyx_n_s_LinkedList_remove, __pyx_k_LinkedList_remove, sizeof(__pyx_k_LinkedList_remove), 0, 0, 1, 1},
+  {&__pyx_n_s_LinkedList_split, __pyx_k_LinkedList_split, sizeof(__pyx_k_LinkedList_split), 0, 0, 1, 1},
   {&__pyx_n_s_LinkedList_to_list, __pyx_k_LinkedList_to_list, sizeof(__pyx_k_LinkedList_to_list), 0, 0, 1, 1},
   {&__pyx_n_s_Node, __pyx_k_Node, sizeof(__pyx_k_Node), 0, 0, 1, 1},
   {&__pyx_n_s_Node___init, __pyx_k_Node___init, sizeof(__pyx_k_Node___init), 0, 0, 1, 1},
-  {&__pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_k_Pipeline_Accessories_DataStructu, sizeof(__pyx_k_Pipeline_Accessories_DataStructu), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_kp_u_Value_not_found, __pyx_k_Value_not_found, sizeof(__pyx_k_Value_not_found), 0, 1, 0, 0},
+  {&__pyx_kp_u__5, __pyx_k__5, sizeof(__pyx_k__5), 0, 1, 0, 0},
   {&__pyx_n_s_append, __pyx_k_append, sizeof(__pyx_k_append), 0, 0, 1, 1},
   {&__pyx_n_s_args, __pyx_k_args, sizeof(__pyx_k_args), 0, 0, 1, 1},
+  {&__pyx_n_s_chunk, __pyx_k_chunk, sizeof(__pyx_k_chunk), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_close, __pyx_k_close, sizeof(__pyx_k_close), 0, 0, 1, 1},
   {&__pyx_n_s_contains, __pyx_k_contains, sizeof(__pyx_k_contains), 0, 0, 1, 1},
   {&__pyx_n_s_data, __pyx_k_data, sizeof(__pyx_k_data), 0, 0, 1, 1},
+  {&__pyx_n_s_delim, __pyx_k_delim, sizeof(__pyx_k_delim), 0, 0, 1, 1},
   {&__pyx_n_s_delitem, __pyx_k_delitem, sizeof(__pyx_k_delitem), 0, 0, 1, 1},
   {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
   {&__pyx_n_s_getitem, __pyx_k_getitem, sizeof(__pyx_k_getitem), 0, 0, 1, 1},
@@ -6343,6 +6624,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_init, __pyx_k_init, sizeof(__pyx_k_init), 0, 0, 1, 1},
   {&__pyx_n_s_initial, __pyx_k_initial, sizeof(__pyx_k_initial), 0, 0, 1, 1},
   {&__pyx_n_u_initial, __pyx_k_initial, sizeof(__pyx_k_initial), 0, 1, 0, 1},
+  {&__pyx_n_s_initial_data_string, __pyx_k_initial_data_string, sizeof(__pyx_k_initial_data_string), 0, 0, 1, 1},
   {&__pyx_n_s_insert, __pyx_k_insert, sizeof(__pyx_k_insert), 0, 0, 1, 1},
   {&__pyx_n_s_isub, __pyx_k_isub, sizeof(__pyx_k_isub), 0, 0, 1, 1},
   {&__pyx_n_s_item, __pyx_k_item, sizeof(__pyx_k_item), 0, 0, 1, 1},
@@ -6350,6 +6632,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_len, __pyx_k_len, sizeof(__pyx_k_len), 0, 0, 1, 1},
   {&__pyx_n_s_length, __pyx_k_length, sizeof(__pyx_k_length), 0, 0, 1, 1},
   {&__pyx_n_u_length, __pyx_k_length, sizeof(__pyx_k_length), 0, 1, 0, 1},
+  {&__pyx_n_s_ll, __pyx_k_ll, sizeof(__pyx_k_ll), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_metaclass, __pyx_k_metaclass, sizeof(__pyx_k_metaclass), 0, 0, 1, 1},
   {&__pyx_n_s_module, __pyx_k_module, sizeof(__pyx_k_module), 0, 0, 1, 1},
@@ -6372,18 +6655,22 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_send, __pyx_k_send, sizeof(__pyx_k_send), 0, 0, 1, 1},
   {&__pyx_n_s_setitem, __pyx_k_setitem, sizeof(__pyx_k_setitem), 0, 0, 1, 1},
   {&__pyx_n_s_slots, __pyx_k_slots, sizeof(__pyx_k_slots), 0, 0, 1, 1},
+  {&__pyx_n_s_split, __pyx_k_split, sizeof(__pyx_k_split), 0, 0, 1, 1},
   {&__pyx_n_s_start, __pyx_k_start, sizeof(__pyx_k_start), 0, 0, 1, 1},
+  {&__pyx_n_s_staticmethod, __pyx_k_staticmethod, sizeof(__pyx_k_staticmethod), 0, 0, 1, 1},
   {&__pyx_n_s_step, __pyx_k_step, sizeof(__pyx_k_step), 0, 0, 1, 1},
   {&__pyx_n_s_stop, __pyx_k_stop, sizeof(__pyx_k_stop), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_throw, __pyx_k_throw, sizeof(__pyx_k_throw), 0, 0, 1, 1},
   {&__pyx_n_s_to_list, __pyx_k_to_list, sizeof(__pyx_k_to_list), 0, 0, 1, 1},
   {&__pyx_n_s_to_return, __pyx_k_to_return, sizeof(__pyx_k_to_return), 0, 0, 1, 1},
+  {&__pyx_n_s_val, __pyx_k_val, sizeof(__pyx_k_val), 0, 0, 1, 1},
   {&__pyx_n_s_value, __pyx_k_value, sizeof(__pyx_k_value), 0, 0, 1, 1},
   {&__pyx_n_u_value, __pyx_k_value, sizeof(__pyx_k_value), 0, 1, 0, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
+  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(0, 289, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 150, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 195, __pyx_L1_error)
   return 0;
@@ -6395,7 +6682,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":61
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":61
  *             self.initial = self.node
  *             self.length += 1
  *             self._move_to_end(0)             # <<<<<<<<<<<<<<
@@ -6406,7 +6693,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":130
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":130
  *             self.node = self.node.next_node
  *         self.node = self.initial
  *         self._move_to_end(0)             # <<<<<<<<<<<<<<
@@ -6417,7 +6704,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":147
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":147
  *             self.length += other.length
  *             self.node = self.initial
  *             self._move_to_end(0)             # <<<<<<<<<<<<<<
@@ -6428,7 +6715,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":258
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":258
  *             self.node = self.initial
  *             self.length -= 1
  *             self._move_to_end(0)             # <<<<<<<<<<<<<<
@@ -6439,221 +6726,233 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":7
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":7
  *     __slots__ = ['value', 'next_node']
  * 
  *     def __init__(self, value):             # <<<<<<<<<<<<<<
  *         self.value = value
  *         self.next_node = None
  */
-  __pyx_tuple__5 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_value); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 7, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__5);
-  __Pyx_GIVEREF(__pyx_tuple__5);
-  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_init, 7, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_value); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_init, 7, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 7, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":15
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":15
  *     __slots__ = ['length', 'node', 'initial']
  * 
  *     def __init__(self, *args):             # <<<<<<<<<<<<<<
  *         """ Initializer
  * 
  */
-  __pyx_tuple__7 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_args, __pyx_n_s_data); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__7);
-  __Pyx_GIVEREF(__pyx_tuple__7);
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_init, 15, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_args, __pyx_n_s_data); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__8);
+  __Pyx_GIVEREF(__pyx_tuple__8);
+  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_VARARGS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_init, 15, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 15, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":31
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":31
  *                     self.append(data)
  * 
  *     def append(self, value):             # <<<<<<<<<<<<<<
  *         """ Add to end of LinkedList
  * 
  */
-  __pyx_tuple__9 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_value, __pyx_n_s_new_node); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 31, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_append, 31, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_value, __pyx_n_s_new_node); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__10);
+  __Pyx_GIVEREF(__pyx_tuple__10);
+  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_append, 31, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 31, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":45
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":45
  *         self.length += 1
  * 
  *     def insert(self, int index, value):             # <<<<<<<<<<<<<<
  *         """ Insert at given index
  * 
  */
-  __pyx_tuple__11 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_index, __pyx_n_s_value, __pyx_n_s_new_node, __pyx_n_s_i, __pyx_n_s_old_next_node); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 45, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__11);
-  __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_insert, 45, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_index, __pyx_n_s_value, __pyx_n_s_new_node, __pyx_n_s_i, __pyx_n_s_old_next_node); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__12);
+  __Pyx_GIVEREF(__pyx_tuple__12);
+  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_insert, 45, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 45, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":75
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":75
  *         self._move_to_end(i)
  * 
  *     def to_list(self):             # <<<<<<<<<<<<<<
  *         """ Creates and returns python list of values
  * 
  */
-  __pyx_tuple__13 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_i, __pyx_n_s_to_return); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 75, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__13);
-  __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_to_list, 75, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_i, __pyx_n_s_to_return); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__14);
+  __Pyx_GIVEREF(__pyx_tuple__14);
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_to_list, 75, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 75, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":89
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":89
  *         return to_return
  * 
  *     def pop(self):             # <<<<<<<<<<<<<<
  *         """ Remove and return last value in LinkedList
  * 
  */
-  __pyx_tuple__15 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_i, __pyx_n_s_to_return); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 89, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__15);
-  __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_pop, 89, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_i, __pyx_n_s_to_return); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__16);
+  __Pyx_GIVEREF(__pyx_tuple__16);
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_pop, 89, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 89, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":104
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":104
  *         return to_return
  * 
  *     def __len__(self):             # <<<<<<<<<<<<<<
  *         """ Return length property
  * 
  */
-  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 104, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__17);
-  __Pyx_GIVEREF(__pyx_tuple__17);
-  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_len, 104, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__18);
+  __Pyx_GIVEREF(__pyx_tuple__18);
+  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_len, 104, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 104, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":111
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":111
  *         return self.length
  * 
  *     def __next__(self):             # <<<<<<<<<<<<<<
  *         """ Sets node as next node's value, if available
  * 
  */
-  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 111, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__19);
-  __Pyx_GIVEREF(__pyx_tuple__19);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_next, 111, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 111, __pyx_L1_error)
+  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 111, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__20);
+  __Pyx_GIVEREF(__pyx_tuple__20);
+  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__20, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_next, 111, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(0, 111, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":120
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":120
  *             return self
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
  *         """ Creates iterator that yields values of nodes
  * 
  */
-  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 120, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__21);
-  __Pyx_GIVEREF(__pyx_tuple__21);
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_iter, 120, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 120, __pyx_L1_error)
+  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 120, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__22);
+  __Pyx_GIVEREF(__pyx_tuple__22);
+  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_iter, 120, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 120, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":132
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":132
  *         self._move_to_end(0)
  * 
  *     def __iadd__(self, other):             # <<<<<<<<<<<<<<
  *         """ Overload method for combining 2 LinkedLists
  * 
  */
-  __pyx_tuple__23 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_other, __pyx_n_s_old_length, __pyx_n_s_value); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 132, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__23);
-  __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_iadd, 132, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_tuple__24 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_other, __pyx_n_s_old_length, __pyx_n_s_value); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__24);
+  __Pyx_GIVEREF(__pyx_tuple__24);
+  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_iadd, 132, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 132, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":152
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":152
  *             raise TypeError, "Invalid type passed"
  * 
  *     def __isub__(self, other):             # <<<<<<<<<<<<<<
  *         """ Overload method for removing an iterable of values from LinkedList
  * 
  */
-  __pyx_tuple__25 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_other, __pyx_n_s_value); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 152, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__25);
-  __Pyx_GIVEREF(__pyx_tuple__25);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_isub, 152, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_tuple__26 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_other, __pyx_n_s_value); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__26);
+  __Pyx_GIVEREF(__pyx_tuple__26);
+  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_isub, 152, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 152, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":162
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":162
  *         return self
  * 
  *     def __contains__(self, value):             # <<<<<<<<<<<<<<
  *         """ Determines if value in list
  *         Returns bool based on search
  */
-  __pyx_tuple__27 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_value, __pyx_n_s_i); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 162, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__27);
-  __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_contains, 162, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_tuple__28 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_value, __pyx_n_s_i); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__28);
+  __Pyx_GIVEREF(__pyx_tuple__28);
+  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_contains, 162, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 162, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":180
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":180
  *         return False
  * 
  *     def remove(self, value):             # <<<<<<<<<<<<<<
  *         """ Removes first occurrence of value
  *         Looks for value and calls __delitem__ if found
  */
-  __pyx_tuple__29 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_value, __pyx_n_s_i); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 180, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__29);
-  __Pyx_GIVEREF(__pyx_tuple__29);
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_remove, 180, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_tuple__30 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_value, __pyx_n_s_i); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__30);
+  __Pyx_GIVEREF(__pyx_tuple__30);
+  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__30, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_remove, 180, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 180, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":198
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":198
  *         self.__delitem__(i)
  * 
  *     def __getitem__(self, item):             # <<<<<<<<<<<<<<
  *         """ Returns value at location or slice
  *         Passing a slice creates list and returns given slice of list
  */
-  __pyx_tuple__31 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_item, __pyx_n_s_to_return, __pyx_n_s_i); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 198, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__31);
-  __Pyx_GIVEREF(__pyx_tuple__31);
-  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_getitem, 198, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_tuple__32 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_item, __pyx_n_s_to_return, __pyx_n_s_i); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 198, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__32);
+  __Pyx_GIVEREF(__pyx_tuple__32);
+  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_getitem, 198, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 198, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":224
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":224
  *         raise TypeError, "Item must be int or slice"
  * 
  *     def __setitem__(self, int index, value):             # <<<<<<<<<<<<<<
  *         """ Sets value at index
  * 
  */
-  __pyx_tuple__33 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_index, __pyx_n_s_value, __pyx_n_s_i); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 224, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__33);
-  __Pyx_GIVEREF(__pyx_tuple__33);
-  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_setitem, 224, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 224, __pyx_L1_error)
+  __pyx_tuple__34 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_index, __pyx_n_s_value, __pyx_n_s_i); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 224, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__34);
+  __Pyx_GIVEREF(__pyx_tuple__34);
+  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_setitem, 224, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 224, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":246
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":246
  *         self._move_to_end(i)
  * 
  *     def __delitem__(self, int index):             # <<<<<<<<<<<<<<
  *         """ Deletes value at index
  * 
  */
-  __pyx_tuple__35 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_index, __pyx_n_s_i); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 246, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__35);
-  __Pyx_GIVEREF(__pyx_tuple__35);
-  __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_delitem, 246, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 246, __pyx_L1_error)
+  __pyx_tuple__36 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_index, __pyx_n_s_i); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 246, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__36);
+  __Pyx_GIVEREF(__pyx_tuple__36);
+  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_delitem, 246, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 246, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":272
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":272
  *         self._move_to_end(i)
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
  *         """ Creates list and returns string representation
  * 
  */
-  __pyx_tuple__37 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 272, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__37);
-  __Pyx_GIVEREF(__pyx_tuple__37);
-  __pyx_codeobj__38 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__37, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_repr, 272, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__38)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __pyx_tuple__38 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__38);
+  __Pyx_GIVEREF(__pyx_tuple__38);
+  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_repr, 272, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) __PYX_ERR(0, 272, __pyx_L1_error)
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":279
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":279
  *         return self.to_list().__repr__()
  * 
  *     def _move_to_end(self, int i):             # <<<<<<<<<<<<<<
  *         """ Protected member for moving pointer to end of list, starting at index i
  * 
  */
-  __pyx_tuple__39 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_i); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(0, 279, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__39);
-  __Pyx_GIVEREF(__pyx_tuple__39);
-  __pyx_codeobj__40 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__39, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_move_to_end, 279, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__40)) __PYX_ERR(0, 279, __pyx_L1_error)
+  __pyx_tuple__40 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_i); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 279, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__40);
+  __Pyx_GIVEREF(__pyx_tuple__40);
+  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_move_to_end, 279, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 279, __pyx_L1_error)
+
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":290
+ * 
+ *     @staticmethod
+ *     def split(str initial_data_string, str delim):             # <<<<<<<<<<<<<<
+ *         """ Creates linked list from passed string
+ * 
+ */
+  __pyx_tuple__42 = PyTuple_Pack(5, __pyx_n_s_initial_data_string, __pyx_n_s_delim, __pyx_n_s_ll, __pyx_n_s_chunk, __pyx_n_s_val); if (unlikely(!__pyx_tuple__42)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__42);
+  __Pyx_GIVEREF(__pyx_tuple__42);
+  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Accessories_DataStructures_linke, __pyx_n_s_split, 290, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) __PYX_ERR(0, 290, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -6682,6 +6981,7 @@ PyMODINIT_FUNC PyInit_linked_list(void)
 {
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannyDeclarations
   #if CYTHON_REFNANNY
   __Pyx_RefNanny = __Pyx_RefNannyImportAPI("refnanny");
@@ -6739,14 +7039,14 @@ PyMODINIT_FUNC PyInit_linked_list(void)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_Pipeline__Accessories__DataStructures__linked_list) {
+  if (__pyx_module_is_main_BioMetaPipeline__Accessories__DataStructures__linked_list) {
     if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "Pipeline.Accessories.DataStructures.linked_list")) {
-      if (unlikely(PyDict_SetItemString(modules, "Pipeline.Accessories.DataStructures.linked_list", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "BioMetaPipeline.Accessories.DataStructures.linked_list")) {
+      if (unlikely(PyDict_SetItemString(modules, "BioMetaPipeline.Accessories.DataStructures.linked_list", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -6758,9 +7058,9 @@ PyMODINIT_FUNC PyInit_linked_list(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__) < 0) __PYX_ERR(0, 120, __pyx_L1_error)
-  __pyx_type_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__.tp_print = 0;
-  __pyx_ptype_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ = &__pyx_type_8Pipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__;
+  if (PyType_Ready(&__pyx_type_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__) < 0) __PYX_ERR(0, 120, __pyx_L1_error)
+  __pyx_type_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__.tp_print = 0;
+  __pyx_ptype_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__ = &__pyx_type_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list___pyx_scope_struct____iter__;
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
   /*--- Function import code ---*/
@@ -6769,17 +7069,17 @@ PyMODINIT_FUNC PyInit_linked_list(void)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":4
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":4
  * 
  * 
  * class Node:             # <<<<<<<<<<<<<<
  *     __slots__ = ['value', 'next_node']
  * 
  */
-  __pyx_t_1 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_Node, __pyx_n_s_Node, (PyObject *) NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, (PyObject *) NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_Node, __pyx_n_s_Node, (PyObject *) NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, (PyObject *) NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":5
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":5
  * 
  * class Node:
  *     __slots__ = ['value', 'next_node']             # <<<<<<<<<<<<<<
@@ -6797,19 +7097,19 @@ PyMODINIT_FUNC PyInit_linked_list(void)
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_slots, __pyx_t_2) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":7
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":7
  *     __slots__ = ['value', 'next_node']
  * 
  *     def __init__(self, value):             # <<<<<<<<<<<<<<
  *         self.value = value
  *         self.next_node = None
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_4Node_1__init__, 0, __pyx_n_s_Node___init, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__6)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_4Node_1__init__, 0, __pyx_n_s_Node___init, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_2) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":4
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":4
  * 
  * 
  * class Node:             # <<<<<<<<<<<<<<
@@ -6822,17 +7122,17 @@ PyMODINIT_FUNC PyInit_linked_list(void)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":12
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":12
  * 
  * 
  * class LinkedList:             # <<<<<<<<<<<<<<
  *     __slots__ = ['length', 'node', 'initial']
  * 
  */
-  __pyx_t_1 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_LinkedList, __pyx_n_s_LinkedList, (PyObject *) NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, (PyObject *) NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_LinkedList, __pyx_n_s_LinkedList, (PyObject *) NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, (PyObject *) NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":13
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":13
  * 
  * class LinkedList:
  *     __slots__ = ['length', 'node', 'initial']             # <<<<<<<<<<<<<<
@@ -6853,211 +7153,239 @@ PyMODINIT_FUNC PyInit_linked_list(void)
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_slots, __pyx_t_2) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":15
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":15
  *     __slots__ = ['length', 'node', 'initial']
  * 
  *     def __init__(self, *args):             # <<<<<<<<<<<<<<
  *         """ Initializer
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_1__init__, 0, __pyx_n_s_LinkedList___init, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_1__init__, 0, __pyx_n_s_LinkedList___init, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_2) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":31
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":31
  *                     self.append(data)
  * 
  *     def append(self, value):             # <<<<<<<<<<<<<<
  *         """ Add to end of LinkedList
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_3append, 0, __pyx_n_s_LinkedList_append, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_3append, 0, __pyx_n_s_LinkedList_append, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_append, __pyx_t_2) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":45
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":45
  *         self.length += 1
  * 
  *     def insert(self, int index, value):             # <<<<<<<<<<<<<<
  *         """ Insert at given index
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_5insert, 0, __pyx_n_s_LinkedList_insert, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_5insert, 0, __pyx_n_s_LinkedList_insert, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_insert, __pyx_t_2) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":75
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":75
  *         self._move_to_end(i)
  * 
  *     def to_list(self):             # <<<<<<<<<<<<<<
  *         """ Creates and returns python list of values
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_7to_list, 0, __pyx_n_s_LinkedList_to_list, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_7to_list, 0, __pyx_n_s_LinkedList_to_list, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_to_list, __pyx_t_2) < 0) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":89
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":89
  *         return to_return
  * 
  *     def pop(self):             # <<<<<<<<<<<<<<
  *         """ Remove and return last value in LinkedList
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_9pop, 0, __pyx_n_s_LinkedList_pop, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_9pop, 0, __pyx_n_s_LinkedList_pop, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_pop, __pyx_t_2) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":104
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":104
  *         return to_return
  * 
  *     def __len__(self):             # <<<<<<<<<<<<<<
  *         """ Return length property
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_11__len__, 0, __pyx_n_s_LinkedList___len, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_11__len__, 0, __pyx_n_s_LinkedList___len, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_len, __pyx_t_2) < 0) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":111
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":111
  *         return self.length
  * 
  *     def __next__(self):             # <<<<<<<<<<<<<<
  *         """ Sets node as next node's value, if available
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_13__next__, 0, __pyx_n_s_LinkedList___next, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 111, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_13__next__, 0, __pyx_n_s_LinkedList___next, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_next, __pyx_t_2) < 0) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":120
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":120
  *             return self
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
  *         """ Creates iterator that yields values of nodes
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_15__iter__, 0, __pyx_n_s_LinkedList___iter, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_15__iter__, 0, __pyx_n_s_LinkedList___iter, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__23)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_iter, __pyx_t_2) < 0) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":132
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":132
  *         self._move_to_end(0)
  * 
  *     def __iadd__(self, other):             # <<<<<<<<<<<<<<
  *         """ Overload method for combining 2 LinkedLists
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_18__iadd__, 0, __pyx_n_s_LinkedList___iadd, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_18__iadd__, 0, __pyx_n_s_LinkedList___iadd, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_iadd, __pyx_t_2) < 0) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":152
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":152
  *             raise TypeError, "Invalid type passed"
  * 
  *     def __isub__(self, other):             # <<<<<<<<<<<<<<
  *         """ Overload method for removing an iterable of values from LinkedList
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_20__isub__, 0, __pyx_n_s_LinkedList___isub, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_20__isub__, 0, __pyx_n_s_LinkedList___isub, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_isub, __pyx_t_2) < 0) __PYX_ERR(0, 152, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":162
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":162
  *         return self
  * 
  *     def __contains__(self, value):             # <<<<<<<<<<<<<<
  *         """ Determines if value in list
  *         Returns bool based on search
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_22__contains__, 0, __pyx_n_s_LinkedList___contains, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_22__contains__, 0, __pyx_n_s_LinkedList___contains, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__29)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_contains, __pyx_t_2) < 0) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":180
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":180
  *         return False
  * 
  *     def remove(self, value):             # <<<<<<<<<<<<<<
  *         """ Removes first occurrence of value
  *         Looks for value and calls __delitem__ if found
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_24remove, 0, __pyx_n_s_LinkedList_remove, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_24remove, 0, __pyx_n_s_LinkedList_remove, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__31)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 180, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_remove, __pyx_t_2) < 0) __PYX_ERR(0, 180, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":198
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":198
  *         self.__delitem__(i)
  * 
  *     def __getitem__(self, item):             # <<<<<<<<<<<<<<
  *         """ Returns value at location or slice
  *         Passing a slice creates list and returns given slice of list
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_26__getitem__, 0, __pyx_n_s_LinkedList___getitem, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_26__getitem__, 0, __pyx_n_s_LinkedList___getitem, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__33)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_getitem, __pyx_t_2) < 0) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":224
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":224
  *         raise TypeError, "Item must be int or slice"
  * 
  *     def __setitem__(self, int index, value):             # <<<<<<<<<<<<<<
  *         """ Sets value at index
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_28__setitem__, 0, __pyx_n_s_LinkedList___setitem, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 224, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_28__setitem__, 0, __pyx_n_s_LinkedList___setitem, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__35)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 224, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_setitem, __pyx_t_2) < 0) __PYX_ERR(0, 224, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":246
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":246
  *         self._move_to_end(i)
  * 
  *     def __delitem__(self, int index):             # <<<<<<<<<<<<<<
  *         """ Deletes value at index
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_30__delitem__, 0, __pyx_n_s_LinkedList___delitem, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__36)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 246, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_30__delitem__, 0, __pyx_n_s_LinkedList___delitem, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__37)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 246, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_delitem, __pyx_t_2) < 0) __PYX_ERR(0, 246, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":272
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":272
  *         self._move_to_end(i)
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
  *         """ Creates list and returns string representation
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_32__repr__, 0, __pyx_n_s_LinkedList___repr, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__38)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_32__repr__, 0, __pyx_n_s_LinkedList___repr, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__39)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 272, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_repr, __pyx_t_2) < 0) __PYX_ERR(0, 272, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":279
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":279
  *         return self.to_list().__repr__()
  * 
  *     def _move_to_end(self, int i):             # <<<<<<<<<<<<<<
  *         """ Protected member for moving pointer to end of list, starting at index i
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Pipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_34_move_to_end, 0, __pyx_n_s_LinkedList__move_to_end, NULL, __pyx_n_s_Pipeline_Accessories_DataStructu, __pyx_d, ((PyObject *)__pyx_codeobj__40)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 279, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_34_move_to_end, 0, __pyx_n_s_LinkedList__move_to_end, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__41)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 279, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_move_to_end, __pyx_t_2) < 0) __PYX_ERR(0, 279, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":12
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":290
+ * 
+ *     @staticmethod
+ *     def split(str initial_data_string, str delim):             # <<<<<<<<<<<<<<
+ *         """ Creates linked list from passed string
+ * 
+ */
+  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_15BioMetaPipeline_11Accessories_14DataStructures_11linked_list_10LinkedList_36split, __Pyx_CYFUNCTION_STATICMETHOD, __pyx_n_s_LinkedList_split, NULL, __pyx_n_s_BioMetaPipeline_Accessories_Data, __pyx_d, ((PyObject *)__pyx_codeobj__43)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":289
+ *             i += 1
+ * 
+ *     @staticmethod             # <<<<<<<<<<<<<<
+ *     def split(str initial_data_string, str delim):
+ *         """ Creates linked list from passed string
+ */
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
+  __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_staticmethod, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_split, __pyx_t_2) < 0) __PYX_ERR(0, 290, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":12
  * 
  * 
  * class LinkedList:             # <<<<<<<<<<<<<<
@@ -7070,7 +7398,7 @@ PyMODINIT_FUNC PyInit_linked_list(void)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Pipeline/Accessories/DataStructures/linked_list.pyx":1
+  /* "BioMetaPipeline/Accessories/DataStructures/linked_list.pyx":1
  * # cython: language_level=3             # <<<<<<<<<<<<<<
  * 
  * 
@@ -7086,13 +7414,14 @@ PyMODINIT_FUNC PyInit_linked_list(void)
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init Pipeline.Accessories.DataStructures.linked_list", 0, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init BioMetaPipeline.Accessories.DataStructures.linked_list", 0, __pyx_lineno, __pyx_filename);
     }
     Py_DECREF(__pyx_m); __pyx_m = 0;
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init Pipeline.Accessories.DataStructures.linked_list");
+    PyErr_SetString(PyExc_ImportError, "init BioMetaPipeline.Accessories.DataStructures.linked_list");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -8266,6 +8595,195 @@ static CYTHON_INLINE PyObject* __Pyx_PyList_Pop(PyObject* L) {
     return __Pyx_CallUnboundCMethod0(&__pyx_umethod_PyList_Type_pop, L);
 }
 #endif
+
+/* ArgTypeTest */
+      static void __Pyx_RaiseArgumentTypeInvalid(const char* name, PyObject *obj, PyTypeObject *type) {
+    PyErr_Format(PyExc_TypeError,
+        "Argument '%.200s' has incorrect type (expected %.200s, got %.200s)",
+        name, type->tp_name, Py_TYPE(obj)->tp_name);
+}
+static CYTHON_INLINE int __Pyx_ArgTypeTest(PyObject *obj, PyTypeObject *type, int none_allowed,
+    const char *name, int exact)
+{
+    if (unlikely(!type)) {
+        PyErr_SetString(PyExc_SystemError, "Missing type object");
+        return 0;
+    }
+    if (none_allowed && obj == Py_None) return 1;
+    else if (exact) {
+        if (likely(Py_TYPE(obj) == type)) return 1;
+        #if PY_MAJOR_VERSION == 2
+        else if ((type == &PyBaseString_Type) && likely(__Pyx_PyBaseString_CheckExact(obj))) return 1;
+        #endif
+    }
+    else {
+        if (likely(PyObject_TypeCheck(obj, type))) return 1;
+    }
+    __Pyx_RaiseArgumentTypeInvalid(name, obj, type);
+    return 0;
+}
+
+/* unicode_iter */
+      static CYTHON_INLINE int __Pyx_init_unicode_iteration(
+    PyObject* ustring, Py_ssize_t *length, void** data, int *kind) {
+#if CYTHON_PEP393_ENABLED
+    if (unlikely(__Pyx_PyUnicode_READY(ustring) < 0)) return -1;
+    *kind   = PyUnicode_KIND(ustring);
+    *length = PyUnicode_GET_LENGTH(ustring);
+    *data   = PyUnicode_DATA(ustring);
+#else
+    *kind   = 0;
+    *length = PyUnicode_GET_SIZE(ustring);
+    *data   = (void*)PyUnicode_AS_UNICODE(ustring);
+#endif
+    return 0;
+}
+
+/* BytesEquals */
+      static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals) {
+#if CYTHON_COMPILING_IN_PYPY
+    return PyObject_RichCompareBool(s1, s2, equals);
+#else
+    if (s1 == s2) {
+        return (equals == Py_EQ);
+    } else if (PyBytes_CheckExact(s1) & PyBytes_CheckExact(s2)) {
+        const char *ps1, *ps2;
+        Py_ssize_t length = PyBytes_GET_SIZE(s1);
+        if (length != PyBytes_GET_SIZE(s2))
+            return (equals == Py_NE);
+        ps1 = PyBytes_AS_STRING(s1);
+        ps2 = PyBytes_AS_STRING(s2);
+        if (ps1[0] != ps2[0]) {
+            return (equals == Py_NE);
+        } else if (length == 1) {
+            return (equals == Py_EQ);
+        } else {
+            int result;
+#if CYTHON_USE_UNICODE_INTERNALS
+            Py_hash_t hash1, hash2;
+            hash1 = ((PyBytesObject*)s1)->ob_shash;
+            hash2 = ((PyBytesObject*)s2)->ob_shash;
+            if (hash1 != hash2 && hash1 != -1 && hash2 != -1) {
+                return (equals == Py_NE);
+            }
+#endif
+            result = memcmp(ps1, ps2, (size_t)length);
+            return (equals == Py_EQ) ? (result == 0) : (result != 0);
+        }
+    } else if ((s1 == Py_None) & PyBytes_CheckExact(s2)) {
+        return (equals == Py_NE);
+    } else if ((s2 == Py_None) & PyBytes_CheckExact(s1)) {
+        return (equals == Py_NE);
+    } else {
+        int result;
+        PyObject* py_result = PyObject_RichCompare(s1, s2, equals);
+        if (!py_result)
+            return -1;
+        result = __Pyx_PyObject_IsTrue(py_result);
+        Py_DECREF(py_result);
+        return result;
+    }
+#endif
+}
+
+/* UnicodeEquals */
+      static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int equals) {
+#if CYTHON_COMPILING_IN_PYPY
+    return PyObject_RichCompareBool(s1, s2, equals);
+#else
+#if PY_MAJOR_VERSION < 3
+    PyObject* owned_ref = NULL;
+#endif
+    int s1_is_unicode, s2_is_unicode;
+    if (s1 == s2) {
+        goto return_eq;
+    }
+    s1_is_unicode = PyUnicode_CheckExact(s1);
+    s2_is_unicode = PyUnicode_CheckExact(s2);
+#if PY_MAJOR_VERSION < 3
+    if ((s1_is_unicode & (!s2_is_unicode)) && PyString_CheckExact(s2)) {
+        owned_ref = PyUnicode_FromObject(s2);
+        if (unlikely(!owned_ref))
+            return -1;
+        s2 = owned_ref;
+        s2_is_unicode = 1;
+    } else if ((s2_is_unicode & (!s1_is_unicode)) && PyString_CheckExact(s1)) {
+        owned_ref = PyUnicode_FromObject(s1);
+        if (unlikely(!owned_ref))
+            return -1;
+        s1 = owned_ref;
+        s1_is_unicode = 1;
+    } else if (((!s2_is_unicode) & (!s1_is_unicode))) {
+        return __Pyx_PyBytes_Equals(s1, s2, equals);
+    }
+#endif
+    if (s1_is_unicode & s2_is_unicode) {
+        Py_ssize_t length;
+        int kind;
+        void *data1, *data2;
+        if (unlikely(__Pyx_PyUnicode_READY(s1) < 0) || unlikely(__Pyx_PyUnicode_READY(s2) < 0))
+            return -1;
+        length = __Pyx_PyUnicode_GET_LENGTH(s1);
+        if (length != __Pyx_PyUnicode_GET_LENGTH(s2)) {
+            goto return_ne;
+        }
+#if CYTHON_USE_UNICODE_INTERNALS
+        {
+            Py_hash_t hash1, hash2;
+        #if CYTHON_PEP393_ENABLED
+            hash1 = ((PyASCIIObject*)s1)->hash;
+            hash2 = ((PyASCIIObject*)s2)->hash;
+        #else
+            hash1 = ((PyUnicodeObject*)s1)->hash;
+            hash2 = ((PyUnicodeObject*)s2)->hash;
+        #endif
+            if (hash1 != hash2 && hash1 != -1 && hash2 != -1) {
+                goto return_ne;
+            }
+        }
+#endif
+        kind = __Pyx_PyUnicode_KIND(s1);
+        if (kind != __Pyx_PyUnicode_KIND(s2)) {
+            goto return_ne;
+        }
+        data1 = __Pyx_PyUnicode_DATA(s1);
+        data2 = __Pyx_PyUnicode_DATA(s2);
+        if (__Pyx_PyUnicode_READ(kind, data1, 0) != __Pyx_PyUnicode_READ(kind, data2, 0)) {
+            goto return_ne;
+        } else if (length == 1) {
+            goto return_eq;
+        } else {
+            int result = memcmp(data1, data2, (size_t)(length * kind));
+            #if PY_MAJOR_VERSION < 3
+            Py_XDECREF(owned_ref);
+            #endif
+            return (equals == Py_EQ) ? (result == 0) : (result != 0);
+        }
+    } else if ((s1 == Py_None) & s2_is_unicode) {
+        goto return_ne;
+    } else if ((s2 == Py_None) & s1_is_unicode) {
+        goto return_ne;
+    } else {
+        int result;
+        PyObject* py_result = PyObject_RichCompare(s1, s2, equals);
+        if (!py_result)
+            return -1;
+        result = __Pyx_PyObject_IsTrue(py_result);
+        Py_DECREF(py_result);
+        return result;
+    }
+return_eq:
+    #if PY_MAJOR_VERSION < 3
+    Py_XDECREF(owned_ref);
+    #endif
+    return (equals == Py_EQ);
+return_ne:
+    #if PY_MAJOR_VERSION < 3
+    Py_XDECREF(owned_ref);
+    #endif
+    return (equals == Py_NE);
+#endif
+}
 
 /* FetchCommonType */
       static PyTypeObject* __Pyx_FetchCommonType(PyTypeObject* type) {
