@@ -3,3 +3,8 @@ build/*
 .idea/*
 BioMetaPipeline/*
 Accessories/__pycache__/*
+build/*
+*/*.c
+*/*.so
+*/*/*.c
+*/*/*.so
