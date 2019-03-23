@@ -4,7 +4,10 @@ build/*/*
 build/*
 */*.c
 */*.so
+*/__pycache__/*
 */*/*.c
 */*/*.so
+*/*/__pycache__/*
 */*/*/*.so
 */*/*/*.c
+*/*/*/__pycache__/*
