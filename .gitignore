@@ -2,4 +2,4 @@ __pycache__/*
 build/*
 .idea/*
 BioMetaPipeline/*
-*/__pycache__/*
+Accessories/__pycache__/*
