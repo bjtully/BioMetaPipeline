@@ -27,6 +27,5 @@ if __name__ == "__main__":
     )
 
     ap = ArgParse(args_list, description="Collected reads matching criteria")
-
     # bamfile = pysam.AlignmentFile(ap.args.alignment_file, "rb")
 

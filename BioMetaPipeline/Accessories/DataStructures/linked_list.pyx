@@ -1,4 +1,5 @@
 # cython: language_level=3
+from collections.abc import Iterable
 
 
 class Node:
@@ -22,8 +23,11 @@ class LinkedList:
         self.initial = None
         if args:
             if len(args) == 1:
-                for data in args[0]:
-                    self.append(data)
+                if isinstance(args[0], Iterable):
+                    for data in args[0]:
+                        self.append(data)
+                else:
+                    self.append(args)
             else:
                 for data in args:
                     self.append(data)
@@ -295,14 +299,16 @@ class LinkedList:
         :return:
         """
         ll = LinkedList()
-        cdef str chunk = ""
-        cdef str val
-        for val in initial_data_string:
-            if val != delim:
-                chunk += val
-            else:
-                ll.append(chunk)
-                chunk = ""
-        if chunk != "":
-            ll.append(chunk)
+        cdef int str_len = len(initial_data_string)
+        split_values = [0,]
+        cdef int i
+        for i in range(str_len):
+            if initial_data_string[i] == delim:
+                split_values.append(i)
+                split_values.append(i + 1)
+                continue
+            if i == str_len - 1 and initial_data_string[i] != delim:
+                split_values.append(i + 1)
+        for i in range(0, len(split_values) - 1, 2):
+            ll.append(initial_data_string[split_values[i]: split_values[i + 1]])
         return ll
