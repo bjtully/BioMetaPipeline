@@ -2,17 +2,13 @@
 from collections.abc import Iterable
 
 
-class Node:
-    __slots__ = ['value', 'next_node']
-
-    def __init__(self, value):
-        self.value = value
+cdef class Node:
+    def __init__(self, object value):
+        self.value = <void *>value
         self.next_node = None
 
 
-class LinkedList:
-    __slots__ = ['length', 'node', 'initial']
-
+cdef class LinkedList:
     def __init__(self, *args):
         """ Initializer
 
@@ -21,6 +17,7 @@ class LinkedList:
         self.length = 0
         self.node = None
         self.initial = None
+        cdef int i
         if args:
             if len(args) == 1:
                 if isinstance(args[0], Iterable):
@@ -32,13 +29,13 @@ class LinkedList:
                 for data in args:
                     self.append(data)
 
-    def append(self, value):
+    def append(self, object value):
         """ Add to end of LinkedList
 
         :param value:
         :return:
         """
-        cdef object new_node = Node(value)
+        cdef Node new_node = Node(value)
         if not self.initial:
             self.initial = new_node
         else:
@@ -46,7 +43,7 @@ class LinkedList:
         self.node = new_node
         self.length += 1
 
-    def insert(self, int index, value):
+    def insert(self, int index, object value):
         """ Insert at given index
 
         :param index:
@@ -54,7 +51,7 @@ class LinkedList:
         :return:
         """
         assert index < self.length, "Index must be less that length"
-        cdef object new_node = Node(value)
+        cdef Node new_node = Node(value)
         self.node = self.initial
         cdef int i = 0
         if index == 0:
@@ -69,7 +66,7 @@ class LinkedList:
         while i < index - 1:
             self.__next__()
             i += 1
-        cdef object old_next_node = self.node.next_node
+        cdef Node old_next_node = self.node.next_node
         self.node.next_node = new_node
         self.__next__()
         self.node.next_node = old_next_node
@@ -85,7 +82,7 @@ class LinkedList:
         cdef list to_return = []
         self.node = self.initial
         while i < self.length:
-            to_return.append(self.node.value)
+            to_return.append(<object>self.node.value)
             self.__next__()
             i += 1
         return to_return
@@ -100,7 +97,7 @@ class LinkedList:
         while i < self.length - 2:
             self.__next__()
             i += 1
-        cdef object to_return = self.node.next_node.value
+        cdef object to_return = <object>self.node.next_node.value
         self.node.next_node = None
         self.length -= 1
         return to_return
@@ -128,13 +125,13 @@ class LinkedList:
         """
         self.node = self.initial
         while self.node:
-            yield self.node.value
+            yield <object>self.node.value
             self.node = self.node.next_node
         self.node = self.initial
         self._move_to_end(0)
 
-    def __iadd__(self, other):
-        """ Overload method for combining 2 LinkedLists
+    def __iadd__(self, object other):
+        """ Overload method for combining 2 LinkedLists or an iterable to a linked list
 
         :param other: LinkedList
         :return:
@@ -153,7 +150,7 @@ class LinkedList:
         else:
             raise TypeError, "Invalid type passed"
 
-    def __isub__(self, other):
+    def __isub__(self, object other):
         """ Overload method for removing an iterable of values from LinkedList
 
         :param other:
@@ -163,7 +160,7 @@ class LinkedList:
             self.remove(value)
         return self
 
-    def __contains__(self, value):
+    def __contains__(self, object value):
         """ Determines if value in list
         Returns bool based on search
 
@@ -173,7 +170,7 @@ class LinkedList:
         self.node = self.initial
         cdef int i = 0
         while i < self.length:
-            if self.node.value == value:
+            if <object>self.node.value == value:
                 self._move_to_end(i)
                 return True
             self.__next__()
@@ -181,7 +178,7 @@ class LinkedList:
         self._move_to_end(i)
         return False
 
-    def remove(self, value):
+    def remove(self, object value):
         """ Removes first occurrence of value
         Looks for value and calls __delitem__ if found
 
@@ -191,15 +188,15 @@ class LinkedList:
         self.node = self.initial
         cdef int i = 0
         while i < self.length:
-            if self.node.value == value:
+            if <object>self.node.value == value:
                 break
             self.__next__()
             i += 1
-        if i == self.length and self.node.value != value:
+        if i == self.length and <object>self.node.value != value:
             raise ValueError, "Value not found"
         self.__delitem__(i)
 
-    def __getitem__(self, item):
+    def __getitem__(self, object item):
         """ Returns value at location or slice
         Passing a slice creates list and returns given slice of list
 
@@ -214,13 +211,13 @@ class LinkedList:
         elif isinstance(item, int):
             assert item < self.length, "Index must be less that length"
             if item == 0:
-                return self.initial.value
+                return <object>self.initial.value
             elif item < 0:
                 item = item + self.length
             while i < item:
                 self.node = self.node.next_node
                 i += 1
-            to_return = self.node.value
+            to_return = <object>self.node.value
             self._move_to_end(i)
             return to_return
         raise TypeError, "Item must be int or slice"
@@ -236,7 +233,7 @@ class LinkedList:
         self.node = self.initial
         cdef int i = 0
         if index == 0:
-            self.node.value = value
+            self.node.value = <void *>value
             self._move_to_end(i)
             return
         if index < 0:
@@ -244,7 +241,7 @@ class LinkedList:
         while i < index:
             self.__next__()
             i += 1
-        self.node.value = value
+        self.node.value = <void *>value
         self._move_to_end(i)
 
     def __delitem__(self, int index):

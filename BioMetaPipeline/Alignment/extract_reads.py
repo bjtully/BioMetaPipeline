@@ -22,10 +22,13 @@ if __name__ == "__main__":
     args_list = (
         (("-a", "--alignment_file"),
          {"help": ".bam file", }),
+        (("-s", "--silent"),
+         {"action": "store_true", "default": False}),
         (("-f", "--filter_string"),
          {"help": "MAPPED/UNMAPPED,MAP_QUAL,PAIRED/UNPAIRED | Default: MAPPED,30,UNPAIRED", "default":"MAPPED,30,UNPAIRED"})
     )
 
     ap = ArgParse(args_list, description="Collected reads matching criteria")
+    print(ap.args.silent)
     # bamfile = pysam.AlignmentFile(ap.args.alignment_file, "rb")
 

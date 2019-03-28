@@ -17,7 +17,7 @@ class ArgParse:
             [["-o", "--optional"],
                 {"help": "Optional argument", "default": "None"}],
             [["-r", "--required"],
-                {"help": "Required argument", "require": "True"}]
+                {"help": "Required argument", "required": "True"}]
         ]
 
         ap = ArgParse(args_list, description="Sample:\tSample program")
@@ -35,7 +35,6 @@ class ArgParse:
         """
         self.arguments_list = arguments_list
         self.args = []
-        self.required_options = {}
         # Instantiate ArgumentParser
         self.parser = argparse.ArgumentParser(formatter_class=RawTextHelpFormatter, description=description,
                                               *args, **kwargs)
@@ -44,7 +43,6 @@ class ArgParse:
         # Parse arguments
         try:
             self.args = self.parser.parse_args()
-            self._require_optional()
         except:
             exit(1)
 
@@ -54,25 +52,8 @@ class ArgParse:
 
         """
         for args in self.arguments_list:
-            # Store requirement for option by popping from args dictionary
             # Be default names argument by last value passed in inner list
-            self.required_options[args[0][-1]] = bool(args[1].pop('require', False))
             self.parser.add_argument(*args[0], **args[1])
-
-    def _require_optional(self):
-        """ Protected member for validating "require" arguments
-
-        """
-        passed = True
-        for args in self.arguments_list:
-            # If argument is in "required" list and has not been set
-            # raise exception
-            _arg = args[0][-1]
-            if self.required_options[_arg] and not getattr(self.args, _arg.strip("--")):
-                print("Argument required: {}".format(_arg))
-                passed = False
-        if not passed:
-            raise Exception
 
     @staticmethod
     def description_builder(header_line, help_dict, flag_dict):
@@ -90,6 +71,6 @@ if __name__ == '__main__':
     args_list = [
         [["required_argument"], {"help": "Help string for argument"}],
         [["-o", "--optional"], {"help": "Optional argument"}],
-        [["-r", "--required"], {"help": "Required argument", "require": "True"}]
+        [["-r", "--required"], {"help": "Required argument", "required": "True"}]
     ]
     ap = ArgParse(args_list, description="Sample ArgParse program!")
