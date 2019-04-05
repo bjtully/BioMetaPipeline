@@ -1,7 +1,8 @@
 # cython: language_level=3
 
 import os
-from BioMetaPipeline.Accessories.config import Config
+from BioMetaPipeline.Config.config import Config
+
 
 class ConfigManager:
     """ Class will load config file and determine values for given programs in pipeline based

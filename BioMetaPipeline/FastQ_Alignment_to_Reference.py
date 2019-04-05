@@ -2,18 +2,18 @@
 
 import os
 import luigi
-from Accessories.arg_parse import ArgParse
-from Pipeline.Accessories.run_manager import RunManager
-from Pipeline.Accessories.config_manager import ConfigManager
-from Pipeline.DataPreparation.zip import Gunzip
-from Pipeline.DataPreparation.zip import GZip
-from Pipeline.DataPreparation.dedup import SingleEnd
-from Pipeline.DataPreparation.trim import TrimSingle
-from Pipeline.Alignment.bowtie import Bowtie2Single
-from Pipeline.Alignment.sambamba import View, Sort
-from Pipeline.FileOperations.file_operations import Remove
+from BioMetaPipeline.Accessories.arg_parse import ArgParse
+from BioMetaPipeline.Accessories.run_manager import RunManager
+from BioMetaPipeline.Config.config_manager import ConfigManager
+from BioMetaPipeline.DataPreparation.zip import Gunzip
+from BioMetaPipeline.DataPreparation.zip import GZip
+from BioMetaPipeline.DataPreparation.dedup import SingleEnd
+from BioMetaPipeline.DataPreparation.trim import TrimSingle
+from BioMetaPipeline.Alignment.bowtie import Bowtie2Single
+from BioMetaPipeline.Alignment.sambamba import View, Sort
+from BioMetaPipeline.FileOperations.file_operations import Remove
+from BioMetaPipeline.FastQ_Alignment_to_Reference_constants import ConfigConstants
 
-from FastQ_Alignment_to_Reference_constants import ConfigConstants
 
 if __name__ == "__main__":
     args_list = (
