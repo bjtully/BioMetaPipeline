@@ -10,10 +10,12 @@ class ConfigManager:
 
     """
 
-    def __init__(self, str config_path, tuple ignore = ()):
+    def __init__(self, str config_path, tuple ignore = (), bint validate=True):
         self.config = Config()
         self.config.read(config_path)
         self.ignore = ignore
+        if validate:
+            self._validate_programs_in_pipeline()
 
     def get(self, str _dict, str value):
         """ Gets value from either environment variable or from Config file,
@@ -55,3 +57,8 @@ class ConfigManager:
                 for def_key in self.config[_dict][params[i]].rstrip("\r\n").split(","):
                     parameter_list.append(def_key)
         return parameter_list
+
+    def _validate_programs_in_pipeline(self):
+        pass
+
+

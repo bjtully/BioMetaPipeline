@@ -16,7 +16,9 @@ if __name__ == "__main__":
         (("-l", "--prefix_file"),
          {"help": "Optional list file formatted as output_prefix\t<file>[\t<file>]\n", "default": "None"}),
         (("-a", "--cancel_autocommit"),
-         {"help": "Cancel commit to database", "action": "store_true", "default": False})
+         {"help": "Cancel commit to database", "action": "store_true", "default": False}),
+        (("-o", "--output_directory"),
+         {"help": "Output directory prefix", "default": "out"}),
     )
 
     programs = {
@@ -25,15 +27,15 @@ if __name__ == "__main__":
     }
 
     flags = {
-        "EVALUATION":           ("directory", "config_file", "prefix_file"),
+        "EVALUATION":           ("directory", "config_file", "prefix_file", "cancel_autocommit", "output_directory"),
     }
 
     errors = {
-        None: None
+
     }
 
     _help = {
-        "EVALUATION":       "Evaluates completion, contamination, and redundancy of genomes (CheckM, "
+        "EVALUATION":       "Evaluates completion, contamination, and redundancy of genomes"
     }
 
     ap = ArgParse(
