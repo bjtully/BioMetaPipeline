@@ -14,8 +14,10 @@ class CheckM(LuigiTaskClass):
         return []
 
     def run(self):
-        """ checkm lineage_wf -x .fna -aai_strain 0.95 -t 10 -pplacer_threads 10 ./genome_folder
+        """ checkm lineage_wf -x .fna --aai_strain 0.95 -t 10 --pplacer_threads 10 ./genome_folder
             output_directory > checkm_lineageWF_results.qa.txt
+
+        Note that python2 is required to run checkm
 
         :return:
         """
@@ -30,4 +32,4 @@ class CheckM(LuigiTaskClass):
         )
 
     def output(self):
-        return luigi.LocalTarget(os.path.join(self.output_directory))
+        return luigi.LocalTarget(os.path.join(self.output_directory)), luigi.LocalTarget(self.outfile)

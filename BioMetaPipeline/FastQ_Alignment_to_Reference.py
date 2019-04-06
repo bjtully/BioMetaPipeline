@@ -3,7 +3,7 @@
 import os
 import luigi
 from BioMetaPipeline.Accessories.arg_parse import ArgParse
-from BioMetaPipeline.Accessories.run_manager import RunManager
+from BioMetaPipeline.PipelineManagement.run_manager import RunManager
 from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.DataPreparation.zip import Gunzip
 from BioMetaPipeline.DataPreparation.zip import GZip
@@ -17,7 +17,7 @@ from BioMetaPipeline.FastQ_Alignment_to_Reference_constants import ConfigConstan
 
 if __name__ == "__main__":
     args_list = (
-        (("-c", "--config"),
+        (("-c", "--Config"),
          {"help": "/path/to/config_file formatted with ConfigParser standards", "require": True}),
         (("-l", "--list_file"),
          {"help": "/path/to/list_file formatted as 'prefix\\tdata_file_1,data_file_2...\\n'", "require": True}),

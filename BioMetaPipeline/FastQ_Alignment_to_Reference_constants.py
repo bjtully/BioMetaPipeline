@@ -1,5 +1,5 @@
 class ConfigConstants:
-    """ Class is used for storing constants to use in config file
+    """ Class is used for storing constants to use in Config file
     Mostly for ease-of-use
 
     """

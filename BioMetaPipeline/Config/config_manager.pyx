@@ -5,7 +5,7 @@ from BioMetaPipeline.Config.config import Config
 
 
 class ConfigManager:
-    """ Class will load config file and determine values for given programs in pipeline based
+    """ Class will load Config file and determine values for given programs in pipeline based
     on environment values and default settings
 
     """
@@ -16,11 +16,11 @@ class ConfigManager:
         self.ignore = ignore
 
     def get(self, str _dict, str value):
-        """ Gets value from either environment variable or from config file,
+        """ Gets value from either environment variable or from Config file,
         Returns None otherwise
 
         :param _dict:
-        :param value: (str) Value to get from config file
+        :param value: (str) Value to get from Config file
         :return:
         """
         if value != "PATH":
@@ -31,7 +31,7 @@ class ConfigManager:
             return None
 
     def build_parameter_list_from_dict(self, str _dict, tuple ignore = ()):
-        """ Creates list of parameters from given values in given config dict section
+        """ Creates list of parameters from given values in given Config dict section
         Ignores areas set on initialization as well as those passed to this function
         Automatically ignores values with "path" in name
 
