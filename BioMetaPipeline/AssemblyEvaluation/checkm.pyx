@@ -6,9 +6,14 @@ import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 
+class CheckMConstants:
+    CHECKM = "CHECKM"
+    OUTPUT_DIRECTORY = "checkm_lineageWF_results"
+
+
 class CheckM(LuigiTaskClass):
     outfile = luigi.Parameter(default="checkm_lineageWF_results.qa.txt")
-    output_directory = luigi.Parameter(default="checkm_lineageWF_results")
+    output_directory = luigi.Parameter()
 
     def requires(self):
         return []
@@ -28,8 +33,5 @@ class CheckM(LuigiTaskClass):
              str(self.fasta_folder),
              str(self.output_directory)],
             check=True,
-            stdout=self.outfile,
+            stdout=os.path.join(str(self.output_directory), str(self.outfile)),
         )
-
-    def output(self):
-        return luigi.LocalTarget(os.path.join(self.output_directory)), luigi.LocalTarget(self.outfile)

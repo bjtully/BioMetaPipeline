@@ -10,6 +10,8 @@ class ConfigManager:
 
     """
 
+    PATH = "PATH"
+
     def __init__(self, str config_path, tuple ignore = (), bint validate=True):
         self.config = Config()
         self.config.read(config_path)

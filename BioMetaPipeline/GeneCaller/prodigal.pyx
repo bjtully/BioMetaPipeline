@@ -5,11 +5,18 @@ import os
 import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
+
+class ProdigalConstants:
+    PRODIGAL = "PRODIGAL"
+    PRODIGAL_DIRECTORY = "prodigal_results"
+
+
 class Prodigal(LuigiTaskClass):
-    output_directory_prefix = luigi.Parameter(default="prodigal_results")
-    outfile = luigi.Parameter(default="")
+    output_directory = luigi.Parameter()
+    outfile = luigi.Parameter()
     protein_file_suffix = luigi.Parameter(default=".protein")
     mrna_file_suffix = luigi.Parameter(default=".mrna")
+    fasta_file = luigi.Parameter()
 
     def requires(self):
         return []
@@ -18,15 +25,16 @@ class Prodigal(LuigiTaskClass):
         subprocess.run(
             [str(self.calling_script_path),
              "-a",
-             os.path.join(str(self.output_directory_prefix),
-                          str(os.path.basename(self.outfile)) + str(self.protein_file_suffix)),
+             os.path.join(str(self.output_directory),
+                          str(os.path.splitext(self.outfile)[0]) + str(self.protein_file_suffix)),
              "-d",
-             os.path.join(str(self.output_directory_prefix),
-                          str(os.path.basename(self.outfile)) + str(self.mrna_file_suffix)),
+             os.path.join(str(self.output_directory),
+                          str(os.path.splitext(self.outfile)[0]) + str(self.mrna_file_suffix)),
              "-o",
-             os.path.join(str(self.output_directory_prefix), str(self.outfile)),
+             os.path.join(str(self.output_directory), str(self.outfile)),
              *self.added_flags,
-             str(self.fasta_folder)],
+             "-i",
+             str(self.fasta_file)],
             check=True,
         )
 

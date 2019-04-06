@@ -6,8 +6,13 @@ import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 
+class GTDBTKConstants:
+    GTDBTK = "GTDBTK"
+    OUTPUT_DIRECTORY = "gtdbtk_results"
+
+
 class GTDBtk(LuigiTaskClass):
-    output_directory = luigi.Parameter(default="gtdbtk_classifyWF_results")
+    output_directory = luigi.Parameter()
 
     def requires(self):
         return []
@@ -21,17 +26,18 @@ class GTDBtk(LuigiTaskClass):
 
         :return:
         """
-        calling_process_vals = [str(self.calling_script_path),
-             "classify_wf",
-             *self.added_flags,
-             str(self.fasta_folder)]
-        if "--out_dir" not in self.added_flags:
-            calling_process_vals.append("--out_dir")
-            calling_process_vals.append(self.output_directory)
         subprocess.run(
-            calling_process_vals,
+            [
+                str(self.calling_script_path),
+                "classify_wf",
+                *self.added_flags,
+                "--genome_dir",
+                str(self.fasta_folder),
+                "--out_dir",
+                str(self.output_directory),
+            ],
             check=True,
         )
 
     def output(self):
-        return luigi.LocalTarget(os.path.join(self.output_directory))
+        return luigi.LocalTarget(os.path.join(str(self.output_directory)))

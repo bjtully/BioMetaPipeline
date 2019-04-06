@@ -8,7 +8,7 @@ from BioMetaPipeline.Pipeline.genome_evaluation import genome_evaluation
 if __name__ == "__main__":
     args_list = (
         (("program",),
-         {"help": "Program to run", "required": True}),
+         {"help": "Program to run"}),
         (("-d", "--directory"),
          {"help": "Directory containing genomes", "required": True}),
         (("-c", "--config_file"),

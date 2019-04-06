@@ -1,4 +1,7 @@
+# cython: language_level=3
+
 import luigi
+import os
 
 
 class LuigiTaskClass(luigi.Task):
@@ -7,3 +10,7 @@ class LuigiTaskClass(luigi.Task):
     added_flags = luigi.ListParameter(default=[])
     output_directory = luigi.Parameter(default="outdir")
     outfile = luigi.Parameter(default="out")
+
+    def output(self):
+        return luigi.LocalTarget(str(self.output_directory)), \
+               luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile)))
