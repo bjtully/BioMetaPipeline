@@ -5,7 +5,7 @@ import os
 
 
 class LuigiTaskClass(luigi.Task):
-    fasta_folder = luigi.Parameter(default=None)
+    fasta_folder = luigi.Parameter(default="None")
     calling_script_path = luigi.Parameter()
     added_flags = luigi.ListParameter(default=[])
     output_directory = luigi.Parameter(default="outdir")

@@ -1,7 +1,7 @@
-from configparser import ConfigParser
+from configparser import RawConfigParser
 
 
-class Config(ConfigParser):
+class Config(RawConfigParser):
     """ Placeholder class for calling configparser
 
 

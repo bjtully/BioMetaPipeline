@@ -26,12 +26,16 @@ class CheckM(LuigiTaskClass):
 
         :return:
         """
-        subprocess.run(
+        result = subprocess.run(
             [str(self.calling_script_path),
              "lineage_wf",
              *self.added_flags,
              str(self.fasta_folder),
              str(self.output_directory)],
             check=True,
-            stdout=os.path.join(str(self.output_directory), str(self.outfile)),
+            stdout=open(os.path.join(os.path.dirname(str(self.output_directory)), str(self.outfile)), "w"),
         )
+
+    def output(self):
+        return luigi.LocalTarget(str(self.output_directory)), \
+               luigi.LocalTarget(os.path.join(os.path.dirname(str(self.output_directory)), str(self.outfile)))

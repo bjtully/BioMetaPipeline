@@ -14,6 +14,7 @@ class ConfigManager:
 
     def __init__(self, str config_path, tuple ignore = (), bint validate=True):
         self.config = Config()
+        self.config.optionxform = str
         self.config.read(config_path)
         self.ignore = ignore
         if validate:
@@ -48,10 +49,10 @@ class ConfigManager:
             key for key in self.config[_dict].keys()
             if key not in ignore
                and key not in self.ignore
-               and "path" not in key
+               and "PATH" not in key
         ]
         for i in range(len(params)):
-            if params[i] != "flags":
+            if params[i] != "FLAGS":
                 parameter_list.append(params[i])
                 parameter_list.append(self.config[_dict][params[i]])
             # Treat values set using FLAGS as a comma-separated list
