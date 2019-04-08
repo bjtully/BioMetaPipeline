@@ -13,3 +13,4 @@ build/*
 */*/*/__pycache__/*
 */*/*.cpp
 !*/*/*_cpp.cpp
+quick.py

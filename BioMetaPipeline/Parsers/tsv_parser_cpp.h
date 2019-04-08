@@ -8,15 +8,17 @@ namespace tsv {
     class TSVParser_cpp {
         public:
             TSVParser_cpp();
-            TSVParser_cpp(std::string fileName);
+            TSVParser_cpp(std::string fileName, std::string delimiter);
             ~TSVParser_cpp();
             void readFile(int skipLines, std::string commentLineDelim, bool headerLine);
             std::vector<std::vector<std::string> > getValues();
+            std::string getHeader();
         private:
             std::string fileName;
             std::vector<std::vector<std::string> > records;
             std::string headerLine;
             std::vector<std::string> commentLines;
+            std::string delimiter;
     };
 }
 
