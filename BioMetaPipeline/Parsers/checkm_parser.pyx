@@ -18,13 +18,11 @@ cdef class CheckMParser:
 
     def get_values(self):
         cdef vector[vector[string]] values_in_file = self.checkm_parser_cpp.getValues()
-        cdef list return_list = []
         cdef size_t i
-        for i in range(values_in_file.size()):
-            if values_in_file[i].size() > 0:
-                return_list.append([
-                    "".join(chr(val) for val in values_in_file[i][0]),
-                    float(values_in_file[i][12]),
-                    float(values_in_file[i][13]),
-                ])
-        return return_list
+        # return return_list
+        return [
+            ["".join(chr(val) for val in values_in_file[i][0]),
+                float(values_in_file[i][12]),
+                float(values_in_file[i][13]),]
+            for i in range(values_in_file.size()) if values_in_file[i].size() > 0
+        ]
