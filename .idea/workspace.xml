@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="218e6076-48b5-4a87-b494-95f1ba5893b8" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/.vscode/ipch/4a903ad3257ebe6/mmap_address.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/.vscode/ipch/acca2011003762c3/mmap_address.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/.vscode/ipch/bec45469e274cd5e/checkm_parser_cpp.ipch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/.vscode/ipch/bec45469e274cd5e/mmap_address.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/.vscode/ipch/c7fdcd8ccd079403/mmap_address.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/.vscode/ipch/e83a84f547d6b60c/checkm_parser.ipch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/.vscode/launch.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/.vscode/settings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/.vscode/tasks.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/checkm.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/checkm.pyx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser.pxd" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser.pxd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser.pyx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser_cpp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser_cpp.h" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser_cpp.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Pipeline/genome_evaluation.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Pipeline/genome_evaluation.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -254,8 +238,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="27" />
-    <option name="y" value="74" />
+    <option name="x" value="845" />
+    <option name="y" value="103" />
     <option name="width" value="1292" />
     <option name="height" value="1225" />
   </component>
@@ -343,16 +327,15 @@
       <workItem from="1554484881692" duration="139000" />
       <workItem from="1554485137192" duration="13722000" />
       <workItem from="1554572246872" duration="99000" />
-      <workItem from="1554572375657" duration="21402000" />
+      <workItem from="1554572375657" duration="21721000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35362000" />
+    <option name="totallyTimeSpent" value="35681000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="991" y="141" width="1292" height="1225" extended-state="0" />
-    <editor active="true" />
+    <frame x="27" y="74" width="1292" height="1225" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15489566" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -688,6 +671,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser_cpp.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser.pyx">
