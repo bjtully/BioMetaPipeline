@@ -4,18 +4,17 @@
 #include <string>
 #include <vector>
 
-typedef std::vector<std::vector<std::string> > string_vec_list;
-
 namespace checkm {
     class CheckMParser_cpp {
         public:
+            CheckMParser_cpp();
             CheckMParser_cpp(std::string fileName);
             ~CheckMParser_cpp();
             void readFile();
-            string_vec_list getValues();
+            std::vector<std::vector<std::string> > getValues();
         private:
             std::string fileName;
-            string_vec_list records;
+            std::vector<std::vector<std::string> > records;
     };
 }
 

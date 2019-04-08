@@ -2,7 +2,6 @@
 import os
 import luigi
 from BioMetaPipeline.Config.config_manager import ConfigManager
-# from BioMetaPipeline.GeneCaller.prodigal import Prodigal, ProdigalConstants
 from BioMetaPipeline.AssemblyEvaluation.checkm import CheckM, CheckMConstants
 # from BioMetaPipeline.AssemblyEvaluation.gtdbtk import GTDBtk, GTDBTKConstants
 from BioMetaPipeline.MetagenomeEvaluation.fastani import FastANI, FastANIConstants
@@ -88,12 +87,5 @@ def genome_evaluation(str directory, str config_file, str prefix_file, bint canc
             fasta_listfile=str(genome_list_path),
         ),
     ]
-    # for _file in os.listdir(directory):
-    #     task_list.append(Prodigal(
-    #         output_directory=output_directory,
-    #         outfile=_file + ".prodigal.txt",
-    #         fasta_file=_file,
-    #         added_flags=cfg.build_parameter_list_from_dict(ProdigalConstants.PRODIGAL),
-    #     ))
 
     luigi.build(task_list, local_scheduler=True)

@@ -4,6 +4,7 @@ import luigi
 import os
 import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
+from BioMetaPipeline.Parsers.checkm_parser import CheckMParser
 
 
 class CheckMConstants:
@@ -35,6 +36,9 @@ class CheckM(LuigiTaskClass):
             check=True,
             stdout=open(os.path.join(os.path.dirname(str(self.output_directory)), str(self.outfile)), "w"),
         )
+        parser = CheckMParser(os.path.join(os.path.dirname(str(self.output_directory)), str(self.outfile)))
+        parser.read_file()
+        print(parser.get_values())
 
     def output(self):
         return luigi.LocalTarget(str(self.output_directory)), \
