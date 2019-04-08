@@ -22,7 +22,7 @@ namespace tsv {
     TSVParser_cpp::~TSVParser_cpp() {}
 
     void TSVParser_cpp::readFile(int skipLines = 0, std::string commentLineDelim = "#", bool headerLine = false) {
-        std::ifstream file(this->fileName);
+        std::ifstream file(this->fileName.c_str());
         std::string line;
         std::string token;
         std::vector<std::string> line_data;

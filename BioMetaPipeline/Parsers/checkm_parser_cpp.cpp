@@ -19,7 +19,7 @@ namespace checkm {
     CheckMParser_cpp::~CheckMParser_cpp() {}
 
     void CheckMParser_cpp::readFile() {
-        std::ifstream file(this->fileName);
+        std::ifstream file(this->fileName.c_str());
         std::string line;
         std::string token;
         const std::string delimiter = " ";

@@ -11,21 +11,42 @@ cdef class TSVParser:
     cdef TSVParser_cpp tsv_parser_cpp
 
     def __init__(self, str file_name, str delimiter="\t"):
-        self.tsv_parser_cpp = TSVParser_cpp(PyUnicode_AsUTF8(file_name), PyUnicode_AsUTF8(delimiter))
+        self.tsv_parser_cpp = TSVParser_cpp(<string>PyUnicode_AsUTF8(file_name), <string>PyUnicode_AsUTF8(delimiter))
 
     def read_file(self, int skip_lines=0, str comment_line_delimiter="#", bint header_line=False):
-        self.tsv_parser_cpp.readFile(skip_lines, PyUnicode_AsUTF8(comment_line_delimiter), header_line)
+        self.tsv_parser_cpp.readFile(skip_lines, <string>PyUnicode_AsUTF8(comment_line_delimiter), header_line)
 
-    def get_values(self):
+    def get_values(self, tuple col_list=(-1,)):
         cdef vector[vector[string]] values_in_file = self.tsv_parser_cpp.getValues()
         cdef size_t i
         cdef string val
         # return return_list
+        if col_list == (-1,):
+            return [
+                ["".join([chr(_c) for _c in val]) for val in values_in_file[i]]
+                for i in range(values_in_file.size())
+                if values_in_file[i].size() > 0 and i in col_list
+            ]
         return [
-            ["".join([chr(_c) for _c in val]) for val in values_in_file[i]]
-            for i in range(values_in_file.size())
-            if values_in_file[i].size() > 0
-        ]
+                ["".join([chr(_c) for _c in val]) for val in values_in_file[i]]
+                for i in range(values_in_file.size())
+                if values_in_file[i].size() > 0
+            ]
+
+    def get_values_as_dict(self, tuple col_list=(-1,)):
+        cdef vector[vector[string]] values_in_file = self.tsv_parser_cpp.getValues()
+        cdef size_t i
+        cdef string val
+        # return return_list
+        if col_list == (-1,):
+            return {"".join([chr(_c) for _c in values_in_file[0]]):
+                ["".join([chr(_c) for _c in val]) for val in values_in_file[i]]
+                for i in range(1, values_in_file.size())
+                if values_in_file[i].size() > 0 and i in col_list}
+        return {"".join([chr(_c) for _c in values_in_file[0]]):
+                ["".join([chr(_c) for _c in val]) for val in values_in_file[i]]
+                for i in range(1, values_in_file.size())
+                if values_in_file[i].size() > 0}
 
     def header(self):
         return self.tsv_parser_cpp.getHeader()
