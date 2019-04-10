@@ -19,6 +19,8 @@ if __name__ == "__main__":
          {"help": "Cancel commit to database", "action": "store_true", "default": False}),
         (("-o", "--output_directory"),
          {"help": "Output directory prefix", "default": "out"}),
+        (("-b", "--biometadb_project"),
+         {"help": "/path/to/BioMetaDB_project (updates existing values or initializes with name)", "default": "None"}),
     )
 
     programs = {
@@ -27,7 +29,8 @@ if __name__ == "__main__":
     }
 
     flags = {
-        "EVALUATION":           ("directory", "config_file", "prefix_file", "cancel_autocommit", "output_directory"),
+        "EVALUATION":           ("directory", "config_file", "prefix_file", "cancel_autocommit", "output_directory",
+                                 "biometadb_project"),
     }
 
     errors = {

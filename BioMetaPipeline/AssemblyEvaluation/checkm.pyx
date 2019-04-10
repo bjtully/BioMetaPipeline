@@ -41,5 +41,4 @@ class CheckM(LuigiTaskClass):
         print(parser.get_values())
 
     def output(self):
-        return luigi.LocalTarget(str(self.output_directory)), \
-               luigi.LocalTarget(os.path.join(os.path.dirname(str(self.output_directory)), str(self.outfile)))
+        return luigi.LocalTarget(os.path.join(os.path.dirname(str(self.output_directory)), str(self.outfile)))

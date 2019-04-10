@@ -39,13 +39,13 @@ cdef class TSVParser:
         cdef string val
         # return return_list
         if col_list == (-1,):
-            return {"".join([chr(_c) for _c in values_in_file[0]]):
-                ["".join([chr(_c) for _c in val]) for val in values_in_file[i]]
-                for i in range(1, values_in_file.size())
+            return {"".join([chr(_c) for _c in values_in_file[i][0]]):
+                ["".join([chr(_c) for _c in val]) for val in values_in_file[i][1:]]
+                for i in range(values_in_file.size())
                 if values_in_file[i].size() > 0 and i in col_list}
-        return {"".join([chr(_c) for _c in values_in_file[0]]):
-                ["".join([chr(_c) for _c in val]) for val in values_in_file[i]]
-                for i in range(1, values_in_file.size())
+        return {"".join([chr(_c) for _c in values_in_file[i][0]]):
+                ["".join([chr(_c) for _c in val]) for val in values_in_file[i][1:]]
+                for i in range(values_in_file.size())
                 if values_in_file[i].size() > 0}
 
     def header(self):
@@ -54,3 +54,19 @@ cdef class TSVParser:
     @property
     def num_records(self):
         return self.tsv_parser_cpp.getValues().size()
+
+    @staticmethod
+    def parse_dict(str file_name, str delimiter="\t", int skip_lines=0,
+                   str comment_line_delimiter="#", bint header_line=False,
+                   tuple col_list=(-1,)):
+        tsv = TSVParser(file_name, delimiter)
+        tsv.read_file(skip_lines, comment_line_delimiter, header_line)
+        return tsv.get_values_as_dict(col_list)
+
+    @staticmethod
+    def parse_list(str file_name, str delimiter="\t", int skip_lines=0,
+                   str comment_line_delimiter="#", bint header_line=False,
+                   tuple col_list=(-1,)):
+        tsv = TSVParser(file_name, delimiter)
+        tsv.read_file(skip_lines, comment_line_delimiter, header_line)
+        return tsv.get_values(col_list)

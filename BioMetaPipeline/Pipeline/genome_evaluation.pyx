@@ -1,9 +1,12 @@
 # cython: language_level=3
 import os
 import luigi
+from BioMetaPipeline.Parsers.tsv_parser import TSVParser
+from BioMetaPipeline.Database.dbdm_calls import Init, Update, Create, BioMetaDBConstants
+from BioMetaPipeline.Parsers.checkm_parser import CheckMParser
 from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.AssemblyEvaluation.checkm import CheckM, CheckMConstants
-# from BioMetaPipeline.AssemblyEvaluation.gtdbtk import GTDBtk, GTDBTKConstants
+from BioMetaPipeline.AssemblyEvaluation.gtdbtk import GTDBtk, GTDBTKConstants
 from BioMetaPipeline.MetagenomeEvaluation.fastani import FastANI, FastANIConstants
 from BioMetaPipeline.Pipeline.Exceptions.GenomeEvaluationExceptions import AssertString
 
@@ -16,29 +19,57 @@ Finally, a summary .tsv file will be created and used to initialize a BioMetaDB 
 """
 
 
+class GenomeEvaluationConstants:
+    CHECKM_TABLE_NAME = "checkm"
+
+
 class GenomeEvaluation(luigi.WrapperTask):
     output_directory = luigi.Parameter()
     fasta_folder = luigi.Parameter()
     fasta_listfile = luigi.Parameter()
+    biometadb_project = luigi.Parameter()
     def requires(self):
-        yield CheckM(
+        # Run CheckM pipe
+        checkm = CheckM(
             output_directory=os.path.join(str(self.output_directory), CheckMConstants.OUTPUT_DIRECTORY),
             fasta_folder=str(self.fasta_folder),
             added_flags=cfg.build_parameter_list_from_dict(CheckMConstants.CHECKM),
             calling_script_path=cfg.get(CheckMConstants.CHECKM, ConfigManager.PATH),
         )
+        yield checkm
+        # Run FastANI pipe
         yield FastANI(
             output_directory=os.path.join(str(self.output_directory), FastANIConstants.OUTPUT_DIRECTORY),
             added_flags=cfg.build_parameter_list_from_dict(FastANIConstants.FASTANI),
             listfile_of_fasta_with_paths=self.fasta_listfile,
             calling_script_path=cfg.get(FastANIConstants.FASTANI, ConfigManager.PATH),
         )
-        # yield GTDBtk(
-        #     output_directory=os.path.join(str(self.output_directory), GTDBTKConstants.OUTPUT_DIRECTORY),
-        #     added_flags=cfg.build_parameter_list_from_dict(GTDBTKConstants.GTDBTK),
-        #     fasta_folder=str(self.fasta_folder),
-        #     calling_script_path=cfg.get(GTDBTKConstants.GTDBTK, ConfigManager.PATH),
-        # )
+        # Run GTDBtk pipe
+        gtdbtk = GTDBtk(
+            output_directory=os.path.join(str(self.output_directory), GTDBTKConstants.OUTPUT_DIRECTORY),
+            added_flags=cfg.build_parameter_list_from_dict(GTDBTKConstants.GTDBTK),
+            fasta_folder=str(self.fasta_folder),
+            calling_script_path=cfg.get(GTDBTKConstants.GTDBTK, ConfigManager.PATH),
+        )
+        yield gtdbtk
+        # Parse CheckM and FastANI to update DB with redundancy, contamination, and completion values
+
+        # Initialize or update DB as needed
+        if str(self.biometadb_project) != "None" and os.path.exists(str(self.biometadb_project)):
+            yield Init(
+                db_name=str(self.biometadb_project),
+                table_name=GenomeEvaluationConstants.CHECKM_TABLE_NAME,
+                directory_name=str(self.fasta_folder),
+                data_file=str(checkm.output()),
+                calling_script_path=cfg.get(CheckMConstants.CHECKM, ConfigManager.PATH),
+            )
+        else:
+            yield Update(
+                config_file=str(self.biometadb_project),
+                table_name=GenomeEvaluationConstants.CHECKM_TABLE_NAME,
+                directory_name=str(self.fasta_folder),
+                data_file=str(checkm.output()),
+            )
         return None
 
 
@@ -57,10 +88,12 @@ def write_genome_list_to_file(str directory, str outfile):
     W.close()
 
 
-def genome_evaluation(str directory, str config_file, str prefix_file, bint cancel_autocommit, str output_directory):
+def genome_evaluation(str directory, str config_file, str prefix_file, bint cancel_autocommit, str output_directory,
+                      str biometadb_project):
     """ Function calls the pipeline for evaluating a set of genomes using checkm, gtdbtk, fastANI
     Creates .tsv file of final output, adds to database
 
+    :param biometadb_project:
     :param directory:
     :param config_file:
     :param prefix_file:
@@ -85,6 +118,7 @@ def genome_evaluation(str directory, str config_file, str prefix_file, bint canc
             output_directory=str(output_directory),
             fasta_folder=str(directory),
             fasta_listfile=str(genome_list_path),
+            biometadb_project=str(biometadb_project),
         ),
     ]
 
