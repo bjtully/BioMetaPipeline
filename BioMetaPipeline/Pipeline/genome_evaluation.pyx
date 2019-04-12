@@ -29,6 +29,7 @@ class GenomeEvaluation(luigi.WrapperTask):
     fasta_folder = luigi.Parameter()
     fasta_listfile = luigi.Parameter()
     biometadb_project = luigi.Parameter()
+    file_ext_dict = luigi.DictParameter()
     def requires(self):
         cdef str final_outfile = os.path.join(self.output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT)
         # Run CheckM pipe
@@ -58,6 +59,7 @@ class GenomeEvaluation(luigi.WrapperTask):
             fastANI_output_file=os.path.join(FastANIConstants.OUTPUT_DIRECTORY, FastANIConstants.OUTFILE),
             gtdbtk_output_file=os.path.join(GTDBTKConstants.OUTPUT_DIRECTORY, GTDBTKConstants.PREFIX + GTDBTKConstants.BAC_OUTEXT),
             cutoffs_dict=cfg.get_cutoffs(),
+            file_ext_dict=self.file_ext_dict,
             calling_script_path="None",
             outfile="GenomeEvaluation.tsv",
             output_directory=self.output_directory,
@@ -128,6 +130,8 @@ def genome_evaluation(str directory, str config_file, str prefix_file, bint canc
             fasta_folder=str(directory),
             fasta_listfile=str(genome_list_path),
             biometadb_project=str(biometadb_project),
+            file_ext_dict={os.path.basename(os.path.splitext(file)[0]): os.path.basename(file)
+                           for file in os.listdir(directory)}
         ),
     ]
 

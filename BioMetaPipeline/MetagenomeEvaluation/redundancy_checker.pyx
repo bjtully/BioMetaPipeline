@@ -31,13 +31,15 @@ cdef class RedundancyChecker:
     cdef void* gtdbtk_file
     cdef dict cutoffs
     cdef dict output_data
+    cdef dict file_ext_dict
 
-    def __init__(self, str checkm_filename, str fastani_filename, str gtdbtk_filename, dict cutoff_values):
+    def __init__(self, str checkm_filename, str fastani_filename, str gtdbtk_filename, dict cutoff_values, dict file_ext_dict):
         self.checkm_file = <void *>checkm_filename
         self.fastani_file = <void *>fastani_filename
         self.gtdbtk_file = <void *>gtdbtk_filename
         self.cutoffs = cutoff_values
         self.output_data = {}
+        self.file_ext_dict = file_ext_dict
         self._parse_records_to_categories()
 
     def _parse_records_to_categories(self):
@@ -79,6 +81,8 @@ cdef class RedundancyChecker:
                 self.output_data[key][is_contaminated_str] = True
             # Assign redundancy by fastANI:
             # If not on fastANI report, mark as non_redundant
+            # Rename key to include file ext
+            key = self.file_ext_dict[key]
             if key not in fast_ANI_keys:
                 self.output_data[key][is_non_redundant_str] = True
             # If not from identical match, store to list of redundant copies
@@ -136,12 +140,17 @@ class RedundancyParserTask(LuigiTaskClass):
     cutoffs_dict = luigi.DictParameter()
     output_directory = luigi.Parameter(default="out")
     outfile = luigi.Parameter()
+    file_ext_dict = luigi.DictParameter()
 
     def requires(self):
         return []
 
     def run(self):
-        rc = RedundancyChecker(str(self.checkm_output_file), str(self.fastANI_output_file), str(self.gtdbtk_output_file), dict(self.cutoffs_dict))
+        rc = RedundancyChecker(str(self.checkm_output_file),
+                               str(self.fastANI_output_file),
+                               str(self.gtdbtk_output_file),
+                               dict(self.cutoffs_dict),
+                               dict(self.checkm_file_ext_dict))
         rc.write_tsv()
 
     def output(self):
