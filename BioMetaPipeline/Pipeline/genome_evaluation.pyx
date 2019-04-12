@@ -58,6 +58,7 @@ class GenomeEvaluation(luigi.WrapperTask):
             fastANI_output_file=str(fastANI.output()),
             gtdbtk_output_file=str(gtdbtk.output()),
             cutoffs_dict=cfg.get_cutoffs(),
+            calling_script_path="None",
         )
         # Initialize or update DB as needed
         if str(self.biometadb_project) != "None" and os.path.exists(str(self.biometadb_project)):
@@ -74,6 +75,7 @@ class GenomeEvaluation(luigi.WrapperTask):
                 table_name=GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
                 directory_name=str(self.fasta_folder),
                 data_file=str(final_outfile),
+                calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
             )
         return None
 
