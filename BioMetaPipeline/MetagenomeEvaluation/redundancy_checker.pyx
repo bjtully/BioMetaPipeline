@@ -150,7 +150,7 @@ class RedundancyParserTask(LuigiTaskClass):
                                str(self.fastANI_output_file),
                                str(self.gtdbtk_output_file),
                                dict(self.cutoffs_dict),
-                               dict(self.checkm_file_ext_dict))
+                               dict(self.file_ext_dict))
         rc.write_tsv()
 
     def output(self):
