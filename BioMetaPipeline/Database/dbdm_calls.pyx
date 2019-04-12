@@ -11,7 +11,7 @@ class BioMetaDBConstants:
 
 
 class DBDM(LuigiTaskClass):
-    config_file = luigi.Parameter()
+    config_file = luigi.Parameter(default="None")
     db_name = luigi.Parameter(default="DB")
     table_name = luigi.Parameter(default="None")
     directory_name = luigi.Parameter(default="None")
