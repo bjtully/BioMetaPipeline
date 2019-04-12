@@ -134,6 +134,8 @@ class RedundancyParserTask(LuigiTaskClass):
     fastANI_output_file = luigi.Parameter()
     gtdbtk_output_file = luigi.Parameter()
     cutoffs_dict = luigi.DictParameter()
+    output_directory = luigi.Parameter(default="out")
+    outfile = luigi.Parameter()
 
     def requires(self):
         return []
@@ -144,7 +146,7 @@ class RedundancyParserTask(LuigiTaskClass):
 
     def output(self):
         return luigi.LocalTarget(
-            os.path.join()
+            os.path.join(str(self.output_directory), str(self.outfile))
         )
 
 

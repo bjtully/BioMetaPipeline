@@ -59,6 +59,8 @@ class GenomeEvaluation(luigi.WrapperTask):
             gtdbtk_output_file=str(gtdbtk.output()),
             cutoffs_dict=cfg.get_cutoffs(),
             calling_script_path="None",
+            outfile="GenomeEvaluation.tsv",
+            output_directory=self.output_directory,
         )
         # Initialize or update DB as needed
         if str(self.biometadb_project) != "None" and os.path.exists(str(self.biometadb_project)):
