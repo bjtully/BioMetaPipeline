@@ -163,7 +163,7 @@ def genome_evaluation(str directory, str config_file, str prefix_file, bint canc
             file_ext_dict={os.path.basename(os.path.splitext(file)[0]): os.path.basename(file)
                            for file in os.listdir(directory)},
             calling_script_path="None",
-            outfile="GenomeEvaluation.tsv",
+            outfile=GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT,
             output_directory=output_directory,
         )
     ]
