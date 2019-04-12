@@ -1,14 +1,13 @@
 # cython: language_level=3
 import os
 import luigi
-from BioMetaPipeline.Parsers.tsv_parser import TSVParser
-from BioMetaPipeline.Database.dbdm_calls import Init, Update, Create, BioMetaDBConstants
-from BioMetaPipeline.Parsers.checkm_parser import CheckMParser
+from BioMetaPipeline.Database.dbdm_calls import Init, Update, BioMetaDBConstants
 from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.AssemblyEvaluation.checkm import CheckM, CheckMConstants
 from BioMetaPipeline.AssemblyEvaluation.gtdbtk import GTDBtk, GTDBTKConstants
 from BioMetaPipeline.MetagenomeEvaluation.fastani import FastANI, FastANIConstants
 from BioMetaPipeline.Pipeline.Exceptions.GenomeEvaluationExceptions import AssertString
+from BioMetaPipeline.MetagenomeEvaluation.redundancy_checker import RedundancyChecker
 
 """
 GenomeEvaluation wrapper class will yield each of the evaluation steps that are conducted on 
@@ -20,7 +19,9 @@ Finally, a summary .tsv file will be created and used to initialize a BioMetaDB 
 
 
 class GenomeEvaluationConstants:
-    CHECKM_TABLE_NAME = "checkm"
+    GENOME_EVALUATION_TABLE_NAME = "genome_evaluation"
+    GENOME_EVALUATION_TSV_OUT = "genome_evaluation.tsv"
+    GENOME_LIST_FILE = "genome_list.list"
 
 
 class GenomeEvaluation(luigi.WrapperTask):
@@ -29,6 +30,7 @@ class GenomeEvaluation(luigi.WrapperTask):
     fasta_listfile = luigi.Parameter()
     biometadb_project = luigi.Parameter()
     def requires(self):
+        cdef str final_outfile = os.path.join(self.output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT)
         # Run CheckM pipe
         checkm = CheckM(
             output_directory=os.path.join(str(self.output_directory), CheckMConstants.OUTPUT_DIRECTORY),
@@ -38,12 +40,13 @@ class GenomeEvaluation(luigi.WrapperTask):
         )
         yield checkm
         # Run FastANI pipe
-        yield FastANI(
+        fastANI =  FastANI(
             output_directory=os.path.join(str(self.output_directory), FastANIConstants.OUTPUT_DIRECTORY),
             added_flags=cfg.build_parameter_list_from_dict(FastANIConstants.FASTANI),
             listfile_of_fasta_with_paths=self.fasta_listfile,
             calling_script_path=cfg.get(FastANIConstants.FASTANI, ConfigManager.PATH),
         )
+        yield fastANI
         # Run GTDBtk pipe
         gtdbtk = GTDBtk(
             output_directory=os.path.join(str(self.output_directory), GTDBTKConstants.OUTPUT_DIRECTORY),
@@ -53,22 +56,23 @@ class GenomeEvaluation(luigi.WrapperTask):
         )
         yield gtdbtk
         # Parse CheckM and FastANI to update DB with redundancy, contamination, and completion values
-
+        rc = RedundancyChecker(str(checkm.output()), str(fastANI.output()), str(gtdbtk.output()), cfg.get_cutoffs())
+        rc.write_tsv()
         # Initialize or update DB as needed
         if str(self.biometadb_project) != "None" and os.path.exists(str(self.biometadb_project)):
             yield Init(
                 db_name=str(self.biometadb_project),
-                table_name=GenomeEvaluationConstants.CHECKM_TABLE_NAME,
+                table_name=GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
                 directory_name=str(self.fasta_folder),
-                data_file=str(checkm.output()),
-                calling_script_path=cfg.get(CheckMConstants.CHECKM, ConfigManager.PATH),
+                data_file=str(final_outfile),
+                calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
             )
         else:
             yield Update(
                 config_file=str(self.biometadb_project),
-                table_name=GenomeEvaluationConstants.CHECKM_TABLE_NAME,
+                table_name=GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
                 directory_name=str(self.fasta_folder),
-                data_file=str(checkm.output()),
+                data_file=str(final_outfile),
             )
         return None
 
@@ -107,10 +111,10 @@ def genome_evaluation(str directory, str config_file, str prefix_file, bint canc
     if not os.path.exists(output_directory):
         # Output directory
         os.makedirs(output_directory)
-        for val in (FastANIConstants, CheckMConstants):
+        for val in (FastANIConstants, CheckMConstants, GTDBTKConstants):
             os.makedirs(os.path.join(output_directory, str(getattr(val, "OUTPUT_DIRECTORY"))))
         # Temporary storage directory - for list, .tsvs, etc, as needed by calling programs
-    cdef str genome_list_path = os.path.join(output_directory, "genome_list.list")
+    cdef str genome_list_path = os.path.join(output_directory, GenomeEvaluationConstants.GENOME_LIST_FILE)
     cdef str _file
     write_genome_list_to_file(directory, genome_list_path)
     task_list = [
