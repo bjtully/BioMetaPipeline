@@ -8,10 +8,11 @@ from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 class FastANIConstants:
     FASTANI = "FASTANI"
     OUTPUT_DIRECTORY = "fastani_results"
+    OUTFILE = "fastani_results.txt"
 
 
 class FastANI(LuigiTaskClass):
-    outfile = luigi.Parameter(default="fastani_results.txt")
+    outfile = luigi.Parameter(default=FastANIConstants.OUTFILE)
     output_directory = luigi.Parameter()
     listfile_of_fasta_with_paths = luigi.Parameter()
 

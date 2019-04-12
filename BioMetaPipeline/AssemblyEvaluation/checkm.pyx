@@ -9,10 +9,11 @@ from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 class CheckMConstants:
     CHECKM = "CHECKM"
     OUTPUT_DIRECTORY = "checkm_lineageWF_results"
+    OUTFILE = "checkm_lineageWF_results.qa.txt"
 
 
 class CheckM(LuigiTaskClass):
-    outfile = luigi.Parameter(default="checkm_lineageWF_results.qa.txt")
+    outfile = luigi.Parameter(default=CheckMConstants.OUTFILE)
     output_directory = luigi.Parameter()
 
     def requires(self):

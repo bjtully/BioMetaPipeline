@@ -9,6 +9,9 @@ from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 class GTDBTKConstants:
     GTDBTK = "GTDBTK"
     OUTPUT_DIRECTORY = "gtdbtk_results"
+    PREFIX = "GenomeEvaluation"
+    BAC_OUTEXT = "_bac120_markers_summary.tsv"
+    ARC_OUTEXT = "_ar122_markers_summary.tsv"
 
 
 class GTDBtk(LuigiTaskClass):
@@ -35,6 +38,8 @@ class GTDBtk(LuigiTaskClass):
                 str(self.fasta_folder),
                 "--out_dir",
                 str(self.output_directory),
+                "--prefix",
+                str(GTDBTKConstants.GTDBTK)
             ],
             check=True,
         )
