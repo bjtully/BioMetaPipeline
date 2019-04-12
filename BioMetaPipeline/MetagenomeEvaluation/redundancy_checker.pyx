@@ -134,6 +134,7 @@ class RedundancyParserTask(LuigiTaskClass):
     fastANI_output_file = luigi.Parameter()
     gtdbtk_output_file = luigi.Parameter()
     cutoffs_dict = luigi.DictParameter()
+    calling_script_path = luigi.Parameter(default="None")
 
     def requires(self):
         return []
