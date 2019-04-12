@@ -44,7 +44,7 @@ class Init(DBDM):
         )
 
     def output(self):
-        return luigi.target.FileSystemTarget(str(self.directory_name))
+        return luigi.LocalTarget(str(self.directory_name))
 
 
 class Update(DBDM):
