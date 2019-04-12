@@ -32,13 +32,16 @@ class GenomeEvaluation(luigi.WrapperTask):
     def requires(self):
         cdef str final_outfile = os.path.join(self.output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT)
         # Run CheckM pipe
+        print("pre-checkm creation")
         checkm = CheckM(
             output_directory=os.path.join(str(self.output_directory), CheckMConstants.OUTPUT_DIRECTORY),
             fasta_folder=str(self.fasta_folder),
             added_flags=cfg.build_parameter_list_from_dict(CheckMConstants.CHECKM),
             calling_script_path=cfg.get(CheckMConstants.CHECKM, ConfigManager.PATH),
         )
+        print("post-checkm creation")
         yield checkm
+        print("post-checkm yield")
         # Run FastANI pipe
         fastANI =  FastANI(
             output_directory=os.path.join(str(self.output_directory), FastANIConstants.OUTPUT_DIRECTORY),
