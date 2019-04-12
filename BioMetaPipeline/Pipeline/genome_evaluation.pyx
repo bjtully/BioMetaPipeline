@@ -7,7 +7,7 @@ from BioMetaPipeline.AssemblyEvaluation.checkm import CheckM, CheckMConstants
 from BioMetaPipeline.AssemblyEvaluation.gtdbtk import GTDBtk, GTDBTKConstants
 from BioMetaPipeline.MetagenomeEvaluation.fastani import FastANI, FastANIConstants
 from BioMetaPipeline.Pipeline.Exceptions.GenomeEvaluationExceptions import AssertString
-from BioMetaPipeline.MetagenomeEvaluation.redundancy_checker import RedundancyChecker
+from BioMetaPipeline.MetagenomeEvaluation.redundancy_checker import RedundancyParserTask
 
 """
 GenomeEvaluation wrapper class will yield each of the evaluation steps that are conducted on 
@@ -32,24 +32,19 @@ class GenomeEvaluation(luigi.WrapperTask):
     def requires(self):
         cdef str final_outfile = os.path.join(self.output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT)
         # Run CheckM pipe
-        print("pre-checkm creation")
         checkm = CheckM(
             output_directory=os.path.join(str(self.output_directory), CheckMConstants.OUTPUT_DIRECTORY),
             fasta_folder=str(self.fasta_folder),
             added_flags=cfg.build_parameter_list_from_dict(CheckMConstants.CHECKM),
             calling_script_path=cfg.get(CheckMConstants.CHECKM, ConfigManager.PATH),
         )
-        print("post-checkm creation")
-        yield checkm
-        print("post-checkm yield")
         # Run FastANI pipe
-        fastANI =  FastANI(
+        fastANI = FastANI(
             output_directory=os.path.join(str(self.output_directory), FastANIConstants.OUTPUT_DIRECTORY),
             added_flags=cfg.build_parameter_list_from_dict(FastANIConstants.FASTANI),
             listfile_of_fasta_with_paths=self.fasta_listfile,
             calling_script_path=cfg.get(FastANIConstants.FASTANI, ConfigManager.PATH),
         )
-        yield fastANI
         # Run GTDBtk pipe
         gtdbtk = GTDBtk(
             output_directory=os.path.join(str(self.output_directory), GTDBTKConstants.OUTPUT_DIRECTORY),
@@ -57,10 +52,13 @@ class GenomeEvaluation(luigi.WrapperTask):
             fasta_folder=str(self.fasta_folder),
             calling_script_path=cfg.get(GTDBTKConstants.GTDBTK, ConfigManager.PATH),
         )
-        yield gtdbtk
         # Parse CheckM and FastANI to update DB with redundancy, contamination, and completion values
-        rc = RedundancyChecker(str(checkm.output()), str(fastANI.output()), str(gtdbtk.output()), cfg.get_cutoffs())
-        rc.write_tsv()
+        yield RedundancyParserTask(
+            checkm_output_file=str(checkm.output()),
+            fastANI_output_file=str(fastANI.output()),
+            gtdbtk_output_file=str(gtdbtk.output()),
+            cutoffs_dict=cfg.get_cutoffs(),
+        )
         # Initialize or update DB as needed
         if str(self.biometadb_project) != "None" and os.path.exists(str(self.biometadb_project)):
             yield Init(

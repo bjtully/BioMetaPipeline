@@ -2,6 +2,9 @@
 from BioMetaPipeline.Parsers.tsv_parser import TSVParser
 from BioMetaPipeline.Parsers.checkm_parser import CheckMParser
 import random
+import luigi
+import os
+from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 """
 Class will combine .tsv output from CheckM and FastANI
@@ -124,3 +127,24 @@ cdef class RedundancyChecker:
                 W.write("\t%s" % self.output_data[_id][column_name])
             W.write("\n")
         W.close()
+
+
+class RedundancyParserTask(LuigiTaskClass):
+    checkm_output_file = luigi.Parameter()
+    fastANI_output_file = luigi.Parameter()
+    gtdbtk_output_file = luigi.Parameter()
+    cutoffs_dict = luigi.DictParameter()
+
+    def requires(self):
+        return []
+
+    def run(self):
+        rc = RedundancyChecker(str(self.checkm_output_file), str(self.fastANI_output_file), str(self.gtdbtk_output_file), dict(self.cutoffs_dict))
+        rc.write_tsv()
+
+    def output(self):
+        return luigi.LocalTarget(
+            os.path.join()
+        )
+
+
