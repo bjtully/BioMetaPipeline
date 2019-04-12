@@ -64,4 +64,7 @@ class ConfigManager:
     def get_cutoffs(self):
         return dict(self.config["CUTOFFS"])
 
+    def _validate_programs_in_pipeline(self):
+        pass
+
 
