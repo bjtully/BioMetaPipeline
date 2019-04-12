@@ -26,6 +26,7 @@ cdef class RedundancyChecker:
     cdef void* checkm_file
     cdef void* fastani_file
     cdef void* gtdbtk_file
+    cdef dict cutoffs
 
     def __init__(self, str checkm_filename, str fastani_filename, str gtdbtk_filename, dict cutoff_values):
         self.checkm_file = <void *>checkm_filename
