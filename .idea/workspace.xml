@@ -33,10 +33,10 @@
                 </provider>
               </entry>
             </file>
-            <file leaf-file-name="redundancy_checker.pyx" pinned="false" current-in-tab="false">
+            <file leaf-file-name="redundancy_checker.pyx" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/BioMetaPipeline/MetagenomeEvaluation/redundancy_checker.pyx">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="473">
+                  <state relative-caret-position="1303">
                     <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
                     <folding>
                       <element signature="e#27#83#0" expanded="true" />
@@ -57,7 +57,7 @@
                 </provider>
               </entry>
             </file>
-            <file leaf-file-name="dbdm_calls.pyx" pinned="false" current-in-tab="true">
+            <file leaf-file-name="dbdm_calls.pyx" pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Database/dbdm_calls.pyx">
                 <provider selected="true" editor-type-id="text-editor">
                   <state relative-caret-position="731">
@@ -81,8 +81,8 @@
             <file leaf-file-name="gtdbtk.pyx" pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/gtdbtk.pyx">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="697">
-                    <caret line="41" column="42" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
+                  <state relative-caret-position="827">
+                    <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
                     <folding>
                       <element signature="e#28#40#0" expanded="true" />
                     </folding>
@@ -133,8 +133,8 @@
       <file leaf-file-name="genome_evaluation.pyx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Pipeline/genome_evaluation.pyx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="58" column="36" selection-start-line="58" selection-start-column="36" selection-end-line="58" selection-end-column="36" />
+            <state relative-caret-position="204">
+              <caret line="68" column="24" lean-forward="true" selection-start-line="68" selection-start-column="24" selection-end-line="68" selection-end-column="24" />
               <folding>
                 <element signature="e#27#36#0" expanded="true" />
               </folding>
@@ -229,11 +229,11 @@
         <option value="$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/checkm.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/MetagenomeEvaluation/fastani.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser.pyx" />
-        <option value="$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/gtdbtk.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/MetagenomeEvaluation/redundancy_checker.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Database/dbdm_calls.pyx" />
         <option value="$PROJECT_DIR$/Examples/Config/GenomeEvaluation.ini" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Pipeline/genome_evaluation.pyx" />
+        <option value="$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/gtdbtk.pyx" />
       </list>
     </option>
   </component>
@@ -742,16 +742,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/gtdbtk.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="42" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
-          <folding>
-            <element signature="e#28#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/checkm.pyx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -759,23 +749,6 @@
           <folding>
             <element signature="e#28#40#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/MetagenomeEvaluation/redundancy_checker.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
-          <folding>
-            <element signature="e#27#83#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Database/dbdm_calls.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -796,12 +769,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Database/dbdm_calls.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Pipeline/genome_evaluation.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="58" column="36" selection-start-line="58" selection-start-column="36" selection-end-line="58" selection-end-column="36" />
+        <state relative-caret-position="204">
+          <caret line="68" column="24" lean-forward="true" selection-start-line="68" selection-start-column="24" selection-end-line="68" selection-end-column="24" />
           <folding>
             <element signature="e#27#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/gtdbtk.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="827">
+          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+          <folding>
+            <element signature="e#28#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/MetagenomeEvaluation/redundancy_checker.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1303">
+          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
+          <folding>
+            <element signature="e#27#83#0" expanded="true" />
           </folding>
         </state>
       </provider>

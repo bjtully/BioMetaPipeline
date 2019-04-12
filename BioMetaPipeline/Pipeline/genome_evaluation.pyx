@@ -33,28 +33,28 @@ class GenomeEvaluation(luigi.WrapperTask):
     def requires(self):
         cdef str final_outfile = os.path.join(self.output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT)
         # Run CheckM pipe
-        yield CheckM(
+        CheckM(
             output_directory=os.path.join(str(self.output_directory), CheckMConstants.OUTPUT_DIRECTORY),
             fasta_folder=str(self.fasta_folder),
             added_flags=cfg.build_parameter_list_from_dict(CheckMConstants.CHECKM),
             calling_script_path=cfg.get(CheckMConstants.CHECKM, ConfigManager.PATH),
         )
         # Run FastANI pipe
-        yield FastANI(
+        FastANI(
             output_directory=os.path.join(str(self.output_directory), FastANIConstants.OUTPUT_DIRECTORY),
             added_flags=cfg.build_parameter_list_from_dict(FastANIConstants.FASTANI),
             listfile_of_fasta_with_paths=self.fasta_listfile,
             calling_script_path=cfg.get(FastANIConstants.FASTANI, ConfigManager.PATH),
         )
         # Run GTDBtk pipe
-        yield GTDBtk(
+        GTDBtk(
             output_directory=os.path.join(str(self.output_directory), GTDBTKConstants.OUTPUT_DIRECTORY),
             added_flags=cfg.build_parameter_list_from_dict(GTDBTKConstants.GTDBTK),
             fasta_folder=str(self.fasta_folder),
             calling_script_path=cfg.get(GTDBTKConstants.GTDBTK, ConfigManager.PATH),
         )
         # Parse CheckM and FastANI to update DB with redundancy, contamination, and completion values
-        yield RedundancyParserTask(
+        RedundancyParserTask(
             checkm_output_file=os.path.join(CheckMConstants.OUTPUT_DIRECTORY, CheckMConstants.OUTFILE),
             fastANI_output_file=os.path.join(FastANIConstants.OUTPUT_DIRECTORY, FastANIConstants.OUTFILE),
             gtdbtk_output_file=os.path.join(GTDBTKConstants.OUTPUT_DIRECTORY, GTDBTKConstants.PREFIX + GTDBTKConstants.BAC_OUTEXT),
