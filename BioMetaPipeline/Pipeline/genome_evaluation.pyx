@@ -66,7 +66,7 @@ class GenomeEvaluation(luigi.WrapperTask):
         )
         # Initialize or update DB as needed
         if str(self.biometadb_project) == "None" or not os.path.exists(str(self.biometadb_project)):
-            yield Init(
+            return Init(
                 db_name=str(self.biometadb_project),
                 table_name=GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
                 directory_name=str(self.fasta_folder),
@@ -74,14 +74,13 @@ class GenomeEvaluation(luigi.WrapperTask):
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
             )
         else:
-            yield Update(
+            return Update(
                 config_file=str(self.biometadb_project),
                 table_name=GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
                 directory_name=str(self.fasta_folder),
                 data_file=str(final_outfile),
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
             )
-        return None
 
 
 def write_genome_list_to_file(str directory, str outfile):
