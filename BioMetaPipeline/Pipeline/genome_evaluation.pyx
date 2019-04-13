@@ -89,7 +89,7 @@ def genome_evaluation(str directory, str config_file, str prefix_file, bint canc
             gtdbtk_output_file=os.path.join(GTDBTKConstants.OUTPUT_DIRECTORY,
                                             GTDBTKConstants.PREFIX + GTDBTKConstants.BAC_OUTEXT),
             cutoffs_dict=cfg.get_cutoffs(),
-            file_ext_dict={os.path.basename(os.path.splitext(_file)[0]): os.path.basename(_file)
+            file_ext_dict={os.path.basename(os.path.splitext(_file)[0]): os.path.splitext(_file)[1]
                            for _file in os.listdir(directory)},
             calling_script_path="None",
             outfile=GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT,

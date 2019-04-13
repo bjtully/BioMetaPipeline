@@ -82,7 +82,7 @@ cdef class RedundancyChecker:
             # Assign redundancy by fastANI:
             # If not on fastANI report, mark as non_redundant
             # Rename key to include file ext
-            key = self.file_ext_dict[key]
+            key += self.file_ext_dict[key]
             if key not in fast_ANI_keys:
                 self.output_data[key][is_non_redundant_str] = True
             # If not from identical match, store to list of redundant copies
