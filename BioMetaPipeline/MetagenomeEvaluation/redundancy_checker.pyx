@@ -152,7 +152,6 @@ class RedundancyParserTask(LuigiTaskClass):
                                str(self.gtdbtk_output_file),
                                dict(self.cutoffs_dict),
                                dict(self.file_ext_dict))
-        rc.
         rc.write_tsv(os.path.join(self.output_directory, self.outfile))
 
     def output(self):
