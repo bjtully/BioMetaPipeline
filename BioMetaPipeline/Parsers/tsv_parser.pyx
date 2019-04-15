@@ -14,7 +14,9 @@ cdef class TSVParser:
         self.tsv_parser_cpp = TSVParser_cpp(<string>PyUnicode_AsUTF8(file_name), <string>PyUnicode_AsUTF8(delimiter))
 
     def read_file(self, int skip_lines=0, str comment_line_delimiter="#", bint header_line=False):
-        self.tsv_parser_cpp.readFile(skip_lines, <string>PyUnicode_AsUTF8(comment_line_delimiter), header_line)
+        cdef int result = self.tsv_parser_cpp.readFile(skip_lines, <string>PyUnicode_AsUTF8(comment_line_delimiter), header_line)
+        if result != 0:
+            raise FileNotFoundError
 
     def get_values(self, tuple col_list=(-1,)):
         cdef vector[vector[string]] values_in_file = self.tsv_parser_cpp.getValues()
@@ -42,11 +44,11 @@ cdef class TSVParser:
             return {"".join([chr(_c) for _c in values_in_file[i][0]]):
                 ["".join([chr(_c) for _c in val]) for val in values_in_file[i][1:]]
                 for i in range(values_in_file.size())
-                if values_in_file[i].size() > 0 and i in col_list}
+                if values_in_file[i].size() > 0}
         return {"".join([chr(_c) for _c in values_in_file[i][0]]):
                 ["".join([chr(_c) for _c in val]) for val in values_in_file[i][1:]]
                 for i in range(values_in_file.size())
-                if values_in_file[i].size() > 0}
+                if values_in_file[i].size() > 0 and i in col_list}
 
     def header(self):
         return self.tsv_parser_cpp.getHeader()

@@ -8,6 +8,6 @@ cdef extern from "tsv_parser_cpp.h" namespace "tsv":
     cdef cppclass TSVParser_cpp:
         TSVParser_cpp() except +
         TSVParser_cpp(string, string) except +
-        void readFile(int, string, bint)
+        int readFile(int, string, bint)
         string getHeader()
         vector[vector[string]] getValues()

@@ -3,6 +3,8 @@
 #include <fstream>
 #include "tsv_parser_cpp.h"
 
+#include <iostream>
+
 /*
 Class CheckMParser parses the output of CheckM
 CheckMParser will read file and return a vector of vector of strings
@@ -19,18 +21,24 @@ namespace tsv {
         this->delimiter = delimiter;
     }
 
-    TSVParser_cpp::~TSVParser_cpp() {}
+    TSVParser_cpp::~TSVParser_cpp() { }
 
-    void TSVParser_cpp::readFile(int skipLines = 0, std::string commentLineDelim = "#", bool headerLine = false) {
+    int TSVParser_cpp::readFile(int skipLines = 0, std::string commentLineDelim = "#", bool headerLine = false) {
         std::ifstream file(this->fileName.c_str());
+        if (!file.is_open()) {
+            return 1;
+        }
         std::string line;
         std::string token;
         std::vector<std::string> line_data;
         size_t pos = 0;
         // Skip over first n lines
+        if (skipLines > 0) {
         for (int i = 0; i < skipLines; ++i) {
             getline(file, line);
         }
+        }
+        getline(file, line);
         // Store header line and move past
         if (headerLine) {
             this->headerLine = line;
@@ -52,6 +60,7 @@ namespace tsv {
             getline(file, line);
         }
         file.close();
+        return 0;
     }
 
     std::vector<std::vector<std::string> > TSVParser_cpp::getValues() {

@@ -46,5 +46,5 @@ class GTDBtk(LuigiTaskClass):
 
     def output(self):
         return luigi.LocalTarget(
-            os.path.join(GTDBTKConstants.OUTPUT_DIRECTORY, GTDBTKConstants.PREFIX + GTDBTKConstants.BAC_OUTEXT),
+            os.path.join(self.output_directory, GTDBTKConstants.PREFIX + GTDBTKConstants.BAC_OUTEXT),
         )

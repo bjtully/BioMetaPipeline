@@ -10,7 +10,7 @@ namespace tsv {
             TSVParser_cpp();
             TSVParser_cpp(std::string fileName, std::string delimiter);
             ~TSVParser_cpp();
-            void readFile(int skipLines, std::string commentLineDelim, bool headerLine);
+            int readFile(int skipLines, std::string commentLineDelim, bool headerLine);
             std::vector<std::vector<std::string> > getValues();
             std::string getHeader();
         private:

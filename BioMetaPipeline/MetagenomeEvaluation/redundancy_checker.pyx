@@ -5,6 +5,7 @@ import random
 import luigi
 import os
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
+from BioMetaPipeline.MetagenomeEvaluation.fastani import FastANIConstants
 
 """
 Class will combine .tsv output from CheckM and FastANI
@@ -66,14 +67,14 @@ cdef class RedundancyChecker:
             # Initialize empty redundancy list
             self.output_data[key][redundant_copies_str] = []
             # Completion value
-            self.output_data[key][completion_str] = float(checkm_results[key][0])
+            self.output_data[key][completion_str] = float(checkm_results[key.rstrip(self.file_ext_dict[key])][0])
             # Set boolean based on CUTOFF values
             if self.output_data[key][completion_str] < float(self.cutoffs["IS_COMPLETE"]):
                 self.output_data[key][is_complete_str] = False
             else:
                 self.output_data[key][is_complete_str] = True
             # Contamination value
-            self.output_data[key][contamination_str] = float(checkm_results[key][1])
+            self.output_data[key][contamination_str] = float(checkm_results[key.rstrip(self.file_ext_dict[key])][1])
             # Set boolean based on CUTOFF values
             if self.output_data[key][contamination_str] < float(self.cutoffs["IS_CONTAMINATED"]):
                 self.output_data[key][is_contaminated_str] = False
@@ -82,7 +83,7 @@ cdef class RedundancyChecker:
             # Assign redundancy by fastANI:
             # If not on fastANI report, mark as non_redundant
             # Rename key to include file ext
-            key += self.file_ext_dict[key]
+            key = self.file_ext_dict[key]
             if key not in fast_ANI_keys:
                 self.output_data[key][is_non_redundant_str] = True
             # If not from identical match, store to list of redundant copies
