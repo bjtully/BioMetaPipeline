@@ -27,12 +27,12 @@ cdef class TSVParser:
             return [
                 ["".join([chr(_c) for _c in val]) for val in values_in_file[i]]
                 for i in range(values_in_file.size())
-                if values_in_file[i].size() > 0 and i in col_list
+                if values_in_file[i].size() > 0
             ]
         return [
                 ["".join([chr(_c) for _c in val]) for val in values_in_file[i]]
                 for i in range(values_in_file.size())
-                if values_in_file[i].size() > 0
+                if values_in_file[i].size() > 0 and i in col_list
             ]
 
     def get_values_as_dict(self, tuple col_list=(-1,)):
