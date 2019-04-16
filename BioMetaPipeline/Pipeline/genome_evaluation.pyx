@@ -25,68 +25,6 @@ class GenomeEvaluationConstants:
     GENOME_EVALUATION_PROJECT_NAME = "GenomeEvaluation"
 
 
-# class GenomeEvaluation(luigi.WrapperTask):
-#     output_directory = luigi.Parameter()
-#     fasta_folder = luigi.Parameter()
-#     fasta_listfile = luigi.Parameter()
-#     biometadb_project = luigi.Parameter()
-#     file_ext_dict = luigi.DictParameter()
-#     def requires(self):
-#         cdef str final_outfile = os.path.join(self.output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT)
-#         # Run CheckM pipe
-#         task_list = [
-#         # task_list = [CheckM(
-#         #     output_directory=os.path.join(str(self.output_directory), CheckMConstants.OUTPUT_DIRECTORY),
-#         #     fasta_folder=str(self.fasta_folder),
-#         #     added_flags=cfg.build_parameter_list_from_dict(CheckMConstants.CHECKM),
-#         #     calling_script_path=cfg.get(CheckMConstants.CHECKM, ConfigManager.PATH),
-#         # ),
-#         # # Run FastANI pipe
-#
-#         # FastANI(
-#         #     output_directory=os.path.join(str(self.output_directory), FastANIConstants.OUTPUT_DIRECTORY),
-#         #     added_flags=cfg.build_parameter_list_from_dict(FastANIConstants.FASTANI),
-#         #     listfile_of_fasta_with_paths=self.fasta_listfile,
-#         #     calling_script_path=cfg.get(FastANIConstants.FASTANI, ConfigManager.PATH),
-#         # ),
-#         # # Run GTDBtk pipe
-#         # GTDBtk(
-#         #     output_directory=os.path.join(str(self.output_directory), GTDBTKConstants.OUTPUT_DIRECTORY),
-#         #     added_flags=cfg.build_parameter_list_from_dict(GTDBTKConstants.GTDBTK),
-#         #     fasta_folder=str(self.fasta_folder),
-#         #     calling_script_path=cfg.get(GTDBTKConstants.GTDBTK, ConfigManager.PATH),
-#         # ),
-#         # Parse CheckM and FastANI to update DB with redundancy, contamination, and completion values
-#         RedundancyParserTask(
-#             checkm_output_file=os.path.join(self.output_directory, CheckMConstants.OUTFILE),
-#             fastANI_output_file=os.path.join(self.output_directory, FastANIConstants.OUTPUT_DIRECTORY, FastANIConstants.OUTFILE),
-#             gtdbtk_output_file=os.path.join(self.output_directory, GTDBTKConstants.OUTPUT_DIRECTORY, GTDBTKConstants.GTDBTK + GTDBTKConstants.BAC_OUTEXT),
-#             cutoffs_dict=cfg.get_cutoffs(),
-#             file_ext_dict=self.file_ext_dict,
-#             calling_script_path="None",
-#             outfile=final_outfile,
-#             output_directory=self.output_directory,
-#         )]
-#         # Initialize or update DB as needed
-#         if str(self.biometadb_project) == "None" or not os.path.exists(str(self.biometadb_project)):
-#             task_list.append(Init(
-#                 db_name=str(self.biometadb_project),
-#                 table_name=GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
-#                 directory_name=str(self.fasta_folder),
-#                 data_file=str(final_outfile),
-#                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-#             ))
-#         else:
-#             task_list.append(Update(
-#                 config_file=str(self.biometadb_project),
-#                 table_name=GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
-#                 directory_name=str(self.fasta_folder),
-#                 data_file=str(final_outfile),
-#                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-#             ))
-#         return task_list
-
-
 def write_genome_list_to_file(str directory, str outfile):
     """  Function writes
 
@@ -102,7 +40,7 @@ def write_genome_list_to_file(str directory, str outfile):
     W.close()
 
 
-def genome_evaluation(str directory, str config_file, str prefix_file, bint cancel_autocommit, str output_directory,
+def genome_evaluation(str directory, str config_file, bint cancel_autocommit, str output_directory,
                       str biometadb_project):
     """ Function calls the pipeline for evaluating a set of genomes using checkm, gtdbtk, fastANI
     Creates .tsv file of final output, adds to database
@@ -110,7 +48,6 @@ def genome_evaluation(str directory, str config_file, str prefix_file, bint canc
     :param biometadb_project:
     :param directory:
     :param config_file:
-    :param prefix_file:
     :param cancel_autocommit:
     :param output_directory:
     :return:
@@ -128,52 +65,56 @@ def genome_evaluation(str directory, str config_file, str prefix_file, bint canc
     cdef str _file
     write_genome_list_to_file(directory, genome_list_path)
     if biometadb_project == "None":
-        biometadb_project = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.DB_NAME)
+        try:
+            biometadb_project = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.DB_NAME)
+        except KeyError:
+            biometadb_project = "GenomeEvaluation"
     task_list = [
-        # CheckM(
-        #     output_directory=os.path.join(output_directory, CheckMConstants.OUTPUT_DIRECTORY),
-        #     fasta_folder=directory,
-        #     added_flags=cfg.build_parameter_list_from_dict(CheckMConstants.CHECKM),
-        #     calling_script_path=cfg.get(CheckMConstants.CHECKM, ConfigManager.PATH),
-        # ),
-        # FastANI(
-        #     output_directory=os.path.join(output_directory, FastANIConstants.OUTPUT_DIRECTORY),
-        #     added_flags=cfg.build_parameter_list_from_dict(FastANIConstants.FASTANI),
-        #     listfile_of_fasta_with_paths=genome_list_path,
-        #     calling_script_path=cfg.get(FastANIConstants.FASTANI, ConfigManager.PATH),
-        # ),
-        # GTDBtk(
-        #     output_directory=os.path.join(output_directory, GTDBTKConstants.OUTPUT_DIRECTORY),
-        #     added_flags=cfg.build_parameter_list_from_dict(GTDBTKConstants.GTDBTK),
-        #     fasta_folder=directory,
-        #     calling_script_path=cfg.get(GTDBTKConstants.GTDBTK, ConfigManager.PATH),
-        # ),
+        CheckM(
+            output_directory=os.path.join(output_directory, CheckMConstants.OUTPUT_DIRECTORY),
+            fasta_folder=directory,
+            added_flags=cfg.build_parameter_list_from_dict(CheckMConstants.CHECKM),
+            calling_script_path=cfg.get(CheckMConstants.CHECKM, ConfigManager.PATH),
+        ),
+        FastANI(
+            output_directory=os.path.join(output_directory, FastANIConstants.OUTPUT_DIRECTORY),
+            added_flags=cfg.build_parameter_list_from_dict(FastANIConstants.FASTANI),
+            listfile_of_fasta_with_paths=genome_list_path,
+            calling_script_path=cfg.get(FastANIConstants.FASTANI, ConfigManager.PATH),
+        ),
+        GTDBtk(
+            output_directory=os.path.join(output_directory, GTDBTKConstants.OUTPUT_DIRECTORY),
+            added_flags=cfg.build_parameter_list_from_dict(GTDBTKConstants.GTDBTK),
+            fasta_folder=directory,
+            calling_script_path=cfg.get(GTDBTKConstants.GTDBTK, ConfigManager.PATH),
+        ),
         RedundancyParserTask(
             checkm_output_file=os.path.join(output_directory, CheckMConstants.OUTFILE),
             fastANI_output_file=os.path.join(output_directory, FastANIConstants.OUTPUT_DIRECTORY, FastANIConstants.OUTFILE),
             gtdbtk_output_file=os.path.join(output_directory, GTDBTKConstants.OUTPUT_DIRECTORY, GTDBTKConstants.GTDBTK + GTDBTKConstants.BAC_OUTEXT),
             cutoffs_dict=cfg.get_cutoffs(),
-            file_ext_dict={os.path.basename(os.path.splitext(file)[0]): os.path.basename(file)
+            file_ext_dict={os.path.basename(os.path.splitext(file)[0]): os.path.splitext(file)[1]
                            for file in os.listdir(directory)},
             calling_script_path="None",
             outfile=os.path.join(output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT),
             output_directory=output_directory,
         ),
     ]
-    if biometadb_project != GenomeEvaluationConstants.GENOME_EVALUATION_PROJECT_NAME or not os.path.exists(biometadb_project):
-        task_list.append(Init(
-            db_name=biometadb_project,
-            table_name=GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
-            directory_name=directory,
-            data_file=os.path.join(output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT),
-            calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-        ))
-    else:
-        task_list.append(Update(
-            config_file=biometadb_project,
-            table_name=GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
-            directory_name=directory,
-            data_file=os.path.join(output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT),
-            calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-        ))
+    if not cancel_autocommit:
+        if not os.path.exists(biometadb_project):
+            task_list.append(Init(
+                db_name=biometadb_project,
+                table_name=GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
+                directory_name=directory,
+                data_file=os.path.join(output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT),
+                calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+            ))
+        else:
+            task_list.append(Update(
+                config_file=biometadb_project,
+                table_name=GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
+                directory_name=directory,
+                data_file=os.path.join(output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT),
+                calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+            ))
     luigi.build(task_list, local_scheduler=True)

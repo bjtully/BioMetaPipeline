@@ -62,6 +62,6 @@ class ArgParse:
         programs = sorted(flag_dict.keys())
         for program in programs:
             to_return += program + ": " + help_dict[program] + "\n\t" + \
-                         "\t(Req: {})".format(" --" + " --".join(flag_dict[program])) + "\n"
+                         "\t(Flags: {})".format(" --" + " --".join(flag_dict[program])) + "\n"
         to_return += "\n"
         return to_return

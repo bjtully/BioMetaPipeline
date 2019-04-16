@@ -13,14 +13,12 @@ if __name__ == "__main__":
          {"help": "Directory containing genomes", "required": True}),
         (("-c", "--config_file"),
          {"help": "Config file", "required": True}),
-        (("-l", "--prefix_file"),
-         {"help": "Optional list file formatted as output_prefix\t<file>[\t<file>]\n", "default": "None"}),
         (("-a", "--cancel_autocommit"),
          {"help": "Cancel commit to database", "action": "store_true", "default": False}),
         (("-o", "--output_directory"),
-         {"help": "Output directory prefix", "default": "out"}),
+         {"help": "Output directory prefix, default out", "default": "out"}),
         (("-b", "--biometadb_project"),
-         {"help": "/path/to/BioMetaDB_project (updates existing values or initializes with name)", "default": "None"}),
+         {"help": "/path/to/BioMetaDB_project (updates values of existing database)", "default": "None"}),
     )
 
     programs = {
@@ -29,7 +27,7 @@ if __name__ == "__main__":
     }
 
     flags = {
-        "EVALUATION":           ("directory", "config_file", "prefix_file", "cancel_autocommit", "output_directory",
+        "EVALUATION":           ("directory", "config_file", "cancel_autocommit", "output_directory",
                                  "biometadb_project"),
     }
 

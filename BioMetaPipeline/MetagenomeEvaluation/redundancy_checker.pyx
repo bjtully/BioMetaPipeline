@@ -65,7 +65,7 @@ cdef class RedundancyChecker:
         cdef str key_and_ext
         for key in checkm_results.keys():
             # Assign by CheckM output
-            key_and_ext = self.file_ext_dict[key]
+            key_and_ext = key + self.file_ext_dict[key]
             self.output_data[key_and_ext] = {}
             # Set gtdbtk value
             self.output_data[key_and_ext][phylogeny_str] = gtdbktk_results[key][0]
@@ -74,27 +74,27 @@ cdef class RedundancyChecker:
             # Completion value
             self.output_data[key_and_ext][completion_str] = float(checkm_results[key][0])
             # Set boolean based on CUTOFF values
-            if self.output_data[key_and_ext][completion_str] < float(self.cutoffs["IS_COMPLETE"]):
+            if self.output_data[key_and_ext][completion_str] <= float(self.cutoffs["IS_COMPLETE"]):
                 self.output_data[key_and_ext][is_complete_str] = False
             else:
                 self.output_data[key_and_ext][is_complete_str] = True
             # Contamination value
             self.output_data[key_and_ext][contamination_str] = float(checkm_results[key][1])
             # Set boolean based on CUTOFF values
-            if self.output_data[key_and_ext][contamination_str] < float(self.cutoffs["IS_CONTAMINATED"]):
+            if self.output_data[key_and_ext][contamination_str] <= float(self.cutoffs["IS_CONTAMINATED"]):
                 self.output_data[key_and_ext][is_contaminated_str] = False
             else:
                 self.output_data[key_and_ext][is_contaminated_str] = True
             # Assign redundancy by fastANI:
             # If not on fastANI report, mark as non_redundant
             # Rename key to include file ext
-            fastani_key = FastANIConstants.OUTPUT_DIRECTORY + "/" + self.file_ext_dict[key]
+            fastani_key = FastANIConstants.OUTPUT_DIRECTORY + "/" +  key + self.file_ext_dict[key]
             if fastani_key not in fast_ANI_keys:
                 self.output_data[key_and_ext][is_non_redundant_str] = True
             # If not from identical match, store to list of redundant copies
             else:
                 if fastANI_results[fastani_key][0] != fastani_key:
-                    if float(fastANI_results[fastani_key][1]) > float(self.cutoffs["ANI"]):
+                    if float(fastANI_results[fastani_key][1]) >= float(self.cutoffs["ANI"]):
                         self.output_data[key_and_ext][redundant_copies_str].append(fastANI_results[fastani_key][0])
 
         # Update each key with a redundancy list to set non_redundant values for most complete
