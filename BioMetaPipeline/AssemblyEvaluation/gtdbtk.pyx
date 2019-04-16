@@ -10,7 +10,7 @@ class GTDBTKConstants:
     GTDBTK = "GTDBTK"
     OUTPUT_DIRECTORY = "gtdbtk_results"
     PREFIX = "GenomeEvaluation"
-    BAC_OUTEXT = ".bac120_markers_summary.tsv"
+    BAC_OUTEXT = ".bac120.summary.tsv"
 
 
 class GTDBtk(LuigiTaskClass):
