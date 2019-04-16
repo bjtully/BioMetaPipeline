@@ -34,10 +34,12 @@ cdef class RedundancyChecker:
     cdef dict file_ext_dict
 
     def __init__(self, str checkm_filename, str fastani_filename, str gtdbtk_filename, dict cutoff_values, dict file_ext_dict):
+        if not os.path.isfile(checkm_filename) or not os.path.isfile(fastani_filename) or not os.path.isfile(gtdbtk_filename):
+            raise FileNotFoundError
+        self.cutoffs = cutoff_values
         self.checkm_file = <void *>checkm_filename
         self.fastani_file = <void *>fastani_filename
         self.gtdbtk_file = <void *>gtdbtk_filename
-        self.cutoffs = cutoff_values
         self.output_data = {}
         self.file_ext_dict = file_ext_dict
         self._parse_records_to_categories()

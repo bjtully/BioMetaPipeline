@@ -128,26 +128,26 @@ def genome_evaluation(str directory, str config_file, str prefix_file, bint canc
     cdef str _file
     write_genome_list_to_file(directory, genome_list_path)
     if biometadb_project == "None":
-        biometadb_project = GenomeEvaluationConstants.GENOME_EVALUATION_PROJECT_NAME
+        biometadb_project = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.DB_NAME)
     task_list = [
-        CheckM(
-            output_directory=os.path.join(output_directory, CheckMConstants.OUTPUT_DIRECTORY),
-            fasta_folder=directory,
-            added_flags=cfg.build_parameter_list_from_dict(CheckMConstants.CHECKM),
-            calling_script_path=cfg.get(CheckMConstants.CHECKM, ConfigManager.PATH),
-        ),
-        FastANI(
-            output_directory=os.path.join(output_directory, FastANIConstants.OUTPUT_DIRECTORY),
-            added_flags=cfg.build_parameter_list_from_dict(FastANIConstants.FASTANI),
-            listfile_of_fasta_with_paths=genome_list_path,
-            calling_script_path=cfg.get(FastANIConstants.FASTANI, ConfigManager.PATH),
-        ),
-        GTDBtk(
-            output_directory=os.path.join(output_directory, GTDBTKConstants.OUTPUT_DIRECTORY),
-            added_flags=cfg.build_parameter_list_from_dict(GTDBTKConstants.GTDBTK),
-            fasta_folder=directory,
-            calling_script_path=cfg.get(GTDBTKConstants.GTDBTK, ConfigManager.PATH),
-        ),
+        # CheckM(
+        #     output_directory=os.path.join(output_directory, CheckMConstants.OUTPUT_DIRECTORY),
+        #     fasta_folder=directory,
+        #     added_flags=cfg.build_parameter_list_from_dict(CheckMConstants.CHECKM),
+        #     calling_script_path=cfg.get(CheckMConstants.CHECKM, ConfigManager.PATH),
+        # ),
+        # FastANI(
+        #     output_directory=os.path.join(output_directory, FastANIConstants.OUTPUT_DIRECTORY),
+        #     added_flags=cfg.build_parameter_list_from_dict(FastANIConstants.FASTANI),
+        #     listfile_of_fasta_with_paths=genome_list_path,
+        #     calling_script_path=cfg.get(FastANIConstants.FASTANI, ConfigManager.PATH),
+        # ),
+        # GTDBtk(
+        #     output_directory=os.path.join(output_directory, GTDBTKConstants.OUTPUT_DIRECTORY),
+        #     added_flags=cfg.build_parameter_list_from_dict(GTDBTKConstants.GTDBTK),
+        #     fasta_folder=directory,
+        #     calling_script_path=cfg.get(GTDBTKConstants.GTDBTK, ConfigManager.PATH),
+        # ),
         RedundancyParserTask(
             checkm_output_file=os.path.join(output_directory, CheckMConstants.OUTFILE),
             fastANI_output_file=os.path.join(output_directory, FastANIConstants.OUTPUT_DIRECTORY, FastANIConstants.OUTFILE),

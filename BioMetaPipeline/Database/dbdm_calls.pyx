@@ -8,6 +8,7 @@ from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 class BioMetaDBConstants:
     BIOMETADB = "BIOMETADB"
+    DB_NAME = "--db_name"
 
 
 class DBDM(LuigiTaskClass):
