@@ -63,7 +63,7 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
     cdef str genome_list_path = os.path.join(output_directory, GenomeEvaluationConstants.GENOME_LIST_FILE)
     cdef str _file
     cdef str alias = "None"
-    cdef str table_name = "None"
+    cdef str table_name
     write_genome_list_to_file(directory, genome_list_path)
     if biometadb_project == "None":
         try:
@@ -74,7 +74,7 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
         alias = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.ALIAS)
         table_name = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.TABLE_NAME)
     except KeyError:
-        pass
+        table_name = GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
     task_list = [
         CheckM(
             output_directory=os.path.join(output_directory, CheckMConstants.OUTPUT_DIRECTORY),
@@ -110,7 +110,6 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
         if not os.path.exists(biometadb_project):
             task_list.append(Init(
                 db_name=biometadb_project,
-                table_name=GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
                 directory_name=directory,
                 data_file=os.path.join(output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT),
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
@@ -120,7 +119,6 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
         else:
             task_list.append(Update(
                 config_file=biometadb_project,
-                table_name=GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
                 directory_name=directory,
                 data_file=os.path.join(output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT),
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
