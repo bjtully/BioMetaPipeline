@@ -28,6 +28,7 @@ class Init(DBDM):
         """
         subprocess.run(
             [
+                "python3",
                 str(self.calling_script_path),
                 "INIT",
                 "-n",
@@ -52,6 +53,7 @@ class Update(DBDM):
     def run(self):
         subprocess.run(
             [
+                "python3",
                 str(self.calling_script_path),
                 "UPDATE",
                 "-c",
@@ -73,6 +75,7 @@ class Create(DBDM):
     def run(self):
         subprocess.run(
             [
+                "python3",
                 str(self.calling_script_path),
                 "CREATE",
                 "-c",
