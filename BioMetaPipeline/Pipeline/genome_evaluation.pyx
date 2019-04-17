@@ -8,6 +8,7 @@ from BioMetaPipeline.AssemblyEvaluation.gtdbtk import GTDBtk, GTDBTKConstants
 from BioMetaPipeline.MetagenomeEvaluation.fastani import FastANI, FastANIConstants
 from BioMetaPipeline.Pipeline.Exceptions.GenomeEvaluationExceptions import AssertString
 from BioMetaPipeline.MetagenomeEvaluation.redundancy_checker import RedundancyParserTask
+from configparser import NoOptionError
 
 """
 GenomeEvaluation wrapper class will yield each of the evaluation steps that are conducted on 
@@ -68,15 +69,15 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
     if biometadb_project == "None":
         try:
             biometadb_project = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.DB_NAME)
-        except KeyError:
+        except NoOptionError:
             biometadb_project = "GenomeEvaluation"
     try:
         table_name = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.TABLE_NAME)
-    except KeyError:
+    except NoOptionError:
         table_name = GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
     try:
         alias = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.ALIAS)
-    except KeyError:
+    except NoOptionError:
         alias = "None"
     task_list = [
         CheckM(
