@@ -126,7 +126,11 @@ cdef class RedundancyChecker:
         cdef str column_name
         # Write header
         W.write("ID")
-        cdef list column_names = list(self.output_data[list(self.output_data.keys())[0]].keys())
+        cdef list column_names
+        column_names = ["is_non_redundant", "redundant_copies",
+                                  "contamination", "is_contaminated",
+                                  "completion", "is_complete",
+                                  "phylogeny"]
         for column_name in column_names:
             W.write("\t%s" % column_name)
         W.write("\n")
