@@ -22,7 +22,8 @@ Adding the last two lines of the above code to a user's `.bashrc` file will main
     - FastANI
     - [BioMetaDB](https://github.com/cjneely10/BioMetaDB)
 
-Python dependencies are best maintained within a separate Python virtual environment. However, **BioMetaPipeline** data
+Python dependencies are best maintained within a separate Python virtual environment. `BioMetaDB` and `BioMetaPipeline`
+must be contained and built within the same python environment. However, **BioMetaPipeline** data
 pipelines are managed through config files that allow direct input of the paths to the Python 2/3 environments 
 that house external programs (such as `CheckM`).
 

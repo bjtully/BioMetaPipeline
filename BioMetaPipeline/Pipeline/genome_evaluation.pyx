@@ -53,7 +53,6 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
     :return:
     """
     assert os.path.exists(directory) and os.path.exists(config_file), AssertString.INVALID_PARAMETERS_PASSED
-    global cfg
     cfg = ConfigManager(config_file)
     if not os.path.exists(output_directory):
         # Output directory
@@ -63,12 +62,19 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
         # Temporary storage directory - for list, .tsvs, etc, as needed by calling programs
     cdef str genome_list_path = os.path.join(output_directory, GenomeEvaluationConstants.GENOME_LIST_FILE)
     cdef str _file
+    cdef str alias = "None"
+    cdef str table_name = "None"
     write_genome_list_to_file(directory, genome_list_path)
     if biometadb_project == "None":
         try:
             biometadb_project = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.DB_NAME)
         except KeyError:
             biometadb_project = "GenomeEvaluation"
+    try:
+        alias = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.ALIAS)
+        table_name = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.TABLE_NAME)
+    except KeyError:
+        pass
     task_list = [
         CheckM(
             output_directory=os.path.join(output_directory, CheckMConstants.OUTPUT_DIRECTORY),
@@ -108,6 +114,8 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
                 directory_name=directory,
                 data_file=os.path.join(output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT),
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                alias=alias,
+                table_name=table_name
             ))
         else:
             task_list.append(Update(
@@ -116,5 +124,7 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
                 directory_name=directory,
                 data_file=os.path.join(output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT),
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                alias=alias,
+                table_name=table_name
             ))
     luigi.build(task_list, local_scheduler=True)
