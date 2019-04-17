@@ -62,7 +62,7 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
         # Temporary storage directory - for list, .tsvs, etc, as needed by calling programs
     cdef str genome_list_path = os.path.join(output_directory, GenomeEvaluationConstants.GENOME_LIST_FILE)
     cdef str _file
-    cdef str alias = "None"
+    cdef str alias
     cdef str table_name
     write_genome_list_to_file(directory, genome_list_path)
     if biometadb_project == "None":
@@ -71,10 +71,13 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
         except KeyError:
             biometadb_project = "GenomeEvaluation"
     try:
-        alias = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.ALIAS)
         table_name = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.TABLE_NAME)
     except KeyError:
         table_name = GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
+    try:
+        alias = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.ALIAS)
+    except KeyError:
+        alias = "None"
     task_list = [
         CheckM(
             output_directory=os.path.join(output_directory, CheckMConstants.OUTPUT_DIRECTORY),
