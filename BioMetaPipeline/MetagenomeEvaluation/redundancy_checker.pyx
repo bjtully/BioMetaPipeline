@@ -4,7 +4,6 @@ from BioMetaPipeline.Parsers.checkm_parser import CheckMParser
 import luigi
 import os
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
-from BioMetaPipeline.MetagenomeEvaluation.fastani import FastANIConstants
 
 """
 Class will combine .tsv output from CheckM and FastANI
@@ -45,15 +44,12 @@ cdef class RedundancyChecker:
         self._parse_records_to_categories()
 
     def _parse_records_to_categories(self):
-        print(<object>self.checkm_file, <object>self.fastani_file, <object>self.gtdbtk_file)
         cdef dict checkm_results = CheckMParser.parse_dict(<object>self.checkm_file)
-        cdef dict fastANI_results = TSVParser.parse_dict(<object>self.fastani_file)
+        cdef list _fastANI_results = TSVParser.parse_list(<object>self.fastani_file)
         cdef dict gtdbktk_results = TSVParser.parse_dict(<object>self.gtdbtk_file)
-        cdef str key
         cdef str max_completion_id
         cdef float max_completion
         cdef int i
-        cdef object fast_ANI_keys = fastANI_results.keys()
         cdef str redundant_copies_str = "redundant_copies"
         cdef str completion_str = "completion"
         cdef str is_complete_str = "is_complete"
@@ -61,8 +57,17 @@ cdef class RedundancyChecker:
         cdef str contamination_str = "contamination"
         cdef str is_non_redundant_str = "is_non_redundant"
         cdef str phylogeny_str = "phylogeny"
-        cdef str fastani_key
         cdef str key_and_ext
+        cdef bint redundant_found
+        cdef fastANI_results = {}
+        for i in range(len(_fastANI_results)):
+            key_and_ext = _fastANI_results[i][0].split("/")[-1]
+            if key_and_ext not in fastANI_results.keys():
+                fastANI_results[key_and_ext] = []
+            _fastANI_results[i][1] = _fastANI_results[i][1].split("/")[-1]
+            if key_and_ext != _fastANI_results[i][1]:
+                fastANI_results[key_and_ext].append(_fastANI_results[i][1:])
+        cdef set fastani_keys = set(fastANI_results.keys())
         for key in checkm_results.keys():
             # Assign by CheckM output
             key_and_ext = key + self.file_ext_dict[key]
@@ -88,14 +93,18 @@ cdef class RedundancyChecker:
             # Assign redundancy by fastANI:
             # If not on fastANI report, mark as non_redundant
             # Rename key to include file ext
-            fastani_key = FastANIConstants.OUTPUT_DIRECTORY + "/" +  key + self.file_ext_dict[key]
-            if fastani_key not in fast_ANI_keys:
+            if key_and_ext not in fastani_keys:
                 self.output_data[key_and_ext][is_non_redundant_str] = True
             # If not from identical match, store to list of redundant copies
             else:
-                if fastANI_results[fastani_key][0] != fastani_key:
-                    if float(fastANI_results[fastani_key][1]) >= float(self.cutoffs["ANI"]):
-                        self.output_data[key_and_ext][redundant_copies_str].append(fastANI_results[fastani_key][0])
+                for i in range(len(fastANI_results[key_and_ext])):
+                    if fastANI_results[key_and_ext][i] != key_and_ext:
+                        if float(fastANI_results[key_and_ext][i][1]) >= float(self.cutoffs["ANI"]):
+                            self.output_data[key_and_ext][redundant_copies_str].append(fastANI_results[key_and_ext][i][0])
+                            self.output_data[key_and_ext][is_non_redundant_str] = False
+                else:
+                    self.output_data[key_and_ext][is_non_redundant_str] = True
+
 
         # Update each key with a redundancy list to set non_redundant values for most complete
         for key in self.output_data.keys():
