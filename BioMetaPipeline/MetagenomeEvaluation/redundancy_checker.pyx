@@ -23,6 +23,10 @@ Will output dictionary as:
 
 """
 
+_column_names = ["is_non_redundant", "redundant_copies",
+                                  "contamination", "is_contaminated",
+                                  "completion", "is_complete",
+                                  "phylogeny"]
 
 cdef class RedundancyChecker:
     cdef void* checkm_file
@@ -59,12 +63,13 @@ cdef class RedundancyChecker:
         cdef str phylogeny_str = "phylogeny"
         cdef str key_and_ext
         cdef bint redundant_found
+        cdef set redundant_genomes = set()
         cdef fastANI_results = {}
         for i in range(len(_fastANI_results)):
-            key_and_ext = _fastANI_results[i][0].split("/")[-1]
+            key_and_ext = os.path.basename(_fastANI_results[i][0])
             if key_and_ext not in fastANI_results.keys():
                 fastANI_results[key_and_ext] = []
-            _fastANI_results[i][1] = _fastANI_results[i][1].split("/")[-1]
+            _fastANI_results[i][1] = os.path.basename(_fastANI_results[i][1])
             if key_and_ext != _fastANI_results[i][1]:
                 fastANI_results[key_and_ext].append(_fastANI_results[i][1:])
         cdef set fastani_keys = set(fastANI_results.keys())
@@ -93,25 +98,18 @@ cdef class RedundancyChecker:
             # Assign redundancy by fastANI:
             # If not on fastANI report, mark as non_redundant
             # Rename key to include file ext
-            if key_and_ext not in fastani_keys:
-                self.output_data[key_and_ext][is_non_redundant_str] = True
-            # If not from identical match, store to list of redundant copies
-            else:
+            if key_and_ext in fastani_keys:
                 for i in range(len(fastANI_results[key_and_ext])):
-                    if fastANI_results[key_and_ext][i] != key_and_ext:
-                        if float(fastANI_results[key_and_ext][i][1]) >= float(self.cutoffs["ANI"]):
-                            self.output_data[key_and_ext][redundant_copies_str].append(fastANI_results[key_and_ext][i][0])
-                            self.output_data[key_and_ext][is_non_redundant_str] = False
-                else:
-                    self.output_data[key_and_ext][is_non_redundant_str] = True
+                    if float(fastANI_results[key_and_ext][i][1]) >= float(self.cutoffs["ANI"]):
+                        self.output_data[key_and_ext][redundant_copies_str].append(fastANI_results[key_and_ext][i][0])
 
         # Update each key with a redundancy list to set non_redundant values for most complete
         for key in self.output_data.keys():
             if len(self.output_data[key][redundant_copies_str]) > 0:
                 # Set max completion as first value
-                max_completion = self.output_data[self.output_data[key][redundant_copies_str][0]][completion_str]
+                max_completion = self.output_data[key][completion_str]
                 # Get id of max completion
-                max_completion_id = self.output_data[key][redundant_copies_str][0]
+                max_completion_id = key
                 for i in range(len(self.output_data[key][redundant_copies_str])):
                     # Update max completion percent as needed
                     if self.output_data[self.output_data[key][redundant_copies_str][i]][completion_str] > max_completion:
@@ -119,10 +117,15 @@ cdef class RedundancyChecker:
                         max_completion_id = self.output_data[key][redundant_copies_str][i]
                 # Move through list of redundant copies and set redundancy as needed
                 for i in range(len(self.output_data[key][redundant_copies_str])):
-                    if self.output_data[key][redundant_copies_str][i] == max_completion_id:
-                        self.output_data[self.output_data[key][redundant_copies_str][i]][is_non_redundant_str] = True
-                    else:
-                        self.output_data[self.output_data[key][redundant_copies_str][i]][is_non_redundant_str] = False
+                    if self.output_data[key][redundant_copies_str][i] != max_completion_id:
+                        redundant_genomes.add(self.output_data[key][redundant_copies_str][i])
+
+        for key in self.output_data.keys():
+            if key not in redundant_genomes:
+                self.output_data[key][is_non_redundant_str] = True
+            else:
+                self.output_data[key][is_non_redundant_str] = False
+
 
     def write_tsv(self, str file_name):
         """ Method will write all values in self.output_data to .tsv file
@@ -134,18 +137,13 @@ cdef class RedundancyChecker:
         cdef str column_name
         # Write header
         W.write("ID")
-        cdef list column_names
-        column_names = ["is_non_redundant", "redundant_copies",
-                                  "contamination", "is_contaminated",
-                                  "completion", "is_complete",
-                                  "phylogeny"]
-        for column_name in column_names:
+        for column_name in _column_names:
             W.write("\t%s" % column_name)
         W.write("\n")
         # Write each line
         for _id in self.output_data.keys():
             W.write(_id)
-            for column_name in column_names:
+            for column_name in _column_names:
                 W.write("\t%s" % self.output_data[_id][column_name])
             W.write("\n")
         W.close()
