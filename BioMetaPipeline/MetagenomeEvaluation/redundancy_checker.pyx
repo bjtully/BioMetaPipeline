@@ -66,10 +66,10 @@ cdef class RedundancyChecker:
         cdef set redundant_genomes = set()
         cdef fastANI_results = {}
         for i in range(len(_fastANI_results)):
-            key_and_ext = os.path.basename(_fastANI_results[i][0])
+            key_and_ext = _fastANI_results[i][0].split("/")[-1]
             if key_and_ext not in fastANI_results.keys():
                 fastANI_results[key_and_ext] = []
-            _fastANI_results[i][1] = os.path.basename(_fastANI_results[i][1])
+            _fastANI_results[i][1] = _fastANI_results[i][1].split("/")[-1]
             if key_and_ext != _fastANI_results[i][1]:
                 fastANI_results[key_and_ext].append(_fastANI_results[i][1:])
         cdef set fastani_keys = set(fastANI_results.keys())
