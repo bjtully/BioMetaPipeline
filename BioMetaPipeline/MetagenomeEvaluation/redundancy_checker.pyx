@@ -105,7 +105,6 @@ cdef class RedundancyChecker:
                 else:
                     self.output_data[key_and_ext][is_non_redundant_str] = True
 
-
         # Update each key with a redundancy list to set non_redundant values for most complete
         for key in self.output_data.keys():
             if len(self.output_data[key][redundant_copies_str]) > 0:
@@ -174,5 +173,3 @@ class RedundancyParserTask(LuigiTaskClass):
 
     def output(self):
         return luigi.LocalTarget(self.outfile)
-
-
