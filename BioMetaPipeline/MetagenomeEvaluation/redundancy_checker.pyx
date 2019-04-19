@@ -49,7 +49,7 @@ cdef class RedundancyChecker:
 
     def _parse_records_to_categories(self):
         cdef dict checkm_results = CheckMParser.parse_dict(<object>self.checkm_file)
-        cdef list _fastANI_results = TSVParser.parse_list(<object>self.fastani_file)
+        cdef list _fastANI_results = TSVParser.parse_list(<object>self.fastani_file, " ")
         cdef dict gtdbktk_results = TSVParser.parse_dict(<object>self.gtdbtk_file)
         cdef str max_completion_id
         cdef float max_completion
