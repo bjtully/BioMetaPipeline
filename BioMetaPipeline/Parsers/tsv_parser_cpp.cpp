@@ -3,8 +3,6 @@
 #include <fstream>
 #include "tsv_parser_cpp.h"
 
-#include <iostream>
-
 /*
 Class CheckMParser parses the output of CheckM
 CheckMParser will read file and return a vector of vector of strings

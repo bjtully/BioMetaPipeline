@@ -11,10 +11,8 @@ from BioMetaPipeline.MetagenomeEvaluation.redundancy_checker import RedundancyPa
 from configparser import NoOptionError
 
 """
-GenomeEvaluation wrapper class will yield each of the evaluation steps that are conducted on 
-multiple genomes.
-After, genome_evaluation function will run through steps called on individual genomes
-Finally, a summary .tsv file will be created and used to initialize a BioMetaDB project folder
+genome_evaluation runs CheckM, GTDBtk, fastANI, and parses output into a BioMetaDB project
+Uses assembled genomes (.fna)
 
 """
 
@@ -100,8 +98,10 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
         ),
         RedundancyParserTask(
             checkm_output_file=os.path.join(output_directory, CheckMConstants.OUTFILE),
-            fastANI_output_file=os.path.join(output_directory, FastANIConstants.OUTPUT_DIRECTORY, FastANIConstants.OUTFILE),
-            gtdbtk_output_file=os.path.join(output_directory, GTDBTKConstants.OUTPUT_DIRECTORY, GTDBTKConstants.GTDBTK + GTDBTKConstants.BAC_OUTEXT),
+            fastANI_output_file=os.path.join(output_directory, FastANIConstants.OUTPUT_DIRECTORY,
+                                             FastANIConstants.OUTFILE),
+            gtdbtk_output_file=os.path.join(output_directory, GTDBTKConstants.OUTPUT_DIRECTORY,
+                                            GTDBTKConstants.GTDBTK + GTDBTKConstants.BAC_OUTEXT),
             cutoffs_dict=cfg.get_cutoffs(),
             file_ext_dict={os.path.basename(os.path.splitext(file)[0]): os.path.splitext(file)[1]
                            for file in os.listdir(directory)},

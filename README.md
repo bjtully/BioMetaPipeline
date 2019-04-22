@@ -57,7 +57,7 @@ results.
 #### Memory usage and time to completion estimates
 
 Some programs in each pipeline can have very high memory requirements (>100GB) or long completion times (depending on 
-the system used to run the pipeline).
+the system used to run the pipeline). Users are advised to use a program such as `screen` or `nohup` to run this pipeline.
 
 ## pipedm
 

@@ -23,7 +23,7 @@ if __name__ == "__main__":
 
     programs = {
         "EVALUATION":           genome_evaluation,
-        # "EU_PAN":               eukaryotic_pangenome,
+        "EU_PAN":               eukaryotic_pangenome,
 
     }
 
