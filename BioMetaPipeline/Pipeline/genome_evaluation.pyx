@@ -6,7 +6,7 @@ from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.AssemblyEvaluation.checkm import CheckM, CheckMConstants
 from BioMetaPipeline.AssemblyEvaluation.gtdbtk import GTDBtk, GTDBTKConstants
 from BioMetaPipeline.MetagenomeEvaluation.fastani import FastANI, FastANIConstants
-from BioMetaPipeline.Pipeline.Exceptions.GenomeEvaluationExceptions import AssertString
+from BioMetaPipeline.Pipeline.Exceptions.GeneralAssertion import AssertString
 from BioMetaPipeline.MetagenomeEvaluation.redundancy_checker import RedundancyParserTask
 from configparser import NoOptionError
 

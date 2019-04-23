@@ -7,9 +7,14 @@ import subprocess
 from BioMetaPipeline.Accessories.ops import get_prefix
 
 
+class Bowtie2Constants:
+    BOWTIE2 = "BOWTIE2"
+    OUTPUT_DIRECTORY = "bowtie2"
+    BOWTIE2_INDEX_PATH = "INDEX_PATH"
+
 class Bowtie2(luigi.Task):
     calling_script_path = luigi.Parameter()
-    output_directory = luigi.Parameter(default=None)
+    output_directory = luigi.Parameter(default=Bowtie2Constants.OUTPUT_DIRECTORY)
 
 
 class Bowtie2Build(Bowtie2):
@@ -23,13 +28,13 @@ class Bowtie2Build(Bowtie2):
             [
                 self.calling_script_path,
                 self.reference_fasta_file,
-                os.path.join(self.output_directory or "", get_prefix(self.reference_fasta_file) + ".bt_index"),
+                os.path.join(self.output_directory, get_prefix(self.reference_fasta_file) + ".bt_index"),
             ],
             check=True
         )
 
     def output(self):
-        return luigi.LocalTarget([glob.glob(os.path.join(self.output_directory or "",
+        return luigi.LocalTarget([glob.glob(os.path.join(self.output_directory,
                                               get_prefix(self.reference_fasta_file) + ".*.bt_index"))])
 
 
@@ -50,7 +55,7 @@ class Bowtie2Single(Bowtie2):
                 "-U",  # file is single
                 self.data_file,
                 "-S",  # output sam
-                os.path.join(self.output_directory or "", (self.output_prefix or get_prefix(self.data_file)) + ".sam"),
+                os.path.join(self.output_directory, (self.output_prefix or get_prefix(self.data_file)) + ".sam"),
                 "-x",  # path to index file
                 self.index_file,
                 *self.added_flags,
@@ -59,5 +64,5 @@ class Bowtie2Single(Bowtie2):
         )
 
     def output(self):
-        return luigi.LocalTarget(os.path.join(self.output_directory or "",
+        return luigi.LocalTarget(os.path.join(self.output_directory,
                                               (self.output_prefix or get_prefix(self.data_file)) + ".sam"))

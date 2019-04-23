@@ -7,11 +7,17 @@ from BioMetaPipeline.Accessories.ops import get_prefix
 from BioMetaPipeline.DataPreparation.zip import Gunzip
 
 
+class DedupConstants:
+    DEDUP = "DEDUP"
+    OUTPUT_DIRECTORY = "dedup"
+    OUTSUFFIX = ".ndupB"
+
+
 class Dedup(luigi.Task):
     zipped_file = luigi.Parameter()
     calling_script_path = luigi.Parameter()
     added_flags = luigi.ListParameter(default=[])
-    output_directory = luigi.Parameter(default=None)
+    output_directory = luigi.Parameter(default=DedupConstants.OUTPUT_DIRECTORY)
 
     def requires(self):
         return [Gunzip(self.zipped_file)]
@@ -24,14 +30,14 @@ class SingleEnd(Dedup):
             ["perl",
              self.calling_script_path,
              "-opre",
-             os.path.join(self.output_directory or "", get_prefix(self.input()[0].path)),
+             os.path.join(self.output_directory, get_prefix(self.input()[0].path)),
              str(self.input()[0].path),
              *self.added_flags],
             check=True
         )
 
     def output(self):
-        return luigi.LocalTarget(os.path.join(self.output_directory or "",
+        return luigi.LocalTarget(os.path.join(self.output_directory,
             get_prefix(self.input()[0].path) + ".ndupB"))
 
 
@@ -42,7 +48,7 @@ class PairedEnd(Dedup):
             ["perl",
              self.calling_script_path,
              "-opre",
-             os.path.join(self.output_directory or "", get_prefix(self.input()[0].path)),
+             os.path.join(self.output_directory, get_prefix(self.input()[0].path)),
              self.input()[0].path,
              self.input()[1].path,
              *self.added_flags],

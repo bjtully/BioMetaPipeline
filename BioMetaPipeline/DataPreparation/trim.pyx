@@ -5,9 +5,15 @@ import luigi
 import subprocess
 from BioMetaPipeline.Accessories.ops import get_prefix
 
+
+class TrimConstants:
+    TRIM = "TRIM"
+    OUTPUT_DIRECTORY = "trimmomatic"
+
+
 class Trim(luigi.Task):
     added_flags = luigi.ListParameter(default=[])
-    output_directory = luigi.Parameter(default=None)
+    output_directory = luigi.Parameter(default=TrimConstants.OUTPUT_DIRECTORY)
     calling_script_path = luigi.Parameter()
 
 
@@ -23,11 +29,11 @@ class TrimSingle(Trim):
                 str(self.calling_script_path),
                 "SE",
                 str(self.data_file),
-                os.path.join(self.output_directory or "", get_prefix(self.data_file) + "_SE.fq"),
+                os.path.join(self.output_directory, get_prefix(self.data_file) + "_SE.fq"),
                 *self.added_flags],
             check=True
         )
 
     def output(self):
-        return luigi.LocalTarget(os.path.join(self.output_directory or "",
+        return luigi.LocalTarget(os.path.join(self.output_directory,
                                               get_prefix(self.data_file) + "_SE.fq"))

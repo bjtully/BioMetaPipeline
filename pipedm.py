@@ -3,6 +3,7 @@
 from BioMetaPipeline.Accessories.arg_parse import ArgParse
 from BioMetaPipeline.Accessories.program_caller import ProgramCaller
 from BioMetaPipeline.Pipeline.genome_evaluation import genome_evaluation
+from BioMetaPipeline.Pipeline.eukaryotic_pangenome import eukaryotic_pangenome
 
 
 if __name__ == "__main__":
@@ -19,17 +20,21 @@ if __name__ == "__main__":
          {"help": "Output directory prefix, default out", "default": "out"}),
         (("-b", "--biometadb_project"),
          {"help": "/path/to/BioMetaDB_project (updates values of existing database)", "default": "None"}),
+        (("-l", "--list_file"),
+         {"help": "/path/to/list_file formatted as 'prefix\tdata_file_1,data_file_2...\n'"}),
     )
 
     programs = {
         "EVALUATION":           genome_evaluation,
-        # "EU_PAN":               eukaryotic_pangenome,
+        "EU_PAN":               eukaryotic_pangenome,
 
     }
 
     flags = {
         "EVALUATION":           ("directory", "config_file", "cancel_autocommit", "output_directory",
                                  "biometadb_project"),
+        "EU_PAN":               ("directory", "config_file", "cancel_autocommit", "output_directory",
+                                 "biometadb_project", "list_file"),
     }
 
     errors = {
