@@ -13,7 +13,7 @@ class SamtoFastQ:
         self.mapping_criteria = mapping_criteria
 
     def write_fastq(self, str outfile):
-        cdef object R = open(self.alignment_file, "rb")
+        cdef object R = open(self.alignment_file, encoding="utf-8")
         cdef object W = open(outfile, "w")
         cdef str _line
         cdef list line
