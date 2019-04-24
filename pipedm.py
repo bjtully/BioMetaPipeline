@@ -42,7 +42,8 @@ if __name__ == "__main__":
     }
 
     _help = {
-        "EVALUATION":       "Evaluates completion, contamination, and redundancy of genomes"
+        "EVALUATION":       "Evaluates completion, contamination, and redundancy of genomes",
+        "EU_PAN":           "Assembles, aligns, annotates, and creates pan-genome for Eukaryotes",
     }
 
     ap = ArgParse(

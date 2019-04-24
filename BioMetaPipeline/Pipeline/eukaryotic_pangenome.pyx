@@ -26,7 +26,7 @@ Uses raw sequence reads .fastq
 
 
 class EukaryoticPangenomeConstants:
-    pass
+    EUKARYOTIC_PANGENOME_PROJECT_NAME = "EukaryoticPangenome"
 
 
 def eukaryotic_pangenome(str directory, str config_file, bint cancel_autocommit, str output_directory,
@@ -97,6 +97,6 @@ def eukaryotic_pangenome(str directory, str config_file, bint cancel_autocommit,
             #     os.path.splitext(single_end.output().path)[0] + ".dropB",
             #     sambamba_view.output().path
             # ]))
-            # task_list.append(GZip(unzipped_file=unzipped_file_and_path))
+            task_list.append(GZip(unzipped_file=unzipped_file_and_path))
         line_data = rm.get()
     luigi.build(task_list, local_scheduler=True)
