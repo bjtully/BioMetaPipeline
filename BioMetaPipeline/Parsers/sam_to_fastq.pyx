@@ -1,35 +1,56 @@
 # distutils: language = c++
 # cython: language_level=3
-from BioMetaPipeline.Accessories.ops import chunk
+import os
+import pysam
 
 
-CHUNK_SIZE = 10000
+cdef int DEFAULT_LENGTH = 500
 
 
-class SamtoFastQ:
+cdef void _adjust_criteria_dict(void* criteria_dict):
+    cdef object data_keys = (<object>criteria_dict).keys()
+    if "LENGTH" not in data_keys:
+        (<object>criteria_dict)["LENGTH"] = DEFAULT_LENGTH
 
-    def __init__(self, str alignment_file, dict mapping_criteria):
-        self.alignment_file = alignment_file
-        self.mapping_criteria = mapping_criteria
 
-    def write_fastq(self, str outfile):
-        cdef object R = open(self.alignment_file, encoding="utf-8")
-        cdef object W = open(outfile, "w")
-        cdef str _line
-        cdef list line
-        cdef bytes byte_line
-        cdef object smaller_chunk
-        for smaller_chunk in chunk(R, CHUNK_SIZE):
-            for byte_line in smaller_chunk:
-                _line = byte_line.decode()
-                while _line.startswith("@"):
-                    try:
-                        _line = next(smaller_chunk).decode()
-                    except StopIteration:
-                        smaller_chunk = next(chunk(R, CHUNK_SIZE))
-                line = _line.rstrip("\r\n").split("\t")
-                if int(line[1]) in self.mapping_criteria["FLAG"] and \
-                        int(line[4]) >= int(self.mapping_criteria["MAP_QUAL"]):
-                    W.write("@%s\n%s\n+\n%s\n" % (line[0], line[9], line[10]))
-        W.close()
-        R.close()
+cdef void alignment_to_fastq(str alignment_file, dict criteria, str outfile):
+    """ Method will convert s/bam to fastq file
+
+    :param outfile:
+    :param criteria:
+    :param alignment_file:
+    :return:
+    """
+    cdef object W = open(outfile, "w")
+    cdef bint is_bam = False
+    cdef str file_ext = os.path.splitext(alignment_file)[1]
+    cdef object alignment_file_object
+    cdef object read
+    cdef object value
+    cdef bint is_read_match
+    _adjust_criteria_dict(<void* >criteria)
+    if file_ext[1] == "b":
+        is_bam = True
+    elif file_ext[1] == "s":
+        is_bam = False
+    else:
+        is_bam = None
+    assert is_bam is not None, "File does not have .sam or .bam extension"
+    if is_bam:
+        alignment_file_object = pysam.AlignmentFile(alignment_file, "rb")
+    else:
+        alignment_file_object = pysam.AlignmentFile(alignment_file, "r")
+
+    for read in alignment_file_object:
+        is_read_match = True
+        if int(getattr(read, "mapping_quality")) >= int(criteria["MAP_QUAL"]) and \
+                len(read.query_sequence) >= int(criteria["LENGTH"]):
+            for value in criteria["FLAGS"]:
+                if not getattr(read, value):
+                    is_read_match = False
+                    break
+            if is_read_match:
+                W.write("@%s\n%s\n+\n%s\n" % (read.query_name,
+                                              read.query_sequence,
+                                              "".join([chr(x + 33) for x in read.query_qualities])))
+    W.close()

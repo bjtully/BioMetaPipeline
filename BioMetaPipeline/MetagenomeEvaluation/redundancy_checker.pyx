@@ -168,6 +168,3 @@ class RedundancyParserTask(LuigiTaskClass):
                                dict(self.cutoffs_dict),
                                dict(self.file_ext_dict))
         rc.write_tsv(self.outfile)
-
-    def output(self):
-        return luigi.LocalTarget(self.outfile)

@@ -15,3 +15,5 @@ build/*
 */*/*.cpp
 !*/*/*_cpp.cpp
 quick.py
+*.bam
+*.sam

@@ -14,12 +14,14 @@ Adding the last two lines of the above code to a user's `.bashrc` file will main
 - Cython
 - Python packages
     - luigi
-    - ConfigParser
-    - ArgParse
+    - configparser
+    - argparse
+    - pysam
 - External programs and their dependencies
-    - CheckM
-    - GTDBtk
-    - FastANI
+    - `GenomeEvaluation`
+        - CheckM
+        - GTDBtk
+        - FastANI
     - [BioMetaDB](https://github.com/cjneely10/BioMetaDB)
 
 Python dependencies are best maintained within a separate Python virtual environment. `BioMetaDB` and `BioMetaPipeline`
