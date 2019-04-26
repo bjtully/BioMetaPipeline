@@ -1,5 +1,4 @@
 # distutils: language = c++
-# cython: language_level=3
 import os
 import pysam
 
@@ -22,29 +21,25 @@ cdef void alignment_to_fastq(str alignment_file, dict criteria, str outfile):
     :return:
     """
     cdef object W = open(outfile, "w")
-    cdef bint is_bam = False
     cdef str file_ext = os.path.splitext(alignment_file)[1]
     cdef object alignment_file_object
     cdef object read
     cdef object value
     cdef bint is_read_match
     _adjust_criteria_dict(<void* >criteria)
+    cdef int map_qual = int(criteria["MAP_QUAL"])
+    cdef int length = int(criteria["LENGTH"])
     if file_ext[1] == "b":
-        is_bam = True
-    elif file_ext[1] == "s":
-        is_bam = False
-    else:
-        is_bam = None
-    assert is_bam is not None, "File does not have .sam or .bam extension"
-    if is_bam:
         alignment_file_object = pysam.AlignmentFile(alignment_file, "rb")
-    else:
+    elif file_ext[1] == "s":
         alignment_file_object = pysam.AlignmentFile(alignment_file, "r")
+    else:
+        raise Exception("File does not have .sam or .bam extension")
 
     for read in alignment_file_object:
-        is_read_match = True
-        if int(getattr(read, "mapping_quality")) >= int(criteria["MAP_QUAL"]) and \
-                len(read.query_sequence) >= int(criteria["LENGTH"]):
+        if getattr(read, "mapping_quality") >= map_qual and \
+                len(read.query_sequence) >= length:
+            is_read_match = True
             for value in criteria["FLAGS"]:
                 if not getattr(read, value):
                     is_read_match = False

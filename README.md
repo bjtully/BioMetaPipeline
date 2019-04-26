@@ -18,10 +18,17 @@ Adding the last two lines of the above code to a user's `.bashrc` file will main
     - argparse
     - pysam
 - External programs and their dependencies
-    - `GenomeEvaluation`
+    - `MET_EVALUATION`
         - CheckM
         - GTDBtk
         - FastANI
+    - `MET_ANNOTATION`
+        - Prodigal
+        - kofamscan
+        - KEGGDecoder
+        - Interproscan
+        - PROKKA
+        - VirSorter
     - [BioMetaDB](https://github.com/cjneely10/BioMetaDB)
 
 Python dependencies are best maintained within a separate Python virtual environment. `BioMetaDB` and `BioMetaPipeline`

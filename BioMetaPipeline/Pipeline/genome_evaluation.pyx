@@ -6,9 +6,9 @@ from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.AssemblyEvaluation.checkm import CheckM, CheckMConstants
 from BioMetaPipeline.AssemblyEvaluation.gtdbtk import GTDBtk, GTDBTKConstants
 from BioMetaPipeline.MetagenomeEvaluation.fastani import FastANI, FastANIConstants
-from BioMetaPipeline.Pipeline.Exceptions.GeneralAssertion import AssertString
 from BioMetaPipeline.MetagenomeEvaluation.redundancy_checker import RedundancyParserTask
-from configparser import NoOptionError
+from BioMetaPipeline.PipelineManagement.project_manager cimport project_check_and_creation
+
 
 """
 genome_evaluation runs CheckM, GTDBtk, fastANI, and parses output into a BioMetaDB project
@@ -17,26 +17,11 @@ Uses assembled genomes (.fna)
 """
 
 
-class GenomeEvaluationConstants:
-    GENOME_EVALUATION_TABLE_NAME = "genome_evaluation"
-    GENOME_EVALUATION_TSV_OUT = "genome_evaluation.tsv"
-    GENOME_LIST_FILE = "genome_list.list"
-    GENOME_EVALUATION_PROJECT_NAME = "GenomeEvaluation"
-
-
-def write_genome_list_to_file(str directory, str outfile):
-    """  Function writes
-
-    :param directory:
-    :param outfile:
-    :return:
-    """
-    cdef str _file
-    cdef object W
-    W = open(outfile, "w")
-    for _file in os.listdir(directory):
-        W.write("%s\n" % os.path.join(directory, _file))
-    W.close()
+class MetagenomeEvaluationConstants:
+    TABLE_NAME = "metagenome_evaluation"
+    TSV_OUT = "metagenome_evaluation.tsv"
+    LIST_FILE = "metagenome_list.list"
+    PROJECT_NAME = "MetagenomeEvaluation"
 
 
 def genome_evaluation(str directory, str config_file, bint cancel_autocommit, str output_directory,
@@ -51,32 +36,17 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
     :param output_directory:
     :return:
     """
-    assert os.path.exists(directory) and os.path.exists(config_file), AssertString.INVALID_PARAMETERS_PASSED
-    cfg = ConfigManager(config_file)
-    if not os.path.exists(output_directory):
-        # Output directory
-        os.makedirs(output_directory)
-        for val in (FastANIConstants, CheckMConstants, GTDBTKConstants):
-            os.makedirs(os.path.join(output_directory, str(getattr(val, "OUTPUT_DIRECTORY"))))
-        # Temporary storage directory - for list, .tsvs, etc, as needed by calling programs
-    cdef str genome_list_path = os.path.join(output_directory, GenomeEvaluationConstants.GENOME_LIST_FILE)
-    cdef str _file
-    cdef str alias
-    cdef str table_name
-    write_genome_list_to_file(directory, genome_list_path)
-    if biometadb_project == "None":
-        try:
-            biometadb_project = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.DB_NAME)
-        except NoOptionError:
-            biometadb_project = "GenomeEvaluation"
-    try:
-        table_name = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.TABLE_NAME)
-    except NoOptionError:
-        table_name = GenomeEvaluationConstants.GENOME_EVALUATION_TABLE_NAME,
-    try:
-        alias = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.ALIAS)
-    except NoOptionError:
-        alias = "None"
+    cdef str genome_list_path, alias, table_name
+    cdef object cfg
+    cdef list constant_classes = [FastANIConstants, CheckMConstants, GTDBTKConstants]
+    genome_list_path, alias, table_name, biometadb_project, cfg = project_check_and_creation(
+        <void* >directory,
+        <void* >config_file,
+        <void* >output_directory,
+        biometadb_project,
+        <void* >constant_classes,
+        MetagenomeEvaluationConstants
+    )
     task_list = [
         CheckM(
             output_directory=os.path.join(output_directory, CheckMConstants.OUTPUT_DIRECTORY),
@@ -106,7 +76,7 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
             file_ext_dict={os.path.basename(os.path.splitext(file)[0]): os.path.splitext(file)[1]
                            for file in os.listdir(directory)},
             calling_script_path="None",
-            outfile=os.path.join(output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT),
+            outfile=os.path.join(output_directory, MetagenomeEvaluationConstants.TSV_OUT),
             output_directory=output_directory,
         ),
     ]
@@ -115,7 +85,7 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
             task_list.append(Init(
                 db_name=biometadb_project,
                 directory_name=directory,
-                data_file=os.path.join(output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT),
+                data_file=os.path.join(output_directory, MetagenomeEvaluationConstants.TSV_OUT),
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                 alias=alias,
                 table_name=table_name
@@ -124,7 +94,7 @@ def genome_evaluation(str directory, str config_file, bint cancel_autocommit, st
             task_list.append(Update(
                 config_file=biometadb_project,
                 directory_name=directory,
-                data_file=os.path.join(output_directory, GenomeEvaluationConstants.GENOME_EVALUATION_TSV_OUT),
+                data_file=os.path.join(output_directory, MetagenomeEvaluationConstants.TSV_OUT),
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                 alias=alias,
                 table_name=table_name

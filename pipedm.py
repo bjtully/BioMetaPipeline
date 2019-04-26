@@ -4,6 +4,7 @@ from BioMetaPipeline.Accessories.arg_parse import ArgParse
 from BioMetaPipeline.Accessories.program_caller import ProgramCaller
 from BioMetaPipeline.Pipeline.genome_evaluation import genome_evaluation
 from BioMetaPipeline.Pipeline.eukaryotic_pangenome import eukaryotic_pangenome
+from BioMetaPipeline.Pipeline.metagenome_annotation import metagenome_annotation
 
 
 if __name__ == "__main__":
@@ -21,20 +22,23 @@ if __name__ == "__main__":
         (("-b", "--biometadb_project"),
          {"help": "/path/to/BioMetaDB_project (updates values of existing database)", "default": "None"}),
         (("-l", "--list_file"),
-         {"help": "/path/to/list_file formatted as 'prefix\tdata_file_1,data_file_2...\n'"}),
+         {"help": "/path/to/list_file formatted as 'prefix\\tdata_file_1,data_file_2[,...]\\n'"}),
     )
 
     programs = {
-        "EVALUATION":           genome_evaluation,
+        "MET_EVALUATION":           genome_evaluation,
         "EU_PAN":               eukaryotic_pangenome,
+        "MET_ANNOTATION":       metagenome_annotation,
 
     }
 
     flags = {
-        "EVALUATION":           ("directory", "config_file", "cancel_autocommit", "output_directory",
+        "MET_EVALUATION":       ("directory", "config_file", "cancel_autocommit", "output_directory",
                                  "biometadb_project"),
         "EU_PAN":               ("directory", "config_file", "cancel_autocommit", "output_directory",
                                  "biometadb_project", "list_file"),
+        "MET_ANNOTATION":       ("directory", "config_file", "cancel_autocommit", "output_directory",
+                                 "biometadb_project"),
     }
 
     errors = {
@@ -42,8 +46,9 @@ if __name__ == "__main__":
     }
 
     _help = {
-        "EVALUATION":       "Evaluates completion, contamination, and redundancy of genomes",
+        "MET_EVALUATION":       "Evaluates completion, contamination, and redundancy of genomes",
         "EU_PAN":           "Assembles, aligns, annotates, and creates pan-genome for Eukaryotes",
+        "MET_ANNOTATION":   "Runs gene callers and annotation programs on MAGs",
     }
 
     ap = ArgParse(
