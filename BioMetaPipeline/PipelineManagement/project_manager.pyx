@@ -11,7 +11,7 @@ cdef str PROJECT_NAME = "PROJECT_NAME"
 cdef str TABLE_NAME = "TABLE_NAME"
 
 
-cdef tuple project_check_and_creation(void* directory, void* config_file, void* output_directory, str biometadb_project,
+cdef tuple project_check_and_creation(void* directory, void* config_file, void* output_directory, void* biometadb_project,
                                void* luigi_programs_classes_list, object CallingClass):
     """
     
@@ -43,11 +43,11 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     # Write list of all files in directory as a list file
     write_genome_list_to_file((<void *>directory), (<void *>genome_list_path))
     # Load biometadb info
-    if biometadb_project == "None":
+    if (<object>biometadb_project) == "None":
         try:
-            biometadb_project = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.DB_NAME)
+            (<object>biometadb_project)[0] = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.DB_NAME)
         except NoOptionError:
-            biometadb_project = getattr(CallingClass, PROJECT_NAME)
+            (<object>biometadb_project)[0] = getattr(CallingClass, PROJECT_NAME)
     # Get table name from config file or default
     try:
         table_name = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.TABLE_NAME)
@@ -58,7 +58,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
         alias = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.ALIAS)
     except NoOptionError:
         alias = "None"
-    return genome_list_path, alias, table_name, biometadb_project, cfg
+    return genome_list_path, alias, table_name, cfg
 
 
 cdef void write_genome_list_to_file(void* directory, void* outfile):

@@ -18,11 +18,11 @@ Adding the last two lines of the above code to a user's `.bashrc` file will main
     - argparse
     - pysam
 - External programs and their dependencies
-    - `MET_EVALUATION`
+    - `MET_EVAL`
         - CheckM
         - GTDBtk
         - FastANI
-    - `MET_ANNOTATION`
+    - `MET_ANNOT`
         - Prodigal
         - kofamscan
         - KEGGDecoder
@@ -73,14 +73,18 @@ the system used to run the pipeline). Users are advised to use a program such as
 **pipedm** is the calling script for running various data pipelines.
 
 <pre><code>usage: pipedm.py [-h] -d DIRECTORY -c CONFIG_FILE [-a] [-o OUTPUT_DIRECTORY]
-                 [-b BIOMETADB_PROJECT]
+                 [-b BIOMETADB_PROJECT] [-l LIST_FILE]
                  program
 
 pipedm: Run genome evaluation and annotation pipelines
 
 Available Programs:
 
-EVALUATION: Evaluates completion, contamination, and redundancy of genomes
+EU_PAN: Assembles, aligns, annotates, and creates pan-genome for Eukaryotes
+                (Flags:  --directory --config_file --cancel_autocommit --output_directory --biometadb_project --list_file)
+MET_ANNOT: Runs gene callers and annotation programs on MAGs
+                (Flags:  --directory --config_file --cancel_autocommit --output_directory --biometadb_project)
+MET_EVAL: Evaluates completion, contamination, and redundancy of genomes
                 (Flags:  --directory --config_file --cancel_autocommit --output_directory --biometadb_project)
 
 positional arguments:
@@ -97,14 +101,16 @@ optional arguments:
   -o OUTPUT_DIRECTORY, --output_directory OUTPUT_DIRECTORY
                         Output directory prefix, default out
   -b BIOMETADB_PROJECT, --biometadb_project BIOMETADB_PROJECT
-                        /path/to/BioMetaDB_project (updates values of existing database)</code></pre>
+                        /path/to/BioMetaDB_project (updates values of existing database)
+  -l LIST_FILE, --list_file LIST_FILE
+                        /path/to/list_file formatted as 'prefix\tdata_file_1,data_file_2[,...]\n'</code></pre>
 
 The typical workflow involves creating a configuration file based on the templates in `Example/Config`. This config
 file is then used to call the given pipeline.
 
-### EVALUATION
+### MET_EVAL
 
-**EVALUATION** uses `CheckM`, `GTDBtk`, and `FastANI` to evaluate prokaryotic meta/genome completion, contamination,
+**MET_EVAL** uses `CheckM`, `GTDBtk`, and `FastANI` to evaluate prokaryotic meta/genome completion, contamination,
 phylogeny, and redundancy. This will generate a final `BioMetaDB` project containing the results of this pipeline.
 An additional `.tsv` output file is generated.
 
@@ -116,7 +122,7 @@ An additional `.tsv` output file is generated.
     - --biometadb_project (-b): Name to assign to `BioMetaDB` project, or name of existing project to use
     - --cancel_autocommit (-a): Cancel creation/update of `BioMetaDB` project
 - Example
-    - `pipedm EVALUATION -d fasta_folder/ -c Examples/Config/EVALUATION.ini -o eval -b Metagenomes`
+    - `pipedm MET_EVAL -d fasta_folder/ -c Examples/Config/MET_EVAL.ini -o eval -b Metagenomes`
     - This command will use the fasta files in `fasta_folder/` in the evaluation pipeline. It will output to the folder
     `eval` and will create or update the `BioMetaDB` project `Metagenomes` in the current directory. It will use the default
     config file provided in `Examples/Config`.
@@ -132,7 +138,7 @@ paths to these calling programs to be set, as well as for program-level flags to
 `IS_COMPLETE` defines the inclusive minimum value to determine if a genome is complete, based on `CheckM`.
 `IS_CONTAMINATED` defines the inclusive maximum value to determine if a genome is contaminated, based on `CheckM`. 
 
-- Location: `Examples/Config/EVALUATION.ini`
+- Location: `Examples/Config/MET_EVAL.ini`
 <pre><code>[CHECKM]
 PATH = /usr/local/bin/checkm
 --aai_strain = 0.95

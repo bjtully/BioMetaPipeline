@@ -46,11 +46,11 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     cdef str genome_list_path, alias, table_name
     cdef object cfg
     cdef list constant_classes = []
-    genome_list_path, alias, table_name, biometadb_project, cfg = project_check_and_creation(
+    genome_list_path, alias, table_name, cfg = project_check_and_creation(
         <void* >directory,
         <void* >config_file,
         <void* >output_directory,
-        biometadb_project,
+        <void* >biometadb_project,
         <void* >constant_classes,
         MetagenomeAnnotationConstants
     )
