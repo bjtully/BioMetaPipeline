@@ -167,4 +167,4 @@ IS_CONTAMINATED = 5</code></pre>
 - General Notes
     - `CheckM` and `GTDBtk` are both high memory-usage programs, often exceeding 100 GB. Use caution when multithreading.
     - `CheckM` writes to a temporary directory which may have separate user-rights, depending on the system on which it
-    is installed. Users are advised to explicitly set the `--tmpdir` flag in `CHECKM` to a user-owned path. 
+    is installed. Users are advised to explicitly set the `--tmpdir` flag in `CHECKM` to a user-owned path.

@@ -1,5 +1,4 @@
 # cython: language_level=3
-
 import luigi
 import os
 import subprocess
@@ -8,12 +7,11 @@ from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 class ProdigalConstants:
     PRODIGAL = "PRODIGAL"
-    PRODIGAL_DIRECTORY = "prodigal_results"
+    OUTPUT_DIRECTORY = "prodigal_results"
 
 
 class Prodigal(LuigiTaskClass):
     output_directory = luigi.Parameter()
-    outfile = luigi.Parameter()
     protein_file_suffix = luigi.Parameter(default=".protein")
     mrna_file_suffix = luigi.Parameter(default=".mrna")
     fasta_file = luigi.Parameter()
@@ -39,4 +37,4 @@ class Prodigal(LuigiTaskClass):
         )
 
     def output(self):
-        return luigi.LocalTarget(os.path.join(self.output_directory))
+        return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile)))

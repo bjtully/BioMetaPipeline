@@ -4,6 +4,7 @@ import luigi
 import os
 import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
+from BioMetaPipeline.Config.config_manager import ConfigManager
 
 
 class BioMetaDBConstants:
@@ -93,3 +94,39 @@ class Create(DBDM):
             ],
             check=True,
         )
+
+
+def get_dbdm_call(bint cancel_autocommit, str table_name, str  alias, object cfg, str db_name,
+                  str directory_name, str data_file):
+    """
+    
+    :param cancel_autocommit: 
+    :param table_name: 
+    :param alias: 
+    :param cfg: 
+    :param db_name: 
+    :param directory_name: 
+    :param data_file: 
+    :return: 
+    """
+    if not cancel_autocommit:
+        if not os.path.exists(db_name):
+            return Init(
+                db_name=db_name,
+                directory_name=directory_name,
+                data_file=data_file,
+                calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                alias=alias,
+                table_name=table_name,
+            )
+        else:
+            return Update(
+                config_file=db_name,
+                directory_name=directory_name,
+                data_file=data_file,
+                calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                alias=alias,
+                table_name=table_name,
+            )
+    else:
+        return None
