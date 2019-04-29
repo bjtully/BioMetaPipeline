@@ -34,7 +34,8 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     if not os.path.exists((<object>output_directory)):
         # Output directory
         os.makedirs((<object>output_directory))
-        for val in (<object>luigi_programs_classes_list):
+    for val in (<object>luigi_programs_classes_list):
+        if not os.path.exists(os.path.join((<object>output_directory), str(getattr(val, OUTPUT_DIRECTORY)))):
             os.makedirs(os.path.join((<object>output_directory), str(getattr(val, OUTPUT_DIRECTORY))))
     # Declarations
     cdef str genome_list_path = os.path.join((<object>output_directory), getattr(CallingClass, LIST_FILE))

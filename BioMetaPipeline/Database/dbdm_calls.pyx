@@ -2,6 +2,7 @@
 
 import luigi
 import os
+import glob
 import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 from BioMetaPipeline.Config.config_manager import ConfigManager
@@ -118,6 +119,15 @@ def get_dbdm_call(bint cancel_autocommit, str table_name, str  alias, object cfg
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                 alias=alias,
                 table_name=table_name,
+            )
+        elif os.path.exists(db_name) and not glob.glob("%s/*/%s.json" % (db_name, table_name)):
+            return Create(
+                directory_name=directory_name,
+                data_file=data_file,
+                alias=alias,
+                table_name=table_name,
+                config_file=db_name,
+                calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
             )
         else:
             return Update(

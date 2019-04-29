@@ -1,6 +1,7 @@
 # cython: language_level=3
 import os
 import luigi
+from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.GeneCaller.prodigal import Prodigal, ProdigalConstants
 from BioMetaPipeline.Database.dbdm_calls import get_dbdm_call
 from BioMetaPipeline.PipelineManagement.project_manager cimport project_check_and_creation
@@ -41,7 +42,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     :param biometadb_project:
     :return:
     """
-    cdef str genome_list_path, alias, table_name
+    cdef str genome_list_path, alias, table_name, fasta_file
     cdef object cfg
     cdef list constant_classes = [ProdigalConstants,]
     genome_list_path, alias, table_name, cfg = project_check_and_creation(
@@ -59,13 +60,19 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     cdef object W = open(genome_list_path, "rb")
     line = next(W)
     while line:
+        fasta_file = line.decode().rstrip("\r\n")
         task_list.append(
             Prodigal(
                 output_directory=os.path.join(output_directory, ProdigalConstants.OUTPUT_DIRECTORY),
-                fasta_file=line.decode().rstrip("\r\n"),
+                fasta_file=fasta_file,
+                calling_script_path=cfg.get(ProdigalConstants.PRODIGAL, ConfigManager.PATH),
+                outfile=os.path.splitext(os.path.basename(line.decode().rstrip("\r\n")))[0]
             )
         )
-        line = next(W)
+        try:
+            line = next(W)
+        except StopIteration:
+            break
 
 
     task_list.append(get_dbdm_call(

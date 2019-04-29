@@ -38,7 +38,7 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
     """
     cdef str genome_list_path, alias, table_name
     cdef object cfg
-    cdef tuple constant_classes = (FastANIConstants, CheckMConstants, GTDBTKConstants)
+    cdef list constant_classes = [FastANIConstants, CheckMConstants, GTDBTKConstants]
     cdef object DBDMCall
     genome_list_path, alias, table_name, cfg = project_check_and_creation(
         <void* >directory,
