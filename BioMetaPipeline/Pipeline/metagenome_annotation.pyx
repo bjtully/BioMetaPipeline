@@ -59,6 +59,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     cdef list task_list = []
     cdef object W = open(genome_list_path, "rb")
     line = next(W)
+    print("Building task list...")
     while line:
         fasta_file = line.decode().rstrip("\r\n")
         task_list.append(
@@ -73,8 +74,6 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
             line = next(W)
         except StopIteration:
             break
-
-
     task_list.append(get_dbdm_call(
         cancel_autocommit,
         table_name,

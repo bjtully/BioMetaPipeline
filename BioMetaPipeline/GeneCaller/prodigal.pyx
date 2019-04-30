@@ -13,9 +13,10 @@ class ProdigalConstants:
 class Prodigal(LuigiTaskClass):
     output_directory = luigi.Parameter()
     outfile = luigi.Parameter()
-    protein_file_suffix = luigi.Parameter(default=".protein")
-    mrna_file_suffix = luigi.Parameter(default=".mrna")
+    protein_file_suffix = luigi.Parameter(default=".protein.faa")
+    mrna_file_suffix = luigi.Parameter(default=".mrna.fna")
     fasta_file = luigi.Parameter()
+    run_edit = luigi.BoolParameter(default=True)
 
     def requires(self):
         return []
@@ -36,6 +37,9 @@ class Prodigal(LuigiTaskClass):
              str(self.fasta_file)],
             check=True,
         )
+        # Run file edit is needed
+        if bool(self.run_edit):
+            pass
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile)+ ".txt"))
