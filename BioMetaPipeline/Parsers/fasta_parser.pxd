@@ -34,5 +34,4 @@ cdef extern from "fasta_parser_cpp.h" namespace "fasta_parser":
     cdef cppclass FastaParser_cpp:
         FastaParser_cpp() except +
         FastaParser_cpp(ifstream, string, string) except +
-        vector[string] get()
         void grab(vector[string]&)

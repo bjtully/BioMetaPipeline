@@ -124,7 +124,7 @@
       <find>print</find>
       <find>void*</find>
       <find>project_check</find>
-      <find>&lt;void* &gt;</find>
+      <find />
     </findStrings>
     <replaceStrings>
       <replace>str</replace>
