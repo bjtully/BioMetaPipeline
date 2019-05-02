@@ -12,9 +12,10 @@ namespace fasta_parser {
             FastaParser_cpp(std::ifstream&, std::string, std::string);
             ~FastaParser_cpp();
             std::vector<std::string> get();
+            void grab(std::vector<std::string>&);
         private:
             std::ifstream* fastaFile;
-            std::string delimeter;
+            std::string delimiter;
             std::string header;
             std::string last_line;
     };

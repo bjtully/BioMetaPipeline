@@ -3,6 +3,12 @@ from fasta_parser cimport FastaParser_cpp
 from libcpp.vector cimport vector
 
 
+"""
+FastaParser holds logic to call c++ optimized fasta parser
+
+"""
+
+
 cdef extern from "Python.h":
     char* PyUnicode_AsUTF8(object unicode)
 
@@ -21,43 +27,74 @@ cdef class FastaParser:
         self.file_pointer.close()
         del self.file_pointer
 
-    def get_values_as_list(self):
-        cdef vector[string] record = self.fasta_parser_cpp.get()
-        cdef string val
-        cdef list return_list = []
-        while record.size() > 0:
-            return_list.append(">%s %s\n%s\n" % (
-                "".join([chr(_c) for _c in record[0]]),
-                "".join([chr(_c) for _c in record[1]]),
-                "".join([chr(_c) for _c in record[2]]),
-            ))
-            record = self.fasta_parser_cpp.get()
-        return return_list
-
-    def yield_simple_record(self):
-        cdef vector[string] record = self.fasta_parser_cpp.get()
-        cdef str val
-        cdef list return_list = []
-        while record.size() > 0:
-            yield ">%s\n%s\n" % (
-                "".join([chr(_c) for _c in record[0]]),
-                "".join([chr(_c) for _c in record[2]]),
+    def yield_as_tuple(self):
+        cdef vector[string]* record = new vector[string]()
+        self.fasta_parser_cpp.grab(record[0])
+        cdef int _c
+        while (record[0]).size() > 0:
+            yield (
+                "".join([chr(_c) for _c in record[0][0]]),
+                "".join([chr(_c) for _c in record[0][1]]),
+                "".join([chr(_c) for _c in record[0][2]]),
             )
-            record = self.fasta_parser_cpp.get()
+            self.fasta_parser_cpp.grab(record[0])
+        del record
+        return None
+
+    def yield_simple_record(self, is_python = False):
+        """ Yield records as strings
+
+        :return:
+        """
+        cdef vector[string]* record = new vector[string]()
+        self.fasta_parser_cpp.grab(record[0])
+        cdef int _c
+        while (record[0]).size() > 0:
+            if is_python:
+                yield (
+                "".join([chr(_c) for _c in record[0][0]]),
+                "".join([chr(_c) for _c in record[0][2]]),
+            )
+            else:
+                yield <string>">%s\n%s\n" % (
+                    record[0][0],
+                    record[0][2],
+                )
+            self.fasta_parser_cpp.grab(record[0])
+        del record
         return None
 
     def get_values_as_dict(self):
-        cdef vector[string] record = self.fasta_parser_cpp.get()
-        cdef string val
+        """ Get record, by record (as in iterate over file) and return as dict
+
+        :return:
+        """
+        cdef object record_gen = self.yield_as_tuple()
+        cdef str val
+        cdef tuple record
         cdef dict return_dict = {}
-        while record.size() > 0:
-            return_dict["".join([chr(_c) for _c in record[0]])] = ">%s %s\n%s\n" % (
-                "".join([chr(_c) for _c in record[0]]),
-                "".join([chr(_c) for _c in record[1]]),
-                "".join([chr(_c) for _c in record[2]]),
-            )
-            record = self.fasta_parser_cpp.get()
+        try:
+            while record_gen:
+                record = next(record_gen)
+                return_dict[record[0]] = (record[1], record[2])
+        except StopIteration:
+            pass
         return return_dict
+
+    def get_values_as_list(self):
+        """ Get record, by record (as in iterate over file) and return as list
+
+        :return:
+        """
+        cdef object record_gen = self.yield_as_tuple()
+        cdef str val
+        cdef list return_list = []
+        try:
+            while record_gen:
+                return_list.append(next(record_gen))
+        except StopIteration:
+            pass
+        return return_list
 
     @staticmethod
     def parse_list(str file_name, str delimiter = " ", str header = ">"):
@@ -68,14 +105,12 @@ cdef class FastaParser:
         return FastaParser(file_name, delimiter, header).get_values_as_dict()
 
     @staticmethod
-    def write_simple(str file_name, str out_file, str delimeter = " ", str header = ">"):
-        fp = FastaParser(file_name, delimeter, header)
-        cdef object W = open(out_file, "w")
-        cdef string val
-        cdef object record = fp.yield_simple_record()
+    def write_simple(str file_name, str out_file, str delimiter = " ", str header = ">"):
+        cdef object fp = FastaParser(file_name, delimiter, header)
+        cdef object W = open(out_file, "wb")
+        cdef object record_iter = fp.yield_simple_record(False)
         try:
-            while record:
-                W.write(next(record))
+            while record_iter:
+                W.write(next(record_iter))
         except StopIteration:
-            pass
-        W.close()
+            W.close()
