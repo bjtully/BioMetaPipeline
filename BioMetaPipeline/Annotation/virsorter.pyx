@@ -16,7 +16,6 @@ class VirSorterConstants:
 class VirSorter(LuigiTaskClass):
     output_directory = luigi.Parameter()
     fasta_file = luigi.Parameter()
-    data_location = luigi.Parameter()
 
     def requires(self):
         return []
@@ -31,7 +30,7 @@ class VirSorter(LuigiTaskClass):
                 "docker",
                 "run",
                 "-v",
-                str(self.data_location) + ":/data",
+                str(self.calling_script_path) + ":/data",
                 "-v",
                 wdir + ":/wdir",
                 "-w",

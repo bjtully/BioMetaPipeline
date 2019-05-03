@@ -93,10 +93,9 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 fasta_file=fasta_file,
             ),
             VirSorter(
-                calling_script_path=cfg.get(VirSorterConstants.VIRSORTER, ConfigManager.PATH),
                 output_directory=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY),
                 fasta_file=fasta_file,
-                data_location=cfg.get(VirSorterConstants.VIRSORTER, ConfigManager.DATA),
+                calling_script_path=cfg.get(VirSorterConstants.VIRSORTER, ConfigManager.PATH),
             )
         ):
             task_list.append(task)
