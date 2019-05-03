@@ -23,7 +23,7 @@ class Interproscan(LuigiTaskClass):
             [
                 str(self.calling_script_path),
                 "-i",
-                os.path.join(str(self.output_directory), str(self.fasta_file)),
+                os.path.join(str(self.fasta_file)),
                 "-o",
                 os.path.join(str(self.output_directory), str(self.out_prefix) + ".tsv"),
                 "-f",
