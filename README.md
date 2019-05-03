@@ -25,7 +25,7 @@ Adding the last two lines of the above code to a user's `.bashrc` file will main
     - `MET_ANNOT`
         - Prodigal
         - kofamscan
-        - KEGGDecoder
+        - [KEGGDecoder](https://github.com/bjtully/BioData)
         - Interproscan
         - PROKKA
         - VirSorter

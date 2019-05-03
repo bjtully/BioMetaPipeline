@@ -5,15 +5,16 @@ import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 
-class KofamScanConstants:
-    KOFAMSCAN = "KOFAMSCAN"
-    OUTPUT_DIRECTORY = "kofamscan_results"
+class HMMSearchConstants:
+    HMMALIGN = "HMMALIGN"
+    OUTPUT_DIRECTORY = "hmmalign_results"
 
 
-class KofamScan(LuigiTaskClass):
+class HMMSearch(LuigiTaskClass):
     output_directory = luigi.Parameter()
     outfile = luigi.Parameter()
     fasta_file = luigi.Parameter()
+    hmm_file = luigi.Parameter()
 
     def requires(self):
         return []
@@ -22,11 +23,10 @@ class KofamScan(LuigiTaskClass):
         subprocess.run(
             [
                 str(self.calling_script_path),
-                "-o",
+                "--tblout",
                 os.path.join(str(self.output_directory), str(self.outfile)),
-                "-f",
-                "detail",
                 *self.added_flags,
+                str(self.hmm_file),
                 str(self.fasta_file),
             ],
             check=True,

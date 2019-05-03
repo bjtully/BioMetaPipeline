@@ -3,6 +3,9 @@ import os
 import luigi
 from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.GeneCaller.prodigal import Prodigal, ProdigalConstants
+from BioMetaPipeline.Annotation.interproscan import Interproscan, InterproscanConstants
+from BioMetaPipeline.Annotation.virsorter import VirSorter, VirSorterConstants
+from BioMetaPipeline.Annotation.prokka import PROKKA, PROKKAConstants
 from BioMetaPipeline.Database.dbdm_calls import get_dbdm_call
 from BioMetaPipeline.PipelineManagement.project_manager cimport project_check_and_creation
 
@@ -42,9 +45,14 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     :param biometadb_project:
     :return:
     """
-    cdef str genome_list_path, alias, table_name, fasta_file
+    cdef str genome_list_path, alias, table_name, fasta_file, out_prefix
     cdef object cfg
-    cdef list constant_classes = [ProdigalConstants,]
+    cdef list constant_classes = [
+        ProdigalConstants,
+        InterproscanConstants,
+        PROKKAConstants,
+        VirSorterConstants,
+    ]
     genome_list_path, alias, table_name, cfg, biometadb_project = project_check_and_creation(
         <void* >directory,
         <void* >config_file,
@@ -58,19 +66,40 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     cdef bytes line
     cdef list task_list = []
     cdef object W = open(genome_list_path, "rb")
+    cdef object task
     line = next(W)
     print("Building task list...")
     while line:
         fasta_file = line.decode().rstrip("\r\n")
-        task_list.append(
+        out_prefix = os.path.splitext(os.path.basename(line.decode().rstrip("\r\n")))[0]
+        for task in (
             Prodigal(
                 output_directory=os.path.join(output_directory, ProdigalConstants.OUTPUT_DIRECTORY),
                 fasta_file=fasta_file,
                 calling_script_path=cfg.get(ProdigalConstants.PRODIGAL, ConfigManager.PATH),
-                outfile=os.path.splitext(os.path.basename(line.decode().rstrip("\r\n")))[0],
+                outfile=out_prefix,
                 run_edit=True,
+            ),
+            Interproscan(
+                calling_script_path=cfg.get(InterproscanConstants.INTERPROSCAN, ConfigManager.PATH),
+                output_directory=os.path.join(output_directory, InterproscanConstants.OUTPUT_DIRECTORY),
+                fasta_file=fasta_file,
+                out_prefix=out_prefix,
+            ),
+            PROKKA(
+                calling_script_path=cfg.get(PROKKAConstants.PROKKA, ConfigManager.PATH),
+                output_directory=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY),
+                out_prefix=out_prefix,
+                fasta_file=fasta_file,
+            ),
+            VirSorter(
+                calling_script_path=cfg.get(VirSorterConstants.VIRSORTER, ConfigManager.PATH),
+                output_directory=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY),
+                fasta_file=fasta_file,
+                data_location=cfg.get(VirSorterConstants.VIRSORTER, ConfigManager.DATA),
             )
-        )
+        ):
+            task_list.append(task)
         try:
             line = next(W)
         except StopIteration:

@@ -11,6 +11,7 @@ class ConfigManager:
     """
 
     PATH = "PATH"
+    DATA = "DATA"
 
     def __init__(self, str config_path, tuple ignore = (), bint validate=True):
         self.config = Config()
@@ -45,6 +46,8 @@ class ConfigManager:
         :return:
         """
         cdef list parameter_list = []
+        cdef str def_key, key
+        cdef int i
         cdef list params = [
             key for key in self.config[_dict].keys()
             if key not in ignore
@@ -58,6 +61,7 @@ class ConfigManager:
             # Treat values set using FLAGS as a comma-separated list
             else:
                 for def_key in self.config[_dict][params[i]].rstrip("\r\n").split(","):
+                    def_key = def_key.lstrip(" ").rstrip(" ")
                     parameter_list.append(def_key)
         return parameter_list
 

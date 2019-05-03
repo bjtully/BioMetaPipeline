@@ -5,14 +5,14 @@ import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 
-class KofamScanConstants:
-    KOFAMSCAN = "KOFAMSCAN"
-    OUTPUT_DIRECTORY = "kofamscan_results"
+class PROKKAConstants:
+    PROKKA = "PROKKA"
+    OUTPUT_DIRECTORY = "prokka_results"
 
 
-class KofamScan(LuigiTaskClass):
+class PROKKA(LuigiTaskClass):
     output_directory = luigi.Parameter()
-    outfile = luigi.Parameter()
+    out_prefix = luigi.Parameter()
     fasta_file = luigi.Parameter()
 
     def requires(self):
@@ -22,15 +22,15 @@ class KofamScan(LuigiTaskClass):
         subprocess.run(
             [
                 str(self.calling_script_path),
-                "-o",
-                os.path.join(str(self.output_directory), str(self.outfile)),
-                "-f",
-                "detail",
-                *self.added_flags,
+                "--prefix",
+                str(self.out_prefix),
+                "--outdir",
+                str(self.output_directory),
                 str(self.fasta_file),
+                *self.added_flags,
             ],
             check=True,
         )
 
     def output(self):
-        return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile)))
+        return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.out_prefix) + ".tsv"))
