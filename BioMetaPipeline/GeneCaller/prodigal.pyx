@@ -3,6 +3,7 @@ import luigi
 import os
 import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
+from BioMetaPipeline.Parsers.fasta_parser import FastaParser
 
 
 class ProdigalConstants:
@@ -22,14 +23,20 @@ class Prodigal(LuigiTaskClass):
         return []
 
     def run(self):
+        cdef str prot_out = os.path.join(str(self.output_directory),
+                           str(self.outfile) +  ".tmp" + str(self.protein_file_suffix))
+        cdef str prot_simple = os.path.join(str(self.output_directory),
+                           str(self.outfile) + str(self.protein_file_suffix))
+        cdef str mrna_out = os.path.join(str(self.output_directory),
+                          str(self.outfile) + ".tmp" + str(self.mrna_file_suffix))
+        cdef str mrna_simple = os.path.join(str(self.output_directory),
+                          str(self.outfile) + str(self.mrna_file_suffix))
         subprocess.run(
             [str(self.calling_script_path),
              "-a",
-             os.path.join(str(self.output_directory),
-                          str(os.path.splitext(str(self.outfile))[0]) + str(self.protein_file_suffix)),
+             prot_out,
              "-d",
-             os.path.join(str(self.output_directory),
-                          str(os.path.splitext(str(self.outfile))[0]) + str(self.mrna_file_suffix)),
+             mrna_out,
              "-o",
              os.path.join(str(self.output_directory), str(self.outfile) + ".txt"),
              *self.added_flags,
@@ -39,7 +46,11 @@ class Prodigal(LuigiTaskClass):
         )
         # Run file edit is needed
         if bool(self.run_edit):
-            pass
+            FastaParser.write_simple(prot_out, prot_simple)
+            os.remove(prot_out)
+            FastaParser.write_simple(mrna_out, mrna_simple)
+            os.remove(mrna_out)
 
     def output(self):
-        return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile)+ ".txt"))
+        return luigi.LocalTarget(os.path.join(str(self.output_directory),
+                           str(self.outfile) + str(self.protein_file_suffix)))

@@ -17,3 +17,5 @@ build/*
 quick.py
 *.bam
 *.sam
+*.fna
+*.faa
