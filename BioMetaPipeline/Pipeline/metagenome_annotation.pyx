@@ -79,23 +79,27 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 calling_script_path=cfg.get(ProdigalConstants.PRODIGAL, ConfigManager.PATH),
                 outfile=out_prefix,
                 run_edit=True,
+                added_flags=cfg.build_parameter_list_from_dict(ProdigalConstants.PRODIGAL),
             ),
             Interproscan(
                 calling_script_path=cfg.get(InterproscanConstants.INTERPROSCAN, ConfigManager.PATH),
                 output_directory=os.path.join(output_directory, InterproscanConstants.OUTPUT_DIRECTORY),
                 fasta_file=fasta_file,
                 out_prefix=out_prefix,
+                added_flags=cfg.build_parameter_list_from_dict(InterproscanConstants.INTERPROSCAN),
             ),
             PROKKA(
                 calling_script_path=cfg.get(PROKKAConstants.PROKKA, ConfigManager.PATH),
                 output_directory=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY),
                 out_prefix=out_prefix,
                 fasta_file=fasta_file,
+                added_flags=cfg.build_parameter_list_from_dict(PROKKAConstants.PROKKA),
             ),
             VirSorter(
                 output_directory=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY),
                 fasta_file=fasta_file,
                 calling_script_path=cfg.get(VirSorterConstants.VIRSORTER, ConfigManager.PATH),
+                added_flags=cfg.build_parameter_list_from_dict(VirSorterConstants.VIRSORTER),
             )
         ):
             task_list.append(task)
