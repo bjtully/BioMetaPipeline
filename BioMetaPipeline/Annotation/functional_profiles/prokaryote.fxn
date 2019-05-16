@@ -1,0 +1,27 @@
+# Nitrogen
+(dissim-nitrate-reduction (or (K00370 K00371) (K02567 K02568)))
+(nitrite-reduction K00370 K00371)
+(DNRA (or (K00362 K00363) (K03385 K15876)))
+(nitric-oxide-reduction K04561 K02305)
+(nitrous-oxide-reduction K00376)
+(nitrogen-fixation (f K02586 K02591 K02588))
+(hydroxylamine-oxidation K10535)
+(ammonia-oxidation-[amo/pmmo] (f K10944 K10945 K10946))
+(hydrazine-dehydrogenase K20935)
+(hydrazine-synthase (f K20932 K20933 K20934))
+
+# Glycolysis
+# phosphoglucomutase, glucose-6-phosphate isomerase, fructose-bisphosphate aldolase, phosphoglycerate kinase, enolase,
+# 6-phosphofructokinase, glyceraldehyde 3-phosphate dehydrogenase, 2,3-bisphosphoglycerate-dependent phosphoglycerate mutase,
+# pyruvate kinase
+(glycolysis (f K01835 K01810 K01623 K00927 K01689 (K00850 K00895) (K00134 K00150) (K01834 K15633) (K00873 K01006)))
+
+# Gluconeogenesis
+# Requires fructose-1,6-bisphosphatase
+# phosphoglucomutase, glucose-6-phosphate isomerase, fructose-bisphosphate aldolase, phosphoglycerate kinase, enolase,
+# glyceraldehyde 3-phosphate dehydrogenase, 2,3-bisphosphoglycerate-dependent phosphoglycerate mutase, pyruvate kinase
+(gluconeogenesis (f (r K03841) (t K01835 K01810 K01623 K00927 K01689) (or K00134 K00150) (or K01834 K15633) (or K00873 K01006)))
+
+# TCA cycle
+(TCA-cycle (f (or K01681 K01682) (or K00031 K00030 K17753) (or K00174 K00175) (or (K01899 K01900) (K01902 K01903) K18118)
+    ))

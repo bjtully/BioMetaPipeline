@@ -25,7 +25,7 @@ class PROKKA(LuigiTaskClass):
                 "--prefix",
                 str(self.out_prefix),
                 "--outdir",
-                str(self.output_directory),
+                os.path.join(str(self.output_directory), os.path.basename(os.path.splitext(str(self.fasta_file))[0])),
                 str(self.fasta_file),
                 *self.added_flags,
             ],

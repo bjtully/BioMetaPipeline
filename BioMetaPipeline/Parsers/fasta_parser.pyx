@@ -21,6 +21,7 @@ cdef class FastaParser:
     def __init__(self, str file_name, str delimiter, str header):
         if not os.path.isfile(file_name):
             raise FileNotFoundError(file_name)
+        # Need as pointer in class object so the pointer is kept open over generator tasks
         self.file_pointer = new ifstream(<char *>PyUnicode_AsUTF8(file_name))
         self.fasta_parser_cpp = FastaParser_cpp(self.file_pointer[0],
                                                 <string>PyUnicode_AsUTF8(delimiter),
@@ -68,8 +69,8 @@ cdef class FastaParser:
             # Yield python str or string
             if is_python:
                 yield (
-                "".join([chr(_c) for _c in record[0][0]]),
-                "".join([chr(_c) for _c in record[0][2]]),
+                    "".join([chr(_c) for _c in record[0][0]]),
+                    "".join([chr(_c) for _c in record[0][2]]),
                 )
             else:
                 yield <string>">%s\n%s\n" % (

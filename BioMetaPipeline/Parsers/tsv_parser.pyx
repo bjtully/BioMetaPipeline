@@ -14,11 +14,23 @@ cdef class TSVParser:
         self.tsv_parser_cpp = TSVParser_cpp(<string>PyUnicode_AsUTF8(file_name), <string>PyUnicode_AsUTF8(delimiter))
 
     def read_file(self, int skip_lines=0, str comment_line_delimiter="#", bint header_line=False):
+        """ Method will read file into memore
+
+        :param skip_lines:
+        :param comment_line_delimiter:
+        :param header_line:
+        :return:
+        """
         cdef int result = self.tsv_parser_cpp.readFile(skip_lines, <string>PyUnicode_AsUTF8(comment_line_delimiter), header_line)
         if result != 0:
             raise FileNotFoundError
 
     def get_values(self, tuple col_list=(-1,)):
+        """ All values are returned as list
+
+        :param col_list:
+        :return:
+        """
         cdef vector[vector[string]] values_in_file = self.tsv_parser_cpp.getValues()
         cdef size_t i
         cdef string val
@@ -36,6 +48,11 @@ cdef class TSVParser:
             ]
 
     def get_values_as_dict(self, tuple col_list=(-1,)):
+        """ All values returned as dict
+
+        :param col_list:
+        :return:
+        """
         cdef vector[vector[string]] values_in_file = self.tsv_parser_cpp.getValues()
         cdef size_t i
         cdef string val
@@ -51,16 +68,34 @@ cdef class TSVParser:
                 if values_in_file[i].size() > 0 and i in col_list}
 
     def header(self):
+        """ Public method for accessing header
+
+        :return:
+        """
         return self.tsv_parser_cpp.getHeader()
 
     @property
     def num_records(self):
+        """ Calls size
+
+        :return:
+        """
         return self.tsv_parser_cpp.getValues().size()
 
     @staticmethod
     def parse_dict(str file_name, str delimiter="\t", int skip_lines=0,
                    str comment_line_delimiter="#", bint header_line=False,
                    tuple col_list=(-1,)):
+        """ Class method for converting tsv file into dict
+
+        :param file_name:
+        :param delimiter:
+        :param skip_lines:
+        :param comment_line_delimiter:
+        :param header_line:
+        :param col_list:
+        :return:
+        """
         tsv = TSVParser(file_name, delimiter)
         tsv.read_file(skip_lines, comment_line_delimiter, header_line)
         return tsv.get_values_as_dict(col_list)
@@ -69,6 +104,16 @@ cdef class TSVParser:
     def parse_list(str file_name, str delimiter="\t", int skip_lines=0,
                    str comment_line_delimiter="#", bint header_line=False,
                    tuple col_list=(-1,)):
+        """ Class method for converting tsv file into list
+
+        :param file_name:
+        :param delimiter:
+        :param skip_lines:
+        :param comment_line_delimiter:
+        :param header_line:
+        :param col_list:
+        :return:
+        """
         tsv = TSVParser(file_name, delimiter)
         tsv.read_file(skip_lines, comment_line_delimiter, header_line)
         return tsv.get_values(col_list)
