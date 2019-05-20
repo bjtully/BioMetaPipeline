@@ -39,7 +39,7 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
     cdef str genome_list_path, alias, table_name
     cdef object cfg
     cdef list constant_classes = [FastANIConstants, CheckMConstants, GTDBTKConstants]
-    cdef object DBDMCall
+    print(directory, config_file, output_directory, biometadb_project, constant_classes)
     genome_list_path, alias, table_name, cfg, biometadb_project = project_check_and_creation(
         <void* >directory,
         <void* >config_file,

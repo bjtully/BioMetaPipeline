@@ -4,20 +4,20 @@
 {
     "distutils": {
         "depends": [
-            "BioMetaPipeline/Annotation/functional_profile_reader/reader_cpp.cpp",
-            "BioMetaPipeline/Annotation/functional_profile_reader/reader_cpp.h"
+            "BioMetaPipeline/Annotation/FunctionalProfileReader/reader_cpp.cpp",
+            "BioMetaPipeline/Annotation/FunctionalProfileReader/reader_cpp.h"
         ],
         "include_dirs": [
-            "BioMetaPipeline/Annotation/functional_profile_reader",
-            "./BioMetaPipeline/Annotation/functional_profile_reader"
+            "BioMetaPipeline/Annotation/FunctionalProfileReader",
+            "./BioMetaPipeline/Annotation/FunctionalProfileReader"
         ],
         "language": "c++",
-        "name": "BioMetaPipeline.Annotation.functional_profile_reader.reader",
+        "name": "BioMetaPipeline.Annotation.FunctionalProfileReader.reader",
         "sources": [
-            "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx"
+            "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx"
         ]
     },
-    "module_name": "BioMetaPipeline.Annotation.functional_profile_reader.reader"
+    "module_name": "BioMetaPipeline.Annotation.FunctionalProfileReader.reader"
 }
 END: Cython Metadata */
 
@@ -502,8 +502,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__BioMetaPipeline__Annotation__functional_profile_reader__reader
-#define __PYX_HAVE_API__BioMetaPipeline__Annotation__functional_profile_reader__reader
+#define __PYX_HAVE__BioMetaPipeline__Annotation__FunctionalProfileReader__reader
+#define __PYX_HAVE_API__BioMetaPipeline__Annotation__FunctionalProfileReader__reader
 #include <string.h>
 #include <string>
 #include "ios"
@@ -716,21 +716,21 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx",
+  "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx",
   "stringsource",
 };
 
 /*--- Type declarations ---*/
-struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader;
+struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader;
 
-/* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":22
+/* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":22
  * 
  * 
  * cdef class Reader:             # <<<<<<<<<<<<<<
  *     cdef ProfileReader profile_reader
  *     cdef ifstream* profile_file
  */
-struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader {
+struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader {
   PyObject_HEAD
   reader::ProfileReader profile_reader;
   std::ifstream *profile_file;
@@ -1015,19 +1015,19 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from 'libcpp.utility' */
 
-/* Module declarations from 'BioMetaPipeline.Annotation.functional_profile_reader.reader' */
-static PyTypeObject *__pyx_ptype_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader = 0;
-static void __pyx_f_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_print_vec(std::vector<std::pair<std::string,std::string> >  &); /*proto*/
+/* Module declarations from 'BioMetaPipeline.Annotation.FunctionalProfileReader.reader' */
+static PyTypeObject *__pyx_ptype_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader = 0;
+static void __pyx_f_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_print_vec(std::vector<std::pair<std::string,std::string> >  &); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyObject_string_to_py_std__in_string(std::string const &); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyUnicode_string_to_py_std__in_string(std::string const &); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyStr_string_to_py_std__in_string(std::string const &); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyBytes_string_to_py_std__in_string(std::string const &); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyByteArray_string_to_py_std__in_string(std::string const &); /*proto*/
 static PyObject *__pyx_convert_pair_to_py_std_3a__3a_string____std_3a__3a_string(std::pair<std::string,std::string>  const &); /*proto*/
-#define __Pyx_MODULE_NAME "BioMetaPipeline.Annotation.functional_profile_reader.reader"
-int __pyx_module_is_main_BioMetaPipeline__Annotation__functional_profile_reader__reader = 0;
+#define __Pyx_MODULE_NAME "BioMetaPipeline.Annotation.FunctionalProfileReader.reader"
+int __pyx_module_is_main_BioMetaPipeline__Annotation__FunctionalProfileReader__reader = 0;
 
-/* Implementation of 'BioMetaPipeline.Annotation.functional_profile_reader.reader' */
+/* Implementation of 'BioMetaPipeline.Annotation.FunctionalProfileReader.reader' */
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_FileNotFoundError;
 static PyObject *__pyx_builtin_TypeError;
@@ -1067,16 +1067,16 @@ static PyObject *__pyx_n_s_reduce_cython;
 static PyObject *__pyx_kp_s_self_kofam_results_file_self_pro;
 static PyObject *__pyx_n_s_setstate_cython;
 static PyObject *__pyx_n_s_test;
-static int __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader___init__(struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *__pyx_v_self, PyObject *__pyx_v_kofam_results_file, PyObject *__pyx_v_profiles_file); /* proto */
-static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_2__del__(struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_4quick_test(struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_tp_new_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static int __pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader___init__(struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *__pyx_v_self, PyObject *__pyx_v_kofam_results_file, PyObject *__pyx_v_profiles_file); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_2__del__(struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_4quick_test(struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_tp_new_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 
-/* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":13
+/* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":13
  * 
  * 
  * cdef void print_vec(vector[pair[string, string]]& vec):             # <<<<<<<<<<<<<<
@@ -1084,7 +1084,7 @@ static PyObject *__pyx_tuple__2;
  *     for i in range(vec.size()):
  */
 
-static void __pyx_f_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_print_vec(std::vector<std::pair<std::string,std::string> >  &__pyx_v_vec) {
+static void __pyx_f_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_print_vec(std::vector<std::pair<std::string,std::string> >  &__pyx_v_vec) {
   size_t __pyx_v_i;
   __Pyx_RefNannyDeclarations
   std::vector<std::pair<std::string,std::string> > ::size_type __pyx_t_1;
@@ -1092,7 +1092,7 @@ static void __pyx_f_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("print_vec", 0);
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":15
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":15
  * cdef void print_vec(vector[pair[string, string]]& vec):
  *     cdef size_t i
  *     for i in range(vec.size()):             # <<<<<<<<<<<<<<
@@ -1103,7 +1103,7 @@ static void __pyx_f_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":16
+    /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":16
  *     cdef size_t i
  *     for i in range(vec.size()):
  *         print(vec[i])             # <<<<<<<<<<<<<<
@@ -1116,7 +1116,7 @@ static void __pyx_f_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":13
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":13
  * 
  * 
  * cdef void print_vec(vector[pair[string, string]]& vec):             # <<<<<<<<<<<<<<
@@ -1128,12 +1128,12 @@ static void __pyx_f_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_WriteUnraisable("BioMetaPipeline.Annotation.functional_profile_reader.reader.print_vec", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_WriteUnraisable("BioMetaPipeline.Annotation.FunctionalProfileReader.reader.print_vec", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
 }
 
-/* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":27
+/* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":27
  *     cdef ifstream* kofam_results_file
  * 
  *     def __init__(self, str kofam_results_file, str profiles_file):             # <<<<<<<<<<<<<<
@@ -1142,8 +1142,8 @@ static void __pyx_f_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
  */
 
 /* Python wrapper */
-static int __pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static int __pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_kofam_results_file = 0;
   PyObject *__pyx_v_profiles_file = 0;
   int __pyx_r;
@@ -1191,13 +1191,13 @@ static int __pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 27, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("BioMetaPipeline.Annotation.functional_profile_reader.reader.Reader.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Annotation.FunctionalProfileReader.reader.Reader.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_kofam_results_file), (&PyString_Type), 1, "kofam_results_file", 1))) __PYX_ERR(0, 27, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_profiles_file), (&PyString_Type), 1, "profiles_file", 1))) __PYX_ERR(0, 27, __pyx_L1_error)
-  __pyx_r = __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader___init__(((struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *)__pyx_v_self), __pyx_v_kofam_results_file, __pyx_v_profiles_file);
+  __pyx_r = __pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader___init__(((struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *)__pyx_v_self), __pyx_v_kofam_results_file, __pyx_v_profiles_file);
 
   /* function exit code */
   goto __pyx_L0;
@@ -1208,7 +1208,7 @@ static int __pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
   return __pyx_r;
 }
 
-static int __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader___init__(struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *__pyx_v_self, PyObject *__pyx_v_kofam_results_file, PyObject *__pyx_v_profiles_file) {
+static int __pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader___init__(struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *__pyx_v_self, PyObject *__pyx_v_kofam_results_file, PyObject *__pyx_v_profiles_file) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1221,7 +1221,7 @@ static int __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
   reader::ProfileReader __pyx_t_8;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":29
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":29
  *     def __init__(self, str kofam_results_file, str profiles_file):
  *         # Confirm file paths are valid
  *         if not os.path.exists(kofam_results_file):             # <<<<<<<<<<<<<<
@@ -1284,7 +1284,7 @@ static int __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
   __pyx_t_6 = ((!__pyx_t_5) != 0);
   if (__pyx_t_6) {
 
-    /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":30
+    /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":30
  *         # Confirm file paths are valid
  *         if not os.path.exists(kofam_results_file):
  *             raise FileNotFoundError(kofam_results_file)             # <<<<<<<<<<<<<<
@@ -1303,7 +1303,7 @@ static int __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __PYX_ERR(0, 30, __pyx_L1_error)
 
-    /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":29
+    /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":29
  *     def __init__(self, str kofam_results_file, str profiles_file):
  *         # Confirm file paths are valid
  *         if not os.path.exists(kofam_results_file):             # <<<<<<<<<<<<<<
@@ -1312,7 +1312,7 @@ static int __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
  */
   }
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":31
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":31
  *         if not os.path.exists(kofam_results_file):
  *             raise FileNotFoundError(kofam_results_file)
  *         if not os.path.exists(profiles_file):             # <<<<<<<<<<<<<<
@@ -1375,7 +1375,7 @@ static int __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
   __pyx_t_5 = ((!__pyx_t_6) != 0);
   if (__pyx_t_5) {
 
-    /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":32
+    /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":32
  *             raise FileNotFoundError(kofam_results_file)
  *         if not os.path.exists(profiles_file):
  *             raise FileNotFoundError(profiles_file)             # <<<<<<<<<<<<<<
@@ -1394,7 +1394,7 @@ static int __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __PYX_ERR(0, 32, __pyx_L1_error)
 
-    /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":31
+    /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":31
  *         if not os.path.exists(kofam_results_file):
  *             raise FileNotFoundError(kofam_results_file)
  *         if not os.path.exists(profiles_file):             # <<<<<<<<<<<<<<
@@ -1403,7 +1403,7 @@ static int __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
  */
   }
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":34
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":34
  *             raise FileNotFoundError(profiles_file)
  *         # Dynamically allocate file pointers and save as object members
  *         self.profile_file = new ifstream(<char *>PyUnicode_AsUTF8(profiles_file))             # <<<<<<<<<<<<<<
@@ -1418,7 +1418,7 @@ static int __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
   }
   __pyx_v_self->profile_file = __pyx_t_7;
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":35
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":35
  *         # Dynamically allocate file pointers and save as object members
  *         self.profile_file = new ifstream(<char *>PyUnicode_AsUTF8(profiles_file))
  *         self.kofam_results_file = new ifstream(<char *>PyUnicode_AsUTF8(kofam_results_file))             # <<<<<<<<<<<<<<
@@ -1433,7 +1433,7 @@ static int __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
   }
   __pyx_v_self->kofam_results_file = __pyx_t_7;
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":36
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":36
  *         self.profile_file = new ifstream(<char *>PyUnicode_AsUTF8(profiles_file))
  *         self.kofam_results_file = new ifstream(<char *>PyUnicode_AsUTF8(kofam_results_file))
  *         self.profile_reader = ProfileReader(             # <<<<<<<<<<<<<<
@@ -1448,7 +1448,7 @@ static int __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
   }
   __pyx_v_self->profile_reader = __pyx_t_8;
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":27
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":27
  *     cdef ifstream* kofam_results_file
  * 
  *     def __init__(self, str kofam_results_file, str profiles_file):             # <<<<<<<<<<<<<<
@@ -1464,14 +1464,14 @@ static int __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("BioMetaPipeline.Annotation.functional_profile_reader.reader.Reader.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Annotation.FunctionalProfileReader.reader.Reader.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":41
+/* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":41
  *         )
  * 
  *     def __del__(self):             # <<<<<<<<<<<<<<
@@ -1480,24 +1480,24 @@ static int __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_3__del__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_3__del__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_3__del__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_3__del__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__del__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_2__del__(((struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *)__pyx_v_self));
+  __pyx_r = __pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_2__del__(((struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_2__del__(struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *__pyx_v_self) {
+static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_2__del__(struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__del__", 0);
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":42
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":42
  * 
  *     def __del__(self):
  *         self.profile_file.close()             # <<<<<<<<<<<<<<
@@ -1511,7 +1511,7 @@ static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_re
     __PYX_ERR(0, 42, __pyx_L1_error)
   }
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":43
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":43
  *     def __del__(self):
  *         self.profile_file.close()
  *         self.kofam_results_file.close()             # <<<<<<<<<<<<<<
@@ -1525,7 +1525,7 @@ static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_re
     __PYX_ERR(0, 43, __pyx_L1_error)
   }
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":44
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":44
  *         self.profile_file.close()
  *         self.kofam_results_file.close()
  *         del self.profile_file             # <<<<<<<<<<<<<<
@@ -1534,7 +1534,7 @@ static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_re
  */
   delete __pyx_v_self->profile_file;
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":45
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":45
  *         self.kofam_results_file.close()
  *         del self.profile_file
  *         del self.kofam_results_file             # <<<<<<<<<<<<<<
@@ -1543,7 +1543,7 @@ static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_re
  */
   delete __pyx_v_self->kofam_results_file;
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":41
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":41
  *         )
  * 
  *     def __del__(self):             # <<<<<<<<<<<<<<
@@ -1555,7 +1555,7 @@ static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_re
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("BioMetaPipeline.Annotation.functional_profile_reader.reader.Reader.__del__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Annotation.FunctionalProfileReader.reader.Reader.__del__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -1563,7 +1563,7 @@ static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_re
   return __pyx_r;
 }
 
-/* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":47
+/* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":47
  *         del self.kofam_results_file
  * 
  *     def quick_test(self):             # <<<<<<<<<<<<<<
@@ -1572,25 +1572,25 @@ static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_re
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_5quick_test(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_5quick_test(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_5quick_test(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_5quick_test(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("quick_test (wrapper)", 0);
-  __pyx_r = __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_4quick_test(((struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *)__pyx_v_self));
+  __pyx_r = __pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_4quick_test(((struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_4quick_test(struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *__pyx_v_self) {
+static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_4quick_test(struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *__pyx_v_self) {
   std::vector<std::pair<std::string,std::string> >  __pyx_v_results;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("quick_test", 0);
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":49
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":49
  *     def quick_test(self):
  *         cdef vector[pair[string, string]] results
  *         self.profile_reader.searchNext(results)             # <<<<<<<<<<<<<<
@@ -1599,15 +1599,15 @@ static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_re
  */
   __pyx_v_self->profile_reader.searchNext(__pyx_v_results);
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":50
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":50
  *         cdef vector[pair[string, string]] results
  *         self.profile_reader.searchNext(results)
  *         print_vec(results)             # <<<<<<<<<<<<<<
  *         # self.profile_reader.printKOResults()
  */
-  __pyx_f_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_print_vec(__pyx_v_results);
+  __pyx_f_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_print_vec(__pyx_v_results);
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":47
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":47
  *         del self.kofam_results_file
  * 
  *     def quick_test(self):             # <<<<<<<<<<<<<<
@@ -1629,19 +1629,19 @@ static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_re
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_6__reduce_cython__(((struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *)__pyx_v_self));
+  __pyx_r = __pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_6__reduce_cython__(((struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *__pyx_v_self) {
+static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1668,7 +1668,7 @@ static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_re
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("BioMetaPipeline.Annotation.functional_profile_reader.reader.Reader.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Annotation.FunctionalProfileReader.reader.Reader.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -1683,19 +1683,19 @@ static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_re
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_8__setstate_cython__(((struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_8__setstate_cython__(((struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1722,7 +1722,7 @@ static PyObject *__pyx_pf_15BioMetaPipeline_10Annotation_25functional_profile_re
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("BioMetaPipeline.Annotation.functional_profile_reader.reader.Reader.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("BioMetaPipeline.Annotation.FunctionalProfileReader.reader.Reader.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -2024,8 +2024,8 @@ static PyObject *__pyx_convert_pair_to_py_std_3a__3a_string____std_3a__3a_string
   return __pyx_r;
 }
 
-static PyObject *__pyx_tp_new_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
-  struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *p;
+static PyObject *__pyx_tp_new_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *p;
   PyObject *o;
   if (likely((t->tp_flags & Py_TPFLAGS_IS_ABSTRACT) == 0)) {
     o = (*t->tp_alloc)(t, 0);
@@ -2033,13 +2033,13 @@ static PyObject *__pyx_tp_new_15BioMetaPipeline_10Annotation_25functional_profil
     o = (PyObject *) PyBaseObject_Type.tp_new(t, __pyx_empty_tuple, 0);
   }
   if (unlikely(!o)) return 0;
-  p = ((struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *)o);
+  p = ((struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *)o);
   new((void*)&(p->profile_reader)) reader::ProfileReader();
   return o;
 }
 
-static void __pyx_tp_dealloc_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader(PyObject *o) {
-  struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *p = (struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader *)o;
+static void __pyx_tp_dealloc_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader(PyObject *o) {
+  struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *p = (struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader *)o;
   #if PY_VERSION_HEX >= 0x030400a1
   if (unlikely(PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE) && Py_TYPE(o)->tp_finalize) && (!PyType_IS_GC(Py_TYPE(o)) || !_PyGC_FINALIZED(o))) {
     if (PyObject_CallFinalizerFromDealloc(o)) return;
@@ -2049,20 +2049,20 @@ static void __pyx_tp_dealloc_15BioMetaPipeline_10Annotation_25functional_profile
   (*Py_TYPE(o)->tp_free)(o);
 }
 
-static PyMethodDef __pyx_methods_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader[] = {
-  {"__del__", (PyCFunction)__pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_3__del__, METH_NOARGS, 0},
-  {"quick_test", (PyCFunction)__pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_5quick_test, METH_NOARGS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_7__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_9__setstate_cython__, METH_O, 0},
+static PyMethodDef __pyx_methods_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader[] = {
+  {"__del__", (PyCFunction)__pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_3__del__, METH_NOARGS, 0},
+  {"quick_test", (PyCFunction)__pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_5quick_test, METH_NOARGS, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_7__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_9__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
-static PyTypeObject __pyx_type_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader = {
+static PyTypeObject __pyx_type_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader = {
   PyVarObject_HEAD_INIT(0, 0)
-  "BioMetaPipeline.Annotation.functional_profile_reader.reader.Reader", /*tp_name*/
-  sizeof(struct __pyx_obj_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader), /*tp_basicsize*/
+  "BioMetaPipeline.Annotation.FunctionalProfileReader.reader.Reader", /*tp_name*/
+  sizeof(struct __pyx_obj_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader, /*tp_dealloc*/
+  __pyx_tp_dealloc_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader, /*tp_dealloc*/
   0, /*tp_print*/
   0, /*tp_getattr*/
   0, /*tp_setattr*/
@@ -2090,7 +2090,7 @@ static PyTypeObject __pyx_type_15BioMetaPipeline_10Annotation_25functional_profi
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader, /*tp_methods*/
+  __pyx_methods_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader, /*tp_methods*/
   0, /*tp_members*/
   0, /*tp_getset*/
   0, /*tp_base*/
@@ -2098,9 +2098,9 @@ static PyTypeObject __pyx_type_15BioMetaPipeline_10Annotation_25functional_profi
   0, /*tp_descr_get*/
   0, /*tp_descr_set*/
   0, /*tp_dictoffset*/
-  __pyx_pw_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_6Reader_1__init__, /*tp_init*/
+  __pyx_pw_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_6Reader_1__init__, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader, /*tp_new*/
+  __pyx_tp_new_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -2269,14 +2269,14 @@ PyMODINIT_FUNC PyInit_reader(void)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_BioMetaPipeline__Annotation__functional_profile_reader__reader) {
+  if (__pyx_module_is_main_BioMetaPipeline__Annotation__FunctionalProfileReader__reader) {
     if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "BioMetaPipeline.Annotation.functional_profile_reader.reader")) {
-      if (unlikely(PyDict_SetItemString(modules, "BioMetaPipeline.Annotation.functional_profile_reader.reader", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "BioMetaPipeline.Annotation.FunctionalProfileReader.reader")) {
+      if (unlikely(PyDict_SetItemString(modules, "BioMetaPipeline.Annotation.FunctionalProfileReader.reader", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -2288,11 +2288,11 @@ PyMODINIT_FUNC PyInit_reader(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
-  __pyx_type_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "Reader", (PyObject *)&__pyx_type_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
-  __pyx_ptype_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader = &__pyx_type_15BioMetaPipeline_10Annotation_25functional_profile_reader_6reader_Reader;
+  if (PyType_Ready(&__pyx_type_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_type_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader.tp_print = 0;
+  if (PyObject_SetAttrString(__pyx_m, "Reader", (PyObject *)&__pyx_type_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_ptype_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader = &__pyx_type_15BioMetaPipeline_10Annotation_23FunctionalProfileReader_6reader_Reader;
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
   /*--- Function import code ---*/
@@ -2301,7 +2301,7 @@ PyMODINIT_FUNC PyInit_reader(void)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":2
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":2
  * # distutils: language = c++
  * import os             # <<<<<<<<<<<<<<
  * from reader cimport ProfileReader
@@ -2312,7 +2312,7 @@ PyMODINIT_FUNC PyInit_reader(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_os, __pyx_t_1) < 0) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "BioMetaPipeline/Annotation/functional_profile_reader/reader.pyx":1
+  /* "BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx":1
  * # distutils: language = c++             # <<<<<<<<<<<<<<
  * import os
  * from reader cimport ProfileReader
@@ -2337,11 +2337,11 @@ PyMODINIT_FUNC PyInit_reader(void)
   __Pyx_XDECREF(__pyx_t_1);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init BioMetaPipeline.Annotation.functional_profile_reader.reader", 0, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init BioMetaPipeline.Annotation.FunctionalProfileReader.reader", 0, __pyx_lineno, __pyx_filename);
     }
     Py_DECREF(__pyx_m); __pyx_m = 0;
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init BioMetaPipeline.Annotation.functional_profile_reader.reader");
+    PyErr_SetString(PyExc_ImportError, "init BioMetaPipeline.Annotation.FunctionalProfileReader.reader");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();

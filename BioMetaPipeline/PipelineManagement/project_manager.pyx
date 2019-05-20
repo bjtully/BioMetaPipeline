@@ -24,7 +24,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     :return: 
     """
     # Ensure that all values are valid
-    assert os.path.exists((<object>directory)) and os.path.exists((<object>config_file)), \
+    assert os.path.isdir((<object>directory)) and os.path.isfile((<object>config_file)), \
         AssertString.INVALID_PARAMETERS_PASSED
     # Load config file as object
     cdef object cfg = ConfigManager((<object>config_file))

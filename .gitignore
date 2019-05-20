@@ -20,3 +20,4 @@ quick.py
 *.fna
 *.faa
 TARA*
+*/*/*/.vscode/*
