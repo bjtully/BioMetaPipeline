@@ -48,5 +48,3 @@ class VirSorter(LuigiTaskClass):
     def output(self):
         if os.path.exists(str(self.wdir)):
             return luigi.LocalTarget(os.path.join(str(self.wdir), os.path.basename(str(self.fasta_file))))
-        else:
-            return []
