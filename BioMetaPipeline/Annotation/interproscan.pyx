@@ -44,7 +44,7 @@ class Interproscan(LuigiTaskClass):
             ],
             check=True,
         )
-        os.remove(outfile)
+        os.remove(outfile_name)
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.out_prefix) + ".tsv"))
