@@ -86,7 +86,12 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
             Interproscan(
                 calling_script_path=cfg.get(InterproscanConstants.INTERPROSCAN, ConfigManager.PATH),
                 output_directory=os.path.join(output_directory, InterproscanConstants.OUTPUT_DIRECTORY),
-                fasta_file=fasta_file,
+                fasta_file=os.path.join(output_directory,
+                                        ProdigalConstants.OUTPUT_DIRECTORY,
+                                        os.path.basename(
+                                            fasta_file.replace(os.path.splitext(fasta_file)[1],
+                                                               ProdigalConstants.PROTEIN_FILE_SUFFIX)
+                                        )),
                 out_prefix=out_prefix,
                 added_flags=cfg.build_parameter_list_from_dict(InterproscanConstants.INTERPROSCAN),
             ),

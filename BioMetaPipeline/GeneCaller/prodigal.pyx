@@ -9,13 +9,15 @@ from BioMetaPipeline.Parsers.fasta_parser import FastaParser
 class ProdigalConstants:
     PRODIGAL = "PRODIGAL"
     OUTPUT_DIRECTORY = "prodigal_results"
+    PROTEIN_FILE_SUFFIX = ".protein.faa"
+    MRNA_FILE_SUFFIX = ".mrna.fna"
 
 
 class Prodigal(LuigiTaskClass):
     output_directory = luigi.Parameter()
     outfile = luigi.Parameter()
-    protein_file_suffix = luigi.Parameter(default=".protein.faa")
-    mrna_file_suffix = luigi.Parameter(default=".mrna.fna")
+    protein_file_suffix = luigi.Parameter(default=ProdigalConstants.PROTEIN_FILE_SUFFIX)
+    mrna_file_suffix = luigi.Parameter(default=ProdigalConstants.MRNA_FILE_SUFFIX)
     fasta_file = luigi.Parameter()
     run_edit = luigi.BoolParameter(default=True)
 
