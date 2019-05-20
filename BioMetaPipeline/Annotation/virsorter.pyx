@@ -27,6 +27,8 @@ class VirSorter(LuigiTaskClass):
             [
                 "docker",
                 "run",
+                "--user",
+                "`id -u`",
                 "-v",
                 "%s:/data" % str(self.calling_script_path),
                 "-v",
