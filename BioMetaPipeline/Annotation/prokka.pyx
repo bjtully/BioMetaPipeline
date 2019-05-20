@@ -33,4 +33,5 @@ class PROKKA(LuigiTaskClass):
         )
 
     def output(self):
-        return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.out_prefix) + ".tsv"))
+        return luigi.LocalTarget(os.path.join(str(self.output_directory), os.path.basename(os.path.splitext(str(self.fasta_file))[0])),
+                                 str(self.out_prefix) + ".tsv")

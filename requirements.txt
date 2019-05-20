@@ -2,4 +2,3 @@ pysam
 argparse
 luigi
 configparser
-macropy3

@@ -1,6 +1,8 @@
 # cython: language_level=3
 import os
 import luigi
+
+from BioMetaPipeline.Accessories.ops import get_prefix
 from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.GeneCaller.prodigal import Prodigal, ProdigalConstants
 from BioMetaPipeline.Annotation.interproscan import Interproscan, InterproscanConstants
@@ -100,6 +102,8 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 fasta_file=fasta_file,
                 calling_script_path=cfg.get(VirSorterConstants.VIRSORTER, ConfigManager.PATH),
                 added_flags=cfg.build_parameter_list_from_dict(VirSorterConstants.VIRSORTER),
+                wdir=os.path.abspath(os.path.join(os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY),
+                                  get_prefix(fasta_file))),
             )
         ):
             task_list.append(task)

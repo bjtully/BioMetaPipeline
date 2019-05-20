@@ -10,39 +10,43 @@ from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 class VirSorterConstants:
     VIRSORTER = "VIRSORTER"
     OUTPUT_DIRECTORY = "virsorter_results"
-    EXPECTED_OUT = "VIRSorter_global_phage_signal.csv"
 
 
 class VirSorter(LuigiTaskClass):
-    output_directory = luigi.Parameter()
     fasta_file = luigi.Parameter()
+    wdir = luigi.Parameter()
 
     def requires(self):
         return []
 
     def run(self):
-        # VirSorter requires that fasta file be in its own working directory
-        cdef wdir = os.path.join(str(self.output_directory), get_prefix(str(self.fasta_file)))
-        os.makedirs(wdir)
-        shutil.copy(str(self.fasta_file), os.path.join(wdir, str(self.fasta_file)))
+        if not os.path.exists(str(self.wdir)):
+            os.makedirs(str(self.wdir))
+        shutil.copy(str(self.fasta_file), str(self.wdir))
         subprocess.run(
             [
                 "docker",
                 "run",
                 "-v",
-                str(self.calling_script_path) + ":/data",
+                "%s:/data" % str(self.calling_script_path),
                 "-v",
-                wdir + ":/wdir",
+                "%s:/wdir" % str(self.wdir),
                 "-w",
                 "/wdir",
                 "--rm",
                 "simroux/virsorter:v1.0.5",
                 "--fna",
-                str(self.fasta_file),
+                os.path.basename(str(self.fasta_file)),
                 *self.added_flags,
             ],
             check=True,
         )
+        os.remove(os.path.join(str(self.wdir), os.path.basename(str(self.fasta_file))))
+        if not os.listdir(str(self.wdir)):
+            os.rmdir(str(self.wdir))
 
     def output(self):
-        return luigi.LocalTarget(os.path.join(str(self.output_directory), VirSorterConstants.EXPECTED_OUT))
+        if os.path.exists(str(self.wdir)):
+            return luigi.LocalTarget(os.path.join(str(self.wdir), os.path.basename(str(self.fasta_file))))
+        else:
+            return []
