@@ -23,12 +23,18 @@ class VirSorter(LuigiTaskClass):
         if not os.path.exists(str(self.wdir)):
             os.makedirs(str(self.wdir))
         shutil.copy(str(self.fasta_file), str(self.wdir))
+        cdef int index_of_user = self.added_flags.index("--user") if "--user" in self.added_flags else -1
+        cdef list username = []
+        cdef list ending_flags = list(self.added_flags)
+        if index_of_user != -1:
+            username = ["--user", self.added_flags[index_of_user + 1]]
+            del ending_flags[index_of_user + 1]
+            del ending_flags[index_of_user]
         subprocess.run(
             [
                 "docker",
                 "run",
-                "--user",
-                "`id -u`",
+                *username,
                 "-v",
                 "%s:/data" % str(self.calling_script_path),
                 "-v",
@@ -39,7 +45,7 @@ class VirSorter(LuigiTaskClass):
                 "simroux/virsorter:v1.0.5",
                 "--fna",
                 os.path.basename(str(self.fasta_file)),
-                *self.added_flags,
+                *ending_flags,
             ],
             check=True,
         )
