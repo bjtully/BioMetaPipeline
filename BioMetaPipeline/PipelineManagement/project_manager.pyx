@@ -10,7 +10,7 @@ cdef str OUTPUT_DIRECTORY = "OUTPUT_DIRECTORY"
 cdef str LIST_FILE = "LIST_FILE"
 cdef str PROJECT_NAME = "PROJECT_NAME"
 cdef str TABLE_NAME = "TABLE_NAME"
-cdef str GENOMES = "genomes"
+GENOMES = "genomes"
 
 
 cdef tuple project_check_and_creation(void* directory, void* config_file, void* output_directory, str biometadb_project,
@@ -45,7 +45,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     for _file in os.listdir((<object>directory)):
         split_file = os.path.splitext(_file)
         FastaParser.write_simple(
-            _file,
+            os.path.join((<object>directory), _file),
             os.path.join((<object>output_directory), GENOMES, split_file[0] + ".tmp" + split_file[1]),
             simplify=True,
         )

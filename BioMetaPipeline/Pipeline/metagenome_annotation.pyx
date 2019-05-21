@@ -64,7 +64,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         <void* >constant_classes,
         MetagenomeAnnotationConstants
     )
-    directory = os.path.join(directory, GENOMES)
+    directory = os.path.join(output_directory, GENOMES)
     cdef tuple line_data
     cdef bytes line
     cdef list task_list = []
