@@ -1,6 +1,7 @@
 # cython: language_level=3
 import os
 import luigi
+import shutil
 from BioMetaPipeline.Database.dbdm_calls import get_dbdm_call
 from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.AssemblyEvaluation.checkm import CheckM, CheckMConstants
@@ -8,6 +9,7 @@ from BioMetaPipeline.AssemblyEvaluation.gtdbtk import GTDBtk, GTDBTKConstants
 from BioMetaPipeline.MetagenomeEvaluation.fastani import FastANI, FastANIConstants
 from BioMetaPipeline.MetagenomeEvaluation.redundancy_checker import RedundancyParserTask
 from BioMetaPipeline.PipelineManagement.project_manager cimport project_check_and_creation
+from BioMetaPipeline.PipelineManagement.project_manager import GENOMES
 
 
 """
@@ -47,7 +49,7 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
         <void* >constant_classes,
         MetagenomeEvaluationConstants
     )
-    directory = os.path.join(directory, "genomes")
+    directory = os.path.join(directory, GENOMES)
     cdef list task_list = [
         CheckM(
             output_directory=os.path.join(output_directory, CheckMConstants.OUTPUT_DIRECTORY),
@@ -91,3 +93,4 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
         os.path.join(output_directory, MetagenomeEvaluationConstants.TSV_OUT),
     ))
     luigi.build(task_list, local_scheduler=True)
+    shutil.rmtree(directory)

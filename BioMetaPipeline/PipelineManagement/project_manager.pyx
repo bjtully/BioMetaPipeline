@@ -10,6 +10,7 @@ cdef str OUTPUT_DIRECTORY = "OUTPUT_DIRECTORY"
 cdef str LIST_FILE = "LIST_FILE"
 cdef str PROJECT_NAME = "PROJECT_NAME"
 cdef str TABLE_NAME = "TABLE_NAME"
+cdef str GENOMES = "genomes"
 
 
 cdef tuple project_check_and_creation(void* directory, void* config_file, void* output_directory, str biometadb_project,
@@ -36,7 +37,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
         # Output directory
         os.makedirs((<object>output_directory))
         # Genome storage for processing
-        os.makedirs(os.path.join((<object>output_directory), "genomes"))
+        os.makedirs(os.path.join((<object>output_directory), GENOMES))
     # Declarations
     cdef str _file
     cdef tuple split_file
@@ -45,9 +46,10 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
         split_file = os.path.splitext(_file)
         FastaParser.write_simple(
             _file,
-            os.path.join((<object>output_directory), "genomes", split_file[0] + ".tmp" + split_file[1]),
+            os.path.join((<object>output_directory), GENOMES, split_file[0] + ".tmp" + split_file[1]),
             simplify=True,
         )
+    # Make directory for each pipe in pipeline
     for val in (<object>luigi_programs_classes_list):
         if not os.path.exists(os.path.join((<object>output_directory), str(getattr(val, OUTPUT_DIRECTORY)))):
             os.makedirs(os.path.join((<object>output_directory), str(getattr(val, OUTPUT_DIRECTORY))))
@@ -86,5 +88,5 @@ cdef void write_genome_list_to_file(void* directory, void* outfile):
     cdef str _file
     cdef object W = open((<object>outfile), "w")
     for _file in os.listdir((<object>directory)):
-        W.write("%s\n" % os.path.join((<object>directory), (<object>_file)))
+        W.write("%s\n" % os.path.join((<object>directory), GENOMES, (<object>_file)))
     W.close()

@@ -1,7 +1,7 @@
 # cython: language_level=3
 import os
 import luigi
-
+import shutil
 from BioMetaPipeline.Accessories.ops import get_prefix
 from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.GeneCaller.prodigal import Prodigal, ProdigalConstants
@@ -10,6 +10,7 @@ from BioMetaPipeline.Annotation.virsorter import VirSorter, VirSorterConstants
 from BioMetaPipeline.Annotation.prokka import PROKKA, PROKKAConstants
 from BioMetaPipeline.Database.dbdm_calls import get_dbdm_call
 from BioMetaPipeline.PipelineManagement.project_manager cimport project_check_and_creation
+from BioMetaPipeline.PipelineManagement.project_manager import GENOMES
 
 """
 metagenome_annotation consists of:
@@ -63,7 +64,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         <void* >constant_classes,
         MetagenomeAnnotationConstants
     )
-    directory = os.path.join(directory, "genomes")
+    directory = os.path.join(directory, GENOMES)
     cdef tuple line_data
     cdef bytes line
     cdef list task_list = []
@@ -123,3 +124,4 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         os.path.join(output_directory, MetagenomeAnnotationConstants.TSV_OUT),
     ))
     luigi.build(task_list, local_scheduler=True)
+    shutil.rmtree(directory)
