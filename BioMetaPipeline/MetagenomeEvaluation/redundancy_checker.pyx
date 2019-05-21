@@ -28,6 +28,8 @@ _column_names = ["is_non_redundant", "redundant_copies",
                                   "completion", "is_complete",
                                   "phylogeny"]
 
+
+# TODO Add error handling for broken data pipes - e.g. how to handle program fails for final parsing
 cdef class RedundancyChecker:
     cdef void* checkm_file
     cdef void* fastani_file
@@ -37,8 +39,6 @@ cdef class RedundancyChecker:
     cdef dict file_ext_dict
 
     def __init__(self, str checkm_filename, str fastani_filename, str gtdbtk_filename, dict cutoff_values, dict file_ext_dict):
-        if not os.path.isfile(checkm_filename) or not os.path.isfile(fastani_filename) or not os.path.isfile(gtdbtk_filename):
-            raise FileNotFoundError
         self.cutoffs = cutoff_values
         self.checkm_file = <void *>checkm_filename
         self.fastani_file = <void *>fastani_filename
@@ -50,7 +50,11 @@ cdef class RedundancyChecker:
     def _parse_records_to_categories(self):
         cdef dict checkm_results = CheckMParser.parse_dict(<object>self.checkm_file)
         cdef list _fastANI_results = TSVParser.parse_list(<object>self.fastani_file, " ")
-        cdef dict gtdbktk_results = TSVParser.parse_dict(<object>self.gtdbtk_file)
+        cdef dict gtdbktk_results
+        if os.path.isfile(<object>self.gtdbtk_file):
+            gtdbktk_results = TSVParser.parse_dict(<object>self.gtdbtk_file)
+        else:
+            gtdbktk_results = {}
         cdef str max_completion_id
         cdef float max_completion
         cdef int i
@@ -78,7 +82,10 @@ cdef class RedundancyChecker:
             key_and_ext = key + self.file_ext_dict[key]
             self.output_data[key_and_ext] = {}
             # Set gtdbtk value
-            self.output_data[key_and_ext][phylogeny_str] = gtdbktk_results[key][0]
+            if gtdbktk_results.get(key) is not None:
+                self.output_data[key_and_ext][phylogeny_str] = gtdbktk_results.get(key)[0]
+            else:
+                self.output_data[key_and_ext][phylogeny_str] = "None"
             # Initialize empty redundancy list
             self.output_data[key_and_ext][redundant_copies_str] = []
             # Completion value
