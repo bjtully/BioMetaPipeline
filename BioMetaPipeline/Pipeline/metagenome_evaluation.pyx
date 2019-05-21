@@ -47,6 +47,7 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
         <void* >constant_classes,
         MetagenomeEvaluationConstants
     )
+    directory = os.path.join(directory, "genomes")
     cdef list task_list = [
         CheckM(
             output_directory=os.path.join(output_directory, CheckMConstants.OUTPUT_DIRECTORY),

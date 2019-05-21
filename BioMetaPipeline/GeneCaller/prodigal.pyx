@@ -48,9 +48,9 @@ class Prodigal(LuigiTaskClass):
         )
         # Run file edit is needed
         if bool(self.run_edit):
-            FastaParser.write_simple(prot_out, prot_simple)
+            FastaParser.write_simple(prot_out, prot_simple, simplify=True)
             os.remove(prot_out)
-            FastaParser.write_simple(mrna_out, mrna_simple)
+            FastaParser.write_simple(mrna_out, mrna_simple, simplify=True)
             os.remove(mrna_out)
 
     def output(self):

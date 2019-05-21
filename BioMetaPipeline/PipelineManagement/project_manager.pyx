@@ -3,6 +3,7 @@ from configparser import NoOptionError
 from BioMetaPipeline.Pipeline.Exceptions.GeneralAssertion import AssertString
 from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.Database.dbdm_calls import BioMetaDBConstants
+from BioMetaPipeline.Parsers.fasta_parser import FastaParser
 
 
 cdef str OUTPUT_DIRECTORY = "OUTPUT_DIRECTORY"
@@ -34,6 +35,19 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     if not os.path.exists((<object>output_directory)):
         # Output directory
         os.makedirs((<object>output_directory))
+        # Genome storage for processing
+        os.makedirs(os.path.join((<object>output_directory), "genomes"))
+    # Declarations
+    cdef str _file
+    cdef tuple split_file
+    # Copy all genomes to folder with temporary file names
+    for _file in os.listdir((<object>directory)):
+        split_file = os.path.splitext(_file)
+        FastaParser.write_simple(
+            _file,
+            os.path.join((<object>output_directory), "genomes", split_file[0] + ".tmp" + split_file[1]),
+            simplify=True,
+        )
     for val in (<object>luigi_programs_classes_list):
         if not os.path.exists(os.path.join((<object>output_directory), str(getattr(val, OUTPUT_DIRECTORY)))):
             os.makedirs(os.path.join((<object>output_directory), str(getattr(val, OUTPUT_DIRECTORY))))

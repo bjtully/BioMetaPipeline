@@ -63,14 +63,13 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         <void* >constant_classes,
         MetagenomeAnnotationConstants
     )
-
+    directory = os.path.join(directory, "genomes")
     cdef tuple line_data
     cdef bytes line
     cdef list task_list = []
     cdef object W = open(genome_list_path, "rb")
     cdef object task
     line = next(W)
-    print("Building task list...")
     while line:
         fasta_file = line.decode().rstrip("\r\n")
         out_prefix = os.path.splitext(os.path.basename(line.decode().rstrip("\r\n")))[0]

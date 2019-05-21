@@ -31,7 +31,7 @@ cdef class FastaParser:
         self.file_pointer.close()
         del self.file_pointer
 
-    def create_tuple_generator(self, is_python = False):
+    def create_tuple_generator(self, bint is_python = False):
         """ Generator function yields tuple of parsed fasta info
 
         :return:
@@ -56,25 +56,37 @@ cdef class FastaParser:
         del record
         return None
 
-    def create_string_generator(self, is_python = False):
+    def create_string_generator(self, bint is_python = False, bint simplify = False):
         """ Generator function yields either python or c++ string
 
+        :param simplify:
         :param is_python:
         :return:
         """
         cdef vector[string]* record = new vector[string]()
+        cdef string record_name
         self.fasta_parser_cpp.grab(record[0])
         cdef int _c
+        cdef int i = 0
         while (record[0]).size() > 0:
             # Yield python str or string
+            if not simplify:
+                record_name = record[0][0]
+            else:
+                record_name = <string>"%s_%s.%d" % (
+                    record[0][0].substr(0, int(len(record[0][0]) / 4)),
+                    record[0][0].substr(int(3 * len(record[0][0]) / 4), int(len(record[0][0]) / 4)),
+                    i
+                )
+                i += 1
             if is_python:
                 yield (
-                    "".join([chr(_c) for _c in record[0][0]]),
+                    "".join([chr(_c) for _c in record_name]),
                     "".join([chr(_c) for _c in record[0][2]]),
                 )
             else:
                 yield <string>">%s\n%s\n" % (
-                    record[0][0],
+                    record_name,
                     record[0][2],
                 )
             self.fasta_parser_cpp.grab(record[0])
@@ -134,9 +146,10 @@ cdef class FastaParser:
         return FastaParser(file_name, delimiter, header).get_values_as_dict()
 
     @staticmethod
-    def write_simple(str file_name, str out_file, str delimiter = " ", str header = ">"):
+    def write_simple(str file_name, str out_file, str delimiter = " ", str header = ">", bint simplify = False):
         """ Method will write a simplified version of a fasta file (e.g. only displays id and sequence)
 
+        :param simplify:
         :param file_name:
         :param out_file:
         :param delimiter:
@@ -145,7 +158,7 @@ cdef class FastaParser:
         """
         cdef object fp = FastaParser(file_name, delimiter, header)
         cdef object W = open(out_file, "wb")
-        cdef object record_gen = fp.create_string_generator(False)
+        cdef object record_gen = fp.create_string_generator(False, simplify)
         try:
             while record_gen:
                 W.write(next(record_gen))
