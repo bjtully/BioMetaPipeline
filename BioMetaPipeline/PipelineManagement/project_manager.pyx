@@ -58,7 +58,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     cdef str alias
     cdef str table_name
     # Write list of all files in directory as a list file
-    write_genome_list_to_file((<void *>directory), (<void *>genome_list_path))
+    write_genome_list_to_file((<void *>output_directory), (<void *>genome_list_path))
     # Load biometadb info
     if (<object>biometadb_project) == "None":
         try:
