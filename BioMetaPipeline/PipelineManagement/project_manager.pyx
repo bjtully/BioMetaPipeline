@@ -88,5 +88,5 @@ cdef void write_genome_list_to_file(void* directory, void* outfile):
     cdef str _file
     cdef object W = open((<object>outfile), "w")
     for _file in os.listdir((<object>directory)):
-        W.write("%s\n" % os.path.join((<object>directory), GENOMES, (<object>_file)))
+        W.write("%s\n" % os.path.join((<object>directory), GENOMES, os.path.basename((<object>_file))))
     W.close()
