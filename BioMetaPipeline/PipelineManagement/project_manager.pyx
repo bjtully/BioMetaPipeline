@@ -32,12 +32,13 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     cdef object cfg = ConfigManager((<object>config_file))
     # Declaration for iteration
     cdef object val
+    cdef str genome_storage_folder = os.path.join((<object>output_directory), GENOMES)
     # Create directories as needed
     if not os.path.exists((<object>output_directory)):
         # Output directory
         os.makedirs((<object>output_directory))
         # Genome storage for processing
-        os.makedirs(os.path.join((<object>output_directory), GENOMES))
+        os.makedirs(genome_storage_folder)
     # Declarations
     cdef str _file
     cdef tuple split_file
@@ -46,7 +47,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
         split_file = os.path.splitext(_file)
         FastaParser.write_simple(
             os.path.join((<object>directory), _file),
-            os.path.join((<object>output_directory), GENOMES, split_file[0] + ".tmp" + split_file[1]),
+            os.path.join(genome_storage_folder, split_file[0] + ".tmp" + split_file[1]),
             simplify=True,
         )
     # Make directory for each pipe in pipeline
@@ -58,7 +59,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     cdef str alias
     cdef str table_name
     # Write list of all files in directory as a list file
-    write_genome_list_to_file((<void *>output_directory), (<void *>genome_list_path))
+    write_genome_list_to_file((<void *>genome_storage_folder), (<void *>genome_list_path))
     # Load biometadb info
     if (<object>biometadb_project) == "None":
         try:
@@ -88,5 +89,5 @@ cdef void write_genome_list_to_file(void* directory, void* outfile):
     cdef str _file
     cdef object W = open((<object>outfile), "w")
     for _file in os.listdir((<object>directory)):
-        W.write("%s\n" % os.path.join((<object>directory), GENOMES, os.path.basename((<object>_file))))
+        W.write("%s\n" % os.path.join((<object>directory), os.path.basename(_file)))
     W.close()
