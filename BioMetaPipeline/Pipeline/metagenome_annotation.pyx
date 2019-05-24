@@ -8,6 +8,7 @@ from BioMetaPipeline.GeneCaller.prodigal import Prodigal, ProdigalConstants
 from BioMetaPipeline.Annotation.interproscan import Interproscan, InterproscanConstants
 from BioMetaPipeline.Annotation.virsorter import VirSorter, VirSorterConstants
 from BioMetaPipeline.Annotation.prokka import PROKKA, PROKKAConstants
+from BioMetaPipeline.Annotation.kofamscan import KofamScan, KofamScanConstants
 from BioMetaPipeline.Database.dbdm_calls import get_dbdm_call
 from BioMetaPipeline.PipelineManagement.project_manager cimport project_check_and_creation
 from BioMetaPipeline.PipelineManagement.project_manager import GENOMES
@@ -52,6 +53,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     cdef object cfg
     cdef list constant_classes = [
         ProdigalConstants,
+        KofamScanConstants,
         InterproscanConstants,
         PROKKAConstants,
         VirSorterConstants,
@@ -82,6 +84,13 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 outfile=out_prefix,
                 run_edit=True,
                 added_flags=cfg.build_parameter_list_from_dict(ProdigalConstants.PRODIGAL),
+            ),
+            KofamScan(
+                output_directory=os.path.join(output_directory, KofamScanConstants.OUTPUT_DIRECTORY),
+                calling_script_path=cfg.get(KofamScanConstants.KOFAMSCAN, ConfigManager.PATH),
+                outfile=out_prefix,
+                fasta_file=fasta_file,
+                added_flags=cfg.build_parameter_list_from_dict(KofamScanConstants.KOFAMSCAN),
             ),
             Interproscan(
                 calling_script_path=cfg.get(InterproscanConstants.INTERPROSCAN, ConfigManager.PATH),

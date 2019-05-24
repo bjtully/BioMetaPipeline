@@ -23,7 +23,7 @@ class KofamScan(LuigiTaskClass):
             [
                 str(self.calling_script_path),
                 "-o",
-                os.path.join(str(self.output_directory), str(self.outfile)),
+                os.path.join(str(self.output_directory), str(self.outfile) + ".tsv"),
                 "-f",
                 "detail",
                 *self.added_flags,
