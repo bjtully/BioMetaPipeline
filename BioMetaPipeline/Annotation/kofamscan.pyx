@@ -8,7 +8,7 @@ from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 class KofamScanConstants:
     KOFAMSCAN = "KOFAMSCAN"
     OUTPUT_DIRECTORY = "kofamscan_results"
-
+    TMP_DIR = "tmp"
 
 class KofamScan(LuigiTaskClass):
     output_directory = luigi.Parameter()
@@ -24,8 +24,8 @@ class KofamScan(LuigiTaskClass):
                 str(self.calling_script_path),
                 "-o",
                 os.path.join(str(self.output_directory), str(self.outfile) + ".tsv"),
-                "-f",
-                "detail",
+                "--tmp-dir",
+                os.path.join(str(self.output_directory), KofamScanConstants.TMP_DIR),
                 *self.added_flags,
                 str(self.fasta_file),
             ],

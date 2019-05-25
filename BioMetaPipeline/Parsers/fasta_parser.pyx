@@ -73,7 +73,7 @@ cdef class FastaParser:
             if not simplify:
                 record_name = record[0][0]
             else:
-                record_name = <string>"%s_%s.%d" % (
+                record_name = <string>"%s.%s_%d" % (
                     record[0][0].substr(0, int(len(record[0][0]) / 4)),
                     record[0][0].substr(int(3 * len(record[0][0]) / 4), int(len(record[0][0]) / 4)),
                     i

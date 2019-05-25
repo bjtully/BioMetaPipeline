@@ -5,29 +5,28 @@ import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 
-class HMMSearchConstants:
-    HMMSEARCH = "HMMSEARCH"
-    OUTPUT_DIRECTORY = "hmmsearch_results"
+class BioDataConstants:
+    BIODATA = "BIODATA"
+    OUTPUT_DIRECTORY = "biodata_results"
 
-
-class HMMSearch(LuigiTaskClass):
+class BioData(LuigiTaskClass):
     output_directory = luigi.Parameter()
+    hmmsearch_results = luigi.Parameter()
     outfile = luigi.Parameter()
     fasta_file = luigi.Parameter()
     hmm_file = luigi.Parameter()
+
 
     def requires(self):
         return []
 
     def run(self):
+        cdef str decoder_outfile = ""
+        cdef str hmmsearch_results = ""
+        cdef str expander_outfile = ""
+        # Run KEGG-decoder
         subprocess.run(
             [
-                str(self.calling_script_path),
-                "--tblout",
-                os.path.join(str(self.output_directory), str(self.outfile)),
-                *self.added_flags,
-                str(self.hmm_file),
-                str(self.fasta_file),
             ],
             check=True,
         )
