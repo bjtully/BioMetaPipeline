@@ -35,6 +35,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     cdef object val
     cdef str genome_storage_folder = os.path.join((<object>output_directory), GENOMES)
     # Create directories as needed
+    print("Creating output directories")
     if not os.path.exists((<object>output_directory)):
         # Output directory
         os.makedirs((<object>output_directory))
@@ -42,16 +43,17 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     if not os.path.exists(genome_storage_folder):
         os.makedirs(genome_storage_folder)
     # Declarations
-    cdef str _file
+    cdef str _file, _f
     cdef tuple split_file
     cdef list current_files = os.listdir(genome_storage_folder)
-    # Copy all genomes to folder with temporary file names
+    # Copy all genomes to folder with temporary file
+    print("Copying files to temp directory")
     for _file in os.listdir((<object>directory)):
-        _file = _file.replace("_", "-")
-        if _file not in current_files:
+        _f = _file.replace("_", "-")
+        if _f not in current_files:
             FastaParser.write_simple(
                 os.path.join((<object>directory), _file),
-                os.path.join(genome_storage_folder, _file),
+                os.path.join(genome_storage_folder, _f),
                 simplify=get_prefix(_file),
             )
     # Make directory for each pipe in pipeline

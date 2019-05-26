@@ -120,7 +120,7 @@ def get_dbdm_call(bint cancel_autocommit, str table_name, str  alias, object cfg
                 alias=alias,
                 table_name=table_name,
             )
-        elif os.path.exists(db_name) and not glob.glob("%s/*/%s.json" % (db_name, table_name)):
+        elif os.path.exists(db_name) and not os.path.exists("%s/classes/%s.json" % (db_name, table_name)):
             return Create(
                 directory_name=directory_name,
                 data_file=data_file,
