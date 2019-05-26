@@ -4,6 +4,7 @@ from BioMetaPipeline.Pipeline.Exceptions.GeneralAssertion import AssertString
 from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.Database.dbdm_calls import BioMetaDBConstants
 from BioMetaPipeline.Parsers.fasta_parser import FastaParser
+from BioMetaPipeline.Accessories.ops import get_prefix
 
 
 cdef str OUTPUT_DIRECTORY = "OUTPUT_DIRECTORY"
@@ -43,14 +44,16 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     # Declarations
     cdef str _file
     cdef tuple split_file
+    cdef list current_files = os.listdir(genome_storage_folder)
     # Copy all genomes to folder with temporary file names
     for _file in os.listdir((<object>directory)):
-        split_file = os.path.splitext(_file)
-        FastaParser.write_simple(
-            os.path.join((<object>directory), _file),
-            os.path.join(genome_storage_folder, split_file[0] + ".tmp" + split_file[1]),
-            simplify=True,
-        )
+        _file = _file.replace("_", "-")
+        if _file not in current_files:
+            FastaParser.write_simple(
+                os.path.join((<object>directory), _file),
+                os.path.join(genome_storage_folder, _file),
+                simplify=get_prefix(_file),
+            )
     # Make directory for each pipe in pipeline
     for val in (<object>luigi_programs_classes_list):
         if not os.path.exists(os.path.join((<object>output_directory), str(getattr(val, OUTPUT_DIRECTORY)))):

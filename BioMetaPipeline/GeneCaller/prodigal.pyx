@@ -4,6 +4,7 @@ import os
 import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 from BioMetaPipeline.Parsers.fasta_parser import FastaParser
+from BioMetaPipeline.Accessories.ops import get_prefix
 
 
 class ProdigalConstants:
@@ -48,9 +49,9 @@ class Prodigal(LuigiTaskClass):
         )
         # Run file edit is needed
         if bool(self.run_edit):
-            FastaParser.write_simple(prot_out, prot_simple, simplify=True)
+            FastaParser.write_simple(prot_out, prot_simple, simplify=get_prefix(prot_simple))
             os.remove(prot_out)
-            FastaParser.write_simple(mrna_out, mrna_simple, simplify=True)
+            FastaParser.write_simple(mrna_out, mrna_simple, simplify=get_prefix(mrna_simple))
             os.remove(mrna_out)
 
     def output(self):

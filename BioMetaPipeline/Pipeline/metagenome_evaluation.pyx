@@ -22,7 +22,7 @@ Uses assembled genomes (.fna)
 class MetagenomeEvaluationConstants:
     TABLE_NAME = "metagenome_evaluation"
     TSV_OUT = "metagenome_evaluation.tsv"
-    LIST_FILE = "metagenome_list.list"
+    LIST_FILE = "metagenome_evaluation.list"
     PROJECT_NAME = "MetagenomeEvaluation"
 
 

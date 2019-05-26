@@ -1,6 +1,7 @@
 # cython: language_level=3
 import luigi
 import os
+from BioMetaPipeline.Accessories.ops import get_prefix
 import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
@@ -19,8 +20,7 @@ class Interproscan(LuigiTaskClass):
         return []
 
     def run(self):
-        cdef str fasta_prefix = os.path.splitext(os.path.basename(str(self.fasta_file)))[0]
-        cdef str outfile_name = os.path.join(str(self.output_directory), fasta_prefix + ".tmp.faa")
+        cdef str outfile_name = os.path.join(str(self.output_directory), get_prefix(str(self.fasta_file)))
         cdef object outfile = open(outfile_name, "w")
         subprocess.run(
             [

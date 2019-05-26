@@ -1,6 +1,4 @@
 from libcpp.string cimport string
-from libcpp.vector cimport vector
-from libcpp.utility cimport pair
 
 cdef extern from "<iostream>" namespace "std":
     cdef cppclass ostream:
@@ -32,8 +30,6 @@ cdef extern from "reader_cpp.cpp":
     pass
 
 cdef extern from "reader_cpp.h" namespace "reader":
-    cdef cppclass ProfileReader:
-        ProfileReader() except +
-        ProfileReader(ifstream, ifstream) except +
-        string searchNext(vector[pair[string, string]])
-        void printKOResults()
+    cdef cppclass KoFamScanReader_cpp:
+        KoFamScanReader_cpp() except +
+        void writeSimplified(string, string)

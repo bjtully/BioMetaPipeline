@@ -12,7 +12,7 @@ class HMMSearchConstants:
 
 class HMMSearch(LuigiTaskClass):
     output_directory = luigi.Parameter()
-    outfile = luigi.Parameter()
+    out_prefix = luigi.Parameter()
     fasta_file = luigi.Parameter()
     hmm_file = luigi.Parameter()
 
@@ -24,7 +24,7 @@ class HMMSearch(LuigiTaskClass):
             [
                 str(self.calling_script_path),
                 "--tblout",
-                os.path.join(str(self.output_directory), str(self.outfile)),
+                os.path.join(str(self.output_directory), str(self.out_prefix)),
                 *self.added_flags,
                 str(self.hmm_file),
                 str(self.fasta_file),
@@ -33,4 +33,4 @@ class HMMSearch(LuigiTaskClass):
         )
 
     def output(self):
-        return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile)))
+        return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.out_prefix)))

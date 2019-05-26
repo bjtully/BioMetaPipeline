@@ -17,6 +17,7 @@ cdef extern from "Python.h":
 cdef class FastaParser:
     cdef FastaParser_cpp fasta_parser_cpp
     cdef ifstream* file_pointer
+    cdef string file_prefix
 
     def __init__(self, str file_name, str delimiter, str header):
         if not os.path.isfile(file_name):
@@ -56,7 +57,7 @@ cdef class FastaParser:
         del record
         return None
 
-    def create_string_generator(self, bint is_python = False, bint simplify = False):
+    def create_string_generator(self, bint is_python = False, string simplify = ""):
         """ Generator function yields either python or c++ string
 
         :param simplify:
@@ -70,12 +71,11 @@ cdef class FastaParser:
         cdef int i = 0
         while (record[0]).size() > 0:
             # Yield python str or string
-            if not simplify:
+            if simplify == "":
                 record_name = record[0][0]
             else:
-                record_name = <string>"%s.%s_%d" % (
-                    record[0][0].substr(0, int(len(record[0][0]) / 4)),
-                    record[0][0].substr(int(3 * len(record[0][0]) / 4), int(len(record[0][0]) / 4)),
+                record_name = <string>"%s_%d" % (
+                    simplify,
                     i
                 )
                 i += 1
@@ -146,7 +146,7 @@ cdef class FastaParser:
         return FastaParser(file_name, delimiter, header).get_values_as_dict()
 
     @staticmethod
-    def write_simple(str file_name, str out_file, str delimiter = " ", str header = ">", bint simplify = False):
+    def write_simple(str file_name, str out_file, str delimiter = " ", str header = ">", str simplify = ""):
         """ Method will write a simplified version of a fasta file (e.g. only displays id and sequence)
 
         :param simplify:
@@ -158,7 +158,7 @@ cdef class FastaParser:
         """
         cdef object fp = FastaParser(file_name, delimiter, header)
         cdef object W = open(out_file, "wb")
-        cdef object record_gen = fp.create_string_generator(False, simplify)
+        cdef object record_gen = fp.create_string_generator(False, PyUnicode_AsUTF8(simplify))
         try:
             while record_gen:
                 W.write(next(record_gen))
