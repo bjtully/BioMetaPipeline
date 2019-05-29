@@ -57,9 +57,10 @@ cdef class FastaParser:
         del record
         return None
 
-    def create_string_generator(self, bint is_python = False, string simplify = ""):
+    def create_string_generator(self, bint is_python = False, string simplify = "", int length = -1):
         """ Generator function yields either python or c++ string
 
+        :param length:
         :param simplify:
         :param is_python:
         :return:
@@ -71,11 +72,14 @@ cdef class FastaParser:
         cdef int i = 0
         while (record[0]).size() > 0:
             # Yield python str or string
+            if length != -1:
+                if length <= len(record[0][0]):
+                    record[0][0] = record[0][0].substr(0, length)
             if simplify == "":
                 record_name = record[0][0]
             else:
                 record_name = <string>"%s_%d" % (
-                    simplify,
+                    simplify.substr(0, length),
                     i
                 )
                 i += 1
@@ -146,9 +150,10 @@ cdef class FastaParser:
         return FastaParser(file_name, delimiter, header).get_values_as_dict()
 
     @staticmethod
-    def write_simple(str file_name, str out_file, str delimiter = " ", str header = ">", str simplify = ""):
+    def write_simple(str file_name, str out_file, str delimiter = " ", str header = ">", str simplify = "", int length = -1):
         """ Method will write a simplified version of a fasta file (e.g. only displays id and sequence)
 
+        :param length:
         :param simplify:
         :param file_name:
         :param out_file:
@@ -158,7 +163,7 @@ cdef class FastaParser:
         """
         cdef object fp = FastaParser(file_name, delimiter, header)
         cdef object W = open(out_file, "wb")
-        cdef object record_gen = fp.create_string_generator(False, PyUnicode_AsUTF8(simplify))
+        cdef object record_gen = fp.create_string_generator(False, PyUnicode_AsUTF8(simplify), length)
         try:
             while record_gen:
                 W.write(next(record_gen))

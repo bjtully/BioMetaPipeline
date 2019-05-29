@@ -55,6 +55,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
                 os.path.join((<object>directory), _file),
                 os.path.join(genome_storage_folder, _f),
                 simplify=get_prefix(_file),
+                length=20,
             )
     # Make directory for each pipe in pipeline
     for val in (<object>luigi_programs_classes_list):
