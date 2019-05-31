@@ -79,7 +79,6 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     cdef object W = open(genome_list_path, "rb")
     cdef object task
     cdef str protein_file = ""
-    cdef str hmmer_file = ""
     line = next(W)
     while line:
         fasta_file = line.decode().rstrip("\r\n")
@@ -87,10 +86,6 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         protein_file = os.path.join(output_directory,
                                         ProdigalConstants.OUTPUT_DIRECTORY,
                                         out_prefix + ProdigalConstants.PROTEIN_FILE_SUFFIX)
-        hmmer_file = os.path.join(
-                    cfg.get(BioDataConstants.BIODATA, ConfigManager.PATH),
-                    BioDataConstants.HMM_PATH,
-                )
         for task in (
             Prodigal(
                 output_directory=os.path.join(output_directory, ProdigalConstants.OUTPUT_DIRECTORY),
