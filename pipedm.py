@@ -46,7 +46,7 @@ if __name__ == "__main__":
     }
 
     _help = {
-        "MET_EVAL":         "Evaluates completion, contamination, and redundancy of genomes",
+        "MET_EVAL":         "Evaluates completion, contamination, and redundancy of MAGs",
         "EU_PAN":           "Assembles, aligns, annotates, and creates pan-genome for Eukaryotes",
         "MET_ANNOT":        "Runs gene callers and annotation programs on MAGs",
     }
