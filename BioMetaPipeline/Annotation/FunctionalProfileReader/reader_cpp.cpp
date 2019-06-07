@@ -18,8 +18,8 @@ namespace reader {
 
         */
         std::ifstream fp;
-        fp.open(kofamResFile);
-        std::ofstream outfile(out);
+        fp.open(kofamResFile.c_str());
+        std::ofstream outfile(out.c_str());
         const std::string THRESHOLD_MET = "*";
         const size_t THRESHOLD_MET_SIZE = THRESHOLD_MET.size();
         std::string line;
