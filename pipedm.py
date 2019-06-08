@@ -54,7 +54,7 @@ if __name__ == "__main__":
     ap = ArgParse(
         args_list,
         description=ArgParse.description_builder(
-            "pipedm:\tRun genome evaluation and annotation pipelines",
+            "pipedm:\tRun meta/genome evaluation and annotation pipelines",
             _help,
             flags
         )

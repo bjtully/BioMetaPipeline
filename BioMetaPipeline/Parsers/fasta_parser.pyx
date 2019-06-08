@@ -49,8 +49,9 @@ cdef class FastaParser:
                     "".join([chr(_c) for _c in record[0][2]]),
                 )
             else:
-                yield <string>">%s\n%s\n" % (
+                yield (
                     record[0][0],
+                    record[0][1],
                     record[0][2],
                 )
             self.fasta_parser_cpp.grab(record[0])
@@ -97,12 +98,12 @@ cdef class FastaParser:
         del record
         return None
 
-    def get_values_as_dict(self):
+    def get_values_as_dict(self, bint is_python = True):
         """ Get record, by record (as in iterate over file) and return as dict
 
         :return:
         """
-        cdef object record_gen = self.create_tuple_generator(True)
+        cdef object record_gen = self.create_tuple_generator(is_python)
         cdef str val
         cdef tuple record
         cdef dict return_dict = {}
@@ -113,12 +114,12 @@ cdef class FastaParser:
         except StopIteration:
             return return_dict
 
-    def get_values_as_list(self):
+    def get_values_as_list(self, bint is_python = True):
         """ Get record, by record (as in iterate over file) and return as list
 
         :return:
         """
-        cdef object record_gen = self.create_tuple_generator(True)
+        cdef object record_gen = self.create_tuple_generator(is_python)
         cdef str val
         cdef list return_list = []
         try:
@@ -128,26 +129,28 @@ cdef class FastaParser:
             return return_list
 
     @staticmethod
-    def parse_list(str file_name, str delimiter = " ", str header = ">"):
+    def parse_list(str file_name, str delimiter = " ", str header = ">", bint is_python = True):
         """ Static method will return fasta file as list [(id, desc, seq),]
 
+        :param is_python:
         :param file_name:
         :param delimiter:
         :param header:
         :return:
         """
-        return FastaParser(file_name, delimiter, header).get_values_as_list()
+        return FastaParser(file_name, delimiter, header).get_values_as_list(is_python)
 
     @staticmethod
-    def parse_dict(str file_name, str delimiter = " ", str header = ">"):
+    def parse_dict(str file_name, str delimiter = " ", str header = ">", bint is_python = True):
         """ Static method for creating dictionary from fasta file as id: (desc(no id), seq)
 
+        :param is_python:
         :param file_name:
         :param delimiter:
         :param header:
         :return:
         """
-        return FastaParser(file_name, delimiter, header).get_values_as_dict()
+        return FastaParser(file_name, delimiter, header).get_values_as_dict(is_python)
 
     @staticmethod
     def write_simple(str file_name, str out_file, str delimiter = " ", str header = ">", str simplify = "", int length = -1):
@@ -169,3 +172,34 @@ cdef class FastaParser:
                 W.write(next(record_gen))
         except StopIteration:
             W.close()
+
+    @staticmethod
+    def split(str file_name, str out_dir = "", str header = ">", str delimiter = " "):
+        """ Method will split fasta file into individual files per fasta entry
+
+        :param out_dir:
+        :param file_name:
+        :param header:
+        :param delimiter:
+        :param simplify:
+        :param length:
+        :return:
+        """
+        cdef object fp = FastaParser(file_name, delimiter, header)
+        cdef object record_gen = fp.create_tuple_generator(False)
+        cdef object W
+        cdef list out_files = []
+        cdef string out_file
+        cdef tuple record
+        try:
+            while record_gen:
+                record = next(record_gen)
+                out_file = <string>PyUnicode_AsUTF8(
+                    os.path.join(out_dir, "".join([chr(_c) for _c in record[0]]) + os.path.splitext(file_name)[1])
+                )
+                W = open("".join([chr(_c) for _c in out_file]), "wb")
+                W.write(<string>">%s\n%s\n" % (record[0], record[2]))
+                W.close()
+                out_files.append(out_file)
+        except StopIteration:
+            return out_files

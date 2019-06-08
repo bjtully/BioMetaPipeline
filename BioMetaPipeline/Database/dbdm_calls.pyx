@@ -97,7 +97,7 @@ class Create(DBDM):
         )
 
 
-def get_dbdm_call(bint cancel_autocommit, str table_name, str  alias, object cfg, str db_name,
+def get_dbdm_call(bint cancel_autocommit, str table_name, str alias, object cfg, str db_name,
                   str directory_name, str data_file):
     """
     
@@ -117,26 +117,26 @@ def get_dbdm_call(bint cancel_autocommit, str table_name, str  alias, object cfg
                 directory_name=directory_name,
                 data_file=data_file,
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-                alias=alias,
-                table_name=table_name,
+                alias=alias.lower(),
+                table_name=table_name.lower(),
             )
-        elif os.path.exists(db_name) and not os.path.exists("%s/classes/%s.json" % (db_name, table_name)):
+        elif os.path.exists(db_name) and not os.path.exists(os.path.join(db_name, "classes", table_name.lower() + ".json")):
             return Create(
                 directory_name=directory_name,
                 data_file=data_file,
-                alias=alias,
-                table_name=table_name,
+                alias=alias.lower(),
+                table_name=table_name.lower(),
                 config_file=db_name,
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
             )
-        else:
+        elif os.path.exists(db_name) and os.path.exists(os.path.join(db_name, "classes", table_name.lower() + ".json")):
             return Update(
                 config_file=db_name,
                 directory_name=directory_name,
                 data_file=data_file,
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-                alias=alias,
-                table_name=table_name,
+                alias=alias.lower(),
+                table_name=table_name.lower(),
             )
     else:
         return None
