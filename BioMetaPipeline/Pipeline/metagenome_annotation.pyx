@@ -129,7 +129,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
             ),
             SplitFile(
                 fasta_file=protein_file,
-                out_dir=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY),
+                out_dir=os.path.join(output_directory, out_prefix, SplitFileConstants.OUTPUT_DIRECTORY),
             ),
             # Commit interproscan results
             get_dbdm_call(
@@ -138,7 +138,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 out_prefix,
                 cfg,
                 biometadb_project,
-                os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY),
+                os.path.join(output_directory, out_prefix, SplitFileConstants.OUTPUT_DIRECTORY),
                 os.path.join(
                     output_directory,
                     InterproscanConstants.OUTPUT_DIRECTORY,
@@ -192,4 +192,4 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     ))
     luigi.build(task_list, local_scheduler=True)
     shutil.rmtree(directory)
-    shutil.rmtree(os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY))
+    shutil.rmtree(os.path.join(output_directory, out_prefix, SplitFileConstants.OUTPUT_DIRECTORY))
