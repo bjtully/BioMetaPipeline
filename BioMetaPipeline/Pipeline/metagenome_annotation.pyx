@@ -13,7 +13,7 @@ from BioMetaPipeline.Annotation.hmmer import HMMSearch, HMMSearchConstants
 from BioMetaPipeline.Annotation.biodata import BioData, BioDataConstants
 from BioMetaPipeline.DataPreparation.combine_output import CombineOutput, CombineOutputConstants
 from BioMetaPipeline.FileOperations.split_file import SplitFile, SplitFileConstants
-from BioMetaPipeline.Database.dbdm_calls import get_dbdm_call
+from BioMetaPipeline.Database.dbdm_calls import GetDBDMCall, BioMetaDBConstants
 from BioMetaPipeline.PipelineManagement.project_manager cimport project_check_and_creation
 from BioMetaPipeline.PipelineManagement.project_manager import GENOMES
 
@@ -112,6 +112,20 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 added_flags=cfg.build_parameter_list_from_dict(InterproscanConstants.INTERPROSCAN),
                 applications=[val for val in cfg.get(InterproscanConstants.INTERPROSCAN, "--applications").split(",") if val != ""],
             ),
+            # Commit interproscan results
+            GetDBDMCall(
+                cancel_autocommit=cancel_autocommit,
+                table_name=out_prefix,
+                alias=out_prefix,
+                calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                db_name=biometadb_project,
+                directory_name=os.path.join(output_directory, out_prefix, SplitFileConstants.OUTPUT_DIRECTORY),
+                data_file=os.path.join(
+                    output_directory,
+                    InterproscanConstants.OUTPUT_DIRECTORY,
+                    out_prefix + InterproscanConstants.AMENDED_RESULTS_SUFFIX
+                )
+            ),
             PROKKA(
                 calling_script_path=cfg.get(PROKKAConstants.PROKKA, ConfigManager.PATH),
                 output_directory=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY),
@@ -131,20 +145,6 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 fasta_file=protein_file,
                 out_dir=os.path.join(output_directory, out_prefix, SplitFileConstants.OUTPUT_DIRECTORY),
             ),
-            # Commit interproscan results
-            get_dbdm_call(
-                cancel_autocommit,
-                out_prefix,
-                out_prefix,
-                cfg,
-                biometadb_project,
-                os.path.join(output_directory, out_prefix, SplitFileConstants.OUTPUT_DIRECTORY),
-                os.path.join(
-                    output_directory,
-                    InterproscanConstants.OUTPUT_DIRECTORY,
-                    out_prefix + InterproscanConstants.AMENDED_RESULTS_SUFFIX
-                )
-            )
         ):
             task_list.append(task)
         try:
@@ -181,14 +181,14 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
             hmmsearch_file=os.path.join(output_directory, HMMSearchConstants.OUTPUT_DIRECTORY, CombineOutputConstants.HMM_OUTPUT_FILE),
         )
     )
-    task_list.append(get_dbdm_call(
-        cancel_autocommit,
-        table_name,
-        alias,
-        cfg,
-        biometadb_project,
-        directory,
-        os.path.join(output_directory, BioDataConstants.OUTPUT_DIRECTORY, BioDataConstants.OUTPUT_FILE + BioDataConstants.OUTPUT_SUFFIX),
+    task_list.append(GetDBDMCall(
+        cancel_autocommit=cancel_autocommit,
+        table_name=table_name,
+        alias=alias,
+        calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+        db_name=biometadb_project,
+        directory_name=directory,
+        data_file=os.path.join(output_directory, BioDataConstants.OUTPUT_DIRECTORY, BioDataConstants.OUTPUT_FILE + BioDataConstants.OUTPUT_SUFFIX),
     ))
     luigi.build(task_list, local_scheduler=True)
     shutil.rmtree(directory)

@@ -97,6 +97,49 @@ class Create(DBDM):
         )
 
 
+class GetDBDMCall(luigi.Task):
+    cancel_autocommit = luigi.BoolParameter()
+    table_name = luigi.Parameter()
+    alias = luigi.Parameter()
+    calling_script_path = luigi.Parameter()
+    db_name = luigi.Parameter()
+    directory_name = luigi.Parameter()
+    data_file = luigi.Parameter()
+
+    def run(self):
+        if not bool(self.cancel_autocommit):
+            if not os.path.exists(str(self.db_name)):
+                return Init(
+                    db_name=str(self.db_name),
+                    directory_name=str(self.directory_name),
+                    data_file=str(self.data_file),
+                    calling_script_path=str(self.calling_script_path),
+                    alias=str(self.alias).lower(),
+                    table_name=str(self.table_name).lower(),
+                )
+            elif os.path.exists(str(self.db_name)) and not os.path.exists(os.path.join(str(self.db_name), "classes", str(self.table_name).lower() + ".json")):
+                return Create(
+                    directory_name=str(self.directory_name),
+                    data_file=str(self.data_file),
+                    alias=str(self.alias).lower(),
+                    table_name=str(self.table_name).lower(),
+                    config_file=str(self.db_name),
+                    calling_script_path=str(self.calling_script_path),
+                )
+            elif os.path.exists(str(self.db_name)) and os.path.exists(os.path.join(str(self.db_name), "classes", str(self.table_name).lower() + ".json")):
+                return Update(
+                    config_file=str(self.db_name),
+                    directory_name=str(self.directory_name),
+                    data_file=str(self.data_file),
+                    calling_script_path=str(self.calling_script_path),
+                    alias=str(self.alias).lower(),
+                    table_name=str(self.table_name).lower(),
+                )
+        else:
+            return None
+
+
+
 def get_dbdm_call(bint cancel_autocommit, str table_name, str alias, object cfg, str db_name,
                   str directory_name, str data_file):
     """
