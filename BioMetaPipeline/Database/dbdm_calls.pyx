@@ -2,7 +2,6 @@
 
 import luigi
 import os
-import glob
 import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 from BioMetaPipeline.Config.config_manager import ConfigManager
@@ -109,34 +108,64 @@ class GetDBDMCall(luigi.Task):
     def run(self):
         if not bool(self.cancel_autocommit):
             if not os.path.exists(str(self.db_name)):
-                return Init(
-                    db_name=str(self.db_name),
-                    directory_name=str(self.directory_name),
-                    data_file=str(self.data_file),
-                    calling_script_path=str(self.calling_script_path),
-                    alias=str(self.alias).lower(),
-                    table_name=str(self.table_name).lower(),
+                subprocess.run(
+                    [
+                        "python3",
+                        str(self.calling_script_path),
+                        "INIT",
+                        "-n",
+                        str(self.db_name),
+                        "-t",
+                        str(self.table_name),
+                        "-d",
+                        str(self.directory_name),
+                        "-f",
+                        str(self.data_file),
+                        "-a",
+                        str(self.alias),
+                    ],
+                    check=True,
                 )
             elif os.path.exists(str(self.db_name)) and not os.path.exists(os.path.join(str(self.db_name), "classes", str(self.table_name).lower() + ".json")):
-                return Create(
-                    directory_name=str(self.directory_name),
-                    data_file=str(self.data_file),
-                    alias=str(self.alias).lower(),
-                    table_name=str(self.table_name).lower(),
-                    config_file=str(self.db_name),
-                    calling_script_path=str(self.calling_script_path),
+                subprocess.run(
+                    [
+                        "python3",
+                        str(self.calling_script_path),
+                        "CREATE",
+                        "-c",
+                        str(self.config_file),
+                        "-t",
+                        str(self.table_name),
+                        "-a",
+                        str(self.alias),
+                        "-f",
+                        str(self.data_file),
+                        "-d",
+                        str(self.directory_name),
+                    ],
+                    check=True,
                 )
             elif os.path.exists(str(self.db_name)) and os.path.exists(os.path.join(str(self.db_name), "classes", str(self.table_name).lower() + ".json")):
-                return Update(
-                    config_file=str(self.db_name),
-                    directory_name=str(self.directory_name),
-                    data_file=str(self.data_file),
-                    calling_script_path=str(self.calling_script_path),
-                    alias=str(self.alias).lower(),
-                    table_name=str(self.table_name).lower(),
+                subprocess.run(
+                    [
+                        "python3",
+                        str(self.calling_script_path),
+                        "UPDATE",
+                        "-c",
+                        str(self.config_file),
+                        "-t",
+                        str(self.table_name),
+                        "-a",
+                        str(self.alias),
+                        "-f",
+                        str(self.data_file),
+                        "-d",
+                        str(self.directory_name),
+                    ],
+                    check=True,
                 )
-        else:
-            return None
+            else:
+                return None
 
 
 
