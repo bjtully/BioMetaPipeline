@@ -111,7 +111,11 @@ optional arguments:
                         /path/to/list_file formatted as 'prefix\tdata_file_1,data_file_2[,...]\n'</code></pre>
 
 The typical workflow involves creating a configuration file based on the templates in `Example/Config`. This config
-file is then used to call the given pipeline.
+file is then used to call the given pipeline by passing to each program any flags specified by the user. This setup
+allows users to customize the calling programs to better fit their needs, as well as provides a useful documentation
+step for researchers.
+
+## Available pipelines
 
 ### MET_EVAL
 
@@ -131,7 +135,25 @@ An additional `.tsv` output file is generated.
     - This command will use the fasta files in `fasta_folder/` in the evaluation pipeline. It will output to the folder
     `eval` and will create or update the `BioMetaDB` project `Metagenomes` in the current directory. It will use the default
     config file provided in `Examples/Config`.
-    - View a summary of the results of this pipeline using `dbdm SUMMARIZE -c Metagenomes/`
+    - View a summary of the results of this pipeline using `dbdm SUMMARIZE -c Metagenomes/ -t evaluation`
+<pre><code>SUMMARIZE:	View summary of all tables in database
+ Project root directory:	Metagenomes
+ Name of database:		Metagenomes.db
+
+******************************************************************
+	    Record Name:	evaluation  
+	Number of Records:	###       
+
+	     Column Name	Average     	Std Dev   
+
+	      completion	##.###      	##.###      
+	   contamination	#.###       	#.###      
+	     is_complete	#.###       	#.###       
+	 is_contaminated	#.###       	#.###       
+	is_non_redundant	#.###       	#.###       
+	       phylogeny	Text entry  
+	redundant_copies	Text entry  
+------------------------------------------------------------------</code></pre>
     
 #### MET_EVAL config file
 
@@ -195,7 +217,29 @@ An additional `.tsv` output file is generated.
     - This command will use the fasta files in `fasta_folder/` in the annotation pipeline. It will output to the folder
     `eval` and will create or update the `BioMetaDB` project `Metagenomes` in the current directory. It will use the default
     config file provided in `Examples/Config`.
-    - View a summary of the results of this pipeline using `dbdm SUMMARIZE -c Metagenomes/`
+    - This pipeline will generate a series of tables - a summary table entitled `annotation`, as well as an individual
+    table for each genome provided.
+    - View the summary table using `dbdm SUMMARIZE -c Metagenomes/ -t annotation`
+<pre><code>SUMMARIZE:	View summary of all tables in database
+ Project root directory:	Metagenomes
+ Name of database:		Metagenomes.db
+
+*************************************************************
+	Record Name:	fasta-file
+	Number of Records:	####      
+
+	Column Name	Average     	Std Dev   
+
+	        cdd	Text entry  
+	      hamap	Text entry  
+	    panther	Text entry  
+	       pfam	Text entry  
+	     prodom	Text entry  
+	       sfld	Text entry  
+	      smart	Text entry  
+	superfamily	Text entry  
+	    tigrfam	Text entry  
+-------------------------------------------------------------</code></pre>
     
 #### MET_ANNOT config file
 
