@@ -8,7 +8,7 @@ namespace reader {
     class KoFamScanReader_cpp {
         public:
             KoFamScanReader_cpp();
-            void writeSimplified(std::string, std::string);
+            void writeSimplified(std::string, std::string, std::string, std::string);
         private:
             void getToken(std::string, std::string*);
     };

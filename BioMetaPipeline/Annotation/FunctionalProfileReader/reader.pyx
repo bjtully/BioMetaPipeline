@@ -15,7 +15,12 @@ cdef extern from "Python.h":
 
 cdef class KoFamScan:
     @staticmethod
-    def write_highest_matches(str kofamscan_results, str outfile):
+    def write_highest_matches(str kofamscan_results, str outfile, str suffix = "", str header = ""):
         cdef KoFamScanReader_cpp reader
         reader = KoFamScanReader_cpp()
-        reader.writeSimplified(<string>PyUnicode_AsUTF8(kofamscan_results), <string>PyUnicode_AsUTF8(outfile))
+        reader.writeSimplified(
+            <string>PyUnicode_AsUTF8(kofamscan_results),
+            <string>PyUnicode_AsUTF8(outfile),
+            <string>PyUnicode_AsUTF8(suffix),
+            <string>PyUnicode_AsUTF8(header),
+        )

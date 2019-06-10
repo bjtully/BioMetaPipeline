@@ -13,13 +13,16 @@ namespace reader {
     KoFamScanReader_cpp::KoFamScanReader_cpp() {}
 
 
-    void KoFamScanReader_cpp::writeSimplified(std::string kofamResFile, std::string out) {
+    void KoFamScanReader_cpp::writeSimplified(std::string kofamResFile, std::string out, std::string suffix = "", std::string header = "") {
         /*  Method saves all K##### values into object member std::set<std::string>
 
         */
         std::ifstream fp;
         fp.open(kofamResFile.c_str());
         std::ofstream outfile(out.c_str());
+        if (header.compare("") != 0) {
+            outfile << header << std::endl;
+        }
         const std::string THRESHOLD_MET = "*";
         const size_t THRESHOLD_MET_SIZE = THRESHOLD_MET.size();
         std::string line;
@@ -34,7 +37,7 @@ namespace reader {
                 // Erase parts of line that come before KO number
                 KoFamScanReader_cpp::getToken(line, id_and_ko);
                 // Add to set of located KO values, as integers
-                outfile << id_and_ko[0] << "\t" << id_and_ko[1] << std::endl;
+                outfile << id_and_ko[0] << suffix << "\t" << id_and_ko[1] << std::endl;
             }
         }
     }

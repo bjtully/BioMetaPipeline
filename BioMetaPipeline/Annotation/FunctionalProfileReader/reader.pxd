@@ -32,4 +32,4 @@ cdef extern from "reader_cpp.cpp":
 cdef extern from "reader_cpp.h" namespace "reader":
     cdef cppclass KoFamScanReader_cpp:
         KoFamScanReader_cpp() except +
-        void writeSimplified(string, string)
+        void writeSimplified(string, string, string, string)

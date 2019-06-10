@@ -11,6 +11,7 @@ class KofamScanConstants:
     KOFAMSCAN = "KOFAMSCAN"
     OUTPUT_DIRECTORY = "kofamscan_results"
     TMP_DIR = "tmp"
+    AMENDED_RESULTS_SUFFIX = ".amended.tsv"
 
 class KofamScan(LuigiTaskClass):
     output_directory = luigi.Parameter()
@@ -36,9 +37,17 @@ class KofamScan(LuigiTaskClass):
             ],
             check=True,
         )
+        # for biodata
         KoFamScan.write_highest_matches(
             outfile_path,
             outpath
+        )
+        # for dbdm
+        KoFamScan.write_highest_matches(
+            outfile_path,
+            os.path.splitext(outpath)[0] + KofamScanConstants.AMENDED_RESULTS_SUFFIX,
+            ".faa",
+            "Protein\tKO"
         )
         # Remove temp directory and file
         os.remove(outfile_path)

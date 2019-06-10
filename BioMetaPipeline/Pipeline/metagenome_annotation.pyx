@@ -97,12 +97,9 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 run_edit=True,
                 added_flags=cfg.build_parameter_list_from_dict(ProdigalConstants.PRODIGAL),
             ),
-            KofamScan(
-                output_directory=os.path.join(output_directory, KofamScanConstants.OUTPUT_DIRECTORY),
-                calling_script_path=cfg.get(KofamScanConstants.KOFAMSCAN, ConfigManager.PATH),
-                outfile=out_prefix,
+            SplitFile(
                 fasta_file=protein_file,
-                added_flags=cfg.build_parameter_list_from_dict(KofamScanConstants.KOFAMSCAN),
+                out_dir=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
             ),
             Interproscan(
                 calling_script_path=cfg.get(InterproscanConstants.INTERPROSCAN, ConfigManager.PATH),
@@ -119,11 +116,32 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 alias=out_prefix,
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                 db_name=biometadb_project,
-                directory_name=os.path.join(output_directory, out_prefix, SplitFileConstants.OUTPUT_DIRECTORY),
+                directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
                 data_file=os.path.join(
                     output_directory,
                     InterproscanConstants.OUTPUT_DIRECTORY,
                     out_prefix + InterproscanConstants.AMENDED_RESULTS_SUFFIX
+                )
+            ),
+            KofamScan(
+                output_directory=os.path.join(output_directory, KofamScanConstants.OUTPUT_DIRECTORY),
+                calling_script_path=cfg.get(KofamScanConstants.KOFAMSCAN, ConfigManager.PATH),
+                outfile=out_prefix,
+                fasta_file=protein_file,
+                added_flags=cfg.build_parameter_list_from_dict(KofamScanConstants.KOFAMSCAN),
+            ),
+            # Commit kofamscan individual results
+            GetDBDMCall(
+                cancel_autocommit=cancel_autocommit,
+                table_name=out_prefix,
+                alias=out_prefix,
+                calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                db_name=biometadb_project,
+                directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
+                data_file=os.path.join(
+                    output_directory,
+                    KofamScanConstants.OUTPUT_DIRECTORY,
+                    out_prefix + KofamScanConstants.AMENDED_RESULTS_SUFFIX
                 )
             ),
             PROKKA(
@@ -140,10 +158,6 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 added_flags=cfg.build_parameter_list_from_dict(VirSorterConstants.VIRSORTER),
                 wdir=os.path.abspath(os.path.join(os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY),
                                   get_prefix(fasta_file))),
-            ),
-            SplitFile(
-                fasta_file=protein_file,
-                out_dir=os.path.join(output_directory, out_prefix, SplitFileConstants.OUTPUT_DIRECTORY),
             ),
         ):
             task_list.append(task)
@@ -192,4 +206,4 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     ))
     luigi.build(task_list, local_scheduler=True)
     shutil.rmtree(directory)
-    shutil.rmtree(os.path.join(output_directory, out_prefix, SplitFileConstants.OUTPUT_DIRECTORY))
+    shutil.rmtree(os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY))
