@@ -240,7 +240,11 @@ An additional `.tsv` output file is generated.
             tigrfam	Text entry  
     -------------------------------------------------------------</code></pre>
     - View the summary table using `dbdm SUMMARIZE -c Metagenomes/ -t annotation`
-    <pre><code>******************************************************************************************************************
+    <pre><code>SUMMARIZE:	View summary of all tables in database
+     Project root directory:	Metagenomes
+     Name of database:		Metagenomes.db
+     
+    ******************************************************************************************************************
                                                     Record Name:	annotation  
                                               Number of Records:	4         
     
@@ -300,7 +304,7 @@ An additional `.tsv` output file is generated.
                                                    woodljungdahl	#.###       	#.###       
                                            xaapro_aminopeptidase	#.###       	#.###       
                                            zinc_carboxypeptidase	#.###       	#.###       
-------------------------------------------------------------------------------------------------------------------</pre></code>
+    ------------------------------------------------------------------------------------------------------------------</code></pre>
     
 #### MET_ANNOT config file
 
