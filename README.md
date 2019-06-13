@@ -219,27 +219,88 @@ An additional `.tsv` output file is generated.
     config file provided in `Examples/Config`.
     - This pipeline will generate a series of tables - a summary table entitled `annotation`, as well as an individual
     table for each genome provided.
+    <pre><code>SUMMARIZE:	View summary of all tables in database
+     Project root directory:	Metagenomes
+     Name of database:		Metagenomes.db
+    
+    *************************************************************
+        Record Name:	fasta-file
+        Number of Records:	####      
+    
+        Column Name	Average     	Std Dev   
+    
+                cdd	Text entry  
+              hamap	Text entry  
+            panther	Text entry  
+               pfam	Text entry  
+             prodom	Text entry  
+               sfld	Text entry  
+              smart	Text entry  
+        superfamily	Text entry  
+            tigrfam	Text entry  
+    -------------------------------------------------------------</code></pre>
     - View the summary table using `dbdm SUMMARIZE -c Metagenomes/ -t annotation`
-<pre><code>SUMMARIZE:	View summary of all tables in database
- Project root directory:	Metagenomes
- Name of database:		Metagenomes.db
-
-*************************************************************
-	Record Name:	fasta-file
-	Number of Records:	####      
-
-	Column Name	Average     	Std Dev   
-
-	        cdd	Text entry  
-	      hamap	Text entry  
-	    panther	Text entry  
-	       pfam	Text entry  
-	     prodom	Text entry  
-	       sfld	Text entry  
-	      smart	Text entry  
-	superfamily	Text entry  
-	    tigrfam	Text entry  
--------------------------------------------------------------</code></pre>
+    <pre><code>******************************************************************************************************************
+                                                    Record Name:	annotation  
+                                              Number of Records:	4         
+    
+                                                     Column Name	Average     	Std Dev   
+    
+                                      3hydroxypropionate_bicycle	#.###       	#.###       
+                              4hydroxybutyrate3hydroxypropionate	#.###       	#.###       
+                                                        adhesion	#.###       	#.###       
+                                                 alcohol_oxidase	#.###       	#.###       
+                                                    alphaamylase	#.###       	#.###       
+                                 alt_thiosulfate_oxidation_doxad	#.###       	#.###       
+                                  alt_thiosulfate_oxidation_tsda	#.###       	#.###       
+                                                aminopeptidase_n	#.###       	#.###       
+                                       ammonia_oxidation_amopmmo	#.###       	#.###              
+                    (...)            
+                                              competence_factors	#.###       	#.###       
+                               competencerelated_core_components	#.###       	#.###       
+                            competencerelated_related_components	#.###       	#.###       
+                                          cp_lyase_cleavage_phnj	#.###       	#.###       
+                                                 cplyase_complex	#.###       	#.###       
+                                                  cplyase_operon	#.###       	#.###       
+                                     curli_fimbriae_biosynthesis	#.###       	#.###       
+                    (...)         
+                                   exopolyalphagalacturonosidase	#.###       	#.###       
+                                            exopolygalacturonase	#.###       	#.###       
+                                          ferredoxin_hydrogenase	#.###       	#.###       
+                                       ferrioxamine_biosynthesis	#.###       	#.###       
+                                                       flagellum	#.###       	#.###       
+                                                    ftype_atpase	#.###       	#.###       
+                    (...)          
+                                   mixed_acid_formate_to_co2__h2	#.###       	#.###       
+                                              mixed_acid_lactate	#.###       	#.###       
+            mixed_acid_pep_to_succinate_via_oaa_malate__fumarate	#.###       	#.###       
+                                      nadhquinone_oxidoreductase	#.###       	#.###       
+                                     nadphquinone_oxidoreductase	#.###       	#.###       
+                                        nadpreducing_hydrogenase	#.###       	#.###       
+                                         nadreducing_hydrogenase	#.###       	#.###       
+                           naphthalene_degradation_to_salicylate	#.###       	#.###       
+                    (...)           
+                                                         rubisco	#.###       	#.###       
+                                                          secsrp	#.###       	#.###       
+                         serine_pathwayformaldehyde_assimilation	#.###       	#.###       
+                                   soluble_methane_monooxygenase	#.###       	#.###       
+                                                 sulfhydrogenase	#.###       	#.###       
+                                               sulfide_oxidation	#.###       	#.###       
+                                           sulfite_dehydrogenase	#.###       	#.###       
+                                   sulfite_dehydrogenase_quinone	#.###       	#.###       
+                                         sulfolipid_biosynthesis	#.###       	#.###       
+                    (...)          
+                                              type_iii_secretion	#.###       	#.###       
+                                               type_iv_secretion	#.###       	#.###       
+                                             type_vabc_secretion	#.###       	#.###       
+                                               type_vi_secretion	#.###       	#.###       
+                                 ubiquinolcytochrome_c_reductase	#.###       	#.###       
+                                        vanadiumonly_nitrogenase	#.###       	#.###       
+                                                    vtype_atpase	#.###       	#.###       
+                                                   woodljungdahl	#.###       	#.###       
+                                           xaapro_aminopeptidase	#.###       	#.###       
+                                           zinc_carboxypeptidase	#.###       	#.###       
+------------------------------------------------------------------------------------------------------------------</pre></code>
     
 #### MET_ANNOT config file
 
