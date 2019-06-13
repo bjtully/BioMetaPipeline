@@ -15,6 +15,8 @@ class BioDataConstants:
     COMBINED_KEGG_FILE = "biodata.ko"
     COMBINED_HMM_FILE = "biodata.hmm"
     COMBINED_PROT_FILE = "biodata.prot"
+    HMM_HEATMAP_OUT = "hmm_heatmap.svg"
+    FUNCTION_HEATMAP_OUT = "function_heatmap.svg"
 
 
 class BioData(LuigiTaskClass):
@@ -51,6 +53,16 @@ class BioData(LuigiTaskClass):
                 "python",
                 str(self.calling_script_path) + "KEGG_expander.py",
                 str(self.hmmsearch_file),
+                expander_outfile
+            ],
+            check=True,
+        )
+        # Run Decode_and_Expand.py
+        subprocess.run(
+            [
+                "python",
+                str(self.calling_script_path) + "Decode_and_Expand.py",
+                decoder_outfile,
                 expander_outfile
             ],
             check=True,

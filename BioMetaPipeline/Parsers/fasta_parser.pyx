@@ -19,7 +19,7 @@ cdef class FastaParser:
     cdef ifstream* file_pointer
     cdef string file_prefix
 
-    def __init__(self, str file_name, str delimiter, str header):
+    def __init__(self, str file_name, str delimiter=" ", str header=">"):
         if not os.path.isfile(file_name):
             raise FileNotFoundError(file_name)
         # Need as pointer in class object so the pointer is kept open over generator tasks
@@ -85,7 +85,7 @@ cdef class FastaParser:
                 )
                 i += 1
             if is_python:
-                yield (
+                yield ">%s\n%s\n" % (
                     "".join([chr(_c) for _c in record_name]),
                     "".join([chr(_c) for _c in record[0][2]]),
                 )
@@ -142,7 +142,7 @@ cdef class FastaParser:
 
     @staticmethod
     def parse_dict(str file_name, str delimiter = " ", str header = ">", bint is_python = True):
-        """ Static method for creating dictionary from fasta file as id: (desc(no id), seq)
+        """ Static method for creating dictionary from fasta file as id<str>: <tuple>(desc<str>(no id), seq<str>)
 
         :param is_python:
         :param file_name:

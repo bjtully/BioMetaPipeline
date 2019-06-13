@@ -104,6 +104,7 @@ class GetDBDMCall(luigi.Task):
     db_name = luigi.Parameter()
     directory_name = luigi.Parameter()
     data_file = luigi.Parameter()
+    added_flags = luigi.ListParameter(default=[])
 
     def run(self):
         if not bool(self.cancel_autocommit):
@@ -123,6 +124,7 @@ class GetDBDMCall(luigi.Task):
                         str(self.data_file),
                         "-a",
                         str(self.alias).lower(),
+                        *self.added_flags,
                     ],
                     check=True,
                 )
@@ -142,6 +144,7 @@ class GetDBDMCall(luigi.Task):
                         str(self.data_file),
                         "-d",
                         str(self.directory_name),
+                        *self.added_flags,
                     ],
                     check=True,
                 )
@@ -161,6 +164,7 @@ class GetDBDMCall(luigi.Task):
                         str(self.data_file),
                         "-d",
                         str(self.directory_name),
+                        *self.added_flags,
                     ],
                     check=True,
                 )
@@ -172,15 +176,15 @@ class GetDBDMCall(luigi.Task):
 def get_dbdm_call(bint cancel_autocommit, str table_name, str alias, object cfg, str db_name,
                   str directory_name, str data_file):
     """
-    
-    :param cancel_autocommit: 
-    :param table_name: 
-    :param alias: 
-    :param cfg: 
-    :param db_name: 
-    :param directory_name: 
-    :param data_file: 
-    :return: 
+
+    :param cancel_autocommit:
+    :param table_name:
+    :param alias:
+    :param cfg:
+    :param db_name:
+    :param directory_name:
+    :param data_file:
+    :return:
     """
     if not cancel_autocommit:
         if not os.path.exists(db_name):

@@ -68,7 +68,19 @@ class ConfigManager:
     def get_cutoffs(self):
         return dict(self.config["CUTOFFS"])
 
+    def get_added_flags(self, str _dict, tuple ignore = ()):
+        """ Metho returns FLAGS line from dict in config file
+
+        :param _dict:
+        :param ignore:
+        :return:
+        """
+        if "FLAGS" in dict(self.config[_dict]).keys():
+            return [def_key.lstrip(" ").rstrip(" ")
+                    for def_key in self.config[_dict]["FLAGS"].rstrip("\r\n").split(",")
+                    if def_key != ""]
+        else:
+            return []
+
     def _validate_programs_in_pipeline(self):
         pass
-
-

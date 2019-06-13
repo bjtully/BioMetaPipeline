@@ -88,6 +88,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         protein_file = os.path.join(output_directory,
                                         ProdigalConstants.OUTPUT_DIRECTORY,
                                         out_prefix + ProdigalConstants.PROTEIN_FILE_SUFFIX)
+        # Build task_list for individual genomes
         for task in (
             Prodigal(
                 output_directory=os.path.join(output_directory, ProdigalConstants.OUTPUT_DIRECTORY),
@@ -121,7 +122,8 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     output_directory,
                     InterproscanConstants.OUTPUT_DIRECTORY,
                     out_prefix + InterproscanConstants.AMENDED_RESULTS_SUFFIX
-                )
+                ),
+                added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
             ),
             KofamScan(
                 output_directory=os.path.join(output_directory, KofamScanConstants.OUTPUT_DIRECTORY),
@@ -130,7 +132,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 fasta_file=protein_file,
                 added_flags=cfg.build_parameter_list_from_dict(KofamScanConstants.KOFAMSCAN),
             ),
-            # Commit kofamscan individual results
+            # Commit kofamscan results
             GetDBDMCall(
                 cancel_autocommit=cancel_autocommit,
                 table_name=out_prefix,
@@ -142,7 +144,8 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     output_directory,
                     KofamScanConstants.OUTPUT_DIRECTORY,
                     out_prefix + KofamScanConstants.AMENDED_RESULTS_SUFFIX
-                )
+                ),
+                added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
             ),
             PROKKA(
                 calling_script_path=cfg.get(PROKKAConstants.PROKKA, ConfigManager.PATH),
@@ -150,6 +153,21 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 out_prefix=out_prefix,
                 fasta_file=fasta_file,
                 added_flags=cfg.build_parameter_list_from_dict(PROKKAConstants.PROKKA),
+            ),
+            # Commit prokka results
+            GetDBDMCall(
+                cancel_autocommit=cancel_autocommit,
+                table_name=out_prefix,
+                alias=out_prefix,
+                calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                db_name=biometadb_project,
+                directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
+                data_file=os.path.join(
+                    output_directory,
+                    InterproscanConstants.OUTPUT_DIRECTORY,
+                    out_prefix + InterproscanConstants.AMENDED_RESULTS_SUFFIX
+                ),
+                added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
             ),
             VirSorter(
                 output_directory=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY),
@@ -195,15 +213,22 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
             hmmsearch_file=os.path.join(output_directory, HMMSearchConstants.OUTPUT_DIRECTORY, CombineOutputConstants.HMM_OUTPUT_FILE),
         )
     )
-    task_list.append(GetDBDMCall(
-        cancel_autocommit=cancel_autocommit,
-        table_name=table_name,
-        alias=alias,
-        calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-        db_name=biometadb_project,
-        directory_name=directory,
-        data_file=os.path.join(output_directory, BioDataConstants.OUTPUT_DIRECTORY, BioDataConstants.OUTPUT_FILE + BioDataConstants.OUTPUT_SUFFIX),
-    ))
+    task_list.append(
+        GetDBDMCall(
+            cancel_autocommit=cancel_autocommit,
+            table_name=table_name,
+            alias=alias,
+            calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+            db_name=biometadb_project,
+            directory_name=directory,
+            data_file=os.path.join(
+                output_directory,
+                BioDataConstants.OUTPUT_DIRECTORY,
+                BioDataConstants.OUTPUT_FILE + BioDataConstants.OUTPUT_SUFFIX,
+            ),
+            added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+        )
+    )
     luigi.build(task_list, local_scheduler=True)
     shutil.rmtree(directory)
     shutil.rmtree(os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY))

@@ -13,7 +13,7 @@ cdef void _adjust_criteria_dict(void* criteria_dict):
 
 
 cdef void alignment_to_fastq(str alignment_file, dict criteria, str outfile):
-    """ Method will convert s/bam to fastq file
+    """ Method will convert s/bam to fastq file and filter for records matching provided criteria
 
     :param outfile:
     :param criteria:
