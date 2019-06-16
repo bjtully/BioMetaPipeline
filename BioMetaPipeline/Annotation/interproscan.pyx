@@ -5,6 +5,7 @@ from BioMetaPipeline.Accessories.ops import get_prefix
 import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 from BioMetaPipeline.Parsers.tsv_parser import TSVParser
+from BioMetaPipeline.Parsers.fasta_parser import FastaParser
 
 
 class InterproscanConstants:
@@ -51,7 +52,8 @@ class Interproscan(LuigiTaskClass):
         write_interproscan_amended(
             os.path.join(str(self.output_directory), str(self.out_prefix) + ".tsv"),
             os.path.join(str(self.output_directory), str(self.out_prefix) + InterproscanConstants.AMENDED_RESULTS_SUFFIX),
-            list(self.applications)
+            list(self.applications),
+            set([key for key in FastaParser.parse_dict(str(self.fasta_file), is_python=True).keys()])
         )
         os.remove(outfile_name)
 
@@ -61,7 +63,7 @@ class Interproscan(LuigiTaskClass):
         )
 
 
-cdef void write_interproscan_amended(str interproscan_results, str outfile,  list applications):
+cdef void write_interproscan_amended(str interproscan_results, str outfile,  list applications, set all_proteins):
     """ Function will write a shortened tsv version of the interproscan results in which
     columns are the applications that were run by the user
     
@@ -74,8 +76,10 @@ cdef void write_interproscan_amended(str interproscan_results, str outfile,  lis
     #                           13:goterms(opt); 14:pathways(opt)
     cdef tuple col_list = (0, 3, 4, 6, 7, 11, 13, 14)
     cdef int val
+    cdef str prot
     cdef str app, outstring = "", id_string
     cdef list interpro_results_list = TSVParser.parse_list(interproscan_results, col_list=col_list)
+    cdef set interpro_ids = set([_l[0] for _l in interpro_results_list])
     cdef object W = open(outfile, "w")
     # initialize current id with first value from interproscan list
     cdef str current_id = interpro_results_list[0][0] + ".faa"
@@ -116,4 +120,15 @@ cdef void write_interproscan_amended(str interproscan_results, str outfile,  lis
             outstring = ""
             application_results = {app: "None" for app in applications}
             current_id = id_string
+    if application_results != {app: "None" for app in applications}:
+        outstring += current_id + "\t"
+        for app in applications:
+            outstring += application_results[app] + "\t"
+        W.write(outstring[:-1])
+        W.write("\n")
+    for prot in (all_proteins - interpro_ids):
+        W.write(prot + ".faa")
+        for app in applications:
+            W.write("\t" + "None")
+        W.write("\n")
     W.close()
