@@ -36,7 +36,6 @@ class CheckM(LuigiTaskClass):
             check=True,
             stdout=open(os.path.join(os.path.dirname(str(self.output_directory)), str(self.outfile)), "w"),
         )
-        # Adjust output to include filenames in
 
     def output(self):
         return luigi.LocalTarget(os.path.join(os.path.dirname(str(self.output_directory)), str(self.outfile)))

@@ -4,18 +4,19 @@ import luigi
 import shutil
 from BioMetaPipeline.Accessories.ops import get_prefix
 from BioMetaPipeline.Config.config_manager import ConfigManager
-from BioMetaPipeline.GeneCaller.prodigal import Prodigal, ProdigalConstants
-from BioMetaPipeline.Annotation.interproscan import Interproscan, InterproscanConstants
-from BioMetaPipeline.Annotation.virsorter import VirSorter, VirSorterConstants
-from BioMetaPipeline.Annotation.prokka import PROKKA, PROKKAConstants
-from BioMetaPipeline.Annotation.kofamscan import KofamScan, KofamScanConstants
-from BioMetaPipeline.Annotation.hmmer import HMMSearch, HMMSearchConstants
-from BioMetaPipeline.Annotation.biodata import BioData, BioDataConstants
-from BioMetaPipeline.DataPreparation.combine_output import CombineOutput, CombineOutputConstants
-from BioMetaPipeline.FileOperations.split_file import SplitFile, SplitFileConstants
-from BioMetaPipeline.Database.dbdm_calls import GetDBDMCall, BioMetaDBConstants
-from BioMetaPipeline.PipelineManagement.project_manager cimport project_check_and_creation
 from BioMetaPipeline.PipelineManagement.project_manager import GENOMES
+from BioMetaPipeline.Annotation.biodata import BioData, BioDataConstants
+from BioMetaPipeline.Annotation.hmmer import HMMSearch, HMMSearchConstants
+from BioMetaPipeline.GeneCaller.prodigal import Prodigal, ProdigalConstants
+from BioMetaPipeline.Annotation.kofamscan import KofamScan, KofamScanConstants
+from BioMetaPipeline.Annotation.virsorter import VirSorter, VirSorterConstants
+from BioMetaPipeline.Database.dbdm_calls import GetDBDMCall, BioMetaDBConstants
+from BioMetaPipeline.FileOperations.split_file import SplitFile, SplitFileConstants
+from BioMetaPipeline.Annotation.prokka import PROKKA, PROKKAConstants, PROKKAMatcher
+from BioMetaPipeline.Annotation.interproscan import Interproscan, InterproscanConstants
+from BioMetaPipeline.PipelineManagement.project_manager cimport project_check_and_creation
+from BioMetaPipeline.DataPreparation.combine_output import CombineOutput, CombineOutputConstants
+from BioMetaPipeline.Alignment.diamond import Diamond, DiamondMakeDB, DiamondConstants, DiamondToFasta
 
 """
 metagenome_annotation consists of:
@@ -65,6 +66,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         CombineOutputConstants,
         BioDataConstants,
         SplitFileConstants,
+        DiamondConstants,
     ]
     genome_list_path, alias, table_name, cfg, biometadb_project = project_check_and_creation(
         <void* >directory,
@@ -98,6 +100,30 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 run_edit=True,
                 added_flags=cfg.build_parameter_list_from_dict(ProdigalConstants.PRODIGAL),
             ),
+            # For PROKKA adjusting
+            DiamondMakeDB(
+                output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
+                prot_file=protein_file,
+                calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
+            ),
+            # Retrieve sections from contigs matching prodigal gene calls
+            Diamond(
+                outfile=out_prefix + ".tsv",
+                output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
+                program="blastx",
+                diamond_db=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, get_prefix(protein_file)),
+                query_file=fasta_file,
+                evalue="1e-10",
+                calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
+            ),
+            DiamondToFasta(
+                output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
+                outfile=out_prefix + ".subset.fna",
+                fasta_file=fasta_file,
+                diamond_file=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, out_prefix + ".tsv"),
+                calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
+            ),
+            # Split prodigal results for committing to DB
             SplitFile(
                 fasta_file=protein_file,
                 out_dir=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
@@ -125,6 +151,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 ),
                 added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
             ),
+            # Predict KEGG
             KofamScan(
                 output_directory=os.path.join(output_directory, KofamScanConstants.OUTPUT_DIRECTORY),
                 calling_script_path=cfg.get(KofamScanConstants.KOFAMSCAN, ConfigManager.PATH),
@@ -147,6 +174,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 ),
                 added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
             ),
+            # PROKKA annotation pipeline
             PROKKA(
                 calling_script_path=cfg.get(PROKKAConstants.PROKKA, ConfigManager.PATH),
                 output_directory=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY),
@@ -154,7 +182,34 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 fasta_file=fasta_file,
                 added_flags=cfg.build_parameter_list_from_dict(PROKKAConstants.PROKKA),
             ),
-            # Commit prokka results
+            # For PROKKA adjusting
+            DiamondMakeDB(
+                output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
+                prot_file=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY, out_prefix, out_prefix + ".faa"),
+                calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
+            ),
+            # Identify which PROKKA annotations match contigs corresponding to prodigal gene calls and save the subset
+            Diamond(
+                outfile=out_prefix + ".rev.tsv",
+                output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
+                program="blastx",
+                diamond_db=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, out_prefix),
+                query_file=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, out_prefix + ".subset.fna"),
+                evalue="1e-20",
+                calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
+            ),
+            # Write final prokka annotations
+            PROKKAMatcher(
+                output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
+                outfile=out_prefix + ".prk-to-prd.tsv",
+                diamond_file=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, out_prefix + ".rev.tsv"),
+                prokka_tsv=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY, out_prefix, out_prefix + PROKKAConstants.AMENDED_RESULTS_SUFFIX),
+                suffix=".faa",
+                evalue="1e-20",
+                pident="98.5",
+                matches_file=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, out_prefix + ".subset.matches"),
+                calling_script_path="",
+            ),
             GetDBDMCall(
                 cancel_autocommit=cancel_autocommit,
                 table_name=out_prefix,
@@ -162,13 +217,10 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                 db_name=biometadb_project,
                 directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
-                data_file=os.path.join(
-                    output_directory,
-                    InterproscanConstants.OUTPUT_DIRECTORY,
-                    out_prefix + InterproscanConstants.AMENDED_RESULTS_SUFFIX
-                ),
+                data_file=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, out_prefix + ".prk-to-prd.tsv"),
                 added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
             ),
+            # Virsorter annotation pipeline
             VirSorter(
                 output_directory=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY),
                 fasta_file=fasta_file,

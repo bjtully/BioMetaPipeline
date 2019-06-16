@@ -24,6 +24,7 @@ Adding the last two lines of the above code to a user's `.bashrc` file will main
         - GTDBtk
         - FastANI
     - `MET_ANNOT`
+        - diamond
         - Prodigal
         - kofamscan
         - [BioData/KEGGDecoder](https://github.com/bjtully/BioData)
