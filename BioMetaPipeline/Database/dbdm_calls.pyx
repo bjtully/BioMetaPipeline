@@ -107,6 +107,8 @@ class GetDBDMCall(luigi.Task):
     added_flags = luigi.ListParameter(default=[])
 
     def run(self):
+        if not os.path.exists(str(self.data_file)):
+            return
         if not bool(self.cancel_autocommit):
             if not os.path.exists(str(self.db_name)):
                 subprocess.run(

@@ -75,17 +75,12 @@ cdef void write_interproscan_amended(str interproscan_results, str outfile,  lis
     # interproscan indices are 0:id; 3:application; 4:sign_accession; 6:start_loc; 7:stop_loc; 11:iprlookup(opt);
     #                           13:goterms(opt); 14:pathways(opt)
     cdef tuple col_list = (0, 3, 4, 6, 7, 11, 13, 14)
-    # cdef int val
     cdef str prot
-    cdef str app, outstring = "" #  , id_string
+    cdef str app, outstring = ""
     cdef list interpro_results_list = TSVParser.parse_list(interproscan_results, col_list=col_list)
     cdef set interpro_ids = set([_l[0] for _l in interpro_results_list])
     cdef object W = open(outfile, "w")
-    # initialize current id with first value from interproscan list
-    # cdef str current_id = interpro_results_list[0][0] + ".faa"
     cdef list interpro_inner_list
-    # cdef dict application_results = {app: "None" for app in applications}
-    # Write header
     W.write("Protein")
     for app in applications:
         W.write("\t" + app)
@@ -117,50 +112,3 @@ cdef void write_interproscan_amended(str interproscan_results, str outfile,  lis
             W.write("\t" + "None")
         W.write("\n")
     W.close()
-    # # Write results by application
-    # for interpro_inner_list in interpro_results_list:
-    #     # Reset prior dict
-    #     # interproscan outputs results for all applications before moving to next protein
-    #     # Collect line info in application until the id changes to the new protein id
-    #     id_string = interpro_inner_list[0] + ".faa"
-    #     if id_string == current_id:
-    #         if application_results[interpro_inner_list[1]] == "None":
-    #             application_results[interpro_inner_list[1]] = "%s-%s:%s;" % (
-    #                 interpro_inner_list[3],
-    #                 interpro_inner_list[4],
-    #                 interpro_inner_list[2],
-    #             )
-    #         else:
-    #             application_results[interpro_inner_list[1]] += "%s-%s:%s;" % (
-    #                 interpro_inner_list[3],
-    #                 interpro_inner_list[4],
-    #                 interpro_inner_list[2],
-    #             )
-    #     else:
-    #         application_results = {app: "None" for app in applications}
-    #         application_results[interpro_inner_list[1]] = "%s-%s:%s;" % (
-    #             interpro_inner_list[3],
-    #             interpro_inner_list[4],
-    #             interpro_inner_list[2],
-    #         )
-    #         # results of protein application end; write to file and move to next protein
-    #         outstring += current_id + "\t"
-    #         for app in applications:
-    #             outstring += application_results[app] + "\t"
-    #         W.write(outstring[:-1])
-    #         W.write("\n")
-    #         # reset outstring, app dict, and current id
-    #         outstring = ""
-    #         current_id = id_string
-    # if application_results != {app: "None" for app in applications}:
-    #     outstring += current_id + "\t"
-    #     for app in applications:
-    #         outstring += application_results[app] + "\t"
-    #     W.write(outstring[:-1])
-    #     W.write("\n")
-    # for prot in (all_proteins - interpro_ids):
-    #     W.write(prot + ".faa")
-    #     for app in applications:
-    #         W.write("\t" + "None")
-    #     W.write("\n")
-    # W.close()

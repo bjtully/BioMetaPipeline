@@ -203,3 +203,60 @@ cdef class FastaParser:
                 out_files.append(out_file)
         except StopIteration:
             return out_files
+
+    @staticmethod
+    def write_single(str file_name, str _id = "", int index = -1, str header = ">", str delimiter = " "):
+        """ Method will search for a given fasta id or index and write to file (named by fasta header)
+
+        :param file_name:
+        :param _id:
+        :param index:
+        :param header:
+        :param delimiter:
+        :return:
+        """
+        assert not (_id == "" and index == -1), "Set _id or index only"
+        cdef object fp = FastaParser(file_name, delimiter, header)
+        cdef object record_gen = fp.create_tuple_generator(False)
+        cdef object W
+        cdef tuple record
+        cdef int i = 0
+        try:
+            while record_gen:
+                record = next(record_gen)
+                if (_id != "" and (<string>record[0]).compare(<string>PyUnicode_AsUTF8(_id)) == 0) or \
+                        (index != -1 and i == index):
+                    W = open(record[0] + (<string>PyUnicode_AsUTF8(os.path.splitext(file_name)[1])), "wb")
+                    W.write(<string>">%s\n%s\n" % (record[0], record[2]))
+                    W.close()
+                    break
+                i += 1
+        except StopIteration:
+            W.close()
+            return
+
+    @staticmethod
+    def get_single(str file_name, str _id = "", int index = -1, str header = ">", str delimiter = " "):
+        """ Method will search for a given fasta id or index and write to file (named by fasta header)
+
+        :param file_name:
+        :param _id:
+        :param index:
+        :param header:
+        :param delimiter:
+        :return:
+        """
+        assert not (_id == "" and index == -1), "Set _id or index only"
+        cdef object fp = FastaParser(file_name, delimiter, header)
+        cdef object record_gen = fp.create_tuple_generator(False)
+        cdef tuple record
+        cdef int i = 0
+        try:
+            while record_gen:
+                record = next(record_gen)
+                if (_id != "" and (<string>record[0]).compare(<string>PyUnicode_AsUTF8(_id)) == 0) or \
+                        (index != -1 and i == index):
+                    return record
+                i += 1
+        except StopIteration:
+            return None

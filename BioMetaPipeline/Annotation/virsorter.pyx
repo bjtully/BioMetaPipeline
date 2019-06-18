@@ -3,13 +3,15 @@ import luigi
 import os
 import subprocess
 import shutil
-from BioMetaPipeline.Accessories.ops import get_prefix
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
+from BioMetaPipeline.Parsers.virsorter_parser cimport parse_prokka_to_dbdm_tsv
 
 
 class VirSorterConstants:
     VIRSORTER = "VIRSORTER"
     OUTPUT_DIRECTORY = "virsorter_results"
+    DEFAULT_CSV_OUTFILE = "VIRSorter_global-phage-signal.csv"
+    ADJ_OUT_FILE = "VIRSorter_adj_out.tsv"
 
 
 class VirSorter(LuigiTaskClass):
@@ -30,29 +32,37 @@ class VirSorter(LuigiTaskClass):
             username = ["--user", self.added_flags[index_of_user + 1]]
             del ending_flags[index_of_user + 1]
             del ending_flags[index_of_user]
-        subprocess.run(
-            [
-                "docker",
-                "run",
-                *username,
-                "-v",
-                "%s:/data" % str(self.calling_script_path),
-                "-v",
-                "%s:/wdir" % str(self.wdir),
-                "-w",
-                "/wdir",
-                "--rm",
-                "simroux/virsorter:v1.0.5",
-                "--fna",
-                os.path.basename(str(self.fasta_file)),
-                *ending_flags,
-            ],
-            check=True,
+        if not os.path.exists(os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.DEFAULT_CSV_OUTFILE)):
+            subprocess.run(
+                [
+                    "docker",
+                    "run",
+                    *username,
+                    "-v",
+                    "%s:/data" % str(self.calling_script_path),
+                    "-v",
+                    "%s:/wdir" % str(self.wdir),
+                    "-w",
+                    "/wdir",
+                    "--rm",
+                    "simroux/virsorter:v1.0.5",
+                    "--fna",
+                    os.path.basename(str(self.fasta_file)),
+                    *ending_flags,
+                ],
+                check=True,
+            )
+        parse_prokka_to_dbdm_tsv(
+            os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.DEFAULT_CSV_OUTFILE),
+            str(self.fasta_file),
+            os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.ADJ_OUT_FILE)
         )
         os.remove(os.path.join(str(self.wdir), os.path.basename(str(self.fasta_file))))
         if not os.listdir(str(self.wdir)):
             os.rmdir(str(self.wdir))
 
     def output(self):
+        pass
         if os.path.exists(str(self.wdir)):
-            return luigi.LocalTarget(os.path.join(str(self.wdir), os.path.basename(str(self.fasta_file))))
+            return luigi.LocalTarget(os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.ADJ_OUT_FILE))
+

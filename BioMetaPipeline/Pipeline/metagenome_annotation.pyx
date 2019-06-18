@@ -229,6 +229,22 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 wdir=os.path.abspath(os.path.join(os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY),
                                   get_prefix(fasta_file))),
             ),
+            # Split genome for committing virsorter results to db
+            SplitFile(
+                fasta_file=fasta_file,
+                out_dir=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix + ".fna"),
+            ),
+            GetDBDMCall(
+                cancel_autocommit=cancel_autocommit,
+                table_name=out_prefix,
+                alias=out_prefix,
+                calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                db_name=biometadb_project,
+                directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix + ".fna"),
+                data_file=os.path.abspath(os.path.join(os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY),
+                                  get_prefix(fasta_file), "virsorter-out", VirSorterConstants.ADJ_OUT_FILE)),
+                added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+            ),
         ):
             task_list.append(task)
         try:

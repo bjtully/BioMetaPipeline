@@ -234,7 +234,8 @@ An additional `.tsv` output file is generated.
               hamap	Text entry  
             panther	Text entry  
                pfam	Text entry  
-             prodom	Text entry  
+             prodom	Text entry
+             prokka Test entry  
                sfld	Text entry  
               smart	Text entry  
         superfamily	Text entry  
@@ -247,7 +248,7 @@ An additional `.tsv` output file is generated.
      
     ******************************************************************************************************************
                                                     Record Name:	annotation  
-                                              Number of Records:	4         
+                                              Number of Records:	##         
     
                                                      Column Name	Average     	Std Dev   
     
