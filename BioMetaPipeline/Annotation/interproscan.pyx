@@ -1,11 +1,13 @@
 # cython: language_level=3
-import luigi
 import os
-from BioMetaPipeline.Accessories.ops import get_prefix
+import luigi
 import subprocess
-from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
+from collections import defaultdict
+from BioMetaPipeline.Accessories.ops import get_prefix
 from BioMetaPipeline.Parsers.tsv_parser import TSVParser
 from BioMetaPipeline.Parsers.fasta_parser import FastaParser
+from BioMetaPipeline.Accessories.range_ops import reduce_span
+from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 
 class InterproscanConstants:
@@ -63,21 +65,22 @@ class Interproscan(LuigiTaskClass):
         )
 
 
-cdef void write_interproscan_amended(str interproscan_results, str outfile,  list applications, set all_proteins):
+cdef void write_interproscan_amended(str interproscan_results, str outfile, list applications, set all_proteins):
     """ Function will write a shortened tsv version of the interproscan results in which
     columns are the applications that were run by the user
     
-    :param applications:
     :param interproscan_results:
     :param outfile: 
+    :param applications:
+    :param all_proteins: 
     :return: 
     """
     # interproscan indices are 0:id; 3:application; 4:sign_accession; 6:start_loc; 7:stop_loc; 11:iprlookup(opt);
     #                           13:goterms(opt); 14:pathways(opt)
     cdef tuple col_list = (0, 3, 4, 6, 7, 11, 13, 14)
-    cdef str prot
+    cdef str prot, sign_acn
     cdef str app, outstring = ""
-    cdef list interpro_results_list = TSVParser.parse_list(interproscan_results, col_list=col_list)
+    cdef list _l, interpro_results_list = TSVParser.parse_list(interproscan_results, col_list=col_list)
     cdef set interpro_ids = set([_l[0] for _l in interpro_results_list])
     cdef object W = open(outfile, "w")
     cdef list interpro_inner_list
@@ -85,27 +88,36 @@ cdef void write_interproscan_amended(str interproscan_results, str outfile,  lis
     for app in applications:
         W.write("\t" + app)
     W.write("\n")
-    cdef dict condensed_results = {_id:{app: "None" for app in applications} for _id in interpro_ids}
+    cdef dict condensed_results = {prot:{app: defaultdict(list) for app in applications} for prot in interpro_ids}
     cdef dict stored_data
+    cdef object inner_data
+    cdef str key
+    cdef tuple coords, coord
+    # Build dict of data by sign_accession.
     for interpro_inner_list in interpro_results_list:
-        stored_data = condensed_results.get(interpro_inner_list[0])
-        if stored_data[interpro_inner_list[1]] == "None":
-            condensed_results[interpro_inner_list[0]][interpro_inner_list[1]] = "%s-%s:%s;" % (
-                interpro_inner_list[3],
-                interpro_inner_list[4],
-                interpro_inner_list[2],
-            )
+        # Check if data for sign_accession is initialized and set
+        if len(interpro_inner_list) == 5:
+            condensed_results[interpro_inner_list[0]][interpro_inner_list[1]][interpro_inner_list[2]].append((interpro_inner_list[3], interpro_inner_list[4]))
         else:
-            condensed_results[interpro_inner_list[0]][interpro_inner_list[1]] += "%s-%s:%s;" % (
-                interpro_inner_list[3],
-                interpro_inner_list[4],
-                interpro_inner_list[2],
-            )
+            condensed_results[interpro_inner_list[0]][interpro_inner_list[1]][interpro_inner_list[2]].append((interpro_inner_list[3], interpro_inner_list[4], *interpro_inner_list[5:]))
+    # Sort results
+    for prot, stored_data in condensed_results.items():
+        for app, inner_data in stored_data.items():
+            # Reduce to nonoverlapping ranges
+            condensed_results[prot][app] = {sign_acn: reduce_span(inner_data[sign_acn]) for sign_acn in inner_data.keys()}
+    # Write summarized results by protein
     for prot in condensed_results.keys():
         outstring = prot + ".faa" + "\t"
         for app in applications:
-            outstring += condensed_results[prot][app] + "\t"
+            if condensed_results[prot][app] != {}:
+                for sign_acn, coords in condensed_results[prot][app].items():
+                    # Write as amended outstring to output file
+                    outstring += "".join(["%s-%s:%s;" % (coord[0], coord[1], "" + sign_acn + (" " + " ".join(coord[2:])[:-1] if len(coord) > 2 else "")) for coord in coords])
+            else:
+                outstring += "None"
+            outstring += "\t"
         W.write(outstring[:-1] + "\n")
+    # Write all proteins for which no interpro matches were located
     for prot in (all_proteins - interpro_ids):
         W.write(prot + ".faa")
         for app in applications:

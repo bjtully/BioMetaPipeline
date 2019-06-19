@@ -329,6 +329,9 @@ PATH = /path/to/kofamscan/exec_annotation
 PATH = /path/to/hmmsearch
 -T = 75
 
+[DIAMOND]
+PATH = /path/to/diamond
+
 [BIODATA]
 PATH = /path/to/KEGGDecoder
 
