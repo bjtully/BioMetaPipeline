@@ -76,7 +76,7 @@ cdef class TSVParser:
 
         :return:
         """
-        cdef char val
+        # cdef char val
         cdef string header_line
         if self.data_type == "python":
             header_line = self.tsv_parser_cpp.getHeader()

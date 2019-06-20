@@ -4,7 +4,7 @@ import os
 import subprocess
 import shutil
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
-from BioMetaPipeline.Parsers.virsorter_parser cimport parse_prokka_to_dbdm_tsv
+from BioMetaPipeline.Parsers.virsorter_parser cimport parse_virsorter_to_dbdm_tsv
 
 
 class VirSorterConstants:
@@ -52,7 +52,7 @@ class VirSorter(LuigiTaskClass):
                 ],
                 check=True,
             )
-        parse_prokka_to_dbdm_tsv(
+        parse_virsorter_to_dbdm_tsv(
             os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.DEFAULT_CSV_OUTFILE),
             str(self.fasta_file),
             os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.ADJ_OUT_FILE)

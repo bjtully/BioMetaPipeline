@@ -8,10 +8,10 @@ cdef extern from "Python.h":
     char* PyUnicode_AsUTF8(object unicode)
 
 
-cdef void parse_prokka_to_dbdm_tsv(str prokka_file, str fasta_file, str outfile):
+cdef void parse_virsorter_to_dbdm_tsv(str virsorter_file, str fasta_file, str outfile):
     """ Rewrites prokka file 
     
-    :param prokka_file: 
+    :param virsorter_file: 
     :param fasta_file: 
     :param outfile: 
     :return: 
@@ -24,7 +24,7 @@ cdef void parse_prokka_to_dbdm_tsv(str prokka_file, str fasta_file, str outfile)
         "5": "num_prophages_2",
         "6": "num_prophages_3"
     }
-    cdef object P = open(prokka_file, "rb")
+    cdef object P = open(virsorter_file, "rb")
     cdef object W
     cdef list line
     cdef bytes _l

@@ -28,6 +28,7 @@ class Interproscan(LuigiTaskClass):
     def run(self):
         cdef str outfile_name = os.path.join(str(self.output_directory), get_prefix(str(self.fasta_file)))
         cdef object outfile = open(outfile_name, "w")
+        cdef str key
         if not os.path.isfile(os.path.join(str(self.output_directory), str(self.out_prefix) + ".tsv")):
             subprocess.run(
                 [
@@ -91,15 +92,16 @@ cdef void write_interproscan_amended(str interproscan_results, str outfile, list
     cdef dict condensed_results = {prot:{app: defaultdict(list) for app in applications} for prot in interpro_ids}
     cdef dict stored_data
     cdef object inner_data
-    cdef str key
     cdef tuple coords, coord
     # Build dict of data by sign_accession.
     for interpro_inner_list in interpro_results_list:
         # Check if data for sign_accession is initialized and set
         if len(interpro_inner_list) == 5:
-            condensed_results[interpro_inner_list[0]][interpro_inner_list[1]][interpro_inner_list[2]].append((interpro_inner_list[3], interpro_inner_list[4]))
+            condensed_results[interpro_inner_list[0]][interpro_inner_list[1]][interpro_inner_list[2]].append(
+                (interpro_inner_list[3], interpro_inner_list[4]))
         else:
-            condensed_results[interpro_inner_list[0]][interpro_inner_list[1]][interpro_inner_list[2]].append((interpro_inner_list[3], interpro_inner_list[4], *interpro_inner_list[5:]))
+            condensed_results[interpro_inner_list[0]][interpro_inner_list[1]][interpro_inner_list[2]].append(
+                (interpro_inner_list[3], interpro_inner_list[4], *interpro_inner_list[5:]))
     # Sort results
     for prot, stored_data in condensed_results.items():
         for app, inner_data in stored_data.items():
@@ -112,7 +114,9 @@ cdef void write_interproscan_amended(str interproscan_results, str outfile, list
             if condensed_results[prot][app] != {}:
                 for sign_acn, coords in condensed_results[prot][app].items():
                     # Write as amended outstring to output file
-                    outstring += "".join(["%s-%s:%s;" % (coord[0], coord[1], "" + sign_acn + (" " + " ".join(coord[2:])[:-1] if len(coord) > 2 else "")) for coord in coords])
+                    outstring += "".join(
+                        ["%s-%s:%s;" % (coord[0], coord[1], sign_acn + (" " + " ".join(
+                            coord[2:])[:-1] if len(coord) > 2 else "")) for coord in coords])
             else:
                 outstring += "None"
             outstring += "\t"

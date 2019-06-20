@@ -104,7 +104,6 @@ cdef class FastaParser:
         :return:
         """
         cdef object record_gen = self.create_tuple_generator(is_python)
-        cdef str val
         cdef tuple record
         cdef dict return_dict = {}
         try:
@@ -120,7 +119,6 @@ cdef class FastaParser:
         :return:
         """
         cdef object record_gen = self.create_tuple_generator(is_python)
-        cdef str val
         cdef list return_list = []
         try:
             while record_gen:
