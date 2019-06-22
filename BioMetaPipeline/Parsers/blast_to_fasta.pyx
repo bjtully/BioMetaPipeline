@@ -12,7 +12,8 @@ def blast_to_fasta(str fasta_file, str blast_file, str out_file, int get_column 
                    float e_value = 1e-10, float pident = 98.5, tuple eval_pident_columns = (4,5), bint write_matches = True):
     """ Function will take the results of a blastx search and output corresponding
     fasta records from a file. Must provide the index of the column with id to get as int.
-    Must also provide a tuple for the indices of the start/end coordinates.
+    Must also provide a tuple for the indices of the start/end coordinates, as well as for the indices of the evalue
+    and pident columns. Option to write file that matches newly created id to the original fasta record id.
 
     :param fasta_file:
     :param blast_file:

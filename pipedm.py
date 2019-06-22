@@ -23,6 +23,8 @@ if __name__ == "__main__":
          {"help": "/path/to/BioMetaDB_project (updates values of existing database)", "default": "None"}),
         (("-l", "--list_file"),
          {"help": "/path/to/list_file formatted as 'prefix\\tdata_file_1,data_file_2[,...]\\n'"}),
+        (("-t", "--type_file"),
+         {"help": "/path/to/type_file formatted as 'file_name.fna\\t[Archaea/Bacteria]\\n'"}),
     )
 
     programs = {
@@ -38,7 +40,7 @@ if __name__ == "__main__":
         "EU_PAN":         ("directory", "config_file", "cancel_autocommit", "output_directory",
                            "biometadb_project", "list_file"),
         "MET_ANNOT":      ("directory", "config_file", "cancel_autocommit", "output_directory",
-                           "biometadb_project"),
+                           "biometadb_project", "type_file"),
     }
 
     errors = {

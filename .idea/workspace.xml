@@ -5,21 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="218e6076-48b5-4a87-b494-95f1ba5893b8" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Data/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/ExtractPeptidaseGenes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/cazy-assignment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/cazy.pyx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/extracellular-assignments-EG.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/extractMEROP_genes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/merops.pyx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/peptidase.pyx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/signalp.pyx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Annotation/interproscan.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Annotation/interproscan.pyx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Annotation/virsorter.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Annotation/virsorter.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Annotation/hmmer.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Annotation/hmmer.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Data/MEROPS.pfam.hmm.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Data/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Parsers/blast_to_fasta.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/blast_to_fasta.pyx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Parsers/fasta_parser.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/fasta_parser.pyx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Parsers/tsv_parser.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/tsv_parser.pyx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Parsers/virsorter_parser.pxd" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/virsorter_parser.pxd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Parsers/virsorter_parser.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Parsers/virsorter_parser.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/cazy-assignment.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/cazy.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/cazy.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Examples/Config/MET_ANNOT.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Config/MET_ANNOT.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pipedm.py" beforeDir="false" afterPath="$PROJECT_DIR$/pipedm.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,12 +45,38 @@
     <window id="1">
       <content type="file-editors">
         <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <leaf>
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/extractMEROP_genes.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="270">
+                    <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+                  </state>
+                </provider>
+              </entry>
+            </file>
             <file pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/ExtractPeptidaseGenes.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="135">
+                    <caret line="10" selection-start-line="10" selection-end-line="10" />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+            <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="300">
-                    <caret line="170" column="37" lean-forward="true" selection-start-line="170" selection-start-column="37" selection-end-line="170" selection-end-column="37" />
+                  <state relative-caret-position="117">
+                    <caret line="287" column="23" lean-forward="true" selection-start-line="287" selection-start-column="23" selection-end-line="287" selection-end-column="23" />
                     <folding>
                       <element signature="e#27#36#0" expanded="true" />
                     </folding>
@@ -61,8 +87,8 @@
             <file pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/pipedm.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="264">
-                    <caret line="54" column="18" lean-forward="true" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="18" />
+                  <state relative-caret-position="570">
+                    <caret line="42" column="58" selection-start-line="42" selection-start-column="58" selection-end-line="42" selection-end-column="58" />
                   </state>
                 </provider>
               </entry>
@@ -70,17 +96,26 @@
             <file pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/tsv_parser.pyx">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="420">
+                  <state relative-caret-position="1185">
                     <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
                   </state>
                 </provider>
               </entry>
             </file>
-            <file pinned="false" current-in-tab="true">
+            <file pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/fasta_parser.pyx">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="354">
-                    <caret line="150" column="86" lean-forward="true" selection-start-line="150" selection-start-column="86" selection-end-line="150" selection-end-column="86" />
+                  <state relative-caret-position="345">
+                    <caret line="23" column="46" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser_cpp.cpp">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="570">
+                    <caret line="38" column="17" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
                   </state>
                 </provider>
               </entry>
@@ -92,48 +127,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/ExtractPeptidaseGenes.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/extractMEROP_genes.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/cazy.pyx">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/cazy-assignment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="261">
+              <caret line="66" column="51" lean-forward="true" selection-start-line="66" selection-start-column="51" selection-end-line="66" selection-end-column="51" />
+              <folding>
+                <element signature="e#28#40#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/virsorter.pyx">
+        <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/hmmer.pyx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+            <state relative-caret-position="435">
+              <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
               <folding>
                 <element signature="e#27#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Examples/Config/MET_ANNOT.ini">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="16" selection-start-line="16" selection-end-line="20" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/BioMetaPipeline/DataPreparation/combine_output.pyx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/merops.pyx">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -174,8 +212,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/BioMetaPipeline/Parsers/fasta_parser_cpp.h" />
-        <option value="$PROJECT_DIR$/BioMetaPipeline/Parsers/fasta_parser.pxd" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/PipelineManagement/project_manager.pxd" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/profile_reader.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/functional_profile_reader/profile_reader_macro_module.py" />
@@ -189,10 +225,8 @@
         <option value="$PROJECT_DIR$/BioMetaPipeline/Pipeline/eukaryotic_pangenome.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/MetagenomeEvaluation/redundancy_checker.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_evaluation.pyx" />
-        <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/hmmer.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/PipelineManagement/project_manager.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/DataPreparation/combine_output.pyx" />
-        <option value="$PROJECT_DIR$/pipedm.py" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Parsers/tsv_parser_cpp.cpp" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/FileOperations/file_operations.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/FileOperations/split_file.pyx" />
@@ -201,7 +235,6 @@
         <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/FunctionalProfileReader/reader_cpp.h" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/FunctionalProfileReader/reader_cpp.cpp" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/kofamscan.pyx" />
-        <option value="$PROJECT_DIR$/BioMetaPipeline/Config/config_manager.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/biodata.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Parsers/sam_to_fastq.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/checkm.pyx" />
@@ -209,30 +242,35 @@
         <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/ProkkaParser/prokka_fix.py" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/GeneCaller/prodigal.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Alignment/diamond.pyx" />
-        <option value="$PROJECT_DIR$/BioMetaPipeline/Parsers/blast_to_fasta.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/prokka.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Parsers/blast_to_fasta.pxd" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Database/dbdm_calls.pyx" />
-        <option value="$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Accessories/range_ops.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/interproscan.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Parsers/tsv_parser.pyx" />
-        <option value="$PROJECT_DIR$/Examples/Config/MET_ANNOT.ini" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Data.py" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Parsers/virsorter_parser.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Parsers/virsorter_parser.pxd" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/virsorter.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Peptidase/extractMEROP_genes.py" />
+        <option value="$PROJECT_DIR$/pipedm.py" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Parsers/fasta_parser.pyx" />
+        <option value="$PROJECT_DIR$/BioMetaPipeline/Config/config_manager.pyx" />
+        <option value="$PROJECT_DIR$/BioMetaPipeline/Parsers/blast_to_fasta.pyx" />
+        <option value="$PROJECT_DIR$/BioMetaPipeline/Peptidase/peptidase.pyx" />
+        <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/hmmer.pyx" />
+        <option value="$PROJECT_DIR$/Examples/Config/MET_ANNOT.ini" />
+        <option value="$PROJECT_DIR$/BioMetaPipeline/Peptidase/cazy.pyx" />
+        <option value="$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="31" />
-    <option name="y" value="44" />
+    <option name="x" value="22" />
+    <option name="y" value="10" />
     <option name="width" value="1345" />
-    <option name="height" value="1317" />
+    <option name="height" value="963" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -240,6 +278,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -262,13 +301,13 @@
               <item name="BioMetaPipeline" type="b2602c69:ProjectViewProjectNode" />
               <item name="BioMetaPipeline" type="462c0819:PsiDirectoryNode" />
               <item name="BioMetaPipeline" type="462c0819:PsiDirectoryNode" />
-              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="Config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BioMetaPipeline" type="b2602c69:ProjectViewProjectNode" />
               <item name="BioMetaPipeline" type="462c0819:PsiDirectoryNode" />
               <item name="BioMetaPipeline" type="462c0819:PsiDirectoryNode" />
-              <item name="Parsers" type="462c0819:PsiDirectoryNode" />
+              <item name="DataPreparation" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BioMetaPipeline" type="b2602c69:ProjectViewProjectNode" />
@@ -276,11 +315,21 @@
               <item name="BioMetaPipeline" type="462c0819:PsiDirectoryNode" />
               <item name="Peptidase" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="BioMetaPipeline" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BioMetaPipeline" type="462c0819:PsiDirectoryNode" />
+              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BioMetaPipeline" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BioMetaPipeline" type="462c0819:PsiDirectoryNode" />
+              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+              <item name="Config" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -388,18 +437,19 @@
       <workItem from="1560657793883" duration="24099000" />
       <workItem from="1560751044820" duration="301000" />
       <workItem from="1560751398488" duration="3951000" />
-      <workItem from="1560909858436" duration="15853000" />
+      <workItem from="1560909858436" duration="16543000" />
+      <workItem from="1561085547210" duration="21744000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="239991000" />
+    <option name="totallyTimeSpent" value="262425000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="31" y="44" width="1345" height="1317" extended-state="0" />
+    <frame x="22" y="10" width="1345" height="963" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49885845" visible="true" weight="0.22786759" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49885845" visible="true" weight="0.2317167" />
       <window_info id="Structure" order="1" sideWeight="0.50114155" side_tool="true" weight="0.21771523" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -407,13 +457,13 @@
       <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="5" weight="0.3259949" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.3249139" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3275463" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32648402" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49868765" weight="0.21591872" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49868765" visible="true" weight="0.2974607" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5013123" side_tool="true" weight="0.3243574" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -490,92 +540,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/MetagenomeEvaluation/redundancy_checker.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2771">
-          <caret line="167" column="23" selection-start-line="167" selection-start-column="23" selection-end-line="167" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/PipelineManagement/project_manager.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="41" column="39" lean-forward="true" selection-start-line="41" selection-start-column="39" selection-end-line="41" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_evaluation.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/FileOperations/file_operations.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="26" column="49" selection-start-line="26" selection-start-column="49" selection-end-line="26" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Accessories/arg_parse.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="1" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/FunctionalProfileReader/reader_cpp.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/FunctionalProfileReader/reader_cpp.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="83" selection-start-line="10" selection-start-column="83" selection-end-line="10" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="24" column="43" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
-          <folding>
-            <element signature="e#28#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pxd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="59" selection-start-line="34" selection-start-column="59" selection-end-line="34" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Config/config_manager.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/TaskClasses/luigi_task_class.pyx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -617,13 +581,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/checkm.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="37" column="9" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/ProkkaParser/prokka_fix.py" />
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/kofamscan.pyx">
       <provider selected="true" editor-type-id="text-editor">
@@ -645,13 +602,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/fasta_parser_cpp.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/sam_to_fastq.pyx">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -667,16 +617,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/blast_to_fasta.pxd" />
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/blast_to_fasta.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="55" column="14" lean-forward="true" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
-          <folding>
-            <element signature="e#28#88#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Accessories/ops.pyx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -697,30 +637,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/GeneCaller/prodigal.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-          <folding>
-            <element signature="e#27#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Database/dbdm_calls.pyx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1650">
           <caret line="110" column="18" selection-start-line="110" selection-start-column="18" selection-end-line="110" selection-end-column="18" />
-          <folding>
-            <element signature="e#28#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Alignment/diamond.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="26" />
           <folding>
             <element signature="e#28#40#0" expanded="true" />
           </folding>
@@ -741,57 +661,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Examples/Config/MET_ANNOT.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/cazy.pyx">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser.pyx">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser_cpp.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Data.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Data/MEROPS.pfam.hmm">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="150">
-          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/tsv_parser.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Data.py" />
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Data/MEROPS.pfam.hmm" />
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/virsorter_parser.pxd">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="25" selection-start-column="25" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/virsorter.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-          <folding>
-            <element signature="e#27#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -825,19 +703,181 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/cazy-assignment.py">
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/tsv_parser.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="1185">
+          <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/extracellular-assignments-EG.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="22" column="61" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/cazy.c">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/Config/MET_EVAL.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="11" lean-forward="true" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/checkm.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipedm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="42" column="58" selection-start-line="42" selection-start-column="58" selection-end-line="42" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/signalp.pyx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/blast_to_fasta.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="106" lean-forward="true" selection-start-line="15" selection-start-column="106" selection-end-line="15" selection-end-column="106" />
+          <folding>
+            <element signature="e#28#88#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/fasta_parser_cpp.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="545">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/checkm_parser_cpp.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="38" column="17" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/fasta_parser.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="46" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Config/config_manager.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="28" column="57" lean-forward="true" selection-start-line="28" selection-start-column="57" selection-end-line="28" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.c">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Alignment/diamond.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1095">
+          <caret line="73" column="45" selection-start-line="73" selection-start-column="45" selection-end-line="73" selection-end-column="45" />
+          <folding>
+            <element signature="e#28#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/virsorter.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="5" selection-end-column="71" />
+          <folding>
+            <element signature="e#27#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/Config/MET_ANNOT.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="16" selection-start-line="16" selection-end-line="20" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/hmmer.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+          <folding>
+            <element signature="e#27#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/GeneCaller/prodigal.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+          <folding>
+            <element signature="e#27#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="170" column="37" lean-forward="true" selection-start-line="170" selection-start-column="37" selection-end-line="170" selection-end-column="37" />
+        <state relative-caret-position="117">
+          <caret line="287" column="23" lean-forward="true" selection-start-line="287" selection-start-column="23" selection-end-line="287" selection-end-column="23" />
           <folding>
             <element signature="e#27#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/cazy.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="66" column="51" lean-forward="true" selection-start-line="66" selection-start-column="51" selection-end-line="66" selection-end-column="51" />
+          <folding>
+            <element signature="e#28#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/peptidase.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="41" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/merops.pyx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/ExtractPeptidaseGenes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/cazy-assignment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="46" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
+          <folding>
+            <element signature="e#183#193#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -849,24 +889,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/ExtractPeptidaseGenes.py">
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/DataPreparation/combine_output.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipedm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="54" column="18" lean-forward="true" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/fasta_parser.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="150" column="86" lean-forward="true" selection-start-line="150" selection-start-column="86" selection-end-line="150" selection-end-column="86" />
+        <state relative-caret-position="210">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>

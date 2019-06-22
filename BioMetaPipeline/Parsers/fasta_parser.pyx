@@ -113,6 +113,20 @@ cdef class FastaParser:
         except StopIteration:
             return return_dict
 
+    def get_index(self, bint is_python = True):
+        """ Returns list of fasta ids in file
+
+        :return:
+        """
+        cdef object record_gen = self.create_tuple_generator(is_python)
+        cdef tuple record
+        cdef list return_list = []
+        try:
+            while record_gen:
+                return_list.append(next(record_gen)[0])
+        except StopIteration:
+            return return_list
+
     def get_values_as_list(self, bint is_python = True):
         """ Get record, by record (as in iterate over file) and return as list
 
@@ -258,3 +272,14 @@ cdef class FastaParser:
                 i += 1
         except StopIteration:
             return None
+
+    @staticmethod
+    def index(str file_name, str header = ">", str delimiter = " "):
+        """
+
+        :param file_name:
+        :param header:
+        :param delimiter:
+        :return:
+        """
+        return FastaParser(file_name, delimiter, header).get_index(True)
