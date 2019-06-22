@@ -141,6 +141,28 @@ cdef class FastaParser:
             return return_list
 
     @staticmethod
+    def write_records(str file_name, list fasta_record_ids, str outfile, str delimiter = " ", str header = ">",
+                      bint is_python = True,):
+        """ Static method will write a new file containing records found in file_name that match records in list.
+
+        :param file_name:
+        :param fasta_record_ids:
+        :param outfile:
+        :param delimiter:
+        :param header:
+        :param is_python:
+        :return:
+        """
+        cdef object W = open(outfile, "wb")
+        cdef tuple record
+        cdef str _id
+        for _id in fasta_record_ids:
+            record = FastaParser.get_single(file_name, _id, header=header, delimiter=delimiter)
+            if record:
+                W.write(<string>">%s\n%s\n" % (record[0], record[2]))
+        W.close()
+
+    @staticmethod
     def parse_list(str file_name, str delimiter = " ", str header = ">", bint is_python = True):
         """ Static method will return fasta file as list [(id, desc, seq),]
 
@@ -193,8 +215,6 @@ cdef class FastaParser:
         :param file_name:
         :param header:
         :param delimiter:
-        :param simplify:
-        :param length:
         :return:
         """
         cdef object fp = FastaParser(file_name, delimiter, header)
@@ -228,28 +248,15 @@ cdef class FastaParser:
         :return:
         """
         assert not (_id == "" and index == -1), "Set _id or index only"
-        cdef object fp = FastaParser(file_name, delimiter, header)
-        cdef object record_gen = fp.create_tuple_generator(False)
         cdef object W
-        cdef tuple record
-        cdef int i = 0
-        try:
-            while record_gen:
-                record = next(record_gen)
-                if (_id != "" and (<string>record[0]).compare(<string>PyUnicode_AsUTF8(_id)) == 0) or \
-                        (index != -1 and i == index):
-                    W = open(record[0] + (<string>PyUnicode_AsUTF8(os.path.splitext(file_name)[1])), "wb")
-                    W.write(<string>">%s\n%s\n" % (record[0], record[2]))
-                    W.close()
-                    break
-                i += 1
-        except StopIteration:
-            W.close()
-            return
+        cdef tuple record = FastaParser.get_single(file_name, _id, index, header, delimiter)
+        W = open(record[0] + (<string>PyUnicode_AsUTF8(os.path.splitext(file_name)[1])), "wb")
+        W.write(<string>">%s\n%s\n" % (record[0], record[2]))
+        W.close()
 
     @staticmethod
     def get_single(str file_name, str _id = "", int index = -1, str header = ">", str delimiter = " "):
-        """ Method will search for a given fasta id or index and write to file (named by fasta header)
+        """ Method will search for a given fasta id or index (named by fasta header) and returns record as tuple
 
         :param file_name:
         :param _id:
@@ -275,7 +282,7 @@ cdef class FastaParser:
 
     @staticmethod
     def index(str file_name, str header = ">", str delimiter = " "):
-        """
+        """ Gets fasta ids from file
 
         :param file_name:
         :param header:

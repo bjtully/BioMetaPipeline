@@ -31,6 +31,7 @@ class HMMSearch(LuigiTaskClass):
                 str(self.fasta_file),
             ],
             check=True,
+            stdout=os.path.join(str(self.output_directory), str(self.out_file) + ".log")
         )
 
     def output(self):

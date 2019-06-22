@@ -71,6 +71,14 @@ cdef class TSVParser:
                 for i in range(values_in_file.size())
                 if values_in_file[i].size() > 0 and i in col_list}
 
+    def get_index(self):
+        """ Returns list of ids in tsv file
+
+        :return:
+        """
+        cdef vector[vector[string]] values_in_file = self.tsv_parser_cpp.getValues()
+        return ["".join([chr(_c) for _c in val[0]]) for val in values_in_file]
+
     def header(self):
         """ Public method for accessing header
 
@@ -105,7 +113,7 @@ cdef class TSVParser:
         :param col_list:
         :return:
         """
-        tsv = TSVParser(file_name, delimiter)
+        cdef object tsv = TSVParser(file_name, delimiter)
         tsv.read_file(skip_lines, comment_line_delimiter, header_line)
         return tsv.get_values_as_dict(col_list)
 
@@ -123,6 +131,22 @@ cdef class TSVParser:
         :param col_list:
         :return:
         """
-        tsv = TSVParser(file_name, delimiter)
+        cdef object tsv = TSVParser(file_name, delimiter)
         tsv.read_file(skip_lines, comment_line_delimiter, header_line)
         return tsv.get_values(col_list)
+
+    @staticmethod
+    def index(str file_name, str delimiter="\t", int skip_lines=0,
+                   str comment_line_delimiter="#", bint header_line=False):
+        """ Class method to call get_index
+
+        :param file_name:
+        :param delimiter:
+        :param skip_lines:
+        :param comment_line_delimiter:
+        :param header_line:
+        :return:
+        """
+        cdef object tsv = TSVParser(file_name, delimiter)
+        tsv.read_file(skip_lines, comment_line_delimiter, header_line)
+        return tsv.get_index()

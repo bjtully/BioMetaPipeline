@@ -52,12 +52,17 @@ class CAZY(LuigiTaskClass):
 
 
 cdef dict create_cazy_dict(vector[string]& cazy_ids, str file_name, str suffix):
+    """ Function fills vector parameter cazy_ids with list of cazy hmm ids. For each query sequence,
+    a dict of counts per cazy hmm are tabulated. Compiled dict is returned
+    
+    :param cazy_ids: 
+    :param file_name: 
+    :param suffix: 
+    :return: 
+    """
     cdef object R = open(file_name, "rb")
-    cdef string token, _l
-    cdef size_t pos = 0
     cdef list line
     cdef string comment_header = "#"
-    cdef string delimiter = " "
     cdef bytes _line
     cdef int val
     cdef string cazy_id
@@ -66,8 +71,11 @@ cdef dict create_cazy_dict(vector[string]& cazy_ids, str file_name, str suffix):
     for _line in R:
         if _line.startswith(bytes(comment_header)):
             continue
+        # File is delimited by unknown number of spaces
         line = _line.decode().rstrip("\r\n").split()
+        # Remove file extension
         cazy = line[0].split(suffix)[0]
+        # Store id in vector
         cazy_ids.push_back(<string>PyUnicode_AsUTF8(line[2]))
         val = int(cazy_dict[<string>PyUnicode_AsUTF8(cazy)].get(<string>PyUnicode_AsUTF8(line[2]), 0))
         if val != 0:

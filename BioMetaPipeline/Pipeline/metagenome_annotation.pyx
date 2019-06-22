@@ -3,9 +3,11 @@ import os
 import luigi
 import shutil
 from BioMetaPipeline.Accessories.ops import get_prefix
+from BioMetaPipeline.Parsers.tsv_parser import TSVParser
 from BioMetaPipeline.Peptidase.cazy import CAZY, CAZYConstants
 from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.Peptidase.peptidase import PeptidaseConstants
+from BioMetaPipeline.Peptidase.merops import MEROPS, MEROPSConstants
 from BioMetaPipeline.PipelineManagement.project_manager import GENOMES
 from BioMetaPipeline.Annotation.biodata import BioData, BioDataConstants
 from BioMetaPipeline.GeneCaller.prodigal import Prodigal, ProdigalConstants
@@ -89,6 +91,38 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     cdef object R = open(genome_list_path, "rb")
     cdef object task
     cdef str protein_file = ""
+    # Used for signalp and psortb processing
+    cdef dict bact_arch_type = TSVParser.parse_dict(type_file)
+    # Prepare CAZy hmm profiles
+    task_list.append(
+        HMMConvert(
+            output_directory=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY),
+            hmm_file=cfg.get(CAZYConstants.CAZY, ConfigManager.DATA),
+            calling_script_path=cfg.get(HMMConvertConstants.HMMCONVERT, ConfigManager.PATH),
+        ),
+    )
+    task_list.append(
+        HMMPress(
+            output_directory=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY),
+            hmm_file=cfg.get(CAZYConstants.CAZY, ConfigManager.DATA),
+            calling_script_path=cfg.get(HMMPressConstants.HMMPRESS, ConfigManager.PATH),
+        ),
+    )
+    # Prepare MEROPS hmm profiles
+    task_list.append(
+        HMMConvert(
+            output_directory=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY),
+            hmm_file=cfg.get(MEROPSConstants.MEROPS, ConfigManager.DATA),
+            calling_script_path=cfg.get(HMMConvertConstants.HMMCONVERT, ConfigManager.PATH),
+        ),
+    )
+    task_list.append(
+        HMMPress(
+            output_directory=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY),
+            hmm_file=cfg.get(MEROPSConstants.MEROPS, ConfigManager.DATA),
+            calling_script_path=cfg.get(HMMPressConstants.HMMPRESS, ConfigManager.PATH),
+        ),
+    )
     line = next(R)
     while line:
         fasta_file = line.decode().rstrip("\r\n")
@@ -253,17 +287,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
             #     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
             # ),
             # Begin peptidase portion of pipeline
-            # Prepare CAZy hmm profiles
-            HMMConvert(
-                output_directory=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY),
-                hmm_file=cfg.get(CAZYConstants.CAZY, ConfigManager.DATA),
-                calling_script_path=cfg.get(HMMConvertConstants.HMMCONVERT, ConfigManager.PATH),
-            ),
-            HMMPress(
-                output_directory=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY),
-                hmm_file=cfg.get(CAZYConstants.CAZY, ConfigManager.DATA),
-                calling_script_path=cfg.get(HMMPressConstants.HMMPRESS, ConfigManager.PATH),
-            ),
+            # Search for CAZy
             HMMSearch(
                 calling_script_path=cfg.get(HMMSearchConstants.HMMSEARCH, ConfigManager.PATH),
                 output_directory=os.path.join(output_directory, HMMSearchConstants.OUTPUT_DIRECTORY),
@@ -271,6 +295,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 fasta_file=protein_file,
                 hmm_file=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY, cfg.get(CAZYConstants.CAZY, ConfigManager.DATA)),
             ),
+            # Assign CAZy info for genome
             CAZY(
                 hmm_results=os.path.join(output_directory, HMMSearchConstants.OUTPUT_DIRECTORY, out_prefix + "." + CAZYConstants.HMM_FILE),
                 output_directory=os.path.join(output_directory, CAZYConstants.OUTPUT_DIRECTORY),
@@ -278,6 +303,14 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 calling_script_path="",
                 suffix=os.path.splitext(ProdigalConstants.PROTEIN_FILE_SUFFIX)[0],
             ),
+            # Search for MEROPS
+            HMMSearch(
+                calling_script_path=cfg.get(HMMSearchConstants.HMMSEARCH, ConfigManager.PATH),
+                output_directory=os.path.join(output_directory, HMMSearchConstants.OUTPUT_DIRECTORY),
+                out_file=out_prefix + "." + MEROPSConstants.HMM_FILE,
+                fasta_file=protein_file,
+                hmm_file=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY, cfg.get(MEROPSConstants.MEROPS, ConfigManager.DATA)),
+            )
         ):
             task_list.append(task)
         try:
