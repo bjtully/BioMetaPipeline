@@ -53,7 +53,11 @@ namespace tsv {
                 line_data.push_back(token);
                 line.erase(0, pos + this->delimiter.length());
             }
+            // Store final value
+            token = line.substr(0, pos);
+            line_data.push_back(token);
             this->records.push_back(line_data);
+
             line_data.clear();
             getline(file, line);
         }

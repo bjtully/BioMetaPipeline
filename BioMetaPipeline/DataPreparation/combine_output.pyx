@@ -14,6 +14,7 @@ class CombineOutputConstants:
 class CombineOutput(LuigiTaskClass):
     output_directory = luigi.Parameter()
     directories = luigi.ListParameter()
+    header_once = luigi.BoolParameter(default=False)
 
     def requires(self):
         return []
@@ -24,11 +25,19 @@ class CombineOutput(LuigiTaskClass):
         cdef str output_file
         cdef object _file
         cdef str _f
+        cdef object R
+        cdef bint first = True
         for directory, suffix, output_file in self.directories:
-            _file = open(os.path.join(str(self.output_directory), output_file), "w")
+            _file = open(os.path.join(str(self.output_directory), output_file), "wb")
             for _f in os.listdir(directory):
                 if _f.endswith(suffix):
-                    _file.write(open(os.path.join(directory, _f), "r").read())
+                    if (self.header_once and first) or not self.header_once:
+                        _file.write(open(os.path.join(directory, _f), "rb").read())
+                    elif self.header_once and not first:
+                        first = True
+                        R = open(os.path.join(directory, _f), "rb")
+                        next(R)
+                        _file.write(R.read())
             _file.close()
 
     def output(self):

@@ -69,7 +69,7 @@ cdef class TSVParser:
         return {"".join([chr(_c) for _c in values_in_file[i][0]]):
                 ["".join([chr(_c) for _c in val]) for val in values_in_file[i][1:]]
                 for i in range(values_in_file.size())
-                if values_in_file[i].size() > 0 and i in col_list}
+                if i in col_list and values_in_file[i].size() > 0}
 
     def get_index(self):
         """ Returns list of ids in tsv file

@@ -1,10 +1,10 @@
 # distutils: language = c++
-import luigi
 import os
-from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
+import luigi
+from collections import Counter
 from libcpp.string cimport string
-from collections import defaultdict
 from libcpp.vector cimport vector
+from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 
 cdef extern from "Python.h":
@@ -16,44 +16,59 @@ class CAZYConstants:
     OUTPUT_DIRECTORY = "cazy"
     HMM_FILE = "cazy_hmm.list"
     ASSIGNMENTS = "cazy_assignments.tsv"
+    ASSIGNMENTS_BY_PROTEIN = "cazy_assignments.byprot.tsv"
 
 
 class CAZY(LuigiTaskClass):
     hmm_results = luigi.Parameter()
     output_directory = luigi.Parameter()
     outfile = luigi.Parameter()
-    suffix = luigi.Parameter()
+    prot_suffix = luigi.Parameter()
+    genome_basename = luigi.Parameter()
 
     def requires(self):
         return []
 
     def run(self):
-        cdef dict inner_data
-        cdef string genome, cazy
+        cdef string genome, cazy, val
         cdef int count
-        cdef vector[string] cazy_ids
+        cdef string prot_suffix = <string>PyUnicode_AsUTF8(str(self.prot_suffix))
+        cdef vector[string] _cazy_ids
         cdef object W = open(os.path.join(str(self.output_directory), str(self.outfile)), "wb")
-        cdef dict cazy_data = create_cazy_dict(cazy_ids, str(self.hmm_results), str(self.suffix))
-        cdef int val
+        cdef object WP = open(
+            os.path.join(str(self.output_directory),
+            str(self.outfile).replace(CAZYConstants.ASSIGNMENTS, CAZYConstants.ASSIGNMENTS_BY_PROTEIN)),
+            "wb"
+        )
+        # Populate vector of cazy ids
+        cdef dict cazy_data = create_cazy_dict(_cazy_ids, str(self.hmm_results))
+        cdef dict count_data = <dict>Counter([val for val in (<dict>cazy_data).values()])
+        # Set of no-repeated cazy ids
+        cdef set cazy_ids = set([cazy for cazy in _cazy_ids])
+        # Write compiled count data
         W.write(<string>"Genome")
         for cazy in cazy_ids:
-            W.write(<string>"\t" + cazy.substr(0, cazy.size() - 4))
+            W.write(<string>"\t" + cazy)
         W.write(<string>"\n")
-        for genome, inner_data in cazy_data.items():
-            W.write(genome)
-            for cazy in cazy_ids:
-                val = cazy_data[genome].get(cazy, 0)
-                W.write(<string>(<string>"\t" + <string>PyUnicode_AsUTF8(str(val))))
-            W.write(<string>"\n")
+        W.write(<string>PyUnicode_AsUTF8(str(self.genome_basename)))
+        for cazy in cazy_ids:
+            val = <string>PyUnicode_AsUTF8(str(count_data.get(cazy, 0)))
+            W.write(<string>"\t" + val)
+        W.write(<string>"\n")
+        # Write individual protein data
+        WP.write(<string>"Protein\tCAZy\n")
+        for genome, cazy in cazy_data.items():
+            WP.write(genome + prot_suffix + <string>"\t" + cazy + <string>"\n")
         W.close()
+        WP.close()
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile)))
 
 
-cdef dict create_cazy_dict(vector[string]& cazy_ids, str file_name, str suffix):
-    """ Function fills vector parameter cazy_ids with list of cazy hmm ids. For each query sequence,
-    a dict of counts per cazy hmm are tabulated. Compiled dict is returned
+cdef dict create_cazy_dict(vector[string]& cazy_ids, str file_name):
+    """ Function fills vector parameter cazy_ids with list of cazy hmm ids. Data gathered by protein id, removing
+    .hmm extension from query name
     
     :param cazy_ids: 
     :param file_name: 
@@ -65,22 +80,18 @@ cdef dict create_cazy_dict(vector[string]& cazy_ids, str file_name, str suffix):
     cdef string comment_header = "#"
     cdef bytes _line
     cdef int val
-    cdef string cazy_id
-    cdef str cazy
-    cdef object cazy_dict = defaultdict(dict)
+    cdef string _id, cazy, _cazy
+    cdef dict cazy_dict = {}
     for _line in R:
         if _line.startswith(bytes(comment_header)):
             continue
         # File is delimited by unknown number of spaces
         line = _line.decode().rstrip("\r\n").split(maxsplit=3)
-        # Remove file extension
-        cazy = line[0].split(suffix)[0]
         # Store id in vector
-        cazy_ids.push_back(<string>PyUnicode_AsUTF8(line[2]))
-        val = int(cazy_dict[<string>PyUnicode_AsUTF8(cazy)].get(<string>PyUnicode_AsUTF8(line[2]), 0))
-        if val != 0:
-            cazy_dict[<string>PyUnicode_AsUTF8(cazy)][<string>PyUnicode_AsUTF8(line[2])] += 1
-        else:
-            cazy_dict[<string>PyUnicode_AsUTF8(cazy)][<string>PyUnicode_AsUTF8(line[2])] = 1
+        _cazy = <string>PyUnicode_AsUTF8(line[2])
+        cazy = _cazy.substr(0, _cazy.size() - 4)
+        cazy_ids.push_back(cazy)
+        _id = <string>PyUnicode_AsUTF8(line[0])
+        cazy_dict[_id] = cazy
     R.close()
-    return <dict>cazy_dict
+    return cazy_dict

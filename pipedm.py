@@ -24,7 +24,7 @@ if __name__ == "__main__":
         (("-l", "--list_file"),
          {"help": "/path/to/list_file formatted as 'prefix\\tdata_file_1,data_file_2[,...]\\n'"}),
         (("-t", "--type_file"),
-         {"help": "/path/to/type_file formatted as 'file_name.fna\\t[Archaea/Bacteria]\\n'"}),
+         {"help": "/path/to/type_file formatted as 'file_name.fna\\t[Archaea/Bacteria]\\t[gram+/gram-]\\n'"}),
     )
 
     programs = {

@@ -1,7 +1,6 @@
-# distutils: language = c++
+# cython: language_level=3
 import os
 import luigi
-from libcpp.string cimport string
 from BioMetaPipeline.Parsers.fasta_parser import FastaParser
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
@@ -43,3 +42,21 @@ class MEROPS(LuigiTaskClass):
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile)))
+
+
+def build_merops_dict(str file_name):
+    """ Function builds dict of merops values. Must be str per luigi documentation
+    
+    :param file_name: 
+    :return: 
+    """
+    cdef str _line
+    cdef list line
+    cdef dict merops_data = {}
+    cdef object merops_file = open(file_name, "r")
+    # Skip header
+    next(merops_file)
+    for _line in merops_file:
+        line = _line.rstrip("\r\n").split("\t")
+        merops_data[line[3]] = "%s.%s" % (line[0], line[1])
+    return merops_data

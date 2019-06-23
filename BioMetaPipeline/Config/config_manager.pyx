@@ -12,6 +12,7 @@ class ConfigManager:
 
     PATH = "PATH"
     DATA = "DATA"
+    DATA_DICT = "DATA_DICT"
 
     def __init__(self, str config_path, tuple ignore = (), bint validate=True):
         self.config = Config()
