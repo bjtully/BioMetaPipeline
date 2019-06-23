@@ -29,7 +29,6 @@ _column_names = ["is_non_redundant", "redundant_copies",
                                   "phylogeny"]
 
 
-# TODO Add error handling for broken data pipes - e.g. how to handle program fails for final parsing
 cdef class RedundancyChecker:
     cdef void* checkm_file
     cdef void* fastani_file

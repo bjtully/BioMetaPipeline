@@ -2,6 +2,18 @@
 
 import os
 from BioMetaPipeline.Config.config import Config
+from configparser import NoSectionError
+
+pipelines = {
+    "metagenome_annotation": {
+    "required": ["PRODIGAL", "HMMSEARCH", "HMMCONVERT", "HMMPRESS", "BIOMETADB"],
+    "peptidase": ["CAZY", "MEROPS", "SIGNALP", "PSORTB"],
+    "kegg": ["KOFAMSCAN", "BIODATA"],
+    "prokka": ["DIAMOND", "PROOKKA"],
+    "interproscan": ["INTERPROSCAN",],
+    "virsorter": ["VIRSORTER",],
+}
+}
 
 
 class ConfigManager:
@@ -70,7 +82,7 @@ class ConfigManager:
         return dict(self.config["CUTOFFS"])
 
     def get_added_flags(self, str _dict, tuple ignore = ()):
-        """ Metho returns FLAGS line from dict in config file
+        """ Method returns FLAGS line from dict in config file
 
         :param _dict:
         :param ignore:
@@ -85,3 +97,20 @@ class ConfigManager:
 
     def _validate_programs_in_pipeline(self):
         pass
+
+    def check_pipe_set(self, str pipe, str pipeline_name):
+        """ Method checks if all required programs have entries in config file. Returns true/false.
+        Does not check validity of programs
+
+        :param pipe:
+        :param pipeline_name:
+        :return:
+        """
+        cdef list required_progams
+        cdef str program, value
+        for program in pipelines[pipeline_name][pipe]:
+            try:
+                value = self.config.get(program, ConfigManager.PATH)
+            except NoSectionError:
+                return False
+        return True

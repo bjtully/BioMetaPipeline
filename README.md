@@ -31,6 +31,12 @@ Adding the last two lines of the above code to a user's `.bashrc` file will main
         - Interproscan
         - PROKKA
         - VirSorter
+        - psortb
+        - signalp
+        - hmmer
+        - Required Data:
+            - dbCAN hmm profiles, available [here](http://csbl.bmb.uga.edu/dbCAN/download.php)
+            - MEROPS hmm profiles, available [here](https://www.dropbox.com/s/8pskp3hlkdnt6zm/MEROPS.pfam.hmm?dl=0)
     - [BioMetaDB](https://github.com/cjneely10/BioMetaDB)
 
 Python dependencies are best maintained within a separate Python virtual environment. `BioMetaDB` and `BioMetaPipeline`
@@ -235,7 +241,7 @@ An additional `.tsv` output file is generated.
             panther	Text entry  
                pfam	Text entry  
              prodom	Text entry
-             prokka Test entry  
+             prokka	Text entry  
                sfld	Text entry  
               smart	Text entry  
         superfamily	Text entry  
@@ -307,38 +313,85 @@ An additional `.tsv` output file is generated.
                                            xaapro_aminopeptidase	#.###       	#.###       
                                            zinc_carboxypeptidase	#.###       	#.###       
     ------------------------------------------------------------------------------------------------------------------</code></pre>
+
+#### MET_ANNOT type file
+
+Peptidase predictions are incorporated into the **MET_ANNOT** pipeline, which requires users to provide additional information
+about domain and membrane types. This info should be provided in a separate file and passed to `pipedm` using the `-t` flag.
+The format of this file should include the following info, separated by tabs, with one line per genome passed to pipeline:
+
+<pre><code>[fasta-file]	[bacteria/archaea]	[gram+/gram-]</code></pre> 
     
 #### MET_ANNOT config file
 
 The **MET_ANNOT** default config file allows for paths to calling programs to be set, as well as for program-level flags 
 to be passed. Note that individual flags (e.g. those that are passed without arguments) are set using `FLAGS`. 
-Ensure that all paths are valid (the bash command `which <COMMAND>` is useful for locating program paths). `BioData` requires
-a valid `pip` installation as well as a downloaded copy of the github repository.
+Ensure that all paths are valid (the bash command `which <COMMAND>` is useful for locating program paths).
 
 - Location: `Examples/Config/MET_ANNOT.ini`
-<pre><code>[PRODIGAL]
+<pre><code># MET_ANNOT.ini
+# Default config file for running the MET_ANNOT pipeline
+# Users are recommended to edit copies of this file only
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# The following pipes **MUST** be set
+
+[PRODIGAL]
 PATH = /usr/bin/prodigal
 -p = meta
 FLAGS = -m
+
+[HMMSEARCH]
+PATH = /usr/bin/hmmsearch
+-T = 75
+
+[HMMCONVERT]
+PATH = /usr/bin/hmmconvert
+
+[HMMPRESS]
+PATH = /usr/bin/hmmpress
+
+[BIOMETADB]
+PATH = /path/to/BioMetaDB/dbdm.py
+--db_name = Annotation
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# The following pipe sections may optionally be set
+# Ensure that the entire pipe section is valid, or deleted, prior to running pipeline
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Peptidase annotation
+
+[CAZY]
+DATA = /path/to/dbCAN-fam.hmm
+
+[MEROPS]
+DATA = /path/to/MEROPS.pfam.hmm
+DATA_DICT = /path/to/merops-as-pfams.txt
+
+[SIGNALP]
+PATH = /path/to/signalp
+
+[PSORTB]
+PATH = /path/to/psortb
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# KEGG pathway annotation
 
 [KOFAMSCAN]
 PATH = /path/to/kofamscan/exec_annotation
 --cpu = 1
 
-[HMMSEARCH]
-PATH = /path/to/hmmsearch
--T = 75
-
-[DIAMOND]
-PATH = /path/to/diamond
-
 [BIODATA]
 PATH = /path/to/KEGGDecoder
 
-[INTERPROSCAN]
-PATH = /path/to/interproscan.sh
---applications = TIGRFAM,SFLD,SMART,SUPERFAMILY,Pfam,ProDom,Hamap,CDD,PANTHER
-FLAGS = --goterms,--iprlookup,--pathways
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# PROKKA
+
+[DIAMOND]
+PATH = /path/to/diamond
 
 [PROKKA]
 PATH = /path/to/prokka
@@ -346,14 +399,27 @@ FLAGS = --addgenes,--addmrna,--usegenus,--metagenome,--rnammer
 --evalue = 1e-10
 --cpus = 2
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# InterproScan
+
+[INTERPROSCAN]
+PATH = /path/to/interproscan.sh
+--applications = TIGRFAM,SFLD,SMART,SUPERFAMILY,Pfam,ProDom,Hamap,CDD,PANTHER
+FLAGS = --goterms,--iprlookup,--pathways
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# VirSorter
+
 [VIRSORTER]
 PATH = /path/to/virsorter-data
 --db = 2
 --user = UID-of-user-from-etc/passwd-file
-
-[BIOMETADB]
-PATH = /path/to/BioMetaDB/dbdm.py
---db_name = Annotation</code></pre>
+</code></pre>
 
 - General Notes
     - Depending on the number of genomes, the completion time for this pipeline can vary from several hours to several days.
+    - `BioData` requires a valid `pip` installation as well as a downloaded copy of the github repository.
+    - `psortb` PERL scripts for command-line versions of the program call `sudo`. Either remove this from the script using
+    `sed -i 's/sudo //g' /path/to/psortb`, or ensure that docker access is available.
+    - The `virsorter` pipe offers the ability to pass user info to its calling program, `docker`, thus removing the need to 
+    run using root.
