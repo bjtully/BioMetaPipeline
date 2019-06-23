@@ -77,7 +77,7 @@ cdef class TSVParser:
         :return:
         """
         cdef vector[vector[string]] values_in_file = self.tsv_parser_cpp.getValues()
-        return ["".join([chr(_c) for _c in val[0]]) for val in values_in_file]
+        return ["".join([chr(_c) for _c in val[0]]) for val in values_in_file if val.size() > 0]
 
     def header(self):
         """ Public method for accessing header

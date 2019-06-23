@@ -72,7 +72,7 @@ cdef dict create_cazy_dict(vector[string]& cazy_ids, str file_name, str suffix):
         if _line.startswith(bytes(comment_header)):
             continue
         # File is delimited by unknown number of spaces
-        line = _line.decode().rstrip("\r\n").split()
+        line = _line.decode().rstrip("\r\n").split(maxsplit=3)
         # Remove file extension
         cazy = line[0].split(suffix)[0]
         # Store id in vector

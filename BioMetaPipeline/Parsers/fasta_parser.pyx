@@ -141,8 +141,7 @@ cdef class FastaParser:
             return return_list
 
     @staticmethod
-    def write_records(str file_name, list fasta_record_ids, str outfile, str delimiter = " ", str header = ">",
-                      bint is_python = True,):
+    def write_records(str file_name, object fasta_record_ids, str outfile, str delimiter = " ", str header = ">"):
         """ Static method will write a new file containing records found in file_name that match records in list.
 
         :param file_name:
@@ -150,7 +149,6 @@ cdef class FastaParser:
         :param outfile:
         :param delimiter:
         :param header:
-        :param is_python:
         :return:
         """
         cdef object W = open(outfile, "wb")

@@ -75,6 +75,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         CAZYConstants,
         PeptidaseConstants,
         HMMConvertConstants,
+        MEROPSConstants,
     ]
     genome_list_path, alias, table_name, cfg, biometadb_project = project_check_and_creation(
         <void* >directory,
@@ -310,7 +311,15 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 out_file=out_prefix + "." + MEROPSConstants.HMM_FILE,
                 fasta_file=protein_file,
                 hmm_file=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY, cfg.get(MEROPSConstants.MEROPS, ConfigManager.DATA)),
-            )
+            ),
+            # Assign MEROPS info for genome
+            MEROPS(
+                calling_script_path="",
+                hmm_results=os.path.join(output_directory, HMMSearchConstants.OUTPUT_DIRECTORY, out_prefix + "." + MEROPSConstants.HMM_FILE),
+                output_directory=os.path.join(output_directory, MEROPSConstants.OUTPUT_DIRECTORY),
+                outfile=out_prefix + "." + MEROPSConstants.MEROPS_PROTEIN_FILE_SUFFIX,
+                prot_file=protein_file,
+            ),
         ):
             task_list.append(task)
         try:

@@ -1,9 +1,8 @@
 # distutils: language = c++
+import os
 import luigi
 from libcpp.string cimport string
-from libcpp.vector cimport vector
-from collections import defaultdict
-from BioMetaPipeline.Parsers.tsv_parser import TSVParser
+from BioMetaPipeline.Parsers.fasta_parser import FastaParser
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 
@@ -15,32 +14,32 @@ class MEROPSConstants:
     MEROPS = "MEROPS"
     OUTPUT_DIRECTORY = "merops"
     HMM_FILE = "merops_hmm.list"
+    MEROPS_PROTEIN_FILE_SUFFIX = "merops.protein.faa"
 
 
 class MEROPS(LuigiTaskClass):
     hmm_results = luigi.Parameter()
     output_directory = luigi.Parameter()
     outfile = luigi.Parameter()
-    suffix = luigi.Parameter()
+    prot_file = luigi.Parameter()
 
     def requires(self):
         return []
 
     def run(self):
-        pass
+        # Gather MEROPS gene ids
+        cdef set match_ids = set()
+        cdef object R = open(str(self.hmm_results), "r")
+        cdef str _line
+        cdef str delimiter = "#"
+        cdef list line
+        for _line in R:
+            line = _line.split(maxsplit=1)
+            if line[0] != delimiter:
+                match_ids.add(line[0])
+        # Write protein sequences that match MEROPS genes
+        cdef str out_file = os.path.join(str(self.output_directory), str(self.outfile))
+        FastaParser.write_records(str(self.prot_file), match_ids, out_file)
 
     def output(self):
-        pass
-
-
-cdef set extract_MEROPS_genes(str MEROPS_hmm_results):
-    """
-    
-    :param MEROPS_hmm_results: 
-    :return: 
-    """
-    cdef object W = open(MEROPS_hmm_results, "rb")
-    cdef set match_ids = set(TSVParser.)
-    # Gather MEROPS gene ids
-
-    # Write protein sequences that match MEROPS genes
+        return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile)))
