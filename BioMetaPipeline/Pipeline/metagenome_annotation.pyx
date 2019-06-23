@@ -315,8 +315,8 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
             # Store CAZy output in peptidase-specific database
             GetDBDMCall(
                 cancel_autocommit=cancel_autocommit,
-                table_name=out_prefix + MetagenomeAnnotationConstants.PEPTIDASE,
-                alias=out_prefix + MetagenomeAnnotationConstants.PEPTIDASE,
+                table_name=out_prefix,
+                alias=out_prefix,
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                 db_name=biometadb_project,
                 directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
@@ -381,8 +381,8 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
             # Commit protein-specific info to database
             GetDBDMCall(
                 cancel_autocommit=cancel_autocommit,
-                table_name=out_prefix + MetagenomeAnnotationConstants.PEPTIDASE,
-                alias=out_prefix + MetagenomeAnnotationConstants.PEPTIDASE,
+                table_name=out_prefix,
+                alias=out_prefix,
                 calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                 db_name=biometadb_project,
                 directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
