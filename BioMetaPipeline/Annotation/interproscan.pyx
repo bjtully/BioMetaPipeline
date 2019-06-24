@@ -121,10 +121,4 @@ cdef void write_interproscan_amended(str interproscan_results, str outfile, list
                 outstring += "None"
             outstring += "\t"
         W.write(outstring[:-1] + "\n")
-    # Write all proteins for which no interpro matches were located
-    for prot in (all_proteins - interpro_ids):
-        W.write(prot + ".faa")
-        for app in applications:
-            W.write("\t" + "None")
-        W.write("\n")
     W.close()
