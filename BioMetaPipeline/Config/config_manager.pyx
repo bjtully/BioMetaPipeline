@@ -99,8 +99,9 @@ class ConfigManager:
         pass
 
     def check_pipe_set(self, str pipe, str pipeline_name):
-        """ Method checks if all required programs have entries in config file. Returns true/false.
-        Does not check validity of programs
+        """ Method checks if all required programs have entries in config file.
+
+        Returns true/false. Does not check validity of programs
 
         :param pipe:
         :param pipeline_name:
