@@ -49,9 +49,9 @@ cdef void parse_virsorter_to_dbdm_tsv(str virsorter_file, str fasta_file, str ou
             # Store entry into dict
             entry = data_dict.get(line[0], None)
             if entry is None:
-                data_dict[line[0]] = {current_cat: line[8]}
+                data_dict[line[0]] = {current_cat: line[5]}
             else:
-                data_dict[line[0]][current_cat] = line[8]
+                data_dict[line[0]][current_cat] = line[5]
     if len(data_dict.keys()) > 0:
         W = open(outfile, "w")
         # Write condensed data to file

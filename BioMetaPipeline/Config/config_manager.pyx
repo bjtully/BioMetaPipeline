@@ -9,7 +9,7 @@ pipelines = {
     "required": ["PRODIGAL", "HMMSEARCH", "HMMCONVERT", "HMMPRESS", "BIOMETADB"],
     "peptidase": ["CAZY", "MEROPS", "SIGNALP", "PSORTB"],
     "kegg": ["KOFAMSCAN", "BIODATA"],
-    "prokka": ["DIAMOND", "PROOKKA"],
+    "prokka": ["DIAMOND", "PROKKA"],
     "interproscan": ["INTERPROSCAN",],
     "virsorter": ["VIRSORTER",],
 }
@@ -107,10 +107,11 @@ class ConfigManager:
         :return:
         """
         cdef list required_progams
-        cdef str program, value
+        cdef str program
+        cdef object value
         for program in pipelines[pipeline_name][pipe]:
             try:
-                value = self.config.get(program, ConfigManager.PATH)
+                value = self.config[program]
             except NoSectionError:
                 return False
         return True

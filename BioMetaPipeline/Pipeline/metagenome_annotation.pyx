@@ -99,11 +99,13 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     cdef object task
     cdef str protein_file = ""
     # Used for signalp and psortb processing
-    cdef dict bact_arch_type = TSVParser.parse_dict(type_file)
+    cdef dict bact_arch_type
     # For merops conversion
     cdef dict merops_dict
     # Prepare CAZy hmm profiles if set in config
     if cfg.check_pipe_set("peptidase", MetagenomeAnnotationConstants.PIPELINE_NAME):
+        assert type_file != "None", "Pass -t <type-file> to run this portion of the pipeline"
+        bact_arch_type = TSVParser.parse_dict(type_file)
         task_list.append(
             HMMConvert(
                 output_directory=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY),
@@ -288,7 +290,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     db_name=biometadb_project,
                     directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix + ".fna"),
                     data_file=os.path.abspath(os.path.join(os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY),
-                                      get_prefix(fasta_file), "virsorter-out", VirSorterConstants.ADJ_OUT_FILE)),
+                                      get_prefix(fasta_file), "virsorter-out", out_prefix + VirSorterConstants.ADJ_OUT_FILE)),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
                 ),
             ):
