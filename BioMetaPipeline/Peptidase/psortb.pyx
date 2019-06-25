@@ -23,6 +23,8 @@ class PSORTb(LuigiTaskClass):
         return []
 
     def run(self):
+        cdef str status = "Beginning PSORTb.........."
+        print(status)
         cdef list data_type_flags
         if str(self.data_type).lower() == "gram+":
             data_type_flags = ["-p",]
@@ -52,6 +54,7 @@ class PSORTb(LuigiTaskClass):
             os.path.join(os.path.dirname(str(self.output_directory)), get_prefix(str(self.prot_file)) + ".tbl")
         )
         shutil.rmtree(str(self.output_directory))
+        print("%s%s" % (status[:-5],"done!"))
 
     def output(self):
         return luigi.LocalTarget(os.path.join(os.path.dirname(str(self.output_directory)), get_prefix(str(self.prot_file)) + ".tbl"))

@@ -22,6 +22,8 @@ class PROKKA(LuigiTaskClass):
         return []
 
     def run(self):
+        cdef str status = "Beginning PROKKA.........."
+        print(status)
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef str outfile_prefix = get_prefix(str(self.fasta_file))
@@ -42,6 +44,7 @@ class PROKKA(LuigiTaskClass):
             os.path.join(str(self.output_directory), outfile_prefix, outfile_prefix + ".tsv"),
             os.path.join(str(self.output_directory), outfile_prefix, outfile_prefix + PROKKAConstants.AMENDED_RESULTS_SUFFIX)
         )
+        print("%s%s" % (status[:-5],"done!"))
 
     def output(self):
         return luigi.LocalTarget(
@@ -65,6 +68,8 @@ class PROKKAMatcher(LuigiTaskClass):
         pass
 
     def run(self):
+        cdef str status = "Beginning PROKKAMatcher.........."
+        print(status)
         match_prokka_to_prodigal_and_write_tsv(
             str(self.diamond_file),
             str(self.prokka_tsv),
@@ -78,6 +83,7 @@ class PROKKAMatcher(LuigiTaskClass):
             5,
             suffix=str(self.suffix),
         )
+        print("%s%s" % (status[:-5],"done!"))
 
     def output(self):
         return luigi.LocalTarget(os.path.join(os.path.join(str(self.output_directory), str(self.outfile))))

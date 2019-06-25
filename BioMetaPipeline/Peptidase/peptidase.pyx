@@ -33,6 +33,8 @@ class Peptidase(LuigiTaskClass):
         return []
 
     def run(self):
+        cdef str status = "Beginning Peptidase.........."
+        print(status)
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef object psortb_data = open(str(self.psortb_results), "rb")
@@ -41,15 +43,15 @@ class Peptidase(LuigiTaskClass):
         cdef object pfam_prot_out = open(os.path.join(
             str(self.output_directory),
             str(self.output_prefix) + PeptidaseConstants.EXTRACELLULAR_MATCHES_BYPROT_EXT,
-        ), "wb")
+            ), "wb")
         cdef object pfam_count_out = open(os.path.join(
             str(self.output_directory),
             str(self.output_prefix) + PeptidaseConstants.EXTRACELLULAR_MATCHES_EXT,
-        ), "wb")
+            ), "wb")
         cdef object merops_count_out = open(os.path.join(
             str(self.output_directory),
             str(self.output_prefix) + PeptidaseConstants.MEROPS_HITS_EXT,
-        ), "wb")
+            ), "wb")
         cdef bytes _line, _id, pfam, merop
         cdef str key, val
         cdef int count
@@ -115,6 +117,7 @@ class Peptidase(LuigiTaskClass):
             merops_count_out.write(b"\t" + b"%i" % merops_counts[merop])
         merops_count_out.write(b"\n")
         merops_count_out.close()
+        print("%s%s" % (status[:-5],"done!"))
 
     def output(self):
         return luigi.LocalTarget(os.path.join(

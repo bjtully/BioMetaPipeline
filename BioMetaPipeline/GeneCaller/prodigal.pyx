@@ -26,16 +26,18 @@ class Prodigal(LuigiTaskClass):
         return []
 
     def run(self):
+        cdef str status = "Beginning Prodigal.........."
+        print(status)
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef str prot_out = os.path.join(str(self.output_directory),
-                           str(self.outfile) +  ".tmp" + str(self.protein_file_suffix))
+                                         str(self.outfile) +  ".tmp" + str(self.protein_file_suffix))
         cdef str prot_simple = os.path.join(str(self.output_directory),
-                           str(self.outfile) + str(self.protein_file_suffix))
+                                            str(self.outfile) + str(self.protein_file_suffix))
         cdef str mrna_out = os.path.join(str(self.output_directory),
-                          str(self.outfile) + ".tmp" + str(self.mrna_file_suffix))
+                                         str(self.outfile) + ".tmp" + str(self.mrna_file_suffix))
         cdef str mrna_simple = os.path.join(str(self.output_directory),
-                          str(self.outfile) + str(self.mrna_file_suffix))
+                                            str(self.outfile) + str(self.mrna_file_suffix))
         subprocess.run(
             [str(self.calling_script_path),
              "-a",
@@ -55,6 +57,7 @@ class Prodigal(LuigiTaskClass):
             os.remove(prot_out)
             FastaParser.write_simple(mrna_out, mrna_simple, simplify=get_prefix(mrna_simple))
             os.remove(mrna_out)
+        print("%s%s" % (status[:-5],"done!"))
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory),

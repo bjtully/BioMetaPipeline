@@ -23,6 +23,8 @@ class VirSorter(LuigiTaskClass):
         return []
 
     def run(self):
+        cdef str status = "Beginning VirSorter.........."
+        print(status)
         if not os.path.exists(str(self.wdir)):
             os.makedirs(str(self.wdir))
         shutil.copy(str(self.fasta_file), str(self.wdir))
@@ -50,7 +52,7 @@ class VirSorter(LuigiTaskClass):
                     "--fna",
                     os.path.basename(str(self.fasta_file)),
                     *ending_flags,
-                ],
+                    ],
                 check=True,
             )
         parse_virsorter_to_dbdm_tsv(
@@ -61,6 +63,7 @@ class VirSorter(LuigiTaskClass):
         os.remove(os.path.join(str(self.wdir), os.path.basename(str(self.fasta_file))))
         if not os.listdir(str(self.wdir)):
             os.rmdir(str(self.wdir))
+        print("%s%s" % (status[:-5],"done!"))
 
     def output(self):
         pass

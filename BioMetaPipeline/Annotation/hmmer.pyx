@@ -53,6 +53,8 @@ class HMMConvert(LuigiTaskClass):
         return []
 
     def run(self):
+        cdef str status = "Beginning HMMConvert.........."
+        print(status)
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef object outfile = open(os.path.join(str(self.output_directory), os.path.basename(str(self.hmm_file))), "w")
@@ -64,6 +66,7 @@ class HMMConvert(LuigiTaskClass):
             check=True,
             stdout=outfile,
         )
+        print("%s%s" % (status[:-5],"done!"))
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), os.path.basename(str(self.hmm_file))))
@@ -82,6 +85,8 @@ class HMMPress(LuigiTaskClass):
         return []
 
     def run(self):
+        cdef str status = "Beginning HMMPress.........."
+        print(status)
         # Move hmm file to output directory
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
@@ -95,6 +100,7 @@ class HMMPress(LuigiTaskClass):
             ],
             check=True,
         )
+        print("%s%s" % (status[:-5],"done!"))
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), os.path.basename(str(self.hmm_file))) + ".h3p")

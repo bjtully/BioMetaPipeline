@@ -23,6 +23,8 @@ class KofamScan(LuigiTaskClass):
         return []
 
     def run(self):
+        cdef str status = "Beginning KofamScan.........."
+        print(status)
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef str outfile_path = os.path.join(str(self.output_directory), str(self.outfile) + ".tmp.tsv")
@@ -55,6 +57,7 @@ class KofamScan(LuigiTaskClass):
         # Remove temp directory and file
         os.remove(outfile_path)
         shutil.rmtree(tmp_path)
+        print("%s%s" % (status[:-5],"done!"))
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile) + ".tsv"))

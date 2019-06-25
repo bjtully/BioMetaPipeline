@@ -26,6 +26,8 @@ class Interproscan(LuigiTaskClass):
         return []
 
     def run(self):
+        cdef str status = "Beginning InterproScan.........."
+        print(status)
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef str outfile_name = os.path.join(str(self.output_directory), get_prefix(str(self.fasta_file)))
@@ -61,6 +63,7 @@ class Interproscan(LuigiTaskClass):
             set([key for key in FastaParser.parse_dict(str(self.fasta_file), is_python=True).keys()])
         )
         os.remove(outfile_name)
+        print("%s%s" % (status[:-5],"done!"))
 
     def output(self):
         return luigi.LocalTarget(

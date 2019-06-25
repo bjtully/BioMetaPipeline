@@ -1,7 +1,7 @@
 # cython: language_level=3
 
-import luigi
 import os
+import luigi
 import subprocess
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
@@ -28,6 +28,8 @@ class GTDBtk(LuigiTaskClass):
 
         :return:
         """
+        cdef str status = "Beginning GTDBtk.........."
+        print(status)
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         subprocess.run(
@@ -44,6 +46,7 @@ class GTDBtk(LuigiTaskClass):
             ],
             check=True,
         )
+        print("%s%s" % (status[:-5],"done!"))
 
     def output(self):
         return luigi.LocalTarget(
