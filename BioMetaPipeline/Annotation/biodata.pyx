@@ -30,6 +30,8 @@ class BioData(LuigiTaskClass):
         return []
 
     def run(self):
+        if not os.path.exists(str(self.output_directory)):
+            os.makedirs(str(self.output_directory))
         cdef str decoder_outfile = os.path.join(str(self.output_directory), str(self.out_prefix) + ".decoder.tsv")
         cdef str expander_outfile = os.path.join(str(self.output_directory), str(self.out_prefix) + ".expander.tsv")
         cdef str final_outfile = os.path.join(str(self.output_directory), str(self.out_prefix) + BioDataConstants.OUTPUT_SUFFIX)

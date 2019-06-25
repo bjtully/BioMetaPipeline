@@ -14,9 +14,10 @@ Adding the last two lines of the above code to a user's `.bashrc` file will main
 - Python 2
 - Cython
 - Python packages
-    - luigi
-    - configparser
     - argparse
+    - configparser
+    - luigi
+    - pandas
     - pysam
 - External programs and their dependencies
     - **MET_EVAL**

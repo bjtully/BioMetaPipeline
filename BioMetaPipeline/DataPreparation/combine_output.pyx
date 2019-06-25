@@ -20,6 +20,8 @@ class CombineOutput(LuigiTaskClass):
         return []
 
     def run(self):
+        if not os.path.exists(str(self.output_directory)):
+            os.makedirs(str(self.output_directory))
         cdef str directory
         cdef str suffix
         cdef str output_file

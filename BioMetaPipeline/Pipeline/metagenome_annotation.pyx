@@ -332,7 +332,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 ),
                 # Assign CAZy info for genome
                 CAZY(
-                    hmm_results=os.path.join(output_directory, CAZYConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
+                    hmm_results=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
                                              HMMSearchConstants.OUTPUT_DIRECTORY, out_prefix + "." + CAZYConstants.HMM_FILE),
                     output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY),
                     outfile=out_prefix + "." + CAZYConstants.ASSIGNMENTS,
@@ -461,28 +461,32 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 directories=[
                     (os.path.join(output_directory, ProdigalConstants.OUTPUT_DIRECTORY), ProdigalConstants.PROTEIN_FILE_SUFFIX,
                      CombineOutputConstants.PROT_OUTPUT_FILE),
-                    (os.path.join(output_directory, KofamScanConstants.OUTPUT_DIRECTORY), "", CombineOutputConstants.KO_OUTPUT_FILE),
+                    (os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, KofamScanConstants.OUTPUT_DIRECTORY), "",
+                     CombineOutputConstants.KO_OUTPUT_FILE),
                 ],
                 calling_script_path="",
-                output_directory=os.path.join(output_directory, CombineOutputConstants.OUTPUT_DIRECTORY),
+                output_directory=os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, CombineOutputConstants.OUTPUT_DIRECTORY),
             )
         )
         task_list.append(
             HMMSearch(
                 calling_script_path=cfg.get(HMMSearchConstants.HMMSEARCH, ConfigManager.PATH),
-                output_directory=os.path.join(output_directory, HMMSearchConstants.OUTPUT_DIRECTORY),
+                output_directory=os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, HMMSearchConstants.OUTPUT_DIRECTORY),
                 out_file=CombineOutputConstants.HMM_OUTPUT_FILE,
-                fasta_file=os.path.join(output_directory, CombineOutputConstants.OUTPUT_DIRECTORY, CombineOutputConstants.PROT_OUTPUT_FILE),
+                fasta_file=os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, CombineOutputConstants.OUTPUT_DIRECTORY,
+                                        CombineOutputConstants.PROT_OUTPUT_FILE),
                 hmm_file=os.path.join(cfg.get(BioDataConstants.BIODATA, ConfigManager.PATH), BioDataConstants.HMM_PATH)
             )
         )
         task_list.append(
             BioData(
                 calling_script_path=cfg.get(BioDataConstants.BIODATA, ConfigManager.PATH),
-                output_directory=os.path.join(output_directory, BioDataConstants.OUTPUT_DIRECTORY),
+                output_directory=os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, BioDataConstants.OUTPUT_DIRECTORY),
                 out_prefix=BioDataConstants.OUTPUT_FILE,
-                ko_file=os.path.join(output_directory, CombineOutputConstants.OUTPUT_DIRECTORY, CombineOutputConstants.KO_OUTPUT_FILE),
-                hmmsearch_file=os.path.join(output_directory, HMMSearchConstants.OUTPUT_DIRECTORY, CombineOutputConstants.HMM_OUTPUT_FILE),
+                ko_file=os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, CombineOutputConstants.OUTPUT_DIRECTORY,
+                                     CombineOutputConstants.KO_OUTPUT_FILE),
+                hmmsearch_file=os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, CombineOutputConstants.OUTPUT_DIRECTORY,
+                                            CombineOutputConstants.HMM_OUTPUT_FILE),
             )
         )
         task_list.append(
@@ -495,6 +499,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 directory_name=directory,
                 data_file=os.path.join(
                     output_directory,
+                    KofamScanConstants.KEGG_DIRECTORY,
                     BioDataConstants.OUTPUT_DIRECTORY,
                     BioDataConstants.OUTPUT_FILE + BioDataConstants.OUTPUT_SUFFIX,
                 ),
