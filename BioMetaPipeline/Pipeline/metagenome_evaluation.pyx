@@ -2,7 +2,7 @@
 import os
 import luigi
 import shutil
-from BioMetaPipeline.Database.dbdm_calls import get_dbdm_call
+from BioMetaPipeline.Database.dbdm_calls import GetDBDMCall, BioMetaDBConstants
 from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.AssemblyEvaluation.checkm import CheckM, CheckMConstants
 from BioMetaPipeline.AssemblyEvaluation.gtdbtk import GTDBtk, GTDBTKConstants
@@ -91,14 +91,17 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
         ),
     ):
         task_list.append(task)
-    task_list.append(get_dbdm_call(
-        cancel_autocommit,
-        table_name,
-        alias,
-        cfg,
-        biometadb_project,
-        directory,
-        os.path.join(output_directory, MetagenomeEvaluationConstants.TSV_OUT),
-    ))
+    task_list.append(
+        GetDBDMCall(
+            cancel_autocommit=cancel_autocommit,
+            table_name=table_name,
+            alias=alias,
+            calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+            db_name=biometadb_project,
+            directory_name=directory,
+            data_file=os.path.join(output_directory, MetagenomeEvaluationConstants.TSV_OUT),
+            added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+        )
+    )
     luigi.build(task_list, local_scheduler=True)
     shutil.rmtree(directory)
