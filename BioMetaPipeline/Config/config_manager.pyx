@@ -9,7 +9,7 @@ pipelines = {
         "required": ["PRODIGAL", "HMMSEARCH", "HMMCONVERT", "HMMPRESS", "BIOMETADB",],
         "peptidase": ["CAZY", "MEROPS", "SIGNALP", "PSORTB",],
         "kegg": ["KOFAMSCAN", "BIODATA",],
-        "prokka": ["DIAMOND", "PROKKA",],
+        "prokka": ["PROKKA",],
         "interproscan": ["INTERPROSCAN",],
         "virsorter": ["VIRSORTER",],
     },
