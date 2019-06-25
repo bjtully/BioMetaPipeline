@@ -6,7 +6,7 @@ from BioMetaPipeline.Parsers.fasta_parser import FastaParser
 
 
 class SplitFileConstants:
-    OUTPUT_DIRECTORY = "proteins"
+    OUTPUT_DIRECTORY = "splitfiles"
 
 
 class SplitFile(luigi.Task):
