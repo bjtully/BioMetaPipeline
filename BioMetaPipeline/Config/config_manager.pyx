@@ -6,13 +6,17 @@ from configparser import NoSectionError
 
 pipelines = {
     "metagenome_annotation": {
-    "required": ["PRODIGAL", "HMMSEARCH", "HMMCONVERT", "HMMPRESS", "BIOMETADB"],
-    "peptidase": ["CAZY", "MEROPS", "SIGNALP", "PSORTB"],
-    "kegg": ["KOFAMSCAN", "BIODATA"],
-    "prokka": ["DIAMOND", "PROKKA"],
-    "interproscan": ["INTERPROSCAN",],
-    "virsorter": ["VIRSORTER",],
-}
+        "required": ["PRODIGAL", "HMMSEARCH", "HMMCONVERT", "HMMPRESS", "BIOMETADB",],
+        "peptidase": ["CAZY", "MEROPS", "SIGNALP", "PSORTB",],
+        "kegg": ["KOFAMSCAN", "BIODATA",],
+        "prokka": ["DIAMOND", "PROKKA",],
+        "interproscan": ["INTERPROSCAN",],
+        "virsorter": ["VIRSORTER",],
+    },
+    "metagenome_evaluation": {
+        "required": ["CHECKM", "FASTANI",],
+        "gtdbtk": ["GTDBTK",],
+    },
 }
 
 
@@ -26,13 +30,14 @@ class ConfigManager:
     DATA = "DATA"
     DATA_DICT = "DATA_DICT"
 
-    def __init__(self, str config_path, tuple ignore = (), bint validate=True):
+    def __init__(self, str config_path, tuple ignore = (), str pipeline_name = None):
         self.config = Config()
         self.config.optionxform = str
         self.config.read(config_path)
         self.ignore = ignore
-        if validate:
-            self._validate_programs_in_pipeline()
+        # Check pipeline's required paths/data
+        if pipeline_name:
+            self.check_pipe_set("required", pipeline_name)
 
     def get(self, str _dict, str value):
         """ Gets value from either environment variable or from Config file,
@@ -107,12 +112,18 @@ class ConfigManager:
         :param pipeline_name:
         :return:
         """
-        cdef list required_progams
-        cdef str program
-        cdef object value
+        cdef str program, key
+        cdef object value, _path
         for program in pipelines[pipeline_name][pipe]:
+            # Verify that the [PROGRAM] is present for the given pipe
             try:
+                # value has PROGRAM:{key:val} structure
                 value = self.config[program]
+                # Check PATH, DATA, and DATA_DICT paths
+                for key in ("PATH", "DATA", "DATA_DICT"):
+                    if key in value.keys() and not os.path.exists(value[key]):
+                        print("%s for %s not found" % (key, program))
+                        exit(1)
             except NoSectionError:
                 return False
         return True

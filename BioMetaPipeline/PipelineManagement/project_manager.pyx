@@ -9,6 +9,7 @@ from BioMetaPipeline.Accessories.ops import get_prefix
 
 cdef str OUTPUT_DIRECTORY = "OUTPUT_DIRECTORY"
 cdef str LIST_FILE = "LIST_FILE"
+cdef str PIPELINE_NAME = "PIPELINE_NAME"
 cdef str PROJECT_NAME = "PROJECT_NAME"
 cdef str TABLE_NAME = "TABLE_NAME"
 GENOMES = "genomes"
@@ -30,7 +31,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     assert os.path.isdir((<object>directory)) and os.path.isfile((<object>config_file)), \
         AssertString.INVALID_PARAMETERS_PASSED
     # Load config file as object
-    cdef object cfg = ConfigManager((<object>config_file))
+    cdef object cfg = ConfigManager((<object>config_file), pipeline_name=getattr(CallingClass, PIPELINE_NAME))
     # Declaration for iteration
     cdef object val
     cdef str genome_storage_folder = os.path.join((<object>output_directory), GENOMES)
@@ -82,7 +83,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     try:
         alias = cfg.get(BioMetaDBConstants.BIOMETADB, BioMetaDBConstants.ALIAS)
     except NoOptionError:
-        alias = "None"
+        alias = getattr(CallingClass, TABLE_NAME)
     return genome_list_path, alias, table_name, cfg, biometadb_project
 
 

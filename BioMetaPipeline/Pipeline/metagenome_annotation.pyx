@@ -89,7 +89,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         <void* >output_directory,
         biometadb_project,
         <void* >constant_classes,
-        MetagenomeAnnotationConstants
+        MetagenomeAnnotationConstants,
     )
     directory = os.path.join(output_directory, GENOMES)
     cdef tuple line_data

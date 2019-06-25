@@ -17,11 +17,11 @@ An additional `.tsv` output file is generated.
 ## Example
 
 - Example
-    - `pipedm MET_EVAL -d fasta_folder/ -c metagenome_evaluation.ini -o eval -b Metagenomes`
+    - `pipedm MET_EVAL -d fasta_folder/ -c metagenome_evaluation.ini -o eval -b Metagenomes 2>eval.err`
     - This command will use the fasta files in `fasta_folder/` in the evaluation pipeline. It will output to the folder
     `eval` and will create or update the `BioMetaDB` project `Metagenomes` in the current directory. It will use the config 
     file entitled `metagenome_annotation.ini` to name the output database and table, and to determine individual program 
-    arguments.
+    arguments. Debugging and error messages will be saved to `eval.err`.
     - View a summary of the results of this pipeline using `dbdm SUMMARIZE -c Metagenomes/ -t evaluation`
 <pre><code>SUMMARIZE:	View summary of all tables in database
  Project root directory:	Metagenomes

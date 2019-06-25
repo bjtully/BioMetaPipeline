@@ -18,10 +18,11 @@ results of this pipeline. An additional `.tsv` output file is generated for each
 
 ## Example
 
-- `pipedm MET_ANNOT -d fasta_folder/ -c metagenome_annotation.ini -o annot -b Metagenomes`
+- `pipedm MET_ANNOT -d fasta_folder/ -c metagenome_annotation.ini -o annot -b Metagenomes 2>annot.err`
 - This command will use the fasta files in `fasta_folder/` in the annotation pipeline. It will output to the folder
 `annot` and will create or update the `BioMetaDB` project `Metagenomes` in the current directory. It will use the config 
 file entitled `metagenome_annotation.ini` to name the output database and to determine individual program arguments.
+Debugging and error messages will be saved to `annot.err`.
 - This pipeline will generate a series of tables - a summary table, whose name is user-provided in the config file, as 
 well as an individual table for each genome provided that describes annotations for each protein sequence identified
 from the starting contigs.
