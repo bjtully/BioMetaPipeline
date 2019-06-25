@@ -124,6 +124,6 @@ class ConfigManager:
                     if key in value.keys() and not os.path.exists(value[key]):
                         print("%s for %s not found" % (key, program))
                         exit(1)
-            except NoSectionError:
+            except NoSectionError or KeyError:
                 return False
         return True
