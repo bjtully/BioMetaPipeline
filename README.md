@@ -128,11 +128,11 @@ step for researchers.
 
 ## Available pipelines
 
-- **MET_EVAL**
+- [MET_EVAL](MET_EVAL.md)
     - Evaluate MAGs for completion and contamination using `CheckM`, and evaluate set of passed genomes for redundancy
     using `FastANI`. Optionally predict phylogeny using `GTDBtk`.
     A final BioMetaDB project is generated, or updated, with a table that provides a summary of the results.
-- **MET_ANNOT**
+- [MET_ANNOT](MET_ANNOT.md)
     - Structurally and functionally annotate MAGs using several available annotation programs. Identify peptidase proteins,
     determine KEGG pathways, run PROKKA pipeline, predict viral sequences, and run interproscan.
     A final BioMetaDB project is generated, or updated, with a table that provides a summary of the results.
