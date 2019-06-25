@@ -27,6 +27,8 @@ class CheckM(LuigiTaskClass):
 
         :return:
         """
+        if not os.path.exists(str(self.output_directory)):
+            os.makedirs(str(self.output_directory))
         result = subprocess.run(
             [str(self.calling_script_path),
              "lineage_wf",

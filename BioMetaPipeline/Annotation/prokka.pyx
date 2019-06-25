@@ -22,6 +22,8 @@ class PROKKA(LuigiTaskClass):
         return []
 
     def run(self):
+        if not os.path.exists(str(self.output_directory)):
+            os.makedirs(str(self.output_directory))
         cdef str outfile_prefix = get_prefix(str(self.fasta_file))
         if not os.path.isfile(os.path.join(str(self.output_directory), outfile_prefix, outfile_prefix + ".tsv")):
             subprocess.run(

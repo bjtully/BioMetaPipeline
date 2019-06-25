@@ -55,6 +55,10 @@ paths to these calling programs to be set, as well as for program-level flags to
 `IS_COMPLETE` defines the inclusive minimum value to determine if a genome is complete, based on `CheckM`.
 `IS_CONTAMINATED` defines the inclusive maximum value to determine if a genome is contaminated, based on `CheckM`. 
 
+Deleting the `checkm_results` folder, the `fastani_results` folder, or the `gtdbtk_results` folder will cause its portion
+of the pipeline to be rerun. By default, **MET_EVAL** parses results contained in these folders to determine completion 
+and contamination, redundancy, and, optionally, phylogeny, respectively.
+
 - Location: `Examples/Config/MET_EVAL.ini`
 <pre><code># MET_EVAL.ini
 # Default config file for running the MET_EVAL pipeline

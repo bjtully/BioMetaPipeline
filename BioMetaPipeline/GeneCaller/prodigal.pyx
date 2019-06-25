@@ -26,6 +26,8 @@ class Prodigal(LuigiTaskClass):
         return []
 
     def run(self):
+        if not os.path.exists(str(self.output_directory)):
+            os.makedirs(str(self.output_directory))
         cdef str prot_out = os.path.join(str(self.output_directory),
                            str(self.outfile) +  ".tmp" + str(self.protein_file_suffix))
         cdef str prot_simple = os.path.join(str(self.output_directory),

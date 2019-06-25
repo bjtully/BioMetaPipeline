@@ -126,7 +126,7 @@ The **MET_ANNOT** config file is divided by "pipes" representing available annot
 - Location: `Examples/Config/MET_ANNOT.ini`
 <pre><code># MET_ANNOT.ini
 # Default config file for running the MET_ANNOT pipeline
-# Users are recommended to edit amd use copies of this file only
+# Users are recommended to edit copies of this file only
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # The following **MUST** be set
@@ -150,10 +150,13 @@ PATH = /usr/bin/hmmpress
 PATH = /path/to/BioMetaDB/dbdm.py
 --db_name = Annotation
 
+[DIAMOND]
+PATH = /path/to/diamond
+
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # The following pipe sections may optionally be set
-# Ensure that the entire pipe section is valid, 
+# Ensure that the entire pipe section is valid,
 # or deleted/commented out, prior to running pipeline
 
 
@@ -186,9 +189,6 @@ PATH = /path/to/KEGGDecoder
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # PROKKA
 
-[DIAMOND]
-PATH = /path/to/diamond
-
 [PROKKA]
 PATH = /path/to/prokka
 FLAGS = --addgenes,--addmrna,--usegenus,--metagenome,--rnammer
@@ -209,8 +209,7 @@ FLAGS = --goterms,--iprlookup,--pathways
 [VIRSORTER]
 PATH = /path/to/virsorter-data
 --db = 2
---user = UID-of-user-from-etc/passwd-file
-</code></pre>
+--user = UID-of-user-from-etc/passwd-file</code></pre>
 
 - General Notes
     - Depending on the number of genomes, the completion time for this pipeline can vary from several hours to several days.

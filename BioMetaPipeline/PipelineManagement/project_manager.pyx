@@ -16,14 +16,13 @@ GENOMES = "genomes"
 
 
 cdef tuple project_check_and_creation(void* directory, void* config_file, void* output_directory, str biometadb_project,
-                               void* luigi_programs_classes_list, object CallingClass):
+                               object CallingClass):
     """
     
     :param directory: 
     :param config_file: 
     :param output_directory: 
     :param biometadb_project: 
-    :param luigi_programs_classes_list: 
     :param CallingClass: 
     :return: 
     """
@@ -58,10 +57,6 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
                 simplify=get_prefix(_file),
                 length=20,
             )
-    # Make directory for each pipe in pipeline
-    for val in (<object>luigi_programs_classes_list):
-        if not os.path.exists(os.path.join((<object>output_directory), str(getattr(val, OUTPUT_DIRECTORY)))):
-            os.makedirs(os.path.join((<object>output_directory), str(getattr(val, OUTPUT_DIRECTORY))))
     # Declarations
     cdef str genome_list_path = os.path.join((<object>output_directory), getattr(CallingClass, LIST_FILE))
     cdef str alias

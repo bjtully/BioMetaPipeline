@@ -65,30 +65,11 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     """
     cdef str genome_list_path, alias, table_name, fasta_file, out_prefix
     cdef object cfg
-    cdef list constant_classes = [
-        ProdigalConstants,
-        KofamScanConstants,
-        InterproscanConstants,
-        PROKKAConstants,
-        VirSorterConstants,
-        HMMSearchConstants,
-        CombineOutputConstants,
-        BioDataConstants,
-        SplitFileConstants,
-        DiamondConstants,
-        CAZYConstants,
-        PeptidaseConstants,
-        HMMConvertConstants,
-        MEROPSConstants,
-        SignalPConstants,
-        PSORTbConstants,
-    ]
     genome_list_path, alias, table_name, cfg, biometadb_project = project_check_and_creation(
         <void* >directory,
         <void* >config_file,
         <void* >output_directory,
         biometadb_project,
-        <void* >constant_classes,
         MetagenomeAnnotationConstants,
     )
     directory = os.path.join(output_directory, GENOMES)
@@ -108,14 +89,16 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         bact_arch_type = TSVParser.parse_dict(type_file)
         task_list.append(
             HMMConvert(
-                output_directory=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY),
+                output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY,
+                                              CAZYConstants.OUTPUT_DIRECTORY, HMMConvertConstants.OUTPUT_DIRECTORY),
                 hmm_file=cfg.get(CAZYConstants.CAZY, ConfigManager.DATA),
                 calling_script_path=cfg.get(HMMConvertConstants.HMMCONVERT, ConfigManager.PATH),
             ),
         )
         task_list.append(
             HMMPress(
-                output_directory=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY),
+                output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY,
+                                              CAZYConstants.OUTPUT_DIRECTORY, HMMConvertConstants.OUTPUT_DIRECTORY),
                 hmm_file=cfg.get(CAZYConstants.CAZY, ConfigManager.DATA),
                 calling_script_path=cfg.get(HMMPressConstants.HMMPRESS, ConfigManager.PATH),
             ),
@@ -123,14 +106,16 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         # Prepare MEROPS hmm profiles
         task_list.append(
             HMMConvert(
-                output_directory=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY),
+                output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY,
+                                              MEROPSConstants.OUTPUT_DIRECTORY, HMMConvertConstants.OUTPUT_DIRECTORY),
                 hmm_file=cfg.get(MEROPSConstants.MEROPS, ConfigManager.DATA),
                 calling_script_path=cfg.get(HMMConvertConstants.HMMCONVERT, ConfigManager.PATH),
             ),
         )
         task_list.append(
             HMMPress(
-                output_directory=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY),
+                output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY,
+                                              MEROPSConstants.OUTPUT_DIRECTORY, HMMConvertConstants.OUTPUT_DIRECTORY),
                 hmm_file=cfg.get(MEROPSConstants.MEROPS, ConfigManager.DATA),
                 calling_script_path=cfg.get(HMMPressConstants.HMMPRESS, ConfigManager.PATH),
             ),
@@ -167,12 +152,38 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 out_dir=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix + ".fna"),
             ),
         )
+        # Required task - extract sections of contigs corresponding to prodigal gene calls
+        for task in (
+            DiamondMakeDB(
+                output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
+                prot_file=protein_file,
+                calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
+            ),
+            # Retrieve sections from contigs matching prodigal gene calls
+            Diamond(
+                outfile=out_prefix + ".tsv",
+                output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
+                program="blastx",
+                diamond_db=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, get_prefix(protein_file)),
+                query_file=fasta_file,
+                evalue="1e-10",
+                calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
+            ),
+            DiamondToFasta(
+                output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
+                outfile=out_prefix + ".subset.fna",
+                fasta_file=fasta_file,
+                diamond_file=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, out_prefix + ".tsv"),
+                calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
+            ),
+        ):
+            task_list.append(task)
         # Optional task - kegg
         if cfg.check_pipe_set("kegg", MetagenomeAnnotationConstants.PIPELINE_NAME):
             for task in (
                 # Predict KEGG
                 KofamScan(
-                    output_directory=os.path.join(output_directory, KofamScanConstants.OUTPUT_DIRECTORY),
+                    output_directory=os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, KofamScanConstants.OUTPUT_DIRECTORY),
                     calling_script_path=cfg.get(KofamScanConstants.KOFAMSCAN, ConfigManager.PATH),
                     outfile=out_prefix,
                     fasta_file=protein_file,
@@ -188,6 +199,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
                     data_file=os.path.join(
                         output_directory,
+                        KofamScanConstants.KEGG_DIRECTORY,
                         KofamScanConstants.OUTPUT_DIRECTORY,
                         out_prefix + KofamScanConstants.AMENDED_RESULTS_SUFFIX
                     ),
@@ -198,29 +210,6 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         # Optional task - prokka
         if cfg.check_pipe_set("prokka", MetagenomeAnnotationConstants.PIPELINE_NAME):
             for task in (
-                # For PROKKA adjusting
-                DiamondMakeDB(
-                    output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
-                    prot_file=protein_file,
-                    calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
-                ),
-                # Retrieve sections from contigs matching prodigal gene calls
-                Diamond(
-                    outfile=out_prefix + ".tsv",
-                    output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
-                    program="blastx",
-                    diamond_db=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, get_prefix(protein_file)),
-                    query_file=fasta_file,
-                    evalue="1e-10",
-                    calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
-                ),
-                DiamondToFasta(
-                    output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
-                    outfile=out_prefix + ".subset.fna",
-                    fasta_file=fasta_file,
-                    diamond_file=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, out_prefix + ".tsv"),
-                    calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
-                ),
                 # PROKKA annotation pipeline
                 PROKKA(
                     calling_script_path=cfg.get(PROKKAConstants.PROKKA, ConfigManager.PATH),
@@ -231,26 +220,28 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 ),
                 # For PROKKA adjusting
                 DiamondMakeDB(
-                    output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
+                    output_directory=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY, DiamondConstants.OUTPUT_DIRECTORY),
                     prot_file=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY, out_prefix, out_prefix + ".faa"),
                     calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
                 ),
                 # Identify which PROKKA annotations match contigs corresponding to prodigal gene calls and save the subset
                 Diamond(
                     outfile=out_prefix + ".rev.tsv",
-                    output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
+                    output_directory=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY, DiamondConstants.OUTPUT_DIRECTORY),
                     program="blastx",
-                    diamond_db=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, out_prefix),
+                    diamond_db=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY, DiamondConstants.OUTPUT_DIRECTORY, out_prefix),
                     query_file=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, out_prefix + ".subset.fna"),
                     evalue="1e-20",
                     calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
                 ),
                 # Write final prokka annotations
                 PROKKAMatcher(
-                    output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
+                    output_directory=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY, DiamondConstants.OUTPUT_DIRECTORY),
                     outfile=out_prefix + ".prk-to-prd.tsv",
-                    diamond_file=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, out_prefix + ".rev.tsv"),
-                    prokka_tsv=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY, out_prefix, out_prefix + PROKKAConstants.AMENDED_RESULTS_SUFFIX),
+                    diamond_file=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY,
+                                              DiamondConstants.OUTPUT_DIRECTORY, out_prefix + ".rev.tsv"),
+                    prokka_tsv=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY, out_prefix,
+                                            out_prefix + PROKKAConstants.AMENDED_RESULTS_SUFFIX),
                     suffix=".faa",
                     evalue="1e-20",
                     pident="98.5",
@@ -264,7 +255,8 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                     db_name=biometadb_project,
                     directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
-                    data_file=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, out_prefix + ".prk-to-prd.tsv"),
+                    data_file=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY, DiamondConstants.OUTPUT_DIRECTORY,
+                                           out_prefix + ".prk-to-prd.tsv"),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
                 ),
             ):
@@ -278,8 +270,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     fasta_file=fasta_file,
                     calling_script_path=cfg.get(VirSorterConstants.VIRSORTER, ConfigManager.PATH),
                     added_flags=cfg.build_parameter_list_from_dict(VirSorterConstants.VIRSORTER),
-                    wdir=os.path.abspath(os.path.join(os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY),
-                                      get_prefix(fasta_file))),
+                    wdir=os.path.abspath(os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file))),
                 ),
                 # Store virsorter info to database
                 GetDBDMCall(
@@ -289,8 +280,8 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                     db_name=biometadb_project,
                     directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix + ".fna"),
-                    data_file=os.path.abspath(os.path.join(os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY),
-                                      get_prefix(fasta_file), "virsorter-out", out_prefix + VirSorterConstants.ADJ_OUT_FILE)),
+                    data_file=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file),
+                                           "virsorter-out", out_prefix + "." + VirSorterConstants.ADJ_OUT_FILE),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
                 ),
             ):
@@ -331,15 +322,19 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 # Search for CAZy
                 HMMSearch(
                     calling_script_path=cfg.get(HMMSearchConstants.HMMSEARCH, ConfigManager.PATH),
-                    output_directory=os.path.join(output_directory, HMMSearchConstants.OUTPUT_DIRECTORY),
+                    output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
+                                                  HMMSearchConstants.OUTPUT_DIRECTORY),
                     out_file=out_prefix + "." + CAZYConstants.HMM_FILE,
                     fasta_file=protein_file,
-                    hmm_file=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY, cfg.get(CAZYConstants.CAZY, ConfigManager.DATA)),
+                    hmm_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
+                                          HMMConvertConstants.OUTPUT_DIRECTORY, cfg.get(CAZYConstants.CAZY, ConfigManager.DATA))
+
                 ),
                 # Assign CAZy info for genome
                 CAZY(
-                    hmm_results=os.path.join(output_directory, HMMSearchConstants.OUTPUT_DIRECTORY, out_prefix + "." + CAZYConstants.HMM_FILE),
-                    output_directory=os.path.join(output_directory, CAZYConstants.OUTPUT_DIRECTORY),
+                    hmm_results=os.path.join(output_directory, CAZYConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
+                                             HMMSearchConstants.OUTPUT_DIRECTORY, out_prefix + "." + CAZYConstants.HMM_FILE),
+                    output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY),
                     outfile=out_prefix + "." + CAZYConstants.ASSIGNMENTS,
                     calling_script_path="",
                     prot_suffix=os.path.splitext(ProdigalConstants.PROTEIN_FILE_SUFFIX)[1],
@@ -353,7 +348,8 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                     db_name=biometadb_project,
                     directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
-                    data_file=os.path.join(output_directory, CAZYConstants.OUTPUT_DIRECTORY, out_prefix + "." + CAZYConstants.ASSIGNMENTS_BY_PROTEIN),
+                    data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
+                                           out_prefix + "." + CAZYConstants.ASSIGNMENTS_BY_PROTEIN),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
                 ),
                 # Store CAZy count info
@@ -364,22 +360,26 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                     db_name=biometadb_project,
                     directory_name=directory,
-                    data_file=os.path.join(output_directory, CAZYConstants.OUTPUT_DIRECTORY, out_prefix + "." + CAZYConstants.ASSIGNMENTS),
+                    data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
+                                           out_prefix + "." + CAZYConstants.ASSIGNMENTS),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
                 ),
                 # Search for MEROPS
                 HMMSearch(
                     calling_script_path=cfg.get(HMMSearchConstants.HMMSEARCH, ConfigManager.PATH),
-                    output_directory=os.path.join(output_directory, HMMSearchConstants.OUTPUT_DIRECTORY),
+                    output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, MEROPSConstants.OUTPUT_DIRECTORY,
+                                                  HMMSearchConstants.OUTPUT_DIRECTORY),
                     out_file=out_prefix + "." + MEROPSConstants.HMM_FILE,
                     fasta_file=protein_file,
-                    hmm_file=os.path.join(output_directory, HMMConvertConstants.OUTPUT_DIRECTORY, cfg.get(MEROPSConstants.MEROPS, ConfigManager.DATA)),
+                    hmm_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, MEROPSConstants.OUTPUT_DIRECTORY,
+                                          HMMConvertConstants.OUTPUT_DIRECTORY, cfg.get(MEROPSConstants.MEROPS, ConfigManager.DATA)),
                 ),
                 # Assign MEROPS info for genome
                 MEROPS(
                     calling_script_path="",
-                    hmm_results=os.path.join(output_directory, HMMSearchConstants.OUTPUT_DIRECTORY, out_prefix + "." + MEROPSConstants.HMM_FILE),
-                    output_directory=os.path.join(output_directory, MEROPSConstants.OUTPUT_DIRECTORY),
+                    hmm_results=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, MEROPSConstants.OUTPUT_DIRECTORY,
+                                             HMMSearchConstants.OUTPUT_DIRECTORY, out_prefix + "." + MEROPSConstants.HMM_FILE),
+                    output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, MEROPSConstants.OUTPUT_DIRECTORY),
                     outfile=out_prefix + "." + MEROPSConstants.MEROPS_PROTEIN_FILE_SUFFIX,
                     prot_file=protein_file,
                 ),
@@ -387,7 +387,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 SignalP(
                     calling_script_path=cfg.get(SignalPConstants.SIGNALP, ConfigManager.PATH),
                     membrane_type=bact_arch_type[os.path.basename(fasta_file)][1],
-                    output_directory=os.path.join(output_directory, SignalPConstants.OUTPUT_DIRECTORY),
+                    output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, SignalPConstants.OUTPUT_DIRECTORY),
                     outfile=out_prefix + SignalPConstants.RESULTS_SUFFIX,
                     prot_file=protein_file,
                 ),
@@ -396,15 +396,18 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     data_type=bact_arch_type[os.path.basename(fasta_file)][1],
                     domain_type=bact_arch_type[os.path.basename(fasta_file)][0],
                     prot_file=protein_file,
-                    output_directory=os.path.join(output_directory, PSORTbConstants.OUTPUT_DIRECTORY, out_prefix),
+                    output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, PSORTbConstants.OUTPUT_DIRECTORY, out_prefix),
                     calling_script_path=cfg.get(PSORTbConstants.PSORTB, ConfigManager.PATH),
                 ),
                 # Parse signalp and psortb through merops to identify peptidases
                 Peptidase(
                     calling_script_path="",
-                    psortb_results=os.path.join(output_directory, PSORTbConstants.OUTPUT_DIRECTORY, get_prefix(protein_file) + ".tbl"),
-                    signalp_results=os.path.join(output_directory, SignalPConstants.OUTPUT_DIRECTORY, out_prefix + SignalPConstants.RESULTS_SUFFIX),
-                    merops_hmm_results=os.path.join(output_directory, HMMSearchConstants.OUTPUT_DIRECTORY, out_prefix + "." + MEROPSConstants.HMM_FILE),
+                    psortb_results=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, PSORTbConstants.OUTPUT_DIRECTORY,
+                                                get_prefix(protein_file) + ".tbl"),
+                    signalp_results=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, SignalPConstants.OUTPUT_DIRECTORY,
+                                                 out_prefix + SignalPConstants.RESULTS_SUFFIX),
+                    merops_hmm_results=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, MEROPSConstants.OUTPUT_DIRECTORY,
+                                                    HMMSearchConstants.OUTPUT_DIRECTORY, out_prefix + "." + MEROPSConstants.HMM_FILE),
                     output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY),
                     output_prefix=out_prefix,
                     protein_suffix=os.path.splitext(ProdigalConstants.PROTEIN_FILE_SUFFIX)[1],
@@ -440,7 +443,8 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                     db_name=biometadb_project,
                     directory_name=directory,
-                    data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, out_prefix + PeptidaseConstants.EXTRACELLULAR_MATCHES_EXT),
+                    data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY,
+                                           out_prefix + PeptidaseConstants.EXTRACELLULAR_MATCHES_EXT),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
                 ),
             ):

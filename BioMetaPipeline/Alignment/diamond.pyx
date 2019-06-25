@@ -50,6 +50,8 @@ class DiamondMakeDB(LuigiTaskClass):
     prot_file = luigi.Parameter()
 
     def run(self):
+        if not os.path.exists(str(self.output_directory)):
+            os.makedirs(str(self.output_directory))
         subprocess.run(
             [
                 str(self.calling_script_path),
@@ -74,6 +76,8 @@ class DiamondToFasta(LuigiTaskClass):
     evalue = luigi.Parameter(default="1e-15")
 
     def run(self):
+        if not os.path.exists(str(self.output_directory)):
+            os.makedirs(str(self.output_directory))
         blast_to_fasta(
             str(self.fasta_file),
             str(self.diamond_file),

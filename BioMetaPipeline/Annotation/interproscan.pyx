@@ -26,6 +26,8 @@ class Interproscan(LuigiTaskClass):
         return []
 
     def run(self):
+        if not os.path.exists(str(self.output_directory)):
+            os.makedirs(str(self.output_directory))
         cdef str outfile_name = os.path.join(str(self.output_directory), get_prefix(str(self.fasta_file)))
         cdef object outfile = open(outfile_name, "w")
         cdef str key

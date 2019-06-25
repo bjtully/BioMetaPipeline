@@ -21,6 +21,8 @@ class SignalP(LuigiTaskClass):
         return []
 
     def run(self):
+        if not os.path.exists(str(self.output_directory)):
+            os.makedirs(str(self.output_directory))
         cdef list data_type_flags
         if str(self.membrane_type).lower() == "gram+":
             data_type_flags = ["-t", "gram+"]

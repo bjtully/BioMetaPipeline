@@ -41,13 +41,11 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
     """
     cdef str genome_list_path, alias, table_name
     cdef object cfg, task
-    cdef list constant_classes = [FastANIConstants, CheckMConstants, GTDBTKConstants]
     genome_list_path, alias, table_name, cfg, biometadb_project = project_check_and_creation(
         <void* >directory,
         <void* >config_file,
         <void* >output_directory,
         biometadb_project,
-        <void* >constant_classes,
         MetagenomeEvaluationConstants
     )
     directory = os.path.join(output_directory, GENOMES)

@@ -56,7 +56,7 @@ class VirSorter(LuigiTaskClass):
         parse_virsorter_to_dbdm_tsv(
             os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.DEFAULT_CSV_OUTFILE),
             str(self.fasta_file),
-            os.path.join(str(self.wdir), "virsorter-out", get_prefix(str(self.fasta_file)) + VirSorterConstants.ADJ_OUT_FILE)
+            os.path.join(str(self.wdir), "virsorter-out", get_prefix(str(self.fasta_file)) + "." + VirSorterConstants.ADJ_OUT_FILE)
         )
         os.remove(os.path.join(str(self.wdir), os.path.basename(str(self.fasta_file))))
         if not os.listdir(str(self.wdir)):
@@ -65,5 +65,5 @@ class VirSorter(LuigiTaskClass):
     def output(self):
         pass
         if os.path.exists(str(self.wdir)):
-            return luigi.LocalTarget(os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.ADJ_OUT_FILE))
+            return luigi.LocalTarget(os.path.join(str(self.wdir), "virsorter-out", get_prefix(str(self.fasta_file)) + "." + VirSorterConstants.ADJ_OUT_FILE))
 

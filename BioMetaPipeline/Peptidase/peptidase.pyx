@@ -33,6 +33,8 @@ class Peptidase(LuigiTaskClass):
         return []
 
     def run(self):
+        if not os.path.exists(str(self.output_directory)):
+            os.makedirs(str(self.output_directory))
         cdef object psortb_data = open(str(self.psortb_results), "rb")
         cdef object signalp_results = open(str(self.signalp_results), "rb")
         cdef object merops_results = open(str(self.merops_hmm_results), "rb")

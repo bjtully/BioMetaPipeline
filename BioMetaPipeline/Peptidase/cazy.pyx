@@ -30,6 +30,8 @@ class CAZY(LuigiTaskClass):
         return []
 
     def run(self):
+        if not os.path.exists(str(self.output_directory)):
+            os.makedirs(str(self.output_directory))
         cdef string genome, cazy, val
         cdef int count
         cdef string prot_suffix = <string>PyUnicode_AsUTF8(str(self.prot_suffix))

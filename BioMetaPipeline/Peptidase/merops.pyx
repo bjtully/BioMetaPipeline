@@ -26,6 +26,8 @@ class MEROPS(LuigiTaskClass):
         return []
 
     def run(self):
+        if not os.path.exists(str(self.output_directory)):
+            os.makedirs(str(self.output_directory))
         # Gather MEROPS gene ids
         cdef set match_ids = set()
         cdef object R = open(str(self.hmm_results), "r")

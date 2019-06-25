@@ -20,6 +20,8 @@ class FastANI(LuigiTaskClass):
         return []
 
     def run(self):
+        if not os.path.exists(str(self.output_directory)):
+            os.makedirs(str(self.output_directory))
         subprocess.run(
             [str(self.calling_script_path),
              *self.added_flags,

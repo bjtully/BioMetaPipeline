@@ -12,6 +12,7 @@ class KofamScanConstants:
     OUTPUT_DIRECTORY = "kofamscan_results"
     TMP_DIR = "tmp"
     AMENDED_RESULTS_SUFFIX = ".amended.tsv"
+    KEGG_DIRECTORY = "kegg_results"
 
 class KofamScan(LuigiTaskClass):
     output_directory = luigi.Parameter()
@@ -22,6 +23,8 @@ class KofamScan(LuigiTaskClass):
         return []
 
     def run(self):
+        if not os.path.exists(str(self.output_directory)):
+            os.makedirs(str(self.output_directory))
         cdef str outfile_path = os.path.join(str(self.output_directory), str(self.outfile) + ".tmp.tsv")
         cdef str outpath = os.path.join(str(self.output_directory), str(self.outfile) + ".tsv")
         cdef str tmp_path = os.path.join(str(self.output_directory), KofamScanConstants.TMP_DIR)
