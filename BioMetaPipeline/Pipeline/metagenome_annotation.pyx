@@ -485,7 +485,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 out_prefix=BioDataConstants.OUTPUT_FILE,
                 ko_file=os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, CombineOutputConstants.OUTPUT_DIRECTORY,
                                      CombineOutputConstants.KO_OUTPUT_FILE),
-                hmmsearch_file=os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, CombineOutputConstants.OUTPUT_DIRECTORY,
+                hmmsearch_file=os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, HMMSearchConstants.OUTPUT_DIRECTORY,
                                             CombineOutputConstants.HMM_OUTPUT_FILE),
             )
         )
