@@ -6,7 +6,7 @@ from configparser import NoSectionError
 
 pipelines = {
     "metagenome_annotation": {
-        "required": ["PRODIGAL", "HMMSEARCH", "HMMCONVERT", "HMMPRESS", "BIOMETADB",],
+        "required": ["PRODIGAL", "HMMSEARCH", "HMMCONVERT", "HMMPRESS", "BIOMETADB", "DIAMOND"],
         "peptidase": ["CAZY", "MEROPS", "SIGNALP", "PSORTB",],
         "kegg": ["KOFAMSCAN", "BIODATA",],
         "prokka": ["PROKKA",],

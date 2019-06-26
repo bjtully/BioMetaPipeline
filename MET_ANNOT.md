@@ -5,6 +5,8 @@
 **MET_ANNOT** uses `prodigal`, `kofamscan`, `interproscan`, `PROKKA`, `VirSorter`, `psortb`, `signalp`, and `KEGGDecoder`
 to structurally and functionally annotate contig data. This will generate a final `BioMetaDB` project containing integrated 
 results of this pipeline. An additional `.tsv` output file is generated for each "pipe" in the pipeline's config file.
+The peptidase pipe requires the latest `dbCAN` and `CAZy` HMM profiles, whose links are available on the main README.
+The peptidase pipe also requires the file `merops-as-pfams.txt`, which is available in `Sample/Data`. 
 
 - Required flags
     - --directory (-d): /path/to/directory of fasta files
@@ -164,7 +166,7 @@ PATH = /path/to/diamond
 # Peptidase annotation
 
 [CAZY]
-DATA = /path/to/dbCAN-fam.hmm
+DATA = /path/to/dbCAN-fam-HMMs.txt
 
 [MEROPS]
 DATA = /path/to/MEROPS.pfam.hmm
