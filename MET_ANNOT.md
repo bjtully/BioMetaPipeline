@@ -28,27 +28,38 @@ individual program arguments. Debugging and error messages will be saved to `ann
 well as an individual table for each genome provided that describes annotations for each protein sequence identified
 from the starting contigs.
 <pre><code>SUMMARIZE:	View summary of all tables in database
- Project root directory:	Metagenomes
- Name of database:		Metagenomes.db
+ Project root directory:	Planctomycetes
+ Name of database:		Planctomycetes.db
 
-*************************************************************
-    Table Name:	        fasta-file
-    Number of Records:	####      
+*******************************************************************************
+	        Table Name:	phycisphaera-sp-norp138
+	 Number of Records:	1607      
 
-    Column Name	Average     	Std Dev   
+	        Column Name	Average             	Std Dev     
 
-            cdd	Text entry  
-          hamap	Text entry  
-        panther	Text entry  
-           pfam	Text entry  
-         prodom	Text entry
-         prokka	Text entry  
-           sfld	Text entry  
-          smart	Text entry  
-    superfamily	Text entry  
-        tigrfam	Text entry 
-    (...) 
--------------------------------------------------------------</code></pre>
+	num_phage_contigs_1	#.###               	#.###       
+	num_phage_contigs_2	#.###               	#.###       
+	num_phage_contigs_3	#.###               	#.###       
+	    num_prophages_1	#.###               	#.###       
+	    num_prophages_2	#.###               	#.###       
+	    num_prophages_3	#.###               	#.###       
+-------------------------------------------------------------------------------
+
+	        Column Name	Most Frequent       	Count Non-Null
+
+	               cazy	(...)                	##        
+	                cdd	(...)                	##        
+	              hamap	(...)                	##        
+	                 ko	(...)                	##        
+	            panther	(...)                	##        
+	               pfam	(...)                	##        
+	             prodom	(...)                	##        
+	             prokka	(...)                	##        
+	               sfld	(...)                	##        
+	              smart	(...)                	##        
+	        superfamily	(...)                	##        
+	            tigrfam	(...)                	##        
+-------------------------------------------------------------------------------</code></pre>
 - View the summary table using `dbdm SUMMARIZE -c Metagenomes/ -t annotation`
 <pre><code>SUMMARIZE:	View summary of all tables in database
  Project root directory:	Metagenomes
