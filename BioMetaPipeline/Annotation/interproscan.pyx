@@ -14,6 +14,7 @@ class InterproscanConstants:
     INTERPROSCAN = "INTERPROSCAN"
     OUTPUT_DIRECTORY = "interproscan_results"
     AMENDED_RESULTS_SUFFIX = ".amended.tsv"
+    STORAGE_STRING = "interproscan results"
 
 
 class Interproscan(LuigiTaskClass):

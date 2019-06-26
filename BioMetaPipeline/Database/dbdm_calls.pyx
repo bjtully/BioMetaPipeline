@@ -21,11 +21,12 @@ class GetDBDMCall(luigi.Task):
     directory_name = luigi.Parameter()
     data_file = luigi.Parameter()
     added_flags = luigi.ListParameter(default=[])
+    storage_string = luigi.Parameter(default="")
 
     def run(self):
         if not os.path.exists(str(self.data_file)):
             return
-        print("Storing to database..........")
+        print("Storing %s to database.........." % str(self.storage_string))
         if not bool(self.cancel_autocommit):
             if not os.path.exists(str(self.db_name)):
                 subprocess.run(

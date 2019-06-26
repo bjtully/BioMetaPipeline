@@ -20,11 +20,10 @@ The peptidase pipe also requires the file `merops-as-pfams.txt`, which is availa
 
 ## Example
 
-- `pipedm MET_ANNOT -d fasta_folder/ -c metagenome_annotation.ini -o annot -b Metagenomes 2>annot.err`
+- `pipedm MET_ANNOT -d fasta_folder/ -c metagenome_annotation.ini -o annot 2>annot.err`
 - This command will use the fasta files in `fasta_folder/` in the annotation pipeline. It will output to the folder
-`annot` and will create or update the `BioMetaDB` project `Metagenomes` in the current directory. It will use the config 
-file entitled `metagenome_annotation.ini` to name the output database and to determine individual program arguments.
-Debugging and error messages will be saved to `annot.err`.
+`annot` and will use the config file entitled `metagenome_annotation.ini` to name the output database and to determine 
+individual program arguments. Debugging and error messages will be saved to `annot.err`.
 - This pipeline will generate a series of tables - a summary table, whose name is user-provided in the config file, as 
 well as an individual table for each genome provided that describes annotations for each protein sequence identified
 from the starting contigs.
@@ -150,7 +149,8 @@ PATH = /usr/bin/hmmpress
 
 [BIOMETADB]
 PATH = /path/to/BioMetaDB/dbdm.py
---db_name = Annotation
+--db_name = Metagenomes
+FLAGS = -s
 
 [DIAMOND]
 PATH = /path/to/diamond

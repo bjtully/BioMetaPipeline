@@ -17,6 +17,8 @@ class CAZYConstants:
     HMM_FILE = "cazy_hmm.list"
     ASSIGNMENTS = "cazy_assignments.tsv"
     ASSIGNMENTS_BY_PROTEIN = "cazy_assignments.byprot.tsv"
+    STORAGE_STRING = "CAZy results"
+    SUMMARY_STORAGE_STRING = "summary CAZy results"
 
 
 class CAZY(LuigiTaskClass):

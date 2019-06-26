@@ -11,6 +11,7 @@ class PROKKAConstants:
     PROKKA = "PROKKA"
     OUTPUT_DIRECTORY = "prokka_results"
     AMENDED_RESULTS_SUFFIX = ".amended.tsv"
+    STORAGE_STRING = "prokka results"
 
 
 class PROKKA(LuigiTaskClass):
@@ -156,9 +157,7 @@ cdef void match_prokka_to_prodigal_and_write_tsv(str diamond_file, str prokka_an
     for best_match in highest_matches.values():
         if prokka_data[best_match[0]][2] != "":
             prokka_out_string = "%s-%s:%s;" % (*(best_match[1].split("-")[-1].split("_")), prokka_data[best_match[0]][2])
-        else:
-            prokka_out_string = "None"
-        W.write(matches[best_match[1]] + suffix + "\t" + prokka_out_string + "\n")
+            W.write(matches[best_match[1]] + suffix + "\t" + prokka_out_string + "\n")
     W.close()
     R.close()
 

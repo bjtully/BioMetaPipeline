@@ -13,6 +13,7 @@ class VirSorterConstants:
     OUTPUT_DIRECTORY = "virsorter_results"
     DEFAULT_CSV_OUTFILE = "VIRSorter_global-phage-signal.csv"
     ADJ_OUT_FILE = "VIRSorter_adj_out.tsv"
+    STORAGE_STRING = "virsorter results"
 
 
 class VirSorter(LuigiTaskClass):

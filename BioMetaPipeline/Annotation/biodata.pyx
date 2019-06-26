@@ -17,6 +17,7 @@ class BioDataConstants:
     COMBINED_PROT_FILE = "biodata.prot"
     HMM_HEATMAP_OUT = "hmm_heatmap.svg"
     FUNCTION_HEATMAP_OUT = "function_heatmap.svg"
+    STORAGE_STRING = "BioData results"
 
 
 class BioData(LuigiTaskClass):

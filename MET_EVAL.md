@@ -17,11 +17,10 @@ An additional `.tsv` output file is generated.
 ## Example
 
 - Example
-    - `pipedm MET_EVAL -d fasta_folder/ -c metagenome_evaluation.ini -o eval -b Metagenomes 2>eval.err`
+    - `pipedm MET_EVAL -d fasta_folder/ -c metagenome_evaluation.ini -o eval 2>eval.err`
     - This command will use the fasta files in `fasta_folder/` in the evaluation pipeline. It will output to the folder
-    `eval` and will create or update the `BioMetaDB` project `Metagenomes` in the current directory. It will use the config 
-    file entitled `metagenome_annotation.ini` to name the output database and table, and to determine individual program 
-    arguments. Debugging and error messages will be saved to `eval.err`.
+    `eval` and will use the config file entitled `metagenome_annotation.ini` to name the output database and table, and 
+    to determine individual program arguments. Debugging and error messages will be saved to `eval.err`.
     - View a summary of the results of this pipeline using `dbdm SUMMARIZE -c Metagenomes/ -t evaluation`
 <pre><code>SUMMARIZE:	View summary of all tables in database
  Project root directory:	Metagenomes
@@ -81,9 +80,10 @@ PATH = /usr/local/bin/fastANI
 
 [BIOMETADB]
 PATH = /path/to/BioMetaDB/dbdm.py
---db_name = GenomeEvaluation
+--db_name = Metagenomes
 --table_name = evaluation
 --alias = eval
+FLAGS = -s
 
 [CUTOFFS]
 ANI = 98.5
@@ -93,7 +93,7 @@ IS_CONTAMINATED = 5
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # The following pipe sections may optionally be set
-# Ensure that the entire pipe section is valid, 
+# Ensure that the entire pipe section is valid,
 # or deleted/commented out, prior to running pipeline
 
 

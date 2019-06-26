@@ -17,6 +17,7 @@ class PeptidaseConstants:
     EXTRACELLULAR_MATCHES_EXT = ".pfam.tsv"
     EXTRACELLULAR_MATCHES_BYPROT_EXT = ".pfam.by_prot.tsv"
     MEROPS_HITS_EXT = ".merops.tsv"
+    STORAGE_STRING = "peptidase pfam results"
 
 
 class Peptidase(LuigiTaskClass):
@@ -33,7 +34,7 @@ class Peptidase(LuigiTaskClass):
         return []
 
     def run(self):
-        print("Beginning Peptidasei dentification..........")
+        print("Beginning Peptidase identification..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef object psortb_data = open(str(self.psortb_results), "rb")

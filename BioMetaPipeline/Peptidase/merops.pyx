@@ -14,6 +14,8 @@ class MEROPSConstants:
     OUTPUT_DIRECTORY = "merops"
     HMM_FILE = "merops_hmm.list"
     MEROPS_PROTEIN_FILE_SUFFIX = "merops.protein.faa"
+    STORAGE_STRING = "MEROPS results"
+    SUMMARY_STORAGE_STRING = "MEROPS summary results"
 
 
 class MEROPS(LuigiTaskClass):

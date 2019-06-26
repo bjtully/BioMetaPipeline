@@ -13,6 +13,7 @@ class KofamScanConstants:
     TMP_DIR = "tmp"
     AMENDED_RESULTS_SUFFIX = ".amended.tsv"
     KEGG_DIRECTORY = "kegg_results"
+    STORAGE_STRING = "kofamscan results"
 
 class KofamScan(LuigiTaskClass):
     output_directory = luigi.Parameter()

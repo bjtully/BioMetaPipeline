@@ -204,6 +204,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                         out_prefix + KofamScanConstants.AMENDED_RESULTS_SUFFIX
                     ),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                    storage_string=out_prefix + " " + KofamScanConstants.STORAGE_STRING,
                 ),
             ):
                 task_list.append(task)
@@ -258,6 +259,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     data_file=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY, DiamondConstants.OUTPUT_DIRECTORY,
                                            out_prefix + ".prk-to-prd.tsv"),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                    storage_string=out_prefix + " " + PROKKAConstants.STORAGE_STRING
                 ),
             ):
                 task_list.append(task)
@@ -283,6 +285,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     data_file=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file),
                                            "virsorter-out", out_prefix + "." + VirSorterConstants.ADJ_OUT_FILE),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                    storage_string=out_prefix + " " + VirSorterConstants.STORAGE_STRING,
                 ),
             ):
                 task_list.append(task)
@@ -311,6 +314,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                         out_prefix + InterproscanConstants.AMENDED_RESULTS_SUFFIX
                     ),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                    storage_string=out_prefix + " " + InterproscanConstants.STORAGE_STRING,
                 ),
             ):
                 task_list.append(task)
@@ -351,6 +355,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
                                            out_prefix + "." + CAZYConstants.ASSIGNMENTS_BY_PROTEIN),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                    storage_string=out_prefix + " " + CAZYConstants.STORAGE_STRING,
                 ),
                 # Store CAZy count info
                 GetDBDMCall(
@@ -363,6 +368,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
                                            out_prefix + "." + CAZYConstants.ASSIGNMENTS),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                    storage_string=out_prefix + " " + CAZYConstants.SUMMARY_STORAGE_STRING,
                 ),
                 # Search for MEROPS
                 HMMSearch(
@@ -424,6 +430,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
                     data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, PeptidaseConstants.EXTRACELLULAR_MATCHES_BYPROT_EXT),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                    storage_string=out_prefix + " " + PeptidaseConstants.STORAGE_STRING,
                 ),
                 # Commit genome-wide info to database
                 GetDBDMCall(
@@ -435,6 +442,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     directory_name=directory,
                     data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, out_prefix + PeptidaseConstants.MEROPS_HITS_EXT),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                    storage_string=out_prefix + " " + MEROPSConstants.STORAGE_STRING,
                 ),
                 GetDBDMCall(
                     cancel_autocommit=cancel_autocommit,
@@ -446,6 +454,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY,
                                            out_prefix + PeptidaseConstants.EXTRACELLULAR_MATCHES_EXT),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                    storage_string=out_prefix + " " + MEROPSConstants.SUMMARY_STORAGE_STRING,
                 ),
             ):
                 task_list.append(task)
@@ -504,6 +513,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     BioDataConstants.OUTPUT_FILE + BioDataConstants.OUTPUT_SUFFIX,
                 ),
                 added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                storage_string=BioDataConstants.STORAGE_STRING,
             )
         )
     luigi.build(task_list, local_scheduler=True)
