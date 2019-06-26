@@ -21,6 +21,7 @@ class HMMSearch(LuigiTaskClass):
         return []
 
     def run(self):
+        print("Beginning HMMSearch..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         subprocess.run(
@@ -35,6 +36,7 @@ class HMMSearch(LuigiTaskClass):
             check=True,
             stdout=open(os.path.join(str(self.output_directory), str(self.out_file) + ".log"), "w")
         )
+        print("HMMSearch complete!")
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.out_file)))
@@ -53,8 +55,7 @@ class HMMConvert(LuigiTaskClass):
         return []
 
     def run(self):
-        cdef str status = "Beginning HMMConvert.........."
-        print(status)
+        print("Beginning HMMConvert..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef object outfile = open(os.path.join(str(self.output_directory), os.path.basename(str(self.hmm_file))), "w")
@@ -66,7 +67,7 @@ class HMMConvert(LuigiTaskClass):
             check=True,
             stdout=outfile,
         )
-        print("%s%s" % (status[:-5],"done!"))
+        print("HMMConvert complete!")
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), os.path.basename(str(self.hmm_file))))
@@ -85,8 +86,7 @@ class HMMPress(LuigiTaskClass):
         return []
 
     def run(self):
-        cdef str status = "Beginning HMMPress.........."
-        print(status)
+        print("Beginning HMMPress..........")
         # Move hmm file to output directory
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
@@ -100,7 +100,7 @@ class HMMPress(LuigiTaskClass):
             ],
             check=True,
         )
-        print("%s%s" % (status[:-5],"done!"))
+        print("HMMPress complete!")
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), os.path.basename(str(self.hmm_file))) + ".h3p")

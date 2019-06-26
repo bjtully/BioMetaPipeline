@@ -168,12 +168,11 @@ class RedundancyParserTask(LuigiTaskClass):
         return []
 
     def run(self):
-        cdef str status = "Beginning RedundancyParser.........."
-        print(status)
+        print("Beginning RedundancyParser..........")
         rc = RedundancyChecker(str(self.checkm_output_file),
                                str(self.fastANI_output_file),
                                str(self.gtdbtk_output_file),
                                dict(self.cutoffs_dict),
                                dict(self.file_ext_dict))
         rc.write_tsv(self.outfile)
-        print("%s%s" % (status[:-5],"done!"))
+        print("RedundancyParser complete!")

@@ -30,8 +30,7 @@ class CAZY(LuigiTaskClass):
         return []
 
     def run(self):
-        cdef str status = "Beginning CAZy.........."
-        print(status)
+        print("Beginning CAZy search..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef string genome, cazy, val
@@ -65,7 +64,7 @@ class CAZY(LuigiTaskClass):
             WP.write(genome + prot_suffix + <string>"\t" + cazy + <string>"\n")
         W.close()
         WP.close()
-        print("%s%s" % (status[:-5],"done!"))
+        print("CAZy search complete!")
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile)))

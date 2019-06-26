@@ -26,8 +26,7 @@ class MEROPS(LuigiTaskClass):
         return []
 
     def run(self):
-        cdef str status = "Beginning MEROPS.........."
-        print(status)
+        print("Beginning MEROPS search..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         # Gather MEROPS gene ids
@@ -43,7 +42,7 @@ class MEROPS(LuigiTaskClass):
         # Write protein sequences that match MEROPS genes
         cdef str out_file = os.path.join(str(self.output_directory), str(self.outfile))
         FastaParser.write_records(str(self.prot_file), match_ids, out_file)
-        print("%s%s" % (status[:-5],"done!"))
+        print("MEROPS search complete!")
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile)))

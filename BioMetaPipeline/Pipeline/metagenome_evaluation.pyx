@@ -103,3 +103,4 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
     )
     luigi.build(task_list, local_scheduler=True)
     shutil.rmtree(directory)
+    print("MET_EVAL pipeline complete!")

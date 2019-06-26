@@ -20,8 +20,7 @@ class FastANI(LuigiTaskClass):
         return []
 
     def run(self):
-        cdef str status = "Beginning FastANI.........."
-        print(status)
+        print("Beginning FastANI..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         subprocess.run(
@@ -35,4 +34,4 @@ class FastANI(LuigiTaskClass):
              os.path.join(str(self.output_directory), str(self.outfile))],
             check=True,
         )
-        print("%s%s" % (status[:-5],"done!"))
+        print("FastANI complete")

@@ -27,8 +27,7 @@ class CheckM(LuigiTaskClass):
 
         :return:
         """
-        cdef str status = "Beginning CheckM.........."
-        print(status)
+        print("Beginning CheckM..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         result = subprocess.run(
@@ -40,7 +39,7 @@ class CheckM(LuigiTaskClass):
             check=True,
             stdout=open(os.path.join(os.path.dirname(str(self.output_directory)), str(self.outfile)), "w"),
         )
-        print("%s%s" % (status[:-5],"done!"))
+        print("CheckM complete!")
 
     def output(self):
         return luigi.LocalTarget(os.path.join(os.path.dirname(str(self.output_directory)), str(self.outfile)))

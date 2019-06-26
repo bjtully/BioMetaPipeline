@@ -28,8 +28,7 @@ class GTDBtk(LuigiTaskClass):
 
         :return:
         """
-        cdef str status = "Beginning GTDBtk.........."
-        print(status)
+        print("Beginning GTDBtk..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         subprocess.run(
@@ -46,7 +45,7 @@ class GTDBtk(LuigiTaskClass):
             ],
             check=True,
         )
-        print("%s%s" % (status[:-5],"done!"))
+        print("GTDBtk complete!")
 
     def output(self):
         return luigi.LocalTarget(

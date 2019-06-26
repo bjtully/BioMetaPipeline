@@ -26,8 +26,7 @@ class Prodigal(LuigiTaskClass):
         return []
 
     def run(self):
-        cdef str status = "Beginning Prodigal.........."
-        print(status)
+        print("Beginning Prodigal..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef str prot_out = os.path.join(str(self.output_directory),
@@ -57,7 +56,7 @@ class Prodigal(LuigiTaskClass):
             os.remove(prot_out)
             FastaParser.write_simple(mrna_out, mrna_simple, simplify=get_prefix(mrna_simple))
             os.remove(mrna_out)
-        print("%s%s" % (status[:-5],"done!"))
+        print("Prodigal complete!")
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory),

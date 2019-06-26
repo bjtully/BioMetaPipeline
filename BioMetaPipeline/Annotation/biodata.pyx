@@ -30,8 +30,7 @@ class BioData(LuigiTaskClass):
         return []
 
     def run(self):
-        cdef str status = "Beginning BioData.........."
-        print(status)
+        print("Beginning BioData..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef str decoder_outfile = os.path.join(str(self.output_directory), str(self.out_prefix) + ".decoder.tsv")
@@ -73,7 +72,7 @@ class BioData(LuigiTaskClass):
         )
         # Write final output tsv file
         write_final_output_file(decoder_outfile, expander_outfile, final_outfile)
-        print("%s%s" % (status[:-5],"done!"))
+        print("BioData complete!")
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.out_prefix) + BioDataConstants.OUTPUT_SUFFIX))

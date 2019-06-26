@@ -21,8 +21,7 @@ class SignalP(LuigiTaskClass):
         return []
 
     def run(self):
-        cdef str status = "Beginning SignalP.........."
-        print(status)
+        print("Beginning SignalP..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef list data_type_flags
@@ -39,7 +38,7 @@ class SignalP(LuigiTaskClass):
             check=True,
             stdout=open(os.path.join(str(self.output_directory), str(self.outfile)), "w"),
         )
-        print("%s%s" % (status[:-5],"done!"))
+        print("SignalP complete!")
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile)))

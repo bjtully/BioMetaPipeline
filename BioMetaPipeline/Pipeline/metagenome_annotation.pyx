@@ -509,3 +509,4 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     luigi.build(task_list, local_scheduler=True)
     shutil.rmtree(directory)
     shutil.rmtree(os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY))
+    print("MET_ANNOT pipeline complete!")
