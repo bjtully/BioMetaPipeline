@@ -53,8 +53,7 @@ class DiamondMakeDB(LuigiTaskClass):
     prot_file = luigi.Parameter()
 
     def run(self):
-        cdef str status = "Beginning MakeDB.........."
-        print(status)
+        print("Beginning Diamond makedb..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         subprocess.run(
@@ -68,7 +67,7 @@ class DiamondMakeDB(LuigiTaskClass):
             ],
             check=True,
         )
-        print("%s%s" % (status[:-5],"done!"))
+        print("Diamond makedb complete!")
 
     def output(self):
         return luigi.LocalTarget(os.path.join(str(self.output_directory), get_prefix(str(self.prot_file)) + ".dmnd"))
@@ -82,8 +81,7 @@ class DiamondToFasta(LuigiTaskClass):
     evalue = luigi.Parameter(default="1e-15")
 
     def run(self):
-        cdef str status = "Beginning DiamondToFasta.........."
-        print(status)
+        print("Beginning DiamondToFasta..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         blast_to_fasta(
@@ -92,7 +90,7 @@ class DiamondToFasta(LuigiTaskClass):
             os.path.join(str(self.output_directory), str(self.outfile)),
             e_value=float(str(self.evalue)),
         )
-        print("%s%s" % (status[:-5],"done!"))
+        print("DiamondToFasta complete!")
 
 
     def output(self):

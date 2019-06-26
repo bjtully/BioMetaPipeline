@@ -156,7 +156,7 @@ cdef void match_prokka_to_prodigal_and_write_tsv(str diamond_file, str prokka_an
             highest_matches[line[qcol]] = (line[scol], line[qcol], float(line[pident_col]), float(line[evalue_col]))
     for best_match in highest_matches.values():
         if prokka_data[best_match[0]][2] != "":
-            prokka_out_string = "%s-%s:%s;" % (*(best_match[1].split("-")[-1].split("_")), prokka_data[best_match[0]][2])
+            prokka_out_string = "%s-%s:::%s;;;" % (*(best_match[1].split("-")[-1].split("_")), prokka_data[best_match[0]][2])
             W.write(matches[best_match[1]] + suffix + "\t" + prokka_out_string + "\n")
     W.close()
     R.close()

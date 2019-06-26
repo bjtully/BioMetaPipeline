@@ -120,8 +120,8 @@ cdef void write_interproscan_amended(str interproscan_results, str outfile, list
                 for sign_acn, coords in condensed_results[prot][app].items():
                     # Write as amended outstring to output file
                     outstring += "".join(
-                        ["%s-%s:%s;" % (coord[0], coord[1], sign_acn + (" " + " ".join(
-                            coord[2:])[:-1] if len(coord) > 2 else "")) for coord in coords])
+                        ["%s-%s:::%s;;;" % (coord[0], coord[1], sign_acn + (" " + " ".join(
+                            coord[2:])[:-1] if len(coord) > 2 else "")[:-1]) for coord in coords])
             else:
                 outstring += "None"
             outstring += "\t"

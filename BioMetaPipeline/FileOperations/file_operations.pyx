@@ -7,6 +7,7 @@ import shutil
 
 class FileOperations(luigi.Task):
     data_files = luigi.ListParameter(default=[])
+    data_folder = luigi.Parameter(default="")
 
 
 class Remove(FileOperations):
@@ -20,6 +21,8 @@ class Remove(FileOperations):
         cdef str file_name
         for file_name in self.data_files:
             os.remove(file_name)
+        if str(self.data_folder) != "" and os.path.exists(str(self.data_folder)):
+            shutil.rmtree(str(self.data_folder))
 
 
 class Move(FileOperations):

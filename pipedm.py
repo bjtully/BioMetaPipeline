@@ -21,8 +21,8 @@ if __name__ == "__main__":
          {"help": "Output directory prefix, default out", "default": "out"}),
         (("-b", "--biometadb_project"),
          {"help": "/path/to/BioMetaDB_project (updates values of existing database)", "default": "None"}),
-        (("-l", "--list_file"),
-         {"help": "/path/to/list_file formatted as 'prefix\\tdata_file_1,data_file_2[,...]\\n'"}),
+        # (("-l", "--list_file"),
+        #  {"help": "/path/to/list_file formatted as 'prefix\\tdata_file_1,data_file_2[,...]\\n'"}),
         (("-t", "--type_file"),
          {"help": "/path/to/type_file formatted as 'file_name.fna\\t[Archaea/Bacteria]\\t[gram+/gram-]\\n'",
           "default": "None"}),
@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     programs = {
         "MET_EVAL":       metagenome_evaluation,
-        "EU_PAN":         eukaryotic_pangenome,
+        # "EU_PAN":         eukaryotic_pangenome,
         "MET_ANNOT":      metagenome_annotation,
 
     }
@@ -38,8 +38,8 @@ if __name__ == "__main__":
     flags = {
         "MET_EVAL":       ("directory", "config_file", "cancel_autocommit", "output_directory",
                            "biometadb_project"),
-        "EU_PAN":         ("directory", "config_file", "cancel_autocommit", "output_directory",
-                           "biometadb_project", "list_file"),
+        # "EU_PAN":         ("directory", "config_file", "cancel_autocommit", "output_directory",
+        #                    "biometadb_project", "list_file"),
         "MET_ANNOT":      ("directory", "config_file", "cancel_autocommit", "output_directory",
                            "biometadb_project", "type_file"),
     }
@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
     _help = {
         "MET_EVAL":         "Evaluates completion, contamination, and redundancy of MAGs",
-        "EU_PAN":           "Assembles, aligns, annotates, and creates pan-genome for Eukaryotes",
+        # "EU_PAN":           "Assembles, aligns, annotates, and creates pan-genome for Eukaryotes",
         "MET_ANNOT":        "Runs gene callers and annotation programs on MAGs",
     }
 
@@ -68,4 +68,4 @@ if __name__ == "__main__":
         _help=_help,
         errors=errors
     )
-    pc.run(ap.args, debug=True)
+    pc.run(ap.args, debug=False)
