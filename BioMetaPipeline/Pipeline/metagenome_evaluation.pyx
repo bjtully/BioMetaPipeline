@@ -75,7 +75,7 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
         ),
         # Required task - determine redundancy and quality
         RedundancyParserTask(
-            checkm_output_file=os.path.join(output_directory, CheckMConstants.OUTFILE),
+            checkm_output_file=os.path.join(output_directory, CheckMConstants.OUTPUT_DIRECTORY, CheckMConstants.OUTFILE),
             fastANI_output_file=os.path.join(output_directory, FastANIConstants.OUTPUT_DIRECTORY,
                                              FastANIConstants.OUTFILE),
             gtdbtk_output_file=os.path.join(output_directory, GTDBTKConstants.OUTPUT_DIRECTORY,
@@ -84,7 +84,7 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
             file_ext_dict={os.path.basename(os.path.splitext(file)[0]): os.path.splitext(file)[1]
                            for file in os.listdir(directory)},
             calling_script_path="None",
-            outfile=os.path.join(output_directory, MetagenomeEvaluationConstants.TSV_OUT),
+            outfile=MetagenomeEvaluationConstants.TSV_OUT,
             output_directory=output_directory,
         ),
     ):

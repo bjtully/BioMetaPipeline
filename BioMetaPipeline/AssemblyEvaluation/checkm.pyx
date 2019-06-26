@@ -8,7 +8,7 @@ from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 class CheckMConstants:
     CHECKM = "CHECKM"
-    OUTPUT_DIRECTORY = "checkm_lineageWF_results"
+    OUTPUT_DIRECTORY = "checkm_results"
     OUTFILE = "checkm_lineageWF_results.qa.txt"
 
 
@@ -33,13 +33,14 @@ class CheckM(LuigiTaskClass):
         result = subprocess.run(
             [str(self.calling_script_path),
              "lineage_wf",
+             "--force_overwrite",
              *self.added_flags,
              str(self.fasta_folder),
              str(self.output_directory)],
             check=True,
-            stdout=open(os.path.join(os.path.dirname(str(self.output_directory)), str(self.outfile)), "w"),
+            stdout=open(os.path.join(str(self.output_directory), str(self.outfile)), "w"),
         )
         print("CheckM complete!")
 
     def output(self):
-        return luigi.LocalTarget(os.path.join(os.path.dirname(str(self.output_directory)), str(self.outfile)))
+        return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile)))

@@ -48,7 +48,7 @@ cdef class RedundancyChecker:
 
     def _parse_records_to_categories(self):
         cdef dict checkm_results = CheckMParser.parse_dict(<object>self.checkm_file)
-        cdef list _fastANI_results = TSVParser.parse_list(<object>self.fastani_file, " ")
+        cdef list _fastANI_results = TSVParser.parse_list(<object>self.fastani_file)
         cdef dict gtdbktk_results
         if os.path.isfile(<object>self.gtdbtk_file):
             gtdbktk_results = TSVParser.parse_dict(<object>self.gtdbtk_file)
@@ -108,7 +108,6 @@ cdef class RedundancyChecker:
                 for i in range(len(fastANI_results[key_and_ext])):
                     if float(fastANI_results[key_and_ext][i][1]) >= float(self.cutoffs["ANI"]):
                         self.output_data[key_and_ext][redundant_copies_str].append(fastANI_results[key_and_ext][i][0])
-
         # Update each key with a redundancy list to set non_redundant values for most complete
         for key in self.output_data.keys():
             if len(self.output_data[key][redundant_copies_str]) > 0:
@@ -174,5 +173,8 @@ class RedundancyParserTask(LuigiTaskClass):
                                str(self.gtdbtk_output_file),
                                dict(self.cutoffs_dict),
                                dict(self.file_ext_dict))
-        rc.write_tsv(self.outfile)
+        rc.write_tsv(os.path.join(str(self.output_directory), str(self.outfile)))
         print("RedundancyParser complete!")
+
+    def output(self):
+        pass
