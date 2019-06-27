@@ -430,7 +430,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                     db_name=biometadb_project,
                     directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
-                    data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, PeptidaseConstants.EXTRACELLULAR_MATCHES_BYPROT_EXT),
+                    data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, out_prefix + PeptidaseConstants.EXTRACELLULAR_MATCHES_BYPROT_EXT),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
                     storage_string=out_prefix + " " + PeptidaseConstants.STORAGE_STRING,
                 ),
