@@ -33,7 +33,6 @@ class CheckM(LuigiTaskClass):
         result = subprocess.run(
             [str(self.calling_script_path),
              "lineage_wf",
-             "--force_overwrite",
              *self.added_flags,
              str(self.fasta_folder),
              str(self.output_directory)],
