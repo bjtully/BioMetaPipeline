@@ -23,7 +23,8 @@ cdef class CheckMParser:
         return [
             ["".join(chr(val) for val in values_in_file[i][0]),
                 float(values_in_file[i][12]),
-                float(values_in_file[i][13]),]
+                float(values_in_file[i][13]),
+                values_in_file[i][1],]
             for i in range(values_in_file.size()) if values_in_file[i].size() > 0
         ]
 
