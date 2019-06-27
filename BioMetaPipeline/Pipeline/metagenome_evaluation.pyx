@@ -52,12 +52,14 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
     cdef list task_list = []
     # Optional task - phylogeny prediction
     if cfg.check_pipe_set("gtdbtk", MetagenomeEvaluationConstants.PIPELINE_NAME):
-        GTDBtk(
-            output_directory=os.path.join(output_directory, GTDBTKConstants.OUTPUT_DIRECTORY),
-            added_flags=cfg.build_parameter_list_from_dict(GTDBTKConstants.GTDBTK),
-            fasta_folder=directory,
-            calling_script_path=cfg.get(GTDBTKConstants.GTDBTK, ConfigManager.PATH),
-        ),
+        task_list.append(
+            GTDBtk(
+                output_directory=os.path.join(output_directory, GTDBTKConstants.OUTPUT_DIRECTORY),
+                added_flags=cfg.build_parameter_list_from_dict(GTDBTKConstants.GTDBTK),
+                fasta_folder=directory,
+                calling_script_path=cfg.get(GTDBTKConstants.GTDBTK, ConfigManager.PATH),
+            ),
+        )
     for task in (
         # Required task - determine completeness and contamination
         CheckM(
