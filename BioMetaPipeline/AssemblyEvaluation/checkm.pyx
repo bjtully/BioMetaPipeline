@@ -3,6 +3,7 @@
 import os
 import luigi
 import subprocess
+import shutil
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 
@@ -27,6 +28,7 @@ class CheckM(LuigiTaskClass):
 
         :return:
         """
+        cdef object tmp = open("tmp.txt", "w")
         print("Beginning CheckM..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
@@ -37,8 +39,9 @@ class CheckM(LuigiTaskClass):
              str(self.fasta_folder),
              str(self.output_directory)],
             check=True,
-            stdout=open(os.path.join(str(self.output_directory), str(self.outfile)), "w"),
+            stdout=tmp,
         )
+        shutil.move(tmp, open(os.path.join(str(self.output_directory), str(self.outfile)), "w"))
         print("CheckM complete!")
 
     def output(self):
