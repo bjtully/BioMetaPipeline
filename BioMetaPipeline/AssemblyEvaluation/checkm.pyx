@@ -28,7 +28,10 @@ class CheckM(LuigiTaskClass):
 
         :return:
         """
-        cdef object tmp = open("tmp.txt", "w")
+        cdef str tmp_dir = "tmp_dir"
+        if not os.path.exists(tmp_dir):
+            os.makedirs(tmp_dir)
+        cdef object tmp = open(os.path.join(tmp_dir, "tmp.txt"), "w")
         print("Beginning CheckM..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
@@ -42,6 +45,7 @@ class CheckM(LuigiTaskClass):
             stdout=tmp,
         )
         shutil.move(tmp, open(os.path.join(str(self.output_directory), str(self.outfile)), "w"))
+        shutil.rmtree(tmp_dir)
         print("CheckM complete!")
 
     def output(self):
