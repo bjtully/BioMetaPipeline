@@ -84,7 +84,7 @@ cdef class RedundancyChecker:
             if gtdbktk_results.get(key) is not None:
                 self.output_data[key_and_ext][phylogeny_str] = gtdbktk_results.get(key)[0]
             else:
-                self.output_data[key_and_ext][phylogeny_str] = "None"
+                self.output_data[key_and_ext][phylogeny_str] = checkm_results.get(key)[1]
             # Initialize empty redundancy list
             self.output_data[key_and_ext][redundant_copies_str] = []
             # Completion value

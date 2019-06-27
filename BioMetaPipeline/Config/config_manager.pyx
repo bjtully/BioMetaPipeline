@@ -125,7 +125,13 @@ class ConfigManager:
                         print("%s for %s not found" % (key, program))
                         exit(1)
             except NoSectionError:
+                if pipe == "required":
+                    print("%s not found" % program)
+                    exit(1)
                 return False
             except KeyError:
+                if pipe == "required":
+                    print("%s not found" % program)
+                    exit(1)
                 return False
         return True
