@@ -44,7 +44,7 @@ class CheckM(LuigiTaskClass):
             check=True,
             stdout=tmp,
         )
-        shutil.move(tmp, open(os.path.join(str(self.output_directory), str(self.outfile)), "w"))
+        shutil.move(tmp, os.path.join(str(self.output_directory), str(self.outfile)))
         shutil.rmtree(tmp_dir)
         print("CheckM complete!")
 
