@@ -49,6 +49,8 @@ cdef class RedundancyChecker:
     def _parse_records_to_categories(self):
         cdef dict checkm_results = CheckMParser.parse_dict(<object>self.checkm_file)
         cdef list _fastANI_results = TSVParser.parse_list(<object>self.fastani_file)
+        if len(_fastANI_results[0]) < 2:
+            _fastANI_results = TSVParser.parse_list(<object>self.fastani_file, delimiter=" ")
         cdef dict gtdbktk_results
         if os.path.isfile(<object>self.gtdbtk_file):
             gtdbktk_results = TSVParser.parse_dict(<object>self.gtdbtk_file)
