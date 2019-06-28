@@ -31,35 +31,35 @@ from the starting contigs.
  Project root directory:	Planctomycetes
  Name of database:		Planctomycetes.db
 
-*******************************************************************************
-	        Table Name:	phycisphaera-sp-norp138
-	 Number of Records:	1607      
+**********************************************************************************************
+                Table Name:     tara-psw-mag-00018
+         Number of Records:     3791
 
-	        Column Name	Average             	Std Dev     
+                Column Name     Average                 Std Dev
 
-	num_phage_contigs_1	#.###               	#.###       
-	num_phage_contigs_2	#.###               	#.###       
-	num_phage_contigs_3	#.###               	#.###       
-	    num_prophages_1	#.###               	#.###       
-	    num_prophages_2	#.###               	#.###       
-	    num_prophages_3	#.###               	#.###       
--------------------------------------------------------------------------------
+        num_phage_contigs_1     0.000                   0.000
+        num_phage_contigs_2     0.000                   0.000
+        num_phage_contigs_3     0.000                   0.000
+            num_prophages_1     0.000                   0.000
+            num_prophages_2     0.001                   0.051
+            num_prophages_3     0.000                   0.000
+----------------------------------------------------------------------------------------------
 
-	        Column Name	Most Frequent       	Count Non-Null
+        Column Name     Most Frequent           Num             Count Non-Null
 
-	               cazy	(...)                	##        
-	                cdd	(...)                	##        
-	              hamap	(...)                	##        
-	                 ko	(...)                	##        
-	            panther	(...)                	##        
-	               pfam	(...)                	##        
-	             prodom	(...)                	##        
-	             prokka	(...)                	##        
-	               sfld	(...)                	##        
-	              smart	(...)                	##        
-	        superfamily	(...)                	##        
-	            tigrfam	(...)                	##        
--------------------------------------------------------------------------------</code></pre>
+               cazy     GT41                    40              720
+                cdd     cd06267                 161             1447
+              hamap     MF_01217 IPR00323...    4               410
+                 ko     K03406                  18              1497
+        merops_pfam     PF00326                 10              35
+            panther     PTHR30093               232             2994
+               pfam     PF07963 IPR012902...    237             3469
+             prodom     PD004647                9               57
+               sfld     SFLDS00029 IPR007...    13              42
+              smart     SM00710 IPR006626...    190             952
+        superfamily     SSF54523                246             3226
+            tigrfam     TIGR02532 IPR0129...    243             1041
+--------------------------------------------------------------------------------------</code></pre>
 - View the summary table using `dbdm SUMMARIZE -c Metagenomes/ -t annotation`
 <pre><code>SUMMARIZE:	View summary of all tables in database
  Project root directory:	Metagenomes

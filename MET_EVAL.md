@@ -26,20 +26,24 @@ An additional `.tsv` output file is generated.
  Project root directory:	Metagenomes
  Name of database:		Metagenomes.db
 
-******************************************************************
-	       Table Name:	evaluation  
-	Number of Records:	###       
+*******************************************************************************************
+             Table Name:        evaluation
+        Number of Records:      201
 
-	     Column Name	Average     	Std Dev   
+             Column Name        Average                 Std Dev
 
-	      completion	##.###      	##.###      
-	   contamination	#.###       	#.###      
-	     is_complete	#.###       	#.###       
-	 is_contaminated	#.###       	#.###       
-	is_non_redundant	#.###       	#.###       
-	       phylogeny	Text entry  
-	redundant_copies	Text entry  
-------------------------------------------------------------------</code></pre>
+              completion        83.504                  85.167
+           contamination        2.231                   3.246
+-------------------------------------------------------------------------------------------
+
+             Column Name        Most Frequent           Num             Count Non-Null
+
+             is_complete        True                    196             201
+         is_contaminated        False                   176             201
+        is_non_redundant        True                    139             201
+               phylogeny        k__Bacteria             201             201
+        redundant_copies        []                      99              201
+-------------------------------------------------------------------------------------------</code></pre>
     
 ## MET_EVAL config file
 
