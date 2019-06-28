@@ -88,17 +88,15 @@ as well as to redirect stderr to a separate file.
 **pipedm** is the calling script for running various data pipelines.
 
 <pre><code>usage: pipedm.py [-h] -d DIRECTORY -c CONFIG_FILE [-a] [-o OUTPUT_DIRECTORY]
-                 [-b BIOMETADB_PROJECT] [-l LIST_FILE] [-t TYPE_FILE]
+                 [-b BIOMETADB_PROJECT] [-t TYPE_FILE]
                  program
 
-pipedm: Run genome evaluation and annotation pipelines
+pipedm: Run meta/genome evaluation and annotation pipelines
 
 Available Programs:
 
-EU_PAN: Assembles, aligns, annotates, and creates pan-genome for Eukaryotes
-                (Flags:  --directory --config_file --cancel_autocommit --output_directory --biometadb_project --list_file)
 MET_ANNOT: Runs gene callers and annotation programs on MAGs
-                (Flags:  --directory --config_file --cancel_autocommit --output_directory --biometadb_project)
+                (Flags:  --directory --config_file --cancel_autocommit --output_directory --biometadb_project --type_file)
 MET_EVAL: Evaluates completion, contamination, and redundancy of MAGs
                 (Flags:  --directory --config_file --cancel_autocommit --output_directory --biometadb_project)
 
@@ -117,8 +115,6 @@ optional arguments:
                         Output directory prefix, default out
   -b BIOMETADB_PROJECT, --biometadb_project BIOMETADB_PROJECT
                         /path/to/BioMetaDB_project (updates values of existing database)
-  -l LIST_FILE, --list_file LIST_FILE
-                        /path/to/list_file formatted as 'prefix\tdata_file_1,data_file_2[,...]\n'
   -t TYPE_FILE, --type_file TYPE_FILE
                         /path/to/type_file formatted as 'file_name.fna\t[Archaea/Bacteria]\t[gram+/gram-]\n'</code></pre>
 
