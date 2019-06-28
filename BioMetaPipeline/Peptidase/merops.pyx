@@ -28,7 +28,7 @@ class MEROPS(LuigiTaskClass):
         return []
 
     def run(self):
-        print("Beginning MEROPS search..........")
+        print("Running MEROPS search..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         # Gather MEROPS gene ids

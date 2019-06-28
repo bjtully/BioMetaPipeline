@@ -89,6 +89,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     if cfg.check_pipe_set("peptidase", MetagenomeAnnotationConstants.PIPELINE_NAME):
         assert type_file != "None", "Pass -t <type-file> to run this portion of the pipeline"
         bact_arch_type = TSVParser.parse_dict(type_file)
+        bact_arch_type = {key.replace("_", "-"):val for key, val in bact_arch_type.items()}
         task_list.append(
             HMMConvert(
                 output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY,

@@ -26,7 +26,7 @@ class Prodigal(LuigiTaskClass):
         return []
 
     def run(self):
-        print("Beginning Prodigal..........")
+        print("Running Prodigal..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef str prot_out = os.path.join(str(self.output_directory),

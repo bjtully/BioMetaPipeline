@@ -101,6 +101,7 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
             directory_name=directory,
             data_file=os.path.join(output_directory, MetagenomeEvaluationConstants.TSV_OUT),
             added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+            storage_string="evaluation results"
         )
     )
     luigi.build(task_list, local_scheduler=True)

@@ -23,7 +23,7 @@ class Diamond(LuigiTaskClass):
 
     def run(self):
         assert str(self.program) in {"blastx", "blastp"}, "Invalid program passed"
-        cdef str status = "Beginning Diamond.........."
+        cdef str status = "Running Diamond.........."
         print(status)
         cdef tuple outfmt = ("--outfmt", "6", "qseqid", "sseqid", "qstart", "qend", "pident", "evalue")
         subprocess.run(
@@ -53,7 +53,7 @@ class DiamondMakeDB(LuigiTaskClass):
     prot_file = luigi.Parameter()
 
     def run(self):
-        print("Beginning Diamond makedb..........")
+        print("Running Diamond makedb..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         subprocess.run(
@@ -81,7 +81,7 @@ class DiamondToFasta(LuigiTaskClass):
     evalue = luigi.Parameter(default="1e-15")
 
     def run(self):
-        print("Beginning DiamondToFasta..........")
+        print("Running DiamondToFasta..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         blast_to_fasta(

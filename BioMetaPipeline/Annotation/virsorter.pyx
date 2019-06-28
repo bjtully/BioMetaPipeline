@@ -24,7 +24,7 @@ class VirSorter(LuigiTaskClass):
         return []
 
     def run(self):
-        print("Beginning VirSorter..........")
+        print("Running VirSorter..........")
         if not os.path.exists(str(self.wdir)):
             os.makedirs(str(self.wdir))
         shutil.copy(str(self.fasta_file), str(self.wdir))

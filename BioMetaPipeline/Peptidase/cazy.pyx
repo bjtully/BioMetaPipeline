@@ -32,7 +32,7 @@ class CAZY(LuigiTaskClass):
         return []
 
     def run(self):
-        print("Beginning CAZy search..........")
+        print("Running CAZy search..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef string genome, cazy, val

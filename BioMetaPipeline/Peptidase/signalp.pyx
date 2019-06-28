@@ -21,7 +21,7 @@ class SignalP(LuigiTaskClass):
         return []
 
     def run(self):
-        print("Beginning SignalP..........")
+        print("Running SignalP..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef list data_type_flags

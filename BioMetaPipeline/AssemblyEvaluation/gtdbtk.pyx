@@ -28,7 +28,7 @@ class GTDBtk(LuigiTaskClass):
 
         :return:
         """
-        print("Beginning GTDBtk..........")
+        print("Running GTDBtk..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         subprocess.run(

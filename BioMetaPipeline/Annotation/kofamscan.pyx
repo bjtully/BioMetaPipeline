@@ -24,7 +24,7 @@ class KofamScan(LuigiTaskClass):
         return []
 
     def run(self):
-        print("Beginning KofamScan..........")
+        print("Running KofamScan..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef str outfile_path = os.path.join(str(self.output_directory), str(self.outfile) + ".tmp.tsv")

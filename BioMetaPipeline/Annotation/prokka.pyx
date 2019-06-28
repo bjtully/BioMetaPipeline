@@ -23,7 +23,7 @@ class PROKKA(LuigiTaskClass):
         return []
 
     def run(self):
-        print("Beginning PROKKA..........")
+        print("Running PROKKA..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef str outfile_prefix = get_prefix(str(self.fasta_file))
@@ -68,7 +68,7 @@ class PROKKAMatcher(LuigiTaskClass):
         pass
 
     def run(self):
-        print("Beginning PROKKAMatcher..........")
+        print("Running PROKKAMatcher..........")
         match_prokka_to_prodigal_and_write_tsv(
             str(self.diamond_file),
             str(self.prokka_tsv),

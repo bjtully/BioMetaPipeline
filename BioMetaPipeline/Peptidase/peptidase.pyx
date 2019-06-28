@@ -34,7 +34,7 @@ class Peptidase(LuigiTaskClass):
         return []
 
     def run(self):
-        print("Beginning Peptidase identification..........")
+        print("Running Peptidase identification..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef object psortb_data = open(str(self.psortb_results), "rb")

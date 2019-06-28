@@ -47,7 +47,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     cdef tuple split_file
     cdef list current_files = os.listdir(genome_storage_folder)
     # Copy all genomes to folder with temporary file
-    print("Copying files to temp directory")
+    print("Reformatting input files and moving to temp directory")
     for _file in os.listdir((<object>directory)):
         _f = _file.replace("_", "-")
         if _f not in current_files:

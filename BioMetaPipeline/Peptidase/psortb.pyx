@@ -23,7 +23,7 @@ class PSORTb(LuigiTaskClass):
         return []
 
     def run(self):
-        print("Beginning PSORTb..........")
+        print("Running PSORTb..........")
         cdef list data_type_flags
         if str(self.data_type).lower() == "gram+":
             data_type_flags = ["-p",]

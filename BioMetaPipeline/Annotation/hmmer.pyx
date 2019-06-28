@@ -21,7 +21,7 @@ class HMMSearch(LuigiTaskClass):
         return []
 
     def run(self):
-        print("Beginning HMMSearch..........")
+        print("Running HMMSearch..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         subprocess.run(
@@ -55,7 +55,7 @@ class HMMConvert(LuigiTaskClass):
         return []
 
     def run(self):
-        print("Beginning HMMConvert..........")
+        print("Running HMMConvert..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef object outfile = open(os.path.join(str(self.output_directory), os.path.basename(str(self.hmm_file))), "w")
@@ -86,7 +86,7 @@ class HMMPress(LuigiTaskClass):
         return []
 
     def run(self):
-        print("Beginning HMMPress..........")
+        print("Running HMMPress..........")
         # Move hmm file to output directory
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
