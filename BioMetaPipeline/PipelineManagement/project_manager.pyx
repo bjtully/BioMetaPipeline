@@ -49,14 +49,15 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     # Copy all genomes to folder with temporary file
     print("Reformatting input files and moving to temp directory")
     for _file in os.listdir((<object>directory)):
-        _f = os.path.splitext(_file.replace("_", "-"))[0] + ".fna"
-        if _f not in current_files:
-            FastaParser.write_simple(
-                os.path.join((<object>directory), _file),
-                os.path.join(genome_storage_folder, _f),
-                simplify=get_prefix(_file),
-                length=20,
-            )
+        if os.path.getsize(_file) != 0:
+            _f = os.path.splitext(_file.replace("_", "-"))[0] + ".fna"
+            if _f not in current_files:
+                FastaParser.write_simple(
+                    os.path.join((<object>directory), _file),
+                    os.path.join(genome_storage_folder, _f),
+                    simplify=get_prefix(_file),
+                    length=20,
+                )
     # Declarations
     cdef str genome_list_path = os.path.join((<object>output_directory), getattr(CallingClass, LIST_FILE))
     cdef str alias
