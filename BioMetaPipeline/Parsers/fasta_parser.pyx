@@ -22,6 +22,8 @@ cdef class FastaParser:
     def __init__(self, str file_name, str delimiter=" ", str header=">"):
         if not os.path.isfile(file_name):
             raise FileNotFoundError(file_name)
+        if not os.path.getsize(file_name) != 0:
+            raise IOError(file_name)
         # Need as pointer in class object so the pointer is kept open over generator tasks
         self.file_pointer = new ifstream(<char *>PyUnicode_AsUTF8(file_name))
         self.fasta_parser_cpp = FastaParser_cpp(self.file_pointer[0],
@@ -248,9 +250,10 @@ cdef class FastaParser:
         assert not (_id == "" and index == -1), "Set _id or index only"
         cdef object W
         cdef tuple record = FastaParser.get_single(file_name, _id, index, header, delimiter)
-        W = open(record[0] + (<string>PyUnicode_AsUTF8(os.path.splitext(file_name)[1])), "wb")
-        W.write(<string>">%s\n%s\n" % (record[0], record[2]))
-        W.close()
+        if record:
+            W = open(record[0] + (<string>PyUnicode_AsUTF8(os.path.splitext(file_name)[1])), "wb")
+            W.write(<string>">%s\n%s\n" % (record[0], record[2]))
+            W.close()
 
     @staticmethod
     def get_single(str file_name, str _id = "", int index = -1, str header = ">", str delimiter = " "):

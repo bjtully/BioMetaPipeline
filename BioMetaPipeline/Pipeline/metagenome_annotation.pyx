@@ -473,7 +473,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 directories=[
                     (os.path.join(output_directory, ProdigalConstants.OUTPUT_DIRECTORY), ProdigalConstants.PROTEIN_FILE_SUFFIX,
                      CombineOutputConstants.PROT_OUTPUT_FILE),
-                    (os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, KofamScanConstants.OUTPUT_DIRECTORY), "",
+                    (os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, KofamScanConstants.OUTPUT_DIRECTORY), ".tsv",
                      CombineOutputConstants.KO_OUTPUT_FILE),
                 ],
                 calling_script_path="",

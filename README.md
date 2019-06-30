@@ -18,7 +18,6 @@ Adding the last two lines of the above code to a user's `.bashrc` file will main
     - configparser
     - luigi
     - pandas
-    - pysam
 - External programs and their dependencies
     - **MET_EVAL**
         - CheckM

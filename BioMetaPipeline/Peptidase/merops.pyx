@@ -43,7 +43,8 @@ class MEROPS(LuigiTaskClass):
                 match_ids.add(line[0])
         # Write protein sequences that match MEROPS genes
         cdef str out_file = os.path.join(str(self.output_directory), str(self.outfile))
-        FastaParser.write_records(str(self.prot_file), match_ids, out_file)
+        if os.path.exists(str(self.prot_file)) and os.path.getsize(str(self.prot_file)) != 0:
+            FastaParser.write_records(str(self.prot_file), match_ids, out_file)
         print("MEROPS search complete!")
 
     def output(self):

@@ -69,19 +69,20 @@ class PROKKAMatcher(LuigiTaskClass):
 
     def run(self):
         print("Running PROKKAMatcher..........")
-        match_prokka_to_prodigal_and_write_tsv(
-            str(self.diamond_file),
-            str(self.prokka_tsv),
-            str(self.matches_file),
-            os.path.join(str(self.output_directory), str(self.outfile)),
-            float(str(self.evalue)),
-            float(str(self.pident)),
-            0,
-            1,
-            4,
-            5,
-            suffix=str(self.suffix),
-        )
+        if os.path.exists(str(self.diamond_file)):
+            match_prokka_to_prodigal_and_write_tsv(
+                str(self.diamond_file),
+                str(self.prokka_tsv),
+                str(self.matches_file),
+                os.path.join(str(self.output_directory), str(self.outfile)),
+                float(str(self.evalue)),
+                float(str(self.pident)),
+                0,
+                1,
+                4,
+                5,
+                suffix=str(self.suffix),
+            )
         print("PROKKAMatcher complete!")
 
     def output(self):
@@ -102,17 +103,18 @@ cdef void write_prokka_amended(str prokka_results, str outfile):
     cdef object W = open(outfile, "w")
     cdef list prokka_inner_list
     cdef str val, out_string = ""
-    # Write Header
-    W.write(tsvParser.header())
-    W.write("\n")
-    for prokka_inner_list in prokka_data:
-        if prokka_inner_list[1] == "CDS":
-            for val in prokka_inner_list:
-                out_string += val + "\t"
-            W.write(out_string[:-1])
-            W.write("\n")
-            out_string = ""
-    W.close()
+    if prokka_data:
+        # Write Header
+        W.write(tsvParser.header())
+        W.write("\n")
+        for prokka_inner_list in prokka_data:
+            if prokka_inner_list[1] == "CDS":
+                for val in prokka_inner_list:
+                    out_string += val + "\t"
+                W.write(out_string[:-1])
+                W.write("\n")
+                out_string = ""
+        W.close()
 
 
 cdef void match_prokka_to_prodigal_and_write_tsv(str diamond_file, str prokka_annotation_tsv, str matches_file, str outfile,
@@ -136,8 +138,8 @@ cdef void match_prokka_to_prodigal_and_write_tsv(str diamond_file, str prokka_an
     """
     cdef dict matches = {}
     cdef object W = open(outfile, "w")
-    W.write("protein\tprokka\n")
     cdef dict prokka_data = TSVParser.parse_dict(prokka_annotation_tsv)
+    W.write("protein\tprokka\n")
     cdef bytes _line
     cdef list line
     cdef object R = open(diamond_file, "rb")

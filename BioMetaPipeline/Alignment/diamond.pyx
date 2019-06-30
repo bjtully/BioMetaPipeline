@@ -26,22 +26,23 @@ class Diamond(LuigiTaskClass):
         cdef str status = "Running Diamond.........."
         print(status)
         cdef tuple outfmt = ("--outfmt", "6", "qseqid", "sseqid", "qstart", "qend", "pident", "evalue")
-        subprocess.run(
-            [
-                str(self.calling_script_path),
-                str(self.program),
-                "-d",
-                str(self.diamond_db),
-                "-q",
-                str(self.query_file),
-                "-o",
-                os.path.join(str(self.output_directory), str(self.outfile)),
-                *outfmt,
-                "--evalue",
-                str(self.evalue),
-            ],
-            check=True,
-        )
+        if os.path.exists(str(self.diamond_db) + ".dmnd"):
+            subprocess.run(
+                [
+                    str(self.calling_script_path),
+                    str(self.program),
+                    "-d",
+                    str(self.diamond_db),
+                    "-q",
+                    str(self.query_file),
+                    "-o",
+                    os.path.join(str(self.output_directory), str(self.outfile)),
+                    *outfmt,
+                    "--evalue",
+                    str(self.evalue),
+                ],
+                check=True,
+            )
         print("%s%s" % (status[:-5],"done!"))
 
     def output(self):
@@ -56,17 +57,18 @@ class DiamondMakeDB(LuigiTaskClass):
         print("Running Diamond makedb..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
-        subprocess.run(
-            [
-                str(self.calling_script_path),
-                "makedb",
-                "--in",
-                str(self.prot_file),
-                "-d",
-                os.path.join(str(self.output_directory), get_prefix(str(self.prot_file))),
-            ],
-            check=True,
-        )
+        if os.path.getsize(str(self.prot_file)) != 0:
+            subprocess.run(
+                [
+                    str(self.calling_script_path),
+                    "makedb",
+                    "--in",
+                    str(self.prot_file),
+                    "-d",
+                    os.path.join(str(self.output_directory), get_prefix(str(self.prot_file))),
+                ],
+                check=True,
+            )
         print("Diamond makedb complete!")
 
     def output(self):
@@ -84,12 +86,13 @@ class DiamondToFasta(LuigiTaskClass):
         print("Running DiamondToFasta..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
-        blast_to_fasta(
-            str(self.fasta_file),
-            str(self.diamond_file),
-            os.path.join(str(self.output_directory), str(self.outfile)),
-            e_value=float(str(self.evalue)),
-        )
+        if os.path.getsize(str(self.fasta_file)) != 0 and os.path.exists(str(self.diamond_file)):
+            blast_to_fasta(
+                str(self.fasta_file),
+                str(self.diamond_file),
+                os.path.join(str(self.output_directory), str(self.outfile)),
+                e_value=float(str(self.evalue)),
+            )
         print("DiamondToFasta complete!")
 
 

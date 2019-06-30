@@ -39,33 +39,36 @@ class CAZY(LuigiTaskClass):
         cdef int count
         cdef string prot_suffix = <string>PyUnicode_AsUTF8(str(self.prot_suffix))
         cdef vector[string] _cazy_ids
-        cdef object W = open(os.path.join(str(self.output_directory), str(self.outfile)), "wb")
-        cdef object WP = open(
-            os.path.join(str(self.output_directory),
-                         str(self.outfile).replace(CAZYConstants.ASSIGNMENTS, CAZYConstants.ASSIGNMENTS_BY_PROTEIN)),
-            "wb"
-        )
-        # Populate vector of cazy ids
+        cdef object W
+        cdef object WP
+        # Populate vector _cazy_ids by reference
         cdef dict cazy_data = create_cazy_dict(_cazy_ids, str(self.hmm_results))
         cdef dict count_data = <dict>Counter([val for val in (<dict>cazy_data).values()])
         # Set of no-repeated cazy ids
         cdef set cazy_ids = set([cazy for cazy in _cazy_ids])
         # Write compiled count data
-        W.write(<string>"Genome")
-        for cazy in cazy_ids:
-            W.write(<string>"\t" + cazy)
-        W.write(<string>"\n")
-        W.write(<string>PyUnicode_AsUTF8(str(self.genome_basename)))
-        for cazy in cazy_ids:
-            val = <string>PyUnicode_AsUTF8(str(count_data.get(cazy, 0)))
-            W.write(<string>"\t" + val)
-        W.write(<string>"\n")
-        # Write individual protein data
-        WP.write(<string>"Protein\tCAZy\n")
-        for genome, cazy in cazy_data.items():
-            WP.write(genome + prot_suffix + <string>"\t" + cazy + <string>"\n")
-        W.close()
-        WP.close()
+        if cazy_ids and count_data and cazy_data:
+            W = open(os.path.join(str(self.output_directory), str(self.outfile)), "wb")
+            WP = open(
+                os.path.join(str(self.output_directory),
+                             str(self.outfile).replace(CAZYConstants.ASSIGNMENTS, CAZYConstants.ASSIGNMENTS_BY_PROTEIN)),
+                "wb"
+            )
+            W.write(<string>"Genome")
+            for cazy in cazy_ids:
+                W.write(<string>"\t" + cazy)
+            W.write(<string>"\n")
+            W.write(<string>PyUnicode_AsUTF8(str(self.genome_basename)))
+            for cazy in cazy_ids:
+                val = <string>PyUnicode_AsUTF8(str(count_data.get(cazy, 0)))
+                W.write(<string>"\t" + val)
+            W.write(<string>"\n")
+            # Write individual protein data
+            WP.write(<string>"Protein\tCAZy\n")
+            for genome, cazy in cazy_data.items():
+                WP.write(genome + prot_suffix + <string>"\t" + cazy + <string>"\n")
+            W.close()
+            WP.close()
         print("CAZy search complete!")
 
     def output(self):

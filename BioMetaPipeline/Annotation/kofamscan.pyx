@@ -10,8 +10,8 @@ from BioMetaPipeline.Annotation.FunctionalProfileReader.reader import KoFamScan
 class KofamScanConstants:
     KOFAMSCAN = "KOFAMSCAN"
     OUTPUT_DIRECTORY = "kofamscan_results"
-    TMP_DIR = "tmp"
-    AMENDED_RESULTS_SUFFIX = ".amended.tsv"
+    TMP_DIR = "_tmp_"
+    AMENDED_RESULTS_SUFFIX = ".amended.tbl"
     KEGG_DIRECTORY = "kegg_results"
     STORAGE_STRING = "kofamscan results"
 
@@ -47,13 +47,16 @@ class KofamScan(LuigiTaskClass):
             outfile_path,
             outpath
         )
-        # for dbdm
-        KoFamScan.write_highest_matches(
-            outfile_path,
-            os.path.splitext(outpath)[0] + KofamScanConstants.AMENDED_RESULTS_SUFFIX,
-            ".faa",
-            "Protein\tKO"
-        )
+        if os.path.getsize(outpath) != 0:
+            # for dbdm
+            KoFamScan.write_highest_matches(
+                outfile_path,
+                os.path.splitext(outpath)[0] + KofamScanConstants.AMENDED_RESULTS_SUFFIX,
+                ".faa",
+                "Protein\tKO"
+            )
+        else:
+            os.remove(outpath)
         # Remove temp directory and file
         os.remove(outfile_path)
         shutil.rmtree(tmp_path)

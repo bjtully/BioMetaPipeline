@@ -88,42 +88,45 @@ cdef void write_interproscan_amended(str interproscan_results, str outfile, list
     cdef str app, outstring = ""
     cdef list _l, interpro_results_list = TSVParser.parse_list(interproscan_results, col_list=col_list)
     cdef set interpro_ids = set([_l[0] for _l in interpro_results_list])
-    cdef object W = open(outfile, "w")
+    cdef object W
     cdef list interpro_inner_list
-    W.write("Protein")
-    for app in applications:
-        W.write("\t" + app)
-    W.write("\n")
-    cdef dict condensed_results = {prot:{app: defaultdict(list) for app in applications} for prot in interpro_ids}
     cdef dict stored_data
     cdef object inner_data
     cdef tuple coords, coord
-    # Build dict of data by sign_accession.
-    for interpro_inner_list in interpro_results_list:
-        # Check if data for sign_accession is initialized and set
-        if len(interpro_inner_list) == 5:
-            condensed_results[interpro_inner_list[0]][interpro_inner_list[1]][interpro_inner_list[2]].append(
-                (interpro_inner_list[3], interpro_inner_list[4]))
-        else:
-            condensed_results[interpro_inner_list[0]][interpro_inner_list[1]][interpro_inner_list[2]].append(
-                (interpro_inner_list[3], interpro_inner_list[4], *interpro_inner_list[5:]))
-    # Sort results
-    for prot, stored_data in condensed_results.items():
-        for app, inner_data in stored_data.items():
-            # Reduce to nonoverlapping ranges
-            condensed_results[prot][app] = {sign_acn: reduce_span(inner_data[sign_acn]) for sign_acn in inner_data.keys()}
-    # Write summarized results by protein
-    for prot in condensed_results.keys():
-        outstring = prot + ".faa" + "\t"
+    cdef dict condensed_results
+    if interpro_ids:
+        W = open(outfile, "w")
+        W.write("Protein")
         for app in applications:
-            if condensed_results[prot][app] != {}:
-                for sign_acn, coords in condensed_results[prot][app].items():
-                    # Write as amended outstring to output file
-                    outstring += "".join(
-                        ["%s-%s:::%s;;;" % (coord[0], coord[1], sign_acn + (" " + " ".join(
-                            coord[2:])[:-1] if len(coord) > 2 else "")[:-1]) for coord in coords])
+            W.write("\t" + app)
+        W.write("\n")
+        condensed_results = {prot:{app: defaultdict(list) for app in applications} for prot in interpro_ids}
+        # Build dict of data by sign_accession.
+        for interpro_inner_list in interpro_results_list:
+            # Check if data for sign_accession is initialized and set
+            if len(interpro_inner_list) == 5:
+                condensed_results[interpro_inner_list[0]][interpro_inner_list[1]][interpro_inner_list[2]].append(
+                    (interpro_inner_list[3], interpro_inner_list[4]))
             else:
-                outstring += "None"
-            outstring += "\t"
-        W.write(outstring[:-1] + "\n")
-    W.close()
+                condensed_results[interpro_inner_list[0]][interpro_inner_list[1]][interpro_inner_list[2]].append(
+                    (interpro_inner_list[3], interpro_inner_list[4], *interpro_inner_list[5:]))
+        # Sort results
+        for prot, stored_data in condensed_results.items():
+            for app, inner_data in stored_data.items():
+                # Reduce to nonoverlapping ranges
+                condensed_results[prot][app] = {sign_acn: reduce_span(inner_data[sign_acn]) for sign_acn in inner_data.keys()}
+        # Write summarized results by protein
+        for prot in condensed_results.keys():
+            outstring = prot + ".faa" + "\t"
+            for app in applications:
+                if condensed_results[prot][app] != {}:
+                    for sign_acn, coords in condensed_results[prot][app].items():
+                        # Write as amended outstring to output file
+                        outstring += "".join(
+                            ["%s-%s:::%s;;;" % (coord[0], coord[1], sign_acn + (" " + " ".join(
+                                coord[2:])[:-1] if len(coord) > 2 else "")[:-1]) for coord in coords])
+                else:
+                    outstring += "None"
+                outstring += "\t"
+            W.write(outstring[:-1] + "\n")
+        W.close()
