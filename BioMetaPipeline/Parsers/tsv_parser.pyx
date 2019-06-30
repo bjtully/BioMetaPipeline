@@ -148,7 +148,7 @@ cdef class TSVParser:
     @staticmethod
     def parse_list(str file_name, str delimiter="\t", int skip_lines=0,
                    str comment_line_delimiter="#", bint header_line=False,
-                   tuple col_list=(-1,), bint is_python):
+                   tuple col_list=(-1,), bint is_python=True):
         """ Class method for converting tsv file into list
 
         :param file_name:
@@ -167,7 +167,7 @@ cdef class TSVParser:
     @staticmethod
     def index(str file_name, str delimiter="\t", int skip_lines=0,
                    str comment_line_delimiter="#", bint header_line=False,
-                   bint is_python):
+                   bint is_python=True):
         """ Class method to call get_index
 
         :param file_name:

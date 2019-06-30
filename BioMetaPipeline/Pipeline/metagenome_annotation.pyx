@@ -359,19 +359,19 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
                     storage_string=out_prefix + " " + CAZYConstants.STORAGE_STRING,
                 ),
-                # Store CAZy count info
-                GetDBDMCall(
-                    cancel_autocommit=cancel_autocommit,
-                    table_name=table_name,
-                    alias=alias,
-                    calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-                    db_name=biometadb_project,
-                    directory_name=directory,
-                    data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
-                                           out_prefix + "." + CAZYConstants.ASSIGNMENTS),
-                    added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
-                    storage_string=out_prefix + " " + CAZYConstants.SUMMARY_STORAGE_STRING,
-                ),
+                # # Store CAZy count info
+                # GetDBDMCall(
+                #     cancel_autocommit=cancel_autocommit,
+                #     table_name=table_name,
+                #     alias=alias,
+                #     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                #     db_name=biometadb_project,
+                #     directory_name=directory,
+                #     data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
+                #                            out_prefix + "." + CAZYConstants.ASSIGNMENTS),
+                #     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                #     storage_string=out_prefix + " " + CAZYConstants.SUMMARY_STORAGE_STRING,
+                # ),
                 # Search for MEROPS
                 HMMSearch(
                     calling_script_path=cfg.get(HMMSearchConstants.HMMSEARCH, ConfigManager.PATH),
@@ -434,30 +434,32 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
                     storage_string=out_prefix + " " + PeptidaseConstants.STORAGE_STRING,
                 ),
-                # Commit genome-wide info to database
-                GetDBDMCall(
-                    cancel_autocommit=cancel_autocommit,
-                    table_name=table_name,
-                    alias=alias,
-                    calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-                    db_name=biometadb_project,
-                    directory_name=directory,
-                    data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, out_prefix + PeptidaseConstants.MEROPS_HITS_EXT),
-                    added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
-                    storage_string=out_prefix + " " + MEROPSConstants.STORAGE_STRING,
-                ),
-                GetDBDMCall(
-                    cancel_autocommit=cancel_autocommit,
-                    table_name=table_name,
-                    alias=alias,
-                    calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-                    db_name=biometadb_project,
-                    directory_name=directory,
-                    data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY,
-                                           out_prefix + PeptidaseConstants.EXTRACELLULAR_MATCHES_EXT),
-                    added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
-                    storage_string=out_prefix + " " + MEROPSConstants.SUMMARY_STORAGE_STRING,
-                ),
+                # # Commit genome-wide info to database
+                # # MEROPS matches by their PFAM id
+                # GetDBDMCall(
+                #     cancel_autocommit=cancel_autocommit,
+                #     table_name=table_name,
+                #     alias=alias,
+                #     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                #     db_name=biometadb_project,
+                #     directory_name=directory,
+                #     data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, out_prefix + PeptidaseConstants.MEROPS_HITS_EXT),
+                #     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                #     storage_string=out_prefix + " " + MEROPSConstants.STORAGE_STRING,
+                # ),
+                # # MEROPS matches by their MEROPS id
+                # GetDBDMCall(
+                #     cancel_autocommit=cancel_autocommit,
+                #     table_name=table_name,
+                #     alias=alias,
+                #     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                #     db_name=biometadb_project,
+                #     directory_name=directory,
+                #     data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY,
+                #                            out_prefix + PeptidaseConstants.EXTRACELLULAR_MATCHES_EXT),
+                #     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                #     storage_string=out_prefix + " " + MEROPSConstants.SUMMARY_STORAGE_STRING,
+                # ),
             ):
                 task_list.append(task)
         try:
@@ -471,10 +473,15 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         task_list.append(
             CombineOutput(
                 directories=[
+                    # All prodigal proteins
                     (os.path.join(output_directory, ProdigalConstants.OUTPUT_DIRECTORY), ProdigalConstants.PROTEIN_FILE_SUFFIX,
                      CombineOutputConstants.PROT_OUTPUT_FILE),
+                    # All kofamscan default results (e.g. non-amended, which was for genome-specific and not cumulative)
                     (os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, KofamScanConstants.OUTPUT_DIRECTORY), ".tsv",
                      CombineOutputConstants.KO_OUTPUT_FILE),
+                    # All CAZy summary results
+                    # All MEROPS by PFAM summary results
+                    # All MEROPS by MEROPS summary results
                 ],
                 calling_script_path="",
                 output_directory=os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, CombineOutputConstants.OUTPUT_DIRECTORY),
