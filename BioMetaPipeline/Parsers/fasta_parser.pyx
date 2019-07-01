@@ -1,7 +1,8 @@
 # distutils: language = c++
-from fasta_parser cimport FastaParser_cpp
-from libcpp.vector cimport vector
 import os
+from io import StringIO
+from libcpp.vector cimport vector
+from fasta_parser cimport FastaParser_cpp
 
 
 """
@@ -42,19 +43,21 @@ cdef class FastaParser:
         cdef vector[string]* record = new vector[string]()
         self.fasta_parser_cpp.grab(record[0])
         cdef int _c
+        cdef str seq
         while (record[0]).size() > 0:
             # Yield tuple of str or string
             if is_python:
+                seq = "".join([chr(_c) for _c in record[0][2]])
                 yield (
                     "".join([chr(_c) for _c in record[0][0]]),
                     "".join([chr(_c) for _c in record[0][1]]),
-                    "".join([chr(_c) for _c in record[0][2]]),
+                    FastaParser._reformat_py_sequence_to_length(<void *>seq),
                 )
             else:
                 yield (
                     record[0][0],
                     record[0][1],
-                    record[0][2],
+                    FastaParser._reformat_string_sequence_to_length(record[0][2]),
                 )
             self.fasta_parser_cpp.grab(record[0])
         del record
@@ -73,6 +76,7 @@ cdef class FastaParser:
         self.fasta_parser_cpp.grab(record[0])
         cdef int _c
         cdef int i = 0
+        cdef str seq
         while (record[0]).size() > 0:
             # Yield python str or string
             if length != -1:
@@ -87,14 +91,15 @@ cdef class FastaParser:
                 )
                 i += 1
             if is_python:
-                yield ">%s\n%s\n" % (
+                seq = "".join([chr(_c) for _c in record[0][2]])
+                yield ">%s\n%s" % (
                     "".join([chr(_c) for _c in record_name]),
-                    "".join([chr(_c) for _c in record[0][2]]),
+                    FastaParser._reformat_py_sequence_to_length(<void *>seq),
                 )
             else:
-                yield <string>">%s\n%s\n" % (
+                yield <string>">%s\n%s" % (
                     record_name,
-                    record[0][2],
+                    FastaParser._reformat_string_sequence_to_length(record[0][2]),
                 )
             self.fasta_parser_cpp.grab(record[0])
         del record
@@ -143,6 +148,39 @@ cdef class FastaParser:
             return return_list
 
     @staticmethod
+    cdef str _reformat_py_sequence_to_length(void* seq, int max_length = 80):
+        """
+
+        :param seq:
+        :param max_length:
+        :return:
+        """
+        cdef int seq_len = len((<object>seq))
+        cdef int seq_len_spit = int(len((<object>seq)) / max_length)
+        cdef int i
+        cdef object out_buffer = StringIO()
+        for i in range(seq_len_spit - 1):
+            out_buffer.write((<object>seq)[i * max_length: (i + 1) * max_length] + "\n")
+        out_buffer.write((<object>seq)[seq_len_spit * max_length: seq_len])
+        return out_buffer.getvalue()
+
+    @staticmethod
+    cdef string _reformat_string_sequence_to_length(string seq, int max_length = 80):
+        """
+
+        :param seq:
+        :param max_length:
+        :return:
+        """
+        cdef size_t seq_len = seq.size()
+        cdef int seq_len_spit = int(len(seq) / max_length)
+        cdef int i
+        cdef string out_buffer
+        for i in range(seq_len_spit + 1):
+            out_buffer.append(seq.substr(i * max_length, max_length) + <string>"\n")
+        return out_buffer
+
+    @staticmethod
     def write_records(str file_name, object fasta_record_ids, str outfile, str delimiter = " ", str header = ">"):
         """ Static method will write a new file containing records found in file_name that match records in list.
 
@@ -154,12 +192,12 @@ cdef class FastaParser:
         :return:
         """
         cdef object W = open(outfile, "wb")
-        cdef tuple record
+        cdef tuple record = None
         cdef str _id
         for _id in fasta_record_ids:
             record = FastaParser.get_single(file_name, _id, header=header, delimiter=delimiter)
             if record:
-                W.write(<string>">%s\n%s\n" % (record[0], record[2]))
+                W.write(<string>">%s\n%s" % (record[0], record[2]))
         W.close()
 
     @staticmethod
@@ -230,7 +268,7 @@ cdef class FastaParser:
                     os.path.join(out_dir, "".join([chr(_c) for _c in record[0]]) + os.path.splitext(file_name)[1])
                 )
                 W = open("".join([chr(_c) for _c in out_file]), "wb")
-                W.write(<string>">%s\n%s\n" % (record[0], record[2]))
+                W.write(<string>">%s\n%s" % (record[0], record[2]))
                 W.close()
                 out_files.append(out_file)
         except StopIteration:
@@ -252,7 +290,7 @@ cdef class FastaParser:
         cdef tuple record = FastaParser.get_single(file_name, _id, index, header, delimiter)
         if record:
             W = open(record[0] + (<string>PyUnicode_AsUTF8(os.path.splitext(file_name)[1])), "wb")
-            W.write(<string>">%s\n%s\n" % (record[0], record[2]))
+            W.write(<string>">%s\n%s" % (record[0], record[2]))
             W.close()
 
     @staticmethod

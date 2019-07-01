@@ -32,19 +32,24 @@ class MEROPS(LuigiTaskClass):
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         # Gather MEROPS gene ids
+        print(1)
         cdef set match_ids = set()
         cdef object R = open(str(self.hmm_results), "r")
         cdef str _line
         cdef str delimiter = "#"
         cdef list line
+        print(2)
         for _line in R:
             line = _line.split(maxsplit=1)
             if line[0] != delimiter:
                 match_ids.add(line[0])
+        print(3)
         # Write protein sequences that match MEROPS genes
         cdef str out_file = os.path.join(str(self.output_directory), str(self.outfile))
+        print(4)
         if os.path.exists(str(self.prot_file)) and os.path.getsize(str(self.prot_file)) != 0:
             FastaParser.write_records(str(self.prot_file), match_ids, out_file)
+        print(5)
         print("MEROPS search complete!")
 
     def output(self):
