@@ -88,7 +88,6 @@ class Peptidase(LuigiTaskClass):
                     extracellular_pfams[line[0]] = line[3].split(b".")[0]
             merops_results.close()
         if extracellular_pfams:
-            print("Yes")
             pfam_prot_out = open(os.path.join(
                 str(self.output_directory),
                 str(self.output_prefix) + PeptidaseConstants.EXTRACELLULAR_MATCHES_BYPROT_EXT,
