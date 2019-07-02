@@ -34,11 +34,11 @@ namespace fasta_parser {
             if (this->last_line != "") {
                 line = this->last_line;
             }
-            while (line.compare(0, this->header.length(), this->header) != 0) {
+            while (line.compare(0, this->header.length(), this->header) != 0 && !(*this->fastaFile).eof()) {
                 getline((*this->fastaFile), line);
             }
             pos = line.find(this->delimiter);
-            line_data->push_back(line.substr(1,pos - 1));
+            line_data->push_back(line.substr(1, pos - 1));
             line_data->push_back(line.substr(pos + 1, line.length()));
             getline((*this->fastaFile), line);
             while (line.compare(0, this->header.length(), this->header) != 0 && !(*this->fastaFile).eof()) {

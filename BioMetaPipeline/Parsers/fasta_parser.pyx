@@ -44,7 +44,7 @@ cdef class FastaParser:
         self.fasta_parser_cpp.grab(record[0])
         cdef int _c
         cdef str seq
-        while (record[0]).size() > 0:
+        while (record[0]).size() == 3:
             # Yield tuple of str or string
             if is_python:
                 seq = "".join([chr(_c) for _c in record[0][2]])
@@ -61,7 +61,7 @@ cdef class FastaParser:
                 )
             self.fasta_parser_cpp.grab(record[0])
         del record
-        return None
+        return 1
 
     def create_string_generator(self, bint is_python = False, string simplify = "", int length = -1):
         """ Generator function yields either python or c++ string
@@ -77,7 +77,7 @@ cdef class FastaParser:
         cdef int _c
         cdef int i = 0
         cdef str seq
-        while (record[0]).size() > 0:
+        while (record[0]).size() == 3:
             # Yield python str or string
             if length != -1:
                 if length <= len(record[0][0]):
@@ -192,10 +192,12 @@ cdef class FastaParser:
         :return:
         """
         cdef object W = open(outfile, "wb")
-        cdef tuple record = None
+        cdef tuple record
         cdef str _id
+        cdef int i = 0
         for _id in fasta_record_ids:
             record = FastaParser.get_single(file_name, _id, header=header, delimiter=delimiter)
+            i += 1
             if record:
                 W.write(<string>">%s\n%s" % (record[0], record[2]))
         W.close()
