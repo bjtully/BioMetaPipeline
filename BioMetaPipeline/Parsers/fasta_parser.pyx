@@ -1,6 +1,7 @@
 # distutils: language = c++
 import os
 from io import StringIO
+from collections import deque
 from libcpp.vector cimport vector
 from fasta_parser cimport FastaParser_cpp
 
@@ -40,27 +41,26 @@ cdef class FastaParser:
 
         :return:
         """
-        cdef vector[string]* record = new vector[string]()
-        self.fasta_parser_cpp.grab(record[0])
+        cdef vector[string] record
+        self.fasta_parser_cpp.grab(record)
         cdef int _c
         cdef str seq
-        while (record[0]).size() == 3:
+        while record.size() == 3:
             # Yield tuple of str or string
             if is_python:
-                seq = "".join([chr(_c) for _c in record[0][2]])
+                seq = "".join([chr(_c) for _c in record[2]])
                 yield (
-                    "".join([chr(_c) for _c in record[0][0]]),
-                    "".join([chr(_c) for _c in record[0][1]]),
+                    "".join([chr(_c) for _c in record[0]]),
+                    "".join([chr(_c) for _c in record[1]]),
                     FastaParser._reformat_py_sequence_to_length(<void *>seq),
                 )
             else:
                 yield (
-                    record[0][0],
-                    record[0][1],
-                    FastaParser._reformat_string_sequence_to_length(record[0][2]),
+                    record[0],
+                    record[1],
+                    FastaParser._reformat_string_sequence_to_length(record[2]),
                 )
-            self.fasta_parser_cpp.grab(record[0])
-        del record
+            self.fasta_parser_cpp.grab(record)
         return 1
 
     def create_string_generator(self, bint is_python = False, string simplify = "", int length = -1):
@@ -71,19 +71,19 @@ cdef class FastaParser:
         :param is_python:
         :return:
         """
-        cdef vector[string]* record = new vector[string]()
+        cdef vector[string] record
         cdef string record_name
-        self.fasta_parser_cpp.grab(record[0])
+        self.fasta_parser_cpp.grab(record)
         cdef int _c
         cdef int i = 0
         cdef str seq
-        while (record[0]).size() == 3:
+        while record.size() == 3:
             # Yield python str or string
             if length != -1:
-                if length <= len(record[0][0]):
-                    record[0][0] = record[0][0].substr(0, length)
+                if length <= len(record[0]):
+                    record[0] = record[0].substr(0, length)
             if simplify == "":
-                record_name = record[0][0]
+                record_name = record[0]
             else:
                 record_name = <string>"%s_%d" % (
                     simplify.substr(0, length),
@@ -91,7 +91,7 @@ cdef class FastaParser:
                 )
                 i += 1
             if is_python:
-                seq = "".join([chr(_c) for _c in record[0][2]])
+                seq = "".join([chr(_c) for _c in record[2]])
                 yield ">%s\n%s" % (
                     "".join([chr(_c) for _c in record_name]),
                     FastaParser._reformat_py_sequence_to_length(<void *>seq),
@@ -99,10 +99,9 @@ cdef class FastaParser:
             else:
                 yield <string>">%s\n%s" % (
                     record_name,
-                    FastaParser._reformat_string_sequence_to_length(record[0][2]),
+                    FastaParser._reformat_string_sequence_to_length(record[2]),
                 )
-            self.fasta_parser_cpp.grab(record[0])
-        del record
+            self.fasta_parser_cpp.grab(record)
         return None
 
     def get_values_as_dict(self, bint is_python = True):
@@ -181,26 +180,30 @@ cdef class FastaParser:
         return out_buffer
 
     @staticmethod
-    def write_records(str file_name, object fasta_record_ids, str outfile, str delimiter = " ", str header = ">"):
+    def write_records(str file_name, list fasta_record_ids, str outfile, object filter_func, str delimiter = " ", str header = ">"):
         """ Static method will write a new file containing records found in file_name that match records in list.
 
         :param file_name:
         :param fasta_record_ids:
         :param outfile:
+        :param filter_func:
         :param delimiter:
         :param header:
         :return:
         """
         cdef object W = open(outfile, "wb")
         cdef tuple record
-        cdef str _id
-        cdef int i = 0
-        for _id in fasta_record_ids:
-            record = FastaParser.get_single(file_name, _id, header=header, delimiter=delimiter)
-            i += 1
-            if record:
-                W.write(<string>">%s\n%s" % (record[0], record[2]))
-        W.close()
+        cdef object sorted_ids = deque(sorted(fasta_record_ids, key=filter_func))
+        cdef object fp = FastaParser(file_name, delimiter, header)
+        cdef object record_gen = fp.create_tuple_generator(False)
+        try:
+            while record_gen:
+                record = next(record_gen)
+                if (<string>record[0]).compare(<string>PyUnicode_AsUTF8(sorted_ids[0])) == 0:
+                    W.write(<string>">%s\n%s" % (record[0], record[2]))
+                    sorted_ids.popleft()
+        except StopIteration:
+            W.close()
 
     @staticmethod
     def parse_list(str file_name, str delimiter = " ", str header = ">", bint is_python = True):
@@ -309,7 +312,7 @@ cdef class FastaParser:
         assert not (_id == "" and index == -1), "Set _id or index only"
         cdef object fp = FastaParser(file_name, delimiter, header)
         cdef object record_gen = fp.create_tuple_generator(False)
-        cdef tuple record
+        cdef tuple record = (1,1,1)
         cdef int i = 0
         try:
             while record_gen:
@@ -319,6 +322,7 @@ cdef class FastaParser:
                     return record
                 i += 1
         except StopIteration:
+            del fp
             return None
 
     @staticmethod

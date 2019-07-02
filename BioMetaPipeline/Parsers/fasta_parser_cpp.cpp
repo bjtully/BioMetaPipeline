@@ -22,12 +22,11 @@ namespace fasta_parser {
 
     FastaParser_cpp::~FastaParser_cpp() {}
 
-    void FastaParser_cpp::grab(std::vector<std::string>& ld) {
+    void FastaParser_cpp::grab(std::vector<std::string>& line_data) {
         std::string line;
         std::string dataLine;
-        std::vector<std::string>* line_data = &ld;
-        if (line_data->size() > 0) {
-            line_data->clear();
+        if (line_data.size() > 0) {
+            line_data.clear();
         }
         size_t pos = 0;
         if (!(*this->fastaFile).eof()) {
@@ -38,14 +37,14 @@ namespace fasta_parser {
                 getline((*this->fastaFile), line);
             }
             pos = line.find(this->delimiter);
-            line_data->push_back(line.substr(1, pos - 1));
-            line_data->push_back(line.substr(pos + 1, line.length()));
+            line_data.push_back(line.substr(1, pos - 1));
+            line_data.push_back(line.substr(pos + 1, line.length()));
             getline((*this->fastaFile), line);
             while (line.compare(0, this->header.length(), this->header) != 0 && !(*this->fastaFile).eof()) {
                 dataLine.append(line);
                 getline((*this->fastaFile), line);
             }
-            line_data->push_back(dataLine);
+            line_data.push_back(dataLine);
             this->last_line = line;
         }
     }
