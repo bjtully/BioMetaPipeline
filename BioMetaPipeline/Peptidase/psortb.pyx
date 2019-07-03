@@ -1,9 +1,10 @@
 # cython: language_level=3
-import luigi
 import os
 import glob
+import luigi
 import shutil
 import subprocess
+from sys import stderr
 from BioMetaPipeline.Accessories.ops import get_prefix
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
@@ -46,6 +47,7 @@ class PSORTb(LuigiTaskClass):
                 "terse",
             ],
             check=True,
+            stdout=stderr,
         )
         # Move results up and rename. Remove docker-created directory and
         shutil.move(

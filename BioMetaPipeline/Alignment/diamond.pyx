@@ -1,11 +1,11 @@
 # cython: language_level=3
-
-import luigi
 import os
+import luigi
 import subprocess
+from sys import stderr
 from BioMetaPipeline.Accessories.ops import get_prefix
-from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 from BioMetaPipeline.Parsers.blast_to_fasta import blast_to_fasta
+from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 
 class DiamondConstants:
@@ -42,6 +42,7 @@ class Diamond(LuigiTaskClass):
                     str(self.evalue),
                 ],
                 check=True,
+                stdout=stderr,
             )
         print("%s%s" % (status[:-5],"done!"))
 
@@ -68,6 +69,7 @@ class DiamondMakeDB(LuigiTaskClass):
                     os.path.join(str(self.output_directory), get_prefix(str(self.prot_file))),
                 ],
                 check=True,
+                stdout=stderr,
             )
         print("Diamond makedb complete!")
 

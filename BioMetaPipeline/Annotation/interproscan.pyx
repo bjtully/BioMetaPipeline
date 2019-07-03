@@ -1,5 +1,6 @@
 # cython: language_level=3
 import os
+from sys import stderr
 import luigi
 import subprocess
 from collections import defaultdict
@@ -55,6 +56,7 @@ class Interproscan(LuigiTaskClass):
                     *self.added_flags
                 ],
                 check=True,
+                stdout=stderr,
             )
         write_interproscan_amended(
             os.path.join(str(self.output_directory), str(self.out_prefix) + ".tsv"),

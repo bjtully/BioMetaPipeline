@@ -1,8 +1,9 @@
 # cython: language_level=3
-import luigi
 import os
-import subprocess
+import luigi
 import shutil
+import subprocess
+from sys import stderr
 from BioMetaPipeline.Accessories.ops import get_prefix
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 from BioMetaPipeline.Parsers.virsorter_parser cimport parse_virsorter_to_dbdm_tsv
@@ -54,6 +55,7 @@ class VirSorter(LuigiTaskClass):
                     *ending_flags,
                     ],
                 check=True,
+                stdout=stderr,
             )
         parse_virsorter_to_dbdm_tsv(
             os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.DEFAULT_CSV_OUTFILE),
