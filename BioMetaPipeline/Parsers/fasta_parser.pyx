@@ -180,7 +180,7 @@ cdef class FastaParser:
         return out_buffer
 
     @staticmethod
-    def write_records(str file_name, list fasta_record_ids, str outfile, object filter_func, str delimiter = " ", str header = ">"):
+    def write_records(str file_name, list fasta_record_ids, str outfile, object filter_func=None, str delimiter = " ", str header = ">"):
         """ Static method will write a new file containing records found in file_name that match records in list.
 
         :param file_name:
