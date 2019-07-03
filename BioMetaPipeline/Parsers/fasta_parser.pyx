@@ -197,7 +197,7 @@ cdef class FastaParser:
         cdef object fp = FastaParser(file_name, delimiter, header)
         cdef object record_gen = fp.create_tuple_generator(False)
         try:
-            while record_gen:
+            while record_gen and len(sorted_ids) > 0:
                 record = next(record_gen)
                 if (<string>record[0]).compare(<string>PyUnicode_AsUTF8(sorted_ids[0])) == 0:
                     W.write(<string>">%s\n%s" % (record[0], record[2]))

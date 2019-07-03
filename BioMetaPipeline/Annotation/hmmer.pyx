@@ -1,8 +1,9 @@
 # cython: language_level=3
-import luigi
 import os
-import subprocess
+import luigi
 import shutil
+import subprocess
+from sys import stderr
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 
@@ -99,6 +100,7 @@ class HMMPress(LuigiTaskClass):
                 moved_hmmfile,
             ],
             check=True,
+            stdout=stderr,
         )
         print("HMMPress complete!")
 
