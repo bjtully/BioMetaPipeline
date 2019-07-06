@@ -2,13 +2,12 @@
 import os
 import luigi
 from collections import Counter
-from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 from libcpp.string cimport string
+from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 
 cdef extern from "Python.h":
     char* PyUnicode_AsUTF8(object unicode)
-
 
 
 class PeptidaseConstants:
@@ -18,6 +17,10 @@ class PeptidaseConstants:
     EXTRACELLULAR_MATCHES_BYPROT_EXT = ".pfam.by_prot.tsv"
     MEROPS_HITS_EXT = ".merops.tsv"
     STORAGE_STRING = "peptidase pfam results"
+    GRAM_POS = "gram+"
+    GRAM_NEG = "gram-"
+    BACTERIA = "bacteria"
+    ARCHAEA = "archaea"
 
 
 class Peptidase(LuigiTaskClass):

@@ -82,13 +82,14 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     cdef object task
     cdef str protein_file = ""
     # Used for signalp and psortb processing
-    cdef dict bact_arch_type
+    cdef dict bact_arch_type = {}
     # For merops conversion
     cdef dict merops_dict
     # Prepare CAZy hmm profiles if set in config
     if cfg.check_pipe_set("peptidase", MetagenomeAnnotationConstants.PIPELINE_NAME):
-        assert type_file != "None", "Pass -t <type-file> to run this portion of the pipeline"
-        bact_arch_type = {os.path.splitext(key.replace("_", "-"))[0] + ".fna":val for key, val in TSVParser.parse_dict(type_file).items()}
+        # assert type_file != "None", "Pass -t <type-file> to run this portion of the pipeline"
+        if type_file != "None":
+            bact_arch_type = {os.path.splitext(key.replace("_", "-"))[0] + ".fna":val for key, val in TSVParser.parse_dict(type_file).items()}
         task_list.append(
             HMMConvert(
                 output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY,
@@ -381,15 +382,15 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 # Run signalp
                 SignalP(
                     calling_script_path=cfg.get(SignalPConstants.SIGNALP, ConfigManager.PATH),
-                    membrane_type=bact_arch_type[os.path.basename(fasta_file)][1],
+                    membrane_type=(bact_arch_type[os.path.basename(fasta_file)][1] if bact_arch_type else PeptidaseConstants.GRAM_NEG),
                     output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, SignalPConstants.OUTPUT_DIRECTORY),
                     outfile=out_prefix + SignalPConstants.RESULTS_SUFFIX,
                     prot_file=protein_file,
                 ),
                 # Run psortb
                 PSORTb(
-                    data_type=bact_arch_type[os.path.basename(fasta_file)][1],
-                    domain_type=bact_arch_type[os.path.basename(fasta_file)][0],
+                    data_type=(bact_arch_type[os.path.basename(fasta_file)][1] if bact_arch_type else PeptidaseConstants.GRAM_NEG),
+                    domain_type=(bact_arch_type[os.path.basename(fasta_file)][0] if bact_arch_type else PeptidaseConstants.BACTERIA),
                     prot_file=protein_file,
                     output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, PSORTbConstants.OUTPUT_DIRECTORY, out_prefix),
                     calling_script_path=cfg.get(PSORTbConstants.PSORTB, ConfigManager.PATH),
