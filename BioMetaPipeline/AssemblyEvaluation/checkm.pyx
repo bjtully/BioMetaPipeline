@@ -2,8 +2,10 @@
 
 import os
 import luigi
-import subprocess
 import shutil
+import subprocess
+from random import randint
+from datetime import datetime
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 
 
@@ -28,7 +30,8 @@ class CheckM(LuigiTaskClass):
 
         :return:
         """
-        cdef str tmp_dir = "tmp_dir"
+        cdef str tmp_dir = "%s_%s_outdir" % (datetime.today().strftime("%Y%m%d"),
+                                             str(randint(1,1001)))
         if not os.path.exists(tmp_dir):
             os.makedirs(tmp_dir)
         cdef object tmp = open(os.path.join(tmp_dir, "tmp.txt"), "w")
