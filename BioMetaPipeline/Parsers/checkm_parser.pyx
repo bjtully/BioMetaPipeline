@@ -1,4 +1,5 @@
 # distutils: language = c++
+import os
 from checkm_parser cimport CheckMParser_cpp
 from libcpp.vector cimport vector
 
@@ -11,7 +12,8 @@ cdef class CheckMParser:
     cdef CheckMParser_cpp checkm_parser_cpp
 
     def __init__(self, str file_name):
-        self.checkm_parser_cpp = CheckMParser_cpp(<string>PyUnicode_AsUTF8(file_name))
+        if os.path.exists(file_name):
+            self.checkm_parser_cpp = CheckMParser_cpp(<string>PyUnicode_AsUTF8(file_name))
 
     def read_file(self):
         self.checkm_parser_cpp.readFile()
