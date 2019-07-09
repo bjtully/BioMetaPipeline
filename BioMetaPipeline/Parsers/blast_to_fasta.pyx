@@ -34,7 +34,6 @@ def blast_to_fasta(str fasta_file, str blast_file, str out_file, int get_column 
     cdef bytes _line
     cdef tuple record
     cdef tuple coords
-    cdef string out_id
     for _line in _blast_file:
         line = _line.decode().rstrip("\r\n").split("\t")
         coords = (int(line[coords_columns[0]]), int(line[coords_columns[1]]))
@@ -43,11 +42,12 @@ def blast_to_fasta(str fasta_file, str blast_file, str out_file, int get_column 
         if e_value <= float(line[eval_pident_columns[0]]) and pident >= float(line[eval_pident_columns[1]]):
             record = fasta_records.get((<string>PyUnicode_AsUTF8(line[get_column])), None)
             if record:
-                out_id = <string>"%s\n%s\n" % (
+                record = (
                     record[0] + <string>"-%i_%i" % coords,
-                    (<string>record[1]).substr(coords[0] - 1, coords[1] - coords[0] + 1)
+                    record[1],
+                    (<string>record[2]).substr(coords[0] - 1, coords[1] - coords[0] + 1)
                 )
-                W.write(out_id)
+                W.write(FastaParser.record_to_string(record))
                 if write_matches:
                     WM.write(<string>"%s\t%s\n" % (
                         (<string>record[0]).substr(1, (<string>record[0]).size()) + <string>"-%i_%i" % coords,

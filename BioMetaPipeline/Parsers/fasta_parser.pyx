@@ -78,29 +78,7 @@ cdef class FastaParser:
         cdef int i = 0
         cdef str seq
         while record.size() == 3:
-            # Yield python str or string
-            if length != -1:
-                if length <= len(record[0]):
-                    record[0] = record[0].substr(0, length)
-            if simplify == "":
-                record_name = record[0]
-            else:
-                record_name = <string>"%s_%d" % (
-                    simplify.substr(0, length),
-                    i
-                )
-                i += 1
-            if is_python:
-                seq = "".join([chr(_c) for _c in record[2]])
-                yield ">%s\n%s" % (
-                    "".join([chr(_c) for _c in record_name]),
-                    FastaParser._reformat_py_sequence_to_length(<void *>seq),
-                )
-            else:
-                yield <string>">%s\n%s" % (
-                    record_name,
-                    FastaParser._reformat_string_sequence_to_length(record[2]),
-                )
+            yield FastaParser.record_to_string(record, length, simplify, is_python)
             self.fasta_parser_cpp.grab(record)
         return None
 
@@ -147,6 +125,34 @@ cdef class FastaParser:
             return return_list
 
     @staticmethod
+    def record_to_string(tuple record, int length = 80, string simplify = "", bint is_python = True):
+        cdef int i = 0
+        if length != -1:
+            if length <= len(record[0]):
+                record[0] = record[0].substr(0, length)
+        if simplify == "":
+            record_name = record[0]
+        else:
+            record_name = <string>"%s_%d" % (
+                simplify.substr(0, length),
+                i
+            )
+            i += 1
+        if is_python:
+            seq = "".join([chr(_c) for _c in record[2]])
+            return ">%s%s\n%s" % (
+                "".join([chr(_c) for _c in record_name]),
+                (" " + "".join([chr(_c) for _c in record[1]]) if record[1] else ""),
+                FastaParser._reformat_py_sequence_to_length(<void *>seq),
+            )
+        else:
+            return <string>">%s%s\n%s" % (
+                record_name,
+                (<string>" " + record[1] if record[1] else <string>""),
+                FastaParser._reformat_string_sequence_to_length(record[2]),
+            )
+
+    @staticmethod
     cdef str _reformat_py_sequence_to_length(void* seq, int max_length = 80):
         """
 
@@ -180,7 +186,8 @@ cdef class FastaParser:
         return out_buffer
 
     @staticmethod
-    def write_records(str file_name, list fasta_record_ids, str outfile, object filter_func=None, str delimiter = " ", str header = ">"):
+    def write_records(str file_name, list fasta_record_ids, str outfile, object filter_func=None, str delimiter = " ",
+                      str header = ">"):
         """ Static method will write a new file containing records found in file_name that match records in list.
 
         :param file_name:
@@ -200,7 +207,7 @@ cdef class FastaParser:
             while record_gen and len(sorted_ids) > 0:
                 record = next(record_gen)
                 if (<string>record[0]).compare(<string>PyUnicode_AsUTF8(sorted_ids[0])) == 0:
-                    W.write(<string>">%s\n%s" % (record[0], record[2]))
+                    W.write(FastaParser.record_to_string(record, is_python=False))
                     sorted_ids.popleft()
         except StopIteration:
             W.close()
@@ -273,7 +280,7 @@ cdef class FastaParser:
                     os.path.join(out_dir, "".join([chr(_c) for _c in record[0]]) + os.path.splitext(file_name)[1])
                 )
                 W = open("".join([chr(_c) for _c in out_file]), "wb")
-                W.write(<string>">%s\n%s" % (record[0], record[2]))
+                W.write(FastaParser.record_to_string(record))
                 W.close()
                 out_files.append(out_file)
         except StopIteration:
@@ -295,7 +302,7 @@ cdef class FastaParser:
         cdef tuple record = FastaParser.get_single(file_name, _id, index, header, delimiter)
         if record:
             W = open(record[0] + (<string>PyUnicode_AsUTF8(os.path.splitext(file_name)[1])), "wb")
-            W.write(<string>">%s\n%s" % (record[0], record[2]))
+            W.write(FastaParser.record_to_string(record))
             W.close()
 
     @staticmethod
