@@ -126,6 +126,14 @@ cdef class FastaParser:
 
     @staticmethod
     def record_to_string(tuple record, int length = 80, string simplify = "", bint is_python = True):
+        """ Method converts tuple record from (id, desc, seq) to standard fasta format
+
+        :param record:
+        :param length:
+        :param simplify:
+        :param is_python:
+        :return:
+        """
         cdef int i = 0
         if length != -1:
             if length <= len(record[0]):
