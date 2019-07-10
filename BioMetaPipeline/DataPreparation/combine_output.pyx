@@ -1,4 +1,5 @@
 import os
+import glob
 import luigi
 import pandas as pd
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
@@ -39,7 +40,7 @@ class CombineOutput(LuigiTaskClass):
             # Assumes that header lines are identical for all files
             if not self.join_header:
                 _file = open(os.path.join(str(self.output_directory), output_file), "wb")
-                for _f in [_fi for _fi in os.listdir(directory) if os.path.isfile(os.path.join(directory, _fi)) and _fi.endswith(suffix)]:
+                for _f in build_complete_file_list(directory, suffix):
                     # Write entire contents (for first file written or default)
                     if (self.header_once and is_first) or not self.header_once:
                         _file.write(open(os.path.join(directory, _f), "rb").read())
@@ -54,7 +55,7 @@ class CombineOutput(LuigiTaskClass):
             else:
                 combined_results = []
                 files = []
-                for _f in [_fi for _fi in os.listdir(directory) if os.path.isfile(os.path.join(directory, _fi)) and _fi.endswith(suffix)]:
+                for _f in build_complete_file_list(directory, suffix):
                     # Gather tsv info
                     files.append(_fi)
                     combined_results.append(pd.read_csv(os.path.join(directory, _f), delimiter=str(self.delimiter), header=0, index_col=0))
@@ -71,3 +72,13 @@ class CombineOutput(LuigiTaskClass):
             for directory, suffix, output_file
             in self.directories
         ]
+
+
+def build_complete_file_list(str base_path, str suffix):
+    """ Moves over all directories in base_path and gathers paths of files with matching suffix
+
+    :param base_path:
+    :param suffix:
+    :return:
+    """
+    return [_fi for _fi in glob.glob(base_path) if os.path.isfile(_fi) and _fi.endswith(suffix)]
