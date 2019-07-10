@@ -62,7 +62,7 @@ class Interproscan(LuigiTaskClass):
             os.path.join(str(self.output_directory), str(self.out_prefix) + ".tsv"),
             os.path.join(str(self.output_directory), str(self.out_prefix) + InterproscanConstants.AMENDED_RESULTS_SUFFIX),
             list(self.applications),
-            set([key for key in FastaParser.parse_dict(str(self.fasta_file), is_python=True).keys()])
+            set(FastaParser.index(str(self.fasta_file)))
         )
         os.remove(outfile_name)
         print("InterproScan complete!")
