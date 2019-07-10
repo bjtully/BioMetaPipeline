@@ -382,15 +382,15 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 # Run signalp
                 SignalP(
                     calling_script_path=cfg.get(SignalPConstants.SIGNALP, ConfigManager.PATH),
-                    membrane_type=(bact_arch_type[os.path.basename(fasta_file)][1] if bact_arch_type else PeptidaseConstants.GRAM_NEG),
+                    membrane_type=(bact_arch_type.get(os.path.basename(fasta_file), (0, PeptidaseConstants.GRAM_NEG))[1] if bact_arch_type else PeptidaseConstants.GRAM_NEG),
                     output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, SignalPConstants.OUTPUT_DIRECTORY),
                     outfile=out_prefix + SignalPConstants.RESULTS_SUFFIX,
                     prot_file=protein_file,
                 ),
                 # Run psortb
                 PSORTb(
-                    data_type=(bact_arch_type[os.path.basename(fasta_file)][1] if bact_arch_type else PeptidaseConstants.GRAM_NEG),
-                    domain_type=(bact_arch_type[os.path.basename(fasta_file)][0] if bact_arch_type else PeptidaseConstants.BACTERIA),
+                    data_type=(bact_arch_type.get(os.path.basename(fasta_file), (0, PeptidaseConstants.GRAM_NEG))[1] if bact_arch_type else PeptidaseConstants.GRAM_NEG),
+                    domain_type=(bact_arch_type.get(os.path.basename(fasta_file), (PeptidaseConstants.BACTERIA,))[0] if bact_arch_type else PeptidaseConstants.BACTERIA),
                     prot_file=protein_file,
                     output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, PSORTbConstants.OUTPUT_DIRECTORY, out_prefix),
                     calling_script_path=cfg.get(PSORTbConstants.PSORTB, ConfigManager.PATH),

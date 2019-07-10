@@ -21,6 +21,7 @@ class CombineOutput(LuigiTaskClass):
     header_once = luigi.BoolParameter(default=False)
     join_header = luigi.BoolParameter(default=False)
     delimiter = luigi.Parameter(default="\t")
+    na_rep = luigi.Parameter(default="0")
 
     def requires(self):
         return []
@@ -31,7 +32,7 @@ class CombineOutput(LuigiTaskClass):
         cdef str directory
         cdef str suffix
         cdef str output_file
-        cdef str _f, _fi
+        cdef str _f
         cdef object R
         cdef object _file
         cdef bint is_first = True
@@ -43,11 +44,11 @@ class CombineOutput(LuigiTaskClass):
                 for _f in build_complete_file_list(directory, suffix):
                     # Write entire contents (for first file written or default)
                     if (self.header_once and is_first) or not self.header_once:
-                        _file.write(open(os.path.join(directory, _f), "rb").read())
+                        _file.write(open(_f, "rb").read())
                         is_first = False
                     # Write contents after first line
                     elif self.header_once and not is_first:
-                        R = open(os.path.join(directory, _f), "rb")
+                        R = open(_f, "rb")
                         next(R)
                         _file.write(R.read())
                 _file.close()
@@ -57,12 +58,12 @@ class CombineOutput(LuigiTaskClass):
                 files = []
                 for _f in build_complete_file_list(directory, suffix):
                     # Gather tsv info
-                    files.append(_fi)
+                    files.append(_f)
                     combined_results.append(pd.read_csv(os.path.join(directory, _f), delimiter=str(self.delimiter), header=0, index_col=0))
                 pd.concat(combined_results, sort=True).to_csv(
                     os.path.join(str(self.output_directory), output_file),
                     sep="\t",
-                    na_rep="0",
+                    na_rep=str(self.na_rep),
                     index=files,
                 )
 
@@ -81,4 +82,5 @@ def build_complete_file_list(str base_path, str suffix):
     :param suffix:
     :return:
     """
+    cdef str _fi
     return [_fi for _fi in glob.glob(base_path) if os.path.isfile(_fi) and _fi.endswith(suffix)]

@@ -78,7 +78,7 @@ cdef class FastaParser:
         cdef int i = 0
         cdef str seq
         while record.size() == 3:
-            yield FastaParser.record_to_string(record, length, simplify, is_python)
+            yield FastaParser.record_to_string(tuple(record), length, simplify, is_python)
             self.fasta_parser_cpp.grab(record)
         return None
 
@@ -137,7 +137,7 @@ cdef class FastaParser:
         cdef int i = 0
         if length != -1:
             if length <= len(record[0]):
-                record[0] = record[0].substr(0, length)
+                record[0] = (<string>record[0]).substr(0, length)
         if simplify == "":
             record_name = record[0]
         else:
@@ -288,7 +288,7 @@ cdef class FastaParser:
                     os.path.join(out_dir, "".join([chr(_c) for _c in record[0]]) + os.path.splitext(file_name)[1])
                 )
                 W = open("".join([chr(_c) for _c in out_file]), "wb")
-                W.write(FastaParser.record_to_string(record))
+                W.write(FastaParser.record_to_string(record, is_python=False))
                 W.close()
                 out_files.append(out_file)
         except StopIteration:
@@ -310,7 +310,7 @@ cdef class FastaParser:
         cdef tuple record = FastaParser.get_single(file_name, _id, index, header, delimiter)
         if record:
             W = open(record[0] + (<string>PyUnicode_AsUTF8(os.path.splitext(file_name)[1])), "wb")
-            W.write(FastaParser.record_to_string(record))
+            W.write(FastaParser.record_to_string(record), is_python=False)
             W.close()
 
     @staticmethod
