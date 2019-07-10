@@ -78,7 +78,8 @@ cdef class FastaParser:
         cdef int i = 0
         cdef str seq
         while record.size() == 3:
-            yield FastaParser.record_to_string(tuple(record), length, simplify, is_python)
+            yield FastaParser.record_to_string(tuple(record), length, simplify, i, is_python)
+            i += 1
             self.fasta_parser_cpp.grab(record)
         return None
 
@@ -125,16 +126,16 @@ cdef class FastaParser:
             return return_list
 
     @staticmethod
-    def record_to_string(tuple record, int length = 80, string simplify = "", bint is_python = True):
+    def record_to_string(tuple record, int length = 80, string simplify = "", int count = 0, bint is_python = True):
         """ Method converts tuple record from (id, desc, seq) to standard fasta format
 
         :param record:
         :param length:
         :param simplify:
+        :param count:
         :param is_python:
         :return:
         """
-        cdef int i = 0
         if length != -1:
             if length <= len(record[0]):
                 record[0] = (<string>record[0]).substr(0, length)
@@ -143,9 +144,8 @@ cdef class FastaParser:
         else:
             record_name = <string>"%s_%d" % (
                 simplify.substr(0, length),
-                i
+                count
             )
-            i += 1
         if is_python:
             seq = "".join([chr(_c) for _c in record[2]])
             return ">%s%s\n%s" % (
@@ -173,7 +173,7 @@ cdef class FastaParser:
         cdef int i
         cdef object out_buffer = StringIO()
         for i in range(seq_len_spit - 1):
-            out_buffer.write((<object>seq)[i * max_length: (i + 1) * max_length] + "\n")
+            out_buffer.write((<object>seq).replace("\n", "")[i * max_length: (i + 1) * max_length] + "\n")
         out_buffer.write((<object>seq)[seq_len_spit * max_length: seq_len])
         return out_buffer.getvalue()
 
@@ -189,8 +189,9 @@ cdef class FastaParser:
         cdef int seq_len_spit = int(len(seq) / max_length)
         cdef int i
         cdef string out_buffer
+        seq.replace(<string>"\n", <string>"")
         for i in range(seq_len_spit + 1):
-            out_buffer.append(seq.substr(i * max_length, max_length) + <string>"\n")
+            out_buffer.append((<string>seq).substr(i * max_length, max_length) + <string>"\n")
         return out_buffer
 
     @staticmethod

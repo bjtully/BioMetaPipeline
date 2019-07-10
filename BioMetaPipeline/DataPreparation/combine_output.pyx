@@ -83,4 +83,4 @@ def build_complete_file_list(str base_path, str suffix):
     :return:
     """
     cdef str _fi
-    return [_fi for _fi in glob.glob(base_path) if os.path.isfile(_fi) and _fi.endswith(suffix)]
+    return [_fi for _fi in glob.glob(base_path) if _fi.endswith(suffix)]
