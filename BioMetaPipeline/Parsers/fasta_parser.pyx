@@ -48,27 +48,25 @@ cdef class FastaParser:
         while record.size() == 3:
             # Yield tuple of str or string
             if is_python:
-                seq = "".join([chr(_c) for _c in record[2]])
                 yield (
                     "".join([chr(_c) for _c in record[0]]),
                     "".join([chr(_c) for _c in record[1]]),
-                    FastaParser._reformat_py_sequence_to_length(<void *>seq),
+                    "".join([chr(_c) for _c in record[2]]),
                 )
             else:
                 yield (
                     record[0],
                     record[1],
-                    FastaParser._reformat_string_sequence_to_length(record[2]),
+                    record[2],
                 )
             self.fasta_parser_cpp.grab(record)
         return 1
 
-    def create_string_generator(self, bint is_python = False, string simplify = "", int length = -1):
+    def create_string_generator(self, string simplify = "", int length = 80):
         """ Generator function yields either python or c++ string
 
         :param length:
         :param simplify:
-        :param is_python:
         :return:
         """
         cdef vector[string] record
@@ -78,7 +76,7 @@ cdef class FastaParser:
         cdef int i = 0
         cdef str seq
         while record.size() == 3:
-            yield FastaParser.record_to_string(tuple(record), length, simplify, i, is_python)
+            yield FastaParser.record_to_string(tuple(record), length=length, simplify=simplify, count=i)
             i += 1
             self.fasta_parser_cpp.grab(record)
         return None
@@ -126,70 +124,73 @@ cdef class FastaParser:
             return return_list
 
     @staticmethod
-    def record_to_string(tuple record, int length = 80, string simplify = "", int count = 0, bint is_python = True):
-        """ Method converts tuple record from (id, desc, seq) to standard fasta format
+    def record_to_string(tuple record, int length = 80, int name_len = 20, string simplify = "", int count = 0):
+        """ Method converts tuple c++ string record from (id, desc, seq) to standard fasta format
 
         :param record:
         :param length:
+        :param name_len:
         :param simplify:
         :param count:
-        :param is_python:
         :return:
         """
-        if length != -1:
-            if length <= len(record[0]):
-                record[0] = (<string>record[0]).substr(0, length)
+        cdef object tmp = record[0]
+        cdef bint is_python
+        if type(record[0]) == bytes:
+            is_python = False
+        else:
+            is_python = True
+        if name_len <= len(record[0]):
+            tmp = (<string>tmp).substr(0, name_len)
         if simplify == "":
-            record_name = record[0]
+            record_name = tmp
         else:
             record_name = <string>"%s_%d" % (
-                simplify.substr(0, length),
+                simplify.substr(0, 20),
                 count
             )
         if is_python:
-            seq = "".join([chr(_c) for _c in record[2]])
             return ">%s%s\n%s" % (
                 "".join([chr(_c) for _c in record_name]),
                 (" " + "".join([chr(_c) for _c in record[1]]) if record[1] else ""),
-                FastaParser._reformat_py_sequence_to_length(<void *>seq),
+                FastaParser._reformat_py_sequence_to_length("".join([chr(_c) for _c in record[2]]), max_length=length),
             )
         else:
             return <string>">%s%s\n%s" % (
                 record_name,
                 (<string>" " + record[1] if record[1] else <string>""),
-                FastaParser._reformat_string_sequence_to_length(record[2]),
+                FastaParser._reformat_string_sequence_to_length(record[2], max_length=length),
             )
 
     @staticmethod
-    cdef str _reformat_py_sequence_to_length(void* seq, int max_length = 80):
+    cdef str _reformat_py_sequence_to_length(str seq, int max_length = 80):
         """
 
         :param seq:
         :param max_length:
         :return:
         """
-        cdef int seq_len = len((<object>seq))
-        cdef int seq_len_spit = int(len((<object>seq)) / max_length)
+        cdef int seq_len = len(seq)
+        cdef int seq_len_spit = int(len(seq) / max_length)
         cdef int i
         cdef object out_buffer = StringIO()
         for i in range(seq_len_spit - 1):
-            out_buffer.write((<object>seq).replace("\n", "")[i * max_length: (i + 1) * max_length] + "\n")
-        out_buffer.write((<object>seq)[seq_len_spit * max_length: seq_len])
+            out_buffer.write(seq[i * max_length: (i + 1) * max_length] + "\n")
+        out_buffer.write(seq[seq_len_spit * max_length: seq_len])
         return out_buffer.getvalue()
 
     @staticmethod
-    cdef string _reformat_string_sequence_to_length(string seq, int max_length = 80):
+    cdef string _reformat_string_sequence_to_length(bytes seq, int max_length = 80):
         """
 
         :param seq:
         :param max_length:
         :return:
         """
-        cdef size_t seq_len = seq.size()
+        cdef size_t seq_len = len(seq)
         cdef int seq_len_spit = int(len(seq) / max_length)
         cdef int i
         cdef string out_buffer
-        seq.replace(<string>"\n", <string>"")
         for i in range(seq_len_spit + 1):
             out_buffer.append((<string>seq).substr(i * max_length, max_length) + <string>"\n")
         return out_buffer
@@ -216,7 +217,7 @@ cdef class FastaParser:
             while record_gen and len(sorted_ids) > 0:
                 record = next(record_gen)
                 if (<string>record[0]).compare(<string>PyUnicode_AsUTF8(sorted_ids[0])) == 0:
-                    W.write(FastaParser.record_to_string(record, is_python=False))
+                    W.write(FastaParser.record_to_string(record))
                     sorted_ids.popleft()
         except StopIteration:
             W.close()
@@ -246,7 +247,7 @@ cdef class FastaParser:
         return FastaParser(file_name, delimiter, header).get_values_as_dict(is_python)
 
     @staticmethod
-    def write_simple(str file_name, str out_file, str delimiter = " ", str header = ">", str simplify = "", int length = -1):
+    def write_simple(str file_name, str out_file, str delimiter = " ", str header = ">", str simplify = "", int length = 80):
         """ Method will write a simplified version of a fasta file (e.g. only displays id and sequence)
 
         :param length:
@@ -259,7 +260,7 @@ cdef class FastaParser:
         """
         cdef object fp = FastaParser(file_name, delimiter, header)
         cdef object W = open(out_file, "wb")
-        cdef object record_gen = fp.create_string_generator(False, PyUnicode_AsUTF8(simplify), length)
+        cdef object record_gen = fp.create_string_generator(PyUnicode_AsUTF8(simplify), length)
         try:
             while record_gen:
                 W.write(next(record_gen))
@@ -289,7 +290,7 @@ cdef class FastaParser:
                     os.path.join(out_dir, "".join([chr(_c) for _c in record[0]]) + os.path.splitext(file_name)[1])
                 )
                 W = open("".join([chr(_c) for _c in out_file]), "wb")
-                W.write(FastaParser.record_to_string(record, is_python=False))
+                W.write(FastaParser.record_to_string(record))
                 W.close()
                 out_files.append(out_file)
         except StopIteration:
@@ -311,7 +312,7 @@ cdef class FastaParser:
         cdef tuple record = FastaParser.get_single(file_name, _id, index, header, delimiter)
         if record:
             W = open(record[0] + (<string>PyUnicode_AsUTF8(os.path.splitext(file_name)[1])), "wb")
-            W.write(FastaParser.record_to_string(record), is_python=False)
+            W.write(FastaParser.record_to_string(record))
             W.close()
 
     @staticmethod

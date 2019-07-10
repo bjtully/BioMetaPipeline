@@ -45,7 +45,8 @@ def blast_to_fasta(str fasta_file, str blast_file, str out_file, int get_column 
             record = fasta_records.get(record_id, None)
             if record:
                 record = (
-                    record_id + <string>"-%i_%i" % coords + <string>" %s" % record[0],
+                    record_id + <string>"-%i_%i" % coords,
+                    <string>" %s" % record[0],
                     (<string>record[1]).substr(coords[0] - 1, coords[1] - coords[0] + 1)
                 )
                 W.write(FastaParser.record_to_string(record))

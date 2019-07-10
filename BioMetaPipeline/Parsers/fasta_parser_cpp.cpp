@@ -1,5 +1,6 @@
 #include <string>
 #include <fstream>
+#include <algorithm>
 #include <iostream>
 #include "fasta_parser_cpp.h"
 
@@ -45,9 +46,11 @@ namespace fasta_parser {
                 line_data.push_back(line.substr(pos + 1, line.length()));
             }
             getline((*this->fastaFile), line);
+            line.erase(std::remove(line.begin(), line.end(), '\r'), line.end());
             while (line.compare(0, this->header.length(), this->header) != 0 && !(*this->fastaFile).eof()) {
                 dataLine.append(line);
                 getline((*this->fastaFile), line);
+                line.erase(std::remove(line.begin(), line.end(), '\r'), line.end());
             }
             line_data.push_back(dataLine);
             this->last_line = line;
