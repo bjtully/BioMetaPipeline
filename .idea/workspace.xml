@@ -67,8 +67,8 @@
             <file leaf-file-name="config_manager.pyx" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Config/config_manager.pyx">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="2363">
-                    <caret line="139" column="30" selection-start-line="139" selection-start-column="30" selection-end-line="139" selection-end-column="30" />
+                  <state relative-caret-position="204">
+                    <caret line="36" column="20" lean-forward="true" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
                     <folding>
                       <element signature="e#28#37#0" expanded="true" />
                     </folding>
@@ -1002,13 +1002,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/biodata.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
@@ -1019,10 +1012,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/biodata.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Config/config_manager.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2363">
-          <caret line="139" column="30" selection-start-line="139" selection-start-column="30" selection-end-line="139" selection-end-column="30" />
+        <state relative-caret-position="204">
+          <caret line="36" column="20" lean-forward="true" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
           <folding>
             <element signature="e#28#37#0" expanded="true" />
           </folding>
