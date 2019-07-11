@@ -1,5 +1,4 @@
 pandas
-pysam
 argparse
 luigi
 configparser
