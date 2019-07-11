@@ -1,5 +1,4 @@
 import os
-import glob
 import luigi
 import pandas as pd
 from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
@@ -30,18 +29,18 @@ class CombineOutput(LuigiTaskClass):
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         cdef str directory
-        cdef str suffix
+        cdef tuple suffixes
         cdef str output_file
         cdef str _f
         cdef object R
         cdef object _file
         cdef bint is_first = True
         cdef list combined_results, files
-        for directory, suffix, output_file in self.directories:
+        for directory, suffixes, output_file in self.directories:
             # Assumes that header lines are identical for all files
             if not self.join_header:
                 _file = open(os.path.join(str(self.output_directory), output_file), "wb")
-                for _f in build_complete_file_list(directory, suffix):
+                for _f in build_complete_file_list(directory, suffixes):
                     # Write entire contents (for first file written or default)
                     if (self.header_once and is_first) or not self.header_once:
                         _file.write(open(_f, "rb").read())
@@ -56,7 +55,7 @@ class CombineOutput(LuigiTaskClass):
             else:
                 combined_results = []
                 files = []
-                for _f in build_complete_file_list(directory, suffix):
+                for _f in build_complete_file_list(directory, suffixes):
                     # Gather tsv info
                     files.append(os.path.basename(_f))
                     combined_results.append(pd.read_csv(os.path.join(_f), delimiter=str(self.delimiter), header=0, index_col=0))
@@ -75,19 +74,19 @@ class CombineOutput(LuigiTaskClass):
         ]
 
 
-def build_complete_file_list(str base_path, str suffix):
-    """ Moves over all directories in base_path and gathers paths of files with matching suffix
+def build_complete_file_list(str base_path, tuple suffixes):
+    """ Moves over all directories in base_path and gathers paths of files with matching suffix in tuple of suffixes
 
     :param base_path:
-    :param suffix:
+    :param suffixes:
     :return:
     """
-    cdef str root, filename
+    cdef str root, filename, suffix
     cdef list dirnames, filenames
     cdef set out_paths = set()
     for root, dirnames, filenames in os.walk(base_path):
         for filename in filenames:
-            if filename.endswith(suffix):
-                out_paths.add(os.path.join(root, filename))
-
+            for suffix in suffixes:
+                if filename.endswith(suffix):
+                    out_paths.add(os.path.join(root, filename))
     return list(out_paths)

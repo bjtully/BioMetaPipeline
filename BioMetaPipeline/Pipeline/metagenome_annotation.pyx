@@ -431,15 +431,15 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 directories=[
                     # All CAZy summary results
                     (os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY),
-                     CAZYConstants.ASSIGNMENTS,
+                     (CAZYConstants.ASSIGNMENTS,),
                      CombineOutputConstants.CAZY_OUTPUT_FILE),
                     # All MEROPS by MEROPS summary results
                     (os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY),
-                     PeptidaseConstants.MEROPS_HITS_EXT,
+                     (PeptidaseConstants.MEROPS_HITS_EXT,),
                      CombineOutputConstants.MEROPS_OUTPUT_FILE),
                     # All MEROPS by PFAM summary results
                     (os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY),
-                     PeptidaseConstants.EXTRACELLULAR_MATCHES_EXT,
+                     (PeptidaseConstants.EXTRACELLULAR_MATCHES_EXT,),
                      CombineOutputConstants.MEROPS_PFAM_OUTPUT_FILE),
                 ],
                 calling_script_path="",
@@ -503,11 +503,11 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 directories=[
                     # All prodigal proteins
                     (os.path.join(output_directory, ProdigalConstants.OUTPUT_DIRECTORY),
-                     ProdigalConstants.PROTEIN_FILE_SUFFIX,
+                     (ProdigalConstants.PROTEIN_FILE_SUFFIX,),
                      CombineOutputConstants.PROT_OUTPUT_FILE),
                     # All kofamscan default results (e.g. non-amended, which was for genome-specific and not cumulative)
                     (os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, KofamScanConstants.OUTPUT_DIRECTORY),
-                     ".tsv",
+                     (".tsv",),
                      CombineOutputConstants.KO_OUTPUT_FILE),
                 ],
                 calling_script_path="",
