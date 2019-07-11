@@ -197,20 +197,20 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     wdir=os.path.abspath(os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file))),
                 )
             )
-            task_list.append(
-                GetDBDMCall(
-                    cancel_autocommit=cancel_autocommit,
-                    table_name=out_prefix,
-                    alias=out_prefix,
-                    calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-                    db_name=biometadb_project,
-                    directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix + ".fna"),
-                    data_file=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file),
-                                           "virsorter-out", out_prefix + "." + VirSorterConstants.ADJ_OUT_FILE),
-                    added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
-                    storage_string=out_prefix + " " + VirSorterConstants.STORAGE_STRING,
-                )
-            )
+            # task_list.append(
+            #     GetDBDMCall(
+            #         cancel_autocommit=cancel_autocommit,
+            #         table_name=out_prefix,
+            #         alias=out_prefix,
+            #         calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+            #         db_name=biometadb_project,
+            #         directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix + ".fna"),
+            #         data_file=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file),
+            #                                "virsorter-out", out_prefix + "." + VirSorterConstants.ADJ_OUT_FILE),
+            #         added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+            #         storage_string=out_prefix + " " + VirSorterConstants.STORAGE_STRING,
+            #     )
+            # )
 
         # Optional task - kegg
         if cfg.check_pipe_set("kegg", MetagenomeAnnotationConstants.PIPELINE_NAME):
@@ -223,23 +223,23 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     fasta_file=protein_file,
                     added_flags=cfg.build_parameter_list_from_dict(KofamScanConstants.KOFAMSCAN),
                 ),
-                # Commit kofamscan results
-                GetDBDMCall(
-                    cancel_autocommit=cancel_autocommit,
-                    table_name=out_prefix,
-                    alias=out_prefix,
-                    calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-                    db_name=biometadb_project,
-                    directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
-                    data_file=os.path.join(
-                        output_directory,
-                        KofamScanConstants.KEGG_DIRECTORY,
-                        KofamScanConstants.OUTPUT_DIRECTORY,
-                        out_prefix + KofamScanConstants.AMENDED_RESULTS_SUFFIX
-                    ),
-                    added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
-                    storage_string=out_prefix + " " + KofamScanConstants.STORAGE_STRING,
-                ),
+                # # Commit kofamscan results
+                # GetDBDMCall(
+                #     cancel_autocommit=cancel_autocommit,
+                #     table_name=out_prefix,
+                #     alias=out_prefix,
+                #     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                #     db_name=biometadb_project,
+                #     directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
+                #     data_file=os.path.join(
+                #         output_directory,
+                #         KofamScanConstants.KEGG_DIRECTORY,
+                #         KofamScanConstants.OUTPUT_DIRECTORY,
+                #         out_prefix + KofamScanConstants.AMENDED_RESULTS_SUFFIX
+                #     ),
+                #     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                #     storage_string=out_prefix + " " + KofamScanConstants.STORAGE_STRING,
+                # ),
             ):
                 task_list.append(task)
 
@@ -284,18 +284,18 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     matches_file=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, out_prefix + ".subset.matches"),
                     calling_script_path="",
                 ),
-                GetDBDMCall(
-                    cancel_autocommit=cancel_autocommit,
-                    table_name=out_prefix,
-                    alias=out_prefix,
-                    calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-                    db_name=biometadb_project,
-                    directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
-                    data_file=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY, DiamondConstants.OUTPUT_DIRECTORY,
-                                           out_prefix + ".prk-to-prd.tsv"),
-                    added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
-                    storage_string=out_prefix + " " + PROKKAConstants.STORAGE_STRING
-                ),
+                # GetDBDMCall(
+                #     cancel_autocommit=cancel_autocommit,
+                #     table_name=out_prefix,
+                #     alias=out_prefix,
+                #     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                #     db_name=biometadb_project,
+                #     directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
+                #     data_file=os.path.join(output_directory, PROKKAConstants.OUTPUT_DIRECTORY, DiamondConstants.OUTPUT_DIRECTORY,
+                #                            out_prefix + ".prk-to-prd.tsv"),
+                #     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                #     storage_string=out_prefix + " " + PROKKAConstants.STORAGE_STRING
+                # ),
             ):
                 task_list.append(task)
 
@@ -310,22 +310,22 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     added_flags=cfg.build_parameter_list_from_dict(InterproscanConstants.INTERPROSCAN),
                     applications=[val for val in cfg.get(InterproscanConstants.INTERPROSCAN, "--applications").split(",") if val != ""],
                 ),
-                # Commit interproscan results
-                GetDBDMCall(
-                    cancel_autocommit=cancel_autocommit,
-                    table_name=out_prefix,
-                    alias=out_prefix,
-                    calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-                    db_name=biometadb_project,
-                    directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
-                    data_file=os.path.join(
-                        output_directory,
-                        InterproscanConstants.OUTPUT_DIRECTORY,
-                        out_prefix + InterproscanConstants.AMENDED_RESULTS_SUFFIX
-                    ),
-                    added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
-                    storage_string=out_prefix + " " + InterproscanConstants.STORAGE_STRING,
-                ),
+                # # Commit interproscan results
+                # GetDBDMCall(
+                #     cancel_autocommit=cancel_autocommit,
+                #     table_name=out_prefix,
+                #     alias=out_prefix,
+                #     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                #     db_name=biometadb_project,
+                #     directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
+                #     data_file=os.path.join(
+                #         output_directory,
+                #         InterproscanConstants.OUTPUT_DIRECTORY,
+                #         out_prefix + InterproscanConstants.AMENDED_RESULTS_SUFFIX
+                #     ),
+                #     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                #     storage_string=out_prefix + " " + InterproscanConstants.STORAGE_STRING,
+                # ),
             ):
                 task_list.append(task)
 
@@ -355,19 +355,19 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     prot_suffix=os.path.splitext(ProdigalConstants.PROTEIN_FILE_SUFFIX)[1],
                     genome_basename=os.path.basename(fasta_file),
                 ),
-                # Store CAZy output in peptidase-specific database
-                GetDBDMCall(
-                    cancel_autocommit=cancel_autocommit,
-                    table_name=out_prefix,
-                    alias=out_prefix,
-                    calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-                    db_name=biometadb_project,
-                    directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
-                    data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
-                                           out_prefix + "." + CAZYConstants.ASSIGNMENTS_BY_PROTEIN),
-                    added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
-                    storage_string=out_prefix + " " + CAZYConstants.STORAGE_STRING,
-                ),
+                # # Store CAZy output in peptidase-specific database
+                # GetDBDMCall(
+                #     cancel_autocommit=cancel_autocommit,
+                #     table_name=out_prefix,
+                #     alias=out_prefix,
+                #     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                #     db_name=biometadb_project,
+                #     directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
+                #     data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
+                #                            out_prefix + "." + CAZYConstants.ASSIGNMENTS_BY_PROTEIN),
+                #     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                #     storage_string=out_prefix + " " + CAZYConstants.STORAGE_STRING,
+                # ),
                 # Search for MEROPS
                 HMMSearch(
                     calling_script_path=cfg.get(HMMSearchConstants.HMMSEARCH, ConfigManager.PATH),
@@ -418,18 +418,18 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     genome_id_and_ext=os.path.basename(fasta_file),
                     pfam_to_merops_dict=merops_dict,
                 ),
-                # Commit protein-specific info to database
-                GetDBDMCall(
-                    cancel_autocommit=cancel_autocommit,
-                    table_name=out_prefix,
-                    alias=out_prefix,
-                    calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-                    db_name=biometadb_project,
-                    directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
-                    data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, out_prefix + PeptidaseConstants.EXTRACELLULAR_MATCHES_BYPROT_EXT),
-                    added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
-                    storage_string=out_prefix + " " + PeptidaseConstants.STORAGE_STRING,
-                ),
+                # # Commit protein-specific info to database
+                # GetDBDMCall(
+                #     cancel_autocommit=cancel_autocommit,
+                #     table_name=out_prefix,
+                #     alias=out_prefix,
+                #     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                #     db_name=biometadb_project,
+                #     directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
+                #     data_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, out_prefix + PeptidaseConstants.EXTRACELLULAR_MATCHES_BYPROT_EXT),
+                #     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                #     storage_string=out_prefix + " " + PeptidaseConstants.STORAGE_STRING,
+                # ),
             ):
                 task_list.append(task)
         try:
@@ -597,15 +597,14 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
             task_list.append(
                 GetDBDMCall(
                     cancel_autocommit=cancel_autocommit,
-                    table_name=out_prefix,
-                    alias=out_prefix,
+                    table_name=prefix,
+                    alias=prefix,
                     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                     db_name=biometadb_project,
-                    directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix + ".fna"),
-                    data_file=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file),
-                                           "virsorter-out", out_prefix + "." + VirSorterConstants.ADJ_OUT_FILE),
+                    directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, prefix),
+                    data_file=os.path.join(output_directory, prefix + MetagenomeAnnotationConstants.TSV_OUT),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
-                    storage_string=out_prefix + " " + VirSorterConstants.STORAGE_STRING,
+                    storage_string=prefix + " " + VirSorterConstants.STORAGE_STRING,
                 )
             )
 

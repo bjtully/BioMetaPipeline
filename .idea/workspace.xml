@@ -68,7 +68,7 @@
               <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Config/config_manager.pyx">
                 <provider selected="true" editor-type-id="text-editor">
                   <state relative-caret-position="238">
-                    <caret line="14" column="9" lean-forward="true" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+                    <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
                     <folding>
                       <element signature="e#28#37#0" expanded="true" />
                     </folding>
@@ -99,8 +99,8 @@
             <file leaf-file-name="metagenome_annotation.pyx" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="204">
-                    <caret line="588" column="25" lean-forward="true" selection-start-line="588" selection-start-column="25" selection-end-line="588" selection-end-column="25" />
+                  <state relative-caret-position="189">
+                    <caret line="588" column="112" selection-start-line="588" selection-start-column="112" selection-end-line="588" selection-end-column="112" />
                     <folding>
                       <element signature="e#27#36#0" expanded="true" />
                     </folding>
@@ -115,11 +115,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="biodata.pyx" pinned="false" current-in-tab="false">
+      <file leaf-file-name="biodata.pyx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/biodata.pyx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="24" column="38" lean-forward="true" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+            <state relative-caret-position="493">
+              <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -139,8 +139,8 @@
       <file leaf-file-name="virsorter.pyx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/virsorter.pyx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-78">
-              <caret line="29" column="46" lean-forward="true" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
+            <state relative-caret-position="272">
+              <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
               <folding>
                 <element signature="e#27#36#0" expanded="true" />
               </folding>
@@ -148,13 +148,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="interproscan.pyx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="interproscan.pyx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/interproscan.pyx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-510">
-              <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+            <state relative-caret-position="289">
+              <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
               <folding>
                 <element signature="e#27#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kofamscan.pyx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/kofamscan.pyx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="680">
+              <caret line="40" column="37" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="37" />
+              <folding>
+                <element signature="e#27#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -256,12 +268,12 @@
         <option value="$PROJECT_DIR$/MET_ANNOT.md" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Parsers/fasta_parser.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Parsers/fasta_parser_cpp.cpp" />
-        <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/virsorter.pyx" />
-        <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/interproscan.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Config/task_mapper.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/kofamscan.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Config/config_manager.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/DataPreparation/combine_output.pyx" />
+        <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/interproscan.pyx" />
+        <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/virsorter.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx" />
       </list>
     </option>
@@ -275,7 +287,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="172" />
     <option name="y" value="30" />
     <option name="width" value="1399" />
@@ -521,7 +533,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="172" y="30" width="1399" height="1012" extended-state="0" />
+    <frame x="172" y="30" width="1399" height="1012" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32912844" />
@@ -530,11 +542,11 @@
       <window_info anchor="bottom" id="Run" order="1" weight="0.32938188" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" weight="0.3275463" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32648402" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49868765" weight="0.24311927" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.49868765" visible="true" weight="0.24311927" />
       <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49885845" visible="true" weight="0.21135175" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" weight="0.32921028" />
-      <window_info active="true" anchor="bottom" id="Find" order="5" visible="true" weight="0.32110092" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.32110092" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3286385" />
       <window_info id="Structure" order="0" sideWeight="0.50114155" side_tool="true" weight="0.21771523" />
       <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
@@ -882,26 +894,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/virsorter.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-78">
-          <caret line="29" column="46" lean-forward="true" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
-          <folding>
-            <element signature="e#27#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/prokka.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2805">
-          <caret line="165" selection-start-line="165" selection-end-line="165" />
-          <folding>
-            <element signature="e#27#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Parsers/fasta_parser.pyx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -926,39 +918,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/kofamscan.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="40" column="37" lean-forward="true" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="37" />
-          <folding>
-            <element signature="e#27#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/FunctionalProfileReader/reader.pyx">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/FunctionalProfileReader/reader_cpp.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-274" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/biodata.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="24" column="38" lean-forward="true" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/interproscan.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-510">
-          <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
-          <folding>
-            <element signature="e#27#36#0" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/DataPreparation/combine_output.pyx">
@@ -974,17 +939,64 @@
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Config/config_manager.pyx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="14" column="9" lean-forward="true" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
           <folding>
             <element signature="e#28#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/virsorter.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+          <folding>
+            <element signature="e#27#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/prokka.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2805">
+          <caret line="165" selection-start-line="165" selection-end-line="165" />
+          <folding>
+            <element signature="e#27#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/interproscan.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
+          <folding>
+            <element signature="e#27#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/kofamscan.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="37" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="37" />
+          <folding>
+            <element signature="e#27#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/biodata.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="588" column="25" lean-forward="true" selection-start-line="588" selection-start-column="25" selection-end-line="588" selection-end-column="25" />
+        <state relative-caret-position="189">
+          <caret line="588" column="112" selection-start-line="588" selection-start-column="112" selection-end-line="588" selection-end-column="112" />
           <folding>
             <element signature="e#27#36#0" expanded="true" />
           </folding>
