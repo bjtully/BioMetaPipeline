@@ -114,10 +114,10 @@ from the starting contigs.
 ## MET_ANNOT type file - Peptidase Annotation
 
 Peptidase predictions are incorporated into the **MET_ANNOT** pipeline, which allows users to provide additional information
-about domain and membrane types. The default settings run searches for gram- bacteria, but accepts info for gram+ and archaea. 
-This info should be provided in a separate file and passed to `pipedm` from the command line using the `-t` flag. 
-The format of this file should include the following info, separated by tabs, with one line per fasta file 
-passed to pipeline:
+about domain and membrane types. The default settings run searches for gram- bacteria, but users may also search for gram+ and archaea. 
+This info for relevant genomes should be provided in a separate file and passed to `pipedm` from the command line using the `-t` flag. 
+Pipeline searches can be run with any combination of gram+/- and bacteria/archaea. The format of this file should include 
+the following info, separated by tabs, with one line per relevant fasta file passed to pipeline:
 
 <pre><code>[fasta-file]\t[bacteria/archaea]\t[gram+/gram-]\n</code></pre> 
 
