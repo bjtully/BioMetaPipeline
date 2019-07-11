@@ -63,4 +63,4 @@ class KofamScan(LuigiTaskClass):
         print("KofamScan complete!")
 
     def output(self):
-        return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile) + ".tsv"))
+        return luigi.LocalTarget(os.path.join(str(self.output_directory), str(self.outfile) + KofamScanConstants.AMENDED_RESULTS_SUFFIX))

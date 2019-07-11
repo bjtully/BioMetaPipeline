@@ -6,7 +6,6 @@ import shutil
 from BioMetaPipeline.Accessories.ops import get_prefix
 from BioMetaPipeline.Parsers.tsv_parser import TSVParser
 from BioMetaPipeline.Peptidase.cazy import CAZY, CAZYConstants
-from BioMetaPipeline.Config.config_manager import ConfigManager
 from BioMetaPipeline.Peptidase.psortb import PSORTb, PSORTbConstants
 from BioMetaPipeline.PipelineManagement.project_manager import GENOMES
 from BioMetaPipeline.FileOperations.file_operations import Remove, Move
@@ -17,6 +16,7 @@ from BioMetaPipeline.Peptidase.peptidase import Peptidase, PeptidaseConstants
 from BioMetaPipeline.Annotation.kofamscan import KofamScan, KofamScanConstants
 from BioMetaPipeline.Annotation.virsorter import VirSorter, VirSorterConstants
 from BioMetaPipeline.Database.dbdm_calls import GetDBDMCall, BioMetaDBConstants
+from BioMetaPipeline.Config.config_manager import ConfigManager, pipeline_classes
 from BioMetaPipeline.FileOperations.split_file import SplitFile, SplitFileConstants
 from BioMetaPipeline.Annotation.prokka import PROKKA, PROKKAConstants, PROKKAMatcher
 from BioMetaPipeline.Annotation.interproscan import Interproscan, InterproscanConstants
@@ -65,7 +65,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     :param type_file:
     :return:
     """
-    cdef str genome_list_path, alias, table_name, fasta_file, out_prefix, _file
+    cdef str genome_list_path, alias, table_name, fasta_file, out_prefix, _file, prefix
     cdef object cfg
     genome_list_path, alias, table_name, cfg, biometadb_project = project_check_and_creation(
         <void* >directory,
@@ -77,7 +77,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     directory = os.path.join(output_directory, GENOMES)
     cdef tuple line_data
     cdef bytes line
-    cdef list task_list = []
+    cdef list task_list = [], out_prefixes = []
     cdef object R = open(genome_list_path, "rb")
     cdef object task
     cdef str protein_file = ""
@@ -88,9 +88,9 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
 
     # Prepare CAZy hmm profiles if set in config
     if cfg.check_pipe_set("peptidase", MetagenomeAnnotationConstants.PIPELINE_NAME):
-        # assert type_file != "None", "Pass -t <type-file> to run this portion of the pipeline"
         if type_file != "None":
-            bact_arch_type = {os.path.splitext(key.replace("_", "-"))[0] + ".fna":val for key, val in TSVParser.parse_dict(type_file).items()}
+            bact_arch_type = {os.path.splitext(key.replace("_", "-"))[0] + ".fna": val
+                              for key, val in TSVParser.parse_dict(type_file).items()}
         task_list.append(
             HMMConvert(
                 output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY,
@@ -129,6 +129,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     while line:
         fasta_file = line.decode().rstrip("\r\n")
         out_prefix = os.path.splitext(os.path.basename(line.decode().rstrip("\r\n")))[0]
+        out_prefixes.append(out_prefix)
         protein_file = os.path.join(output_directory,
                                         ProdigalConstants.OUTPUT_DIRECTORY,
                                         out_prefix + ProdigalConstants.PROTEIN_FILE_SUFFIX)
@@ -194,6 +195,20 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     calling_script_path=cfg.get(VirSorterConstants.VIRSORTER, ConfigManager.PATH),
                     added_flags=cfg.build_parameter_list_from_dict(VirSorterConstants.VIRSORTER),
                     wdir=os.path.abspath(os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file))),
+                )
+            )
+            task_list.append(
+                GetDBDMCall(
+                    cancel_autocommit=cancel_autocommit,
+                    table_name=out_prefix,
+                    alias=out_prefix,
+                    calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                    db_name=biometadb_project,
+                    directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix + ".fna"),
+                    data_file=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file),
+                                           "virsorter-out", out_prefix + "." + VirSorterConstants.ADJ_OUT_FILE),
+                    added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                    storage_string=out_prefix + " " + VirSorterConstants.STORAGE_STRING,
                 )
             )
 
@@ -421,7 +436,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
             line = next(R)
         except StopIteration:
             break
-
+    R.close()
     # Optional task - Peptidase
     # Combine all results and commit to database
     if cfg.check_pipe_set("peptidase", MetagenomeAnnotationConstants.PIPELINE_NAME):
@@ -436,10 +451,12 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                      CombineOutputConstants.CAZY_OUTPUT_FILE),
                     # All MEROPS by MEROPS summary results
                     (os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY),
+                     (),
                      (PeptidaseConstants.MEROPS_HITS_EXT,),
                      CombineOutputConstants.MEROPS_OUTPUT_FILE),
                     # All MEROPS by PFAM summary results
                     (os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY),
+                     (),
                      (PeptidaseConstants.EXTRACELLULAR_MATCHES_EXT,),
                      CombineOutputConstants.MEROPS_PFAM_OUTPUT_FILE),
                 ],
@@ -504,10 +521,12 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 directories=[
                     # All prodigal proteins
                     (os.path.join(output_directory, ProdigalConstants.OUTPUT_DIRECTORY),
+                     (),
                      (ProdigalConstants.PROTEIN_FILE_SUFFIX,),
                      CombineOutputConstants.PROT_OUTPUT_FILE),
                     # All kofamscan default results (e.g. non-amended, which was for genome-specific and not cumulative)
                     (os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, KofamScanConstants.OUTPUT_DIRECTORY),
+                     (),
                      (".tsv",),
                      CombineOutputConstants.KO_OUTPUT_FILE),
                 ],
@@ -554,11 +573,26 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 storage_string=BioDataConstants.STORAGE_STRING,
             )
         )
-        # TODO Finish this section! Currrently virsorter has dbdm call removed from above
-        # Final task - combine all results from annotation into single tsv file per genome
-        if cfg.check_pipe_set("virsorter", MetagenomeAnnotationConstants.PIPELINE_NAME):
-            # Combine all output into single tsv file
 
+    # TODO Finish this section! Currently virsorter has dbdm call removed from above
+    # Final task - combine all results from annotation into single tsv file per genome
+    if cfg.completed_tasks:
+        for prefix in out_prefixes:
+            task_list.append(
+                CombineOutput(
+                    directories=[
+                        # All annotation results
+                        (os.path.join(output_directory),
+                        # By genome
+                        (prefix,),
+                        # All possible suffixes
+                        (_v for _v in val for key, val in pipeline_classes.items() if key in cfg.completed_tasks),
+                        prefix + MetagenomeAnnotationConstants.TSV_OUT),
+                    ],
+                    calling_script_path="",
+                    output_directory=os.path.join(output_directory),
+                )
+            )
             # Store combined data to database
             task_list.append(
                 GetDBDMCall(

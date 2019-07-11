@@ -1,8 +1,14 @@
 # cython: language_level=3
 
 import os
-from BioMetaPipeline.Config.config import Config
 from configparser import NoSectionError
+from BioMetaPipeline.Config.config import Config
+from BioMetaPipeline.Peptidase.cazy import CAZYConstants
+from BioMetaPipeline.Annotation.prokka import PROKKAConstants
+from BioMetaPipeline.Peptidase.peptidase import PeptidaseConstants
+from BioMetaPipeline.Annotation.kofamscan import KofamScanConstants
+from BioMetaPipeline.Annotation.virsorter import VirSorterConstants
+from BioMetaPipeline.Annotation.interproscan import InterproscanConstants
 
 pipelines = {
     "metagenome_annotation": {
@@ -17,6 +23,14 @@ pipelines = {
         "required": ["CHECKM", "FASTANI",],
         "gtdbtk": ["GTDBTK",],
     },
+}
+
+pipeline_classes = {
+    "virsorter": (VirSorterConstants.ADJ_OUT_FILE,),
+    "interproscan": (InterproscanConstants.AMENDED_RESULTS_SUFFIX,),
+    "prokka": (PROKKAConstants.AMENDED_RESULTS_SUFFIX,),
+    "kegg": (KofamScanConstants.AMENDED_RESULTS_SUFFIX,),
+    "peptidase": (CAZYConstants.ASSIGNMENTS_BY_PROTEIN, PeptidaseConstants.EXTRACELLULAR_MATCHES_BYPROT_EXT),
 }
 
 
