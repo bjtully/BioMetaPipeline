@@ -35,6 +35,7 @@ class ConfigManager:
         self.config.optionxform = str
         self.config.read(config_path)
         self.ignore = ignore
+        self.completed_tests = set()
         # Check pipeline's required paths/data
         if pipeline_name:
             self.check_pipe_set("required", pipeline_name)
@@ -100,9 +101,6 @@ class ConfigManager:
         else:
             return []
 
-    def _validate_programs_in_pipeline(self):
-        pass
-
     def check_pipe_set(self, str pipe, str pipeline_name):
         """ Method checks if all required programs have entries in config file.
 
@@ -114,6 +112,9 @@ class ConfigManager:
         """
         cdef str program, key
         cdef object value, _path
+        # Allows pipe checks to only run once
+        if (pipe, pipeline_name) in self.completed_tests:
+            return True
         for program in pipelines[pipeline_name][pipe]:
             # Verify that the [PROGRAM] is present for the given pipe
             try:
@@ -134,4 +135,5 @@ class ConfigManager:
                     print("%s not found" % program)
                     exit(1)
                 return False
+        self.completed_tests.add((pipe, pipeline_name))
         return True

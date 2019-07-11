@@ -85,6 +85,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     cdef dict bact_arch_type = {}
     # For merops conversion
     cdef dict merops_dict
+
     # Prepare CAZy hmm profiles if set in config
     if cfg.check_pipe_set("peptidase", MetagenomeAnnotationConstants.PIPELINE_NAME):
         # assert type_file != "None", "Pass -t <type-file> to run this portion of the pipeline"
@@ -123,6 +124,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 calling_script_path=cfg.get(HMMPressConstants.HMMPRESS, ConfigManager.PATH),
             ),
         )
+
     line = next(R)
     while line:
         fasta_file = line.decode().rstrip("\r\n")
@@ -130,6 +132,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         protein_file = os.path.join(output_directory,
                                         ProdigalConstants.OUTPUT_DIRECTORY,
                                         out_prefix + ProdigalConstants.PROTEIN_FILE_SUFFIX)
+
         # Required task - predict proteins in contigs
         task_list.append(
             Prodigal(
@@ -181,6 +184,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
             ),
         ):
             task_list.append(task)
+
         # Optional task - virsorter
         if cfg.check_pipe_set("virsorter", MetagenomeAnnotationConstants.PIPELINE_NAME):
             for task in (
@@ -207,6 +211,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 ),
             ):
                 task_list.append(task)
+
         # Optional task - kegg
         if cfg.check_pipe_set("kegg", MetagenomeAnnotationConstants.PIPELINE_NAME):
             for task in (
@@ -237,6 +242,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 ),
             ):
                 task_list.append(task)
+
         # Optional task - prokka
         if cfg.check_pipe_set("prokka", MetagenomeAnnotationConstants.PIPELINE_NAME):
             for task in (
@@ -292,6 +298,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 ),
             ):
                 task_list.append(task)
+
         # Optional task - interproscan
         if cfg.check_pipe_set("interproscan", MetagenomeAnnotationConstants.PIPELINE_NAME):
             for task in (
@@ -321,6 +328,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 ),
             ):
                 task_list.append(task)
+
         # Optional task - peptidase
         if cfg.check_pipe_set("peptidase", MetagenomeAnnotationConstants.PIPELINE_NAME):
             merops_dict = build_merops_dict(cfg.get(MEROPSConstants.MEROPS, ConfigManager.DATA_DICT))
@@ -428,6 +436,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
             line = next(R)
         except StopIteration:
             break
+
     # Optional task - Peptidase
     # Combine all results and commit to database
     if cfg.check_pipe_set("peptidase", MetagenomeAnnotationConstants.PIPELINE_NAME):
@@ -499,6 +508,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 storage_string=MEROPSConstants.SUMMARY_STORAGE_STRING,
             ),
         )
+        
     # Optional task - kegg
     # Combine all results for final parsing
     if cfg.check_pipe_set("kegg", MetagenomeAnnotationConstants.PIPELINE_NAME):

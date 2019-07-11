@@ -82,5 +82,12 @@ def build_complete_file_list(str base_path, str suffix):
     :param suffix:
     :return:
     """
-    cdef str _fi
-    return [_fi for _fi in glob.glob(base_path) if _fi.endswith(suffix)]
+    cdef str root, filename
+    cdef list dirnames, filenames
+    cdef set out_paths = set()
+    for root, dirnames, filenames in os.walk(base_path):
+        for filename in filenames:
+            if filename.endswith(suffix):
+                out_paths.add(os.path.join(root, filename))
+
+    return list(out_paths)
