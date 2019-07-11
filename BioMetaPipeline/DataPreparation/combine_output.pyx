@@ -58,8 +58,8 @@ class CombineOutput(LuigiTaskClass):
                 files = []
                 for _f in build_complete_file_list(directory, suffix):
                     # Gather tsv info
-                    files.append(_f)
-                    combined_results.append(pd.read_csv(os.path.join(directory, _f), delimiter=str(self.delimiter), header=0, index_col=0))
+                    files.append(os.path.basename(_f))
+                    combined_results.append(pd.read_csv(os.path.join(_f), delimiter=str(self.delimiter), header=0, index_col=0))
                 pd.concat(combined_results, sort=True).to_csv(
                     os.path.join(str(self.output_directory), output_file),
                     sep="\t",

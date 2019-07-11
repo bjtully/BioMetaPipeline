@@ -62,11 +62,12 @@ cdef class FastaParser:
             self.fasta_parser_cpp.grab(record)
         return 1
 
-    def create_string_generator(self, string simplify = "", int length = 80):
+    def create_string_generator(self, string simplify = "", int length = 80, bint include_descr = True):
         """ Generator function yields either python or c++ string
 
         :param length:
         :param simplify:
+        :param include_descr:
         :return:
         """
         cdef vector[string] record
@@ -76,6 +77,8 @@ cdef class FastaParser:
         cdef int i = 0
         cdef str seq
         while record.size() == 3:
+            if not include_descr:
+                record = (record[0], <string>"", record[2])
             yield FastaParser.record_to_string(tuple(record), length=length, simplify=simplify, count=i)
             i += 1
             self.fasta_parser_cpp.grab(record)
@@ -260,7 +263,7 @@ cdef class FastaParser:
         """
         cdef object fp = FastaParser(file_name, delimiter, header)
         cdef object W = open(out_file, "wb")
-        cdef object record_gen = fp.create_string_generator(PyUnicode_AsUTF8(simplify), length)
+        cdef object record_gen = fp.create_string_generator(PyUnicode_AsUTF8(simplify), length, include_descr=False)
         try:
             while record_gen:
                 W.write(next(record_gen))

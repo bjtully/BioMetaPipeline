@@ -38,7 +38,7 @@ namespace fasta_parser {
                 getline((*this->fastaFile), line);
             }
             pos = line.find(this->delimiter);
-            if (pos == 0) {
+            if (static_cast<int>(pos) == -1) {
                 line_data.push_back(line.substr(1));
                 line_data.push_back("");
             } else {

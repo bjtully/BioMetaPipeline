@@ -187,30 +187,15 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
 
         # Optional task - virsorter
         if cfg.check_pipe_set("virsorter", MetagenomeAnnotationConstants.PIPELINE_NAME):
-            for task in (
-                # Virsorter annotation pipeline
+            task_list.append(
                 VirSorter(
                     output_directory=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY),
                     fasta_file=fasta_file,
                     calling_script_path=cfg.get(VirSorterConstants.VIRSORTER, ConfigManager.PATH),
                     added_flags=cfg.build_parameter_list_from_dict(VirSorterConstants.VIRSORTER),
                     wdir=os.path.abspath(os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file))),
-                ),
-                # Store virsorter info to database
-                GetDBDMCall(
-                    cancel_autocommit=cancel_autocommit,
-                    table_name=out_prefix,
-                    alias=out_prefix,
-                    calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-                    db_name=biometadb_project,
-                    directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix + ".fna"),
-                    data_file=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file),
-                                           "virsorter-out", out_prefix + "." + VirSorterConstants.ADJ_OUT_FILE),
-                    added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
-                    storage_string=out_prefix + " " + VirSorterConstants.STORAGE_STRING,
-                ),
-            ):
-                task_list.append(task)
+                )
+            )
 
         # Optional task - kegg
         if cfg.check_pipe_set("kegg", MetagenomeAnnotationConstants.PIPELINE_NAME):
@@ -508,7 +493,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 storage_string=MEROPSConstants.SUMMARY_STORAGE_STRING,
             ),
         )
-        
+
     # Optional task - kegg
     # Combine all results for final parsing
     if cfg.check_pipe_set("kegg", MetagenomeAnnotationConstants.PIPELINE_NAME):
@@ -568,6 +553,27 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 storage_string=BioDataConstants.STORAGE_STRING,
             )
         )
+        # TODO Finish this section! Currrently virsorter has dbdm call removed from above
+        # Final task - combine all results from annotation into single tsv file per genome
+        if cfg.check_pipe_set("virsorter", MetagenomeAnnotationConstants.PIPELINE_NAME):
+            # Combine all output into single tsv file
+
+            # Store combined data to database
+            task_list.append(
+                GetDBDMCall(
+                    cancel_autocommit=cancel_autocommit,
+                    table_name=out_prefix,
+                    alias=out_prefix,
+                    calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                    db_name=biometadb_project,
+                    directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix + ".fna"),
+                    data_file=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file),
+                                           "virsorter-out", out_prefix + "." + VirSorterConstants.ADJ_OUT_FILE),
+                    added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                    storage_string=out_prefix + " " + VirSorterConstants.STORAGE_STRING,
+                )
+            )
+
         # # Remove combined output
         # task_list.append(
         #     Remove(

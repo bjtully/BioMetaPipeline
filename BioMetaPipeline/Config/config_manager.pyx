@@ -113,7 +113,7 @@ class ConfigManager:
         cdef str program, key
         cdef object value, _path
         # Allows pipe checks to only run once
-        if (pipe, pipeline_name) in self.completed_tests:
+        if pipe in self.completed_tests:
             return True
         for program in pipelines[pipeline_name][pipe]:
             # Verify that the [PROGRAM] is present for the given pipe
@@ -135,5 +135,5 @@ class ConfigManager:
                     print("%s not found" % program)
                     exit(1)
                 return False
-        self.completed_tests.add((pipe, pipeline_name))
+        self.completed_tests.add(pipe)
         return True
