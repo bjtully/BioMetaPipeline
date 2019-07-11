@@ -586,7 +586,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                         # By genome
                         (prefix,),
                         # All possible suffixes
-                        (_v for _v in val for key, val in pipeline_classes.items() if key in cfg.completed_tests),
+                        tuple(_v for _v in val for key, val in pipeline_classes.items() if key in cfg.completed_tests),
                         prefix + MetagenomeAnnotationConstants.TSV_OUT),
                     ],
                     calling_script_path="",
