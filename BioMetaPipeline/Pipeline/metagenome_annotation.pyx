@@ -431,6 +431,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 directories=[
                     # All CAZy summary results
                     (os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY),
+                     (),
                      (CAZYConstants.ASSIGNMENTS,),
                      CombineOutputConstants.CAZY_OUTPUT_FILE),
                     # All MEROPS by MEROPS summary results
