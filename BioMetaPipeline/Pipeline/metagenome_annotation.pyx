@@ -576,7 +576,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
 
     # TODO Finish this section! Currently virsorter has dbdm call removed from above
     # Final task - combine all results from annotation into single tsv file per genome
-    if cfg.completed_tasks:
+    if cfg.get_completed_tasks():
         for prefix in out_prefixes:
             task_list.append(
                 CombineOutput(

@@ -69,6 +69,9 @@ class ConfigManager:
         except KeyError:
             return None
 
+    def get_completed_tests(self):
+        return self.completed_tests
+
     def build_parameter_list_from_dict(self, str _dict, tuple ignore = ()):
         """ Creates list of parameters from given values in given Config dict section
         Ignores areas set on initialization as well as those passed to this function
