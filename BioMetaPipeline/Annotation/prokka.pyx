@@ -10,8 +10,9 @@ from BioMetaPipeline.TaskClasses.luigi_task_class import LuigiTaskClass
 class PROKKAConstants:
     PROKKA = "PROKKA"
     OUTPUT_DIRECTORY = "prokka_results"
-    AMENDED_RESULTS_SUFFIX = ".amended.tsv"
+    AMENDED_RESULTS_SUFFIX = ".prk.tsv.amd"
     STORAGE_STRING = "prokka results"
+    FINAL_RESULTS_SUFFIX = ".prk-to-prd.tsv"
 
 
 class PROKKA(LuigiTaskClass):

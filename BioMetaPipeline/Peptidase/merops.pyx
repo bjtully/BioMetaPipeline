@@ -15,7 +15,7 @@ class MEROPSConstants:
     HMM_FILE = "merops_hmm.list"
     MEROPS_PROTEIN_FILE_SUFFIX = "merops.protein.faa"
     STORAGE_STRING = "MEROPS results"
-    SUMMARY_STORAGE_STRING = "MEROPS summary results"
+    SUMMARY_STORAGE_STRING = "MEROPS pfam results"
 
 
 class MEROPS(LuigiTaskClass):

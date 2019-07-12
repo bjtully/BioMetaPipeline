@@ -59,7 +59,7 @@ class CombineOutput(LuigiTaskClass):
                 for _f in filter_complete_list_with_prefixes(build_complete_file_list(directory, suffixes), prefixes):
                     # Gather tsv info
                     files.append(os.path.basename(_f))
-                    combined_results.append(pd.read_csv(os.path.join(_f), delimiter=str(self.delimiter), header=0, index_col=0))
+                    combined_results.append(pd.read_csv(_f, delimiter=str(self.delimiter), header=0, index_col=0))
                 pd.concat(combined_results, sort=True).to_csv(
                     os.path.join(str(self.output_directory), output_file),
                     sep="\t",
@@ -67,12 +67,12 @@ class CombineOutput(LuigiTaskClass):
                     index=files,
                 )
 
-    def output(self):
-        return [
-            luigi.LocalTarget(os.path.join(str(self.output_directory), directory, output_file))
-            for directory, prefixes, suffixes, output_file
-            in self.directories
-        ]
+    # def output(self):
+    #     return [
+    #         luigi.LocalTarget(os.path.join(str(self.output_directory), directory, output_file))
+    #         for directory, prefixes, suffixes, output_file
+    #         in self.directories
+    #     ]
 
 
 def build_complete_file_list(str base_path, tuple suffixes):

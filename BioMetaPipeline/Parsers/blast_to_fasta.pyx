@@ -52,7 +52,7 @@ def blast_to_fasta(str fasta_file, str blast_file, str out_file, int get_column 
                 W.write(FastaParser.record_to_string(record))
                 if write_matches:
                     WM.write(<string>"%s\t%s\n" % (
-                        record_id.substr(1, record_id.size()) + <string>"-%i_%i" % coords,
+                        record_id + <string>"-%i_%i" % coords,
                         <string>PyUnicode_AsUTF8(line[get_column + 1])
                     ))
     W.close()
