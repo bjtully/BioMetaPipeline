@@ -6,6 +6,7 @@ import shutil
 from BioMetaPipeline.Accessories.ops import get_prefix
 from BioMetaPipeline.Parsers.tsv_parser import TSVParser
 from BioMetaPipeline.Peptidase.cazy import CAZY, CAZYConstants
+from BioMetaPipeline.PipelineManagement.print_id import PrintID
 from BioMetaPipeline.Peptidase.psortb import PSORTb, PSORTbConstants
 from BioMetaPipeline.PipelineManagement.project_manager import GENOMES
 from BioMetaPipeline.FileOperations.file_operations import Remove, Move
@@ -51,6 +52,7 @@ class MetagenomeAnnotationConstants:
     PROJECT_NAME = "MetagenomeAnnotation"
     PEPTIDASE = "_peptidase"
     PIPELINE_NAME = "metagenome_annotation"
+    STORAGE_STRING = "Combined results"
 
 
 def metagenome_annotation(str directory, str config_file, bint cancel_autocommit, str output_directory,
@@ -85,6 +87,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     cdef dict bact_arch_type = {}
     # For merops conversion
     cdef dict merops_dict
+
 
     # Prepare CAZy hmm profiles if set in config
     if cfg.check_pipe_set("peptidase", MetagenomeAnnotationConstants.PIPELINE_NAME):
@@ -133,6 +136,13 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         protein_file = os.path.join(output_directory,
                                         ProdigalConstants.OUTPUT_DIRECTORY,
                                         out_prefix + ProdigalConstants.PROTEIN_FILE_SUFFIX)
+
+        # Print task id for user
+        task_list.append(
+            PrintID(
+                out_prefix=out_prefix,
+            )
+        )
 
         # Required task - predict proteins in contigs
         task_list.append(
@@ -188,29 +198,30 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
 
         # Optional task - virsorter
         if cfg.check_pipe_set("virsorter", MetagenomeAnnotationConstants.PIPELINE_NAME):
-            task_list.append(
+            for task in (
+                # Virsorter annotation pipeline
                 VirSorter(
                     output_directory=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY),
                     fasta_file=fasta_file,
                     calling_script_path=cfg.get(VirSorterConstants.VIRSORTER, ConfigManager.PATH),
                     added_flags=cfg.build_parameter_list_from_dict(VirSorterConstants.VIRSORTER),
                     wdir=os.path.abspath(os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file))),
-                )
-            )
-            # task_list.append(
-            #     GetDBDMCall(
-            #         cancel_autocommit=cancel_autocommit,
-            #         table_name=out_prefix,
-            #         alias=out_prefix,
-            #         calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
-            #         db_name=biometadb_project,
-            #         directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix + ".fna"),
-            #         data_file=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file),
-            #                                "virsorter-out", out_prefix + "." + VirSorterConstants.ADJ_OUT_FILE),
-            #         added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
-            #         storage_string=out_prefix + " " + VirSorterConstants.STORAGE_STRING,
-            #     )
-            # )
+                ),
+                # Store virsorter info to database
+                GetDBDMCall(
+                    cancel_autocommit=cancel_autocommit,
+                    table_name=out_prefix,
+                    alias=out_prefix,
+                    calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
+                    db_name=biometadb_project,
+                    directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix + ".fna"),
+                    data_file=os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file),
+                                           "virsorter-out", out_prefix + "." + VirSorterConstants.ADJ_OUT_FILE),
+                    added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
+                    storage_string=out_prefix + " " + VirSorterConstants.STORAGE_STRING,
+                ),
+            ):
+                task_list.append(task)
 
         # Optional task - kegg
         if cfg.check_pipe_set("kegg", MetagenomeAnnotationConstants.PIPELINE_NAME):
@@ -574,7 +585,6 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
             )
         )
 
-    # TODO Finish this section! Currently virsorter has dbdm call removed from above
     # Final task - combine all results from annotation into single tsv file per genome
     if cfg.completed_tests:
         for prefix in out_prefixes:
@@ -586,11 +596,13 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                         # By genome
                         (prefix,),
                         # All possible suffixes
-                        tuple(_v for key, val in pipeline_classes.items() for _v in val if key in cfg.completed_tests),
-                        prefix + MetagenomeAnnotationConstants.TSV_OUT),
+                        tuple(_v for key, val in pipeline_classes.items() for _v in val if key in cfg.completed_tests and key != "virsorter"),
+                        prefix + "." + MetagenomeAnnotationConstants.TSV_OUT),
                     ],
                     calling_script_path="",
                     output_directory=os.path.join(output_directory),
+                    na_rep="None",
+                    join_header=True,
                 )
             )
             # Store combined data to database
@@ -602,9 +614,9 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     calling_script_path=cfg.get(BioMetaDBConstants.BIOMETADB, ConfigManager.PATH),
                     db_name=biometadb_project,
                     directory_name=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, prefix),
-                    data_file=os.path.join(output_directory, prefix + MetagenomeAnnotationConstants.TSV_OUT),
+                    data_file=os.path.join(output_directory, prefix + "." + MetagenomeAnnotationConstants.TSV_OUT),
                     added_flags=cfg.get_added_flags(BioMetaDBConstants.BIOMETADB),
-                    storage_string=prefix + " " + VirSorterConstants.STORAGE_STRING,
+                    storage_string=prefix + " " + MetagenomeAnnotationConstants.STORAGE_STRING,
                 )
             )
 
