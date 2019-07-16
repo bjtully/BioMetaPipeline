@@ -64,7 +64,8 @@ class CombineOutput(LuigiTaskClass):
                     os.path.join(str(self.output_directory), output_file),
                     sep="\t",
                     na_rep=str(self.na_rep),
-                    index=files,
+                    index=True,
+                    index_label="ID",
                 )
 
     # def output(self):
