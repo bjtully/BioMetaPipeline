@@ -18,6 +18,7 @@ class CheckMConstants:
 class CheckM(LuigiTaskClass):
     outfile = luigi.Parameter(default=CheckMConstants.OUTFILE)
     output_directory = luigi.Parameter()
+    data_folder = luigi.Parameter()
 
     def requires(self):
         return []
@@ -38,6 +39,16 @@ class CheckM(LuigiTaskClass):
         print("Running CheckM..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
+        # Setup database
+        subprocess.run(
+            [
+                str(self.calling_script_path),
+                "data",
+                "setRoot",
+                str(self.data_folder),
+            ]
+        )
+        # Run evaluation
         result = subprocess.run(
             [str(self.calling_script_path),
              "lineage_wf",

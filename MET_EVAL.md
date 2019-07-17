@@ -72,9 +72,10 @@ and contamination, redundancy, and, optionally, phylogeny, respectively.
 
 [CHECKM]
 PATH = /usr/local/bin/checkm
+DATA = /path/to/checkm-db
 --aai_strain = 0.95
--t = 10
---pplacer_threads = 10
+-t = 1
+--pplacer_threads = 1
 FLAGS = --reduced_tree
 --tmpdir = /path/to/tmpdir
 
