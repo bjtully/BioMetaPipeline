@@ -28,7 +28,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
     """
     # Ensure that all values are valid
     assert os.path.isdir((<object>directory)) and os.path.isfile((<object>config_file)), \
-        AssertString.INVALID_PARAMETERS_PASSED
+        AssertString.INVALID_PARAMETERS_PASSED + "\t" + (<object>directory) + "\t" + (<object>config_file)
     # Load config file as object
     cdef object cfg = ConfigManager((<object>config_file), pipeline_name=getattr(CallingClass, PIPELINE_NAME))
     # Declaration for iteration
