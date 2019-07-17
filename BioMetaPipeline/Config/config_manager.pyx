@@ -136,7 +136,7 @@ class ConfigManager:
                 value = self.config[program]
                 # Check PATH, DATA, and DATA_DICT paths
                 for key in ("PATH", "DATA", "DATA_DICT"):
-                    if key in value.keys() and not os.path.exists(value[key]):
+                    if key in value.keys() and value[key] != "docker" and not os.path.exists(value[key]):
                         print("%s for %s not found" % (key, program))
                         exit(1)
             except NoSectionError:
