@@ -52,11 +52,17 @@ class ArgParse:
 
         """
         for args in self.arguments_list:
-            # Be default names argument by last value passed in inner list
             self.parser.add_argument(*args[0], **args[1])
 
     @staticmethod
     def description_builder(header_line, help_dict, flag_dict):
+        """ Static method provides summary of programs/requirements
+
+        :param header_line:
+        :param help_dict:
+        :param flag_dict:
+        :return:
+        """
         assert set(help_dict.keys()) == set(flag_dict.keys()), "Program names do not match in key/help dictionaries"
         to_return = header_line + "\n\nAvailable Programs:\n\n"
         programs = sorted(flag_dict.keys())
