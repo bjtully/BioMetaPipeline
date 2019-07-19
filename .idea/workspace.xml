@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="218e6076-48b5-4a87-b494-95f1ba5893b8" name="Default" comment="" />
+    <list default="true" id="218e6076-48b5-4a87-b494-95f1ba5893b8" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,8 +123,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="57" column="24" lean-forward="true" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
+            <state relative-caret-position="475">
+              <caret line="52" column="109" selection-start-line="52" selection-start-column="109" selection-end-line="52" selection-end-column="109" />
               <folding>
                 <element signature="e#27#36#0" expanded="true" />
               </folding>
@@ -522,12 +524,12 @@
       <workItem from="1563381919149" duration="15773000" />
       <workItem from="1563430927984" duration="9000" />
       <workItem from="1563431107289" duration="890000" />
-      <workItem from="1563553443059" duration="4745000" />
+      <workItem from="1563553443059" duration="5459000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="481741000" />
+    <option name="totallyTimeSpent" value="482455000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1015,8 +1017,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="57" column="24" lean-forward="true" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
+        <state relative-caret-position="475">
+          <caret line="52" column="109" selection-start-line="52" selection-start-column="109" selection-end-line="52" selection-end-column="109" />
           <folding>
             <element signature="e#27#36#0" expanded="true" />
           </folding>
