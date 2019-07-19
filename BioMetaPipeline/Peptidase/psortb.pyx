@@ -50,7 +50,7 @@ class PSORTb(LuigiTaskClass):
                 "docker",
                 "run",
                 "--rm",
-                "-v", os.path.dirname(os.path.dirname(str(self.prot_file))) + ":/root/wdir",
+                # "-v", os.path.abspath(os.path.dirname(os.path.dirname(str(self.prot_file)))) + ":/root/wdir",
                 "-e", str(self.output_directory),
                 "brinkmanlab/psortb_commandline:1.0.2",
                 "/usr/local/psortb/bin/psort",
