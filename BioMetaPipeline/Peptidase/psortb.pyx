@@ -54,8 +54,6 @@ class PSORTb(LuigiTaskClass):
                 "-e", str(self.output_directory),
                 "brinkmanlab/psortb_commandline:1.0.2",
                 "/usr/local/psortb/bin/psort",
-                "-r",
-                str(self.output_directory),
                 "-o",
                 "terse",
                 "-i",
