@@ -36,10 +36,25 @@ class PSORTb(LuigiTaskClass):
             shutil.rmtree(str(self.output_directory))
         os.makedirs(str(self.output_directory))
         subprocess.run(
+            # [
+            #     str(self.calling_script_path),
+            #     *data_type_flags,
+            #     "-i",
+            #     str(self.prot_file),
+            #     "-r",
+            #     str(self.output_directory),
+            #     "-o",
+            #     "terse",
+            # ],
             [
-                str(self.calling_script_path),
-                *data_type_flags,
-                "-i",
+                "docker",
+                "run",
+                "--rm",
+                "-v", os.path.dirname(str(self.prot_file)) + ":/wdir",
+                "-e", str(self.output_directory),
+                "brinkmanlab/psortb_commandline:1.0.2",
+                "/usr/local/psortb/bin/psort",
+                  "-i",
                 str(self.prot_file),
                 "-r",
                 str(self.output_directory),
