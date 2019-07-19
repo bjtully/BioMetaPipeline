@@ -118,8 +118,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="789">
-              <caret line="59" column="15" lean-forward="true" selection-start-line="59" selection-start-column="15" selection-end-line="59" selection-end-column="15" />
+            <state relative-caret-position="220">
+              <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
               <folding>
                 <element signature="e#27#36#0" expanded="true" />
               </folding>
@@ -519,12 +519,12 @@
       <workItem from="1563381919149" duration="15773000" />
       <workItem from="1563430927984" duration="9000" />
       <workItem from="1563431107289" duration="890000" />
-      <workItem from="1563553443059" duration="2782000" />
+      <workItem from="1563553443059" duration="3298000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="479778000" />
+    <option name="totallyTimeSpent" value="480294000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -537,6 +537,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="88" y="20" width="1302" height="1350" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.50114155" side_tool="true" weight="0.21771523" />
       <window_info id="Favorites" order="1" side_tool="true" />
@@ -1008,8 +1009,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="789">
-          <caret line="59" column="15" lean-forward="true" selection-start-line="59" selection-start-column="15" selection-end-line="59" selection-end-column="15" />
+        <state relative-caret-position="220">
+          <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
           <folding>
             <element signature="e#27#36#0" expanded="true" />
           </folding>
