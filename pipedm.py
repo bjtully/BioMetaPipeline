@@ -26,6 +26,9 @@ if __name__ == "__main__":
         (("-t", "--type_file"),
          {"help": "/path/to/type_file formatted as 'file_name.fna\\t[Archaea/Bacteria]\\t[gram+/gram-]\\n'",
           "default": "None"}),
+        (("-y", "--docker_path"),
+         {"help": "For use in docker version", "default": ""}),
+
     )
 
     programs = {
@@ -41,7 +44,7 @@ if __name__ == "__main__":
         # "EU_PAN":         ("directory", "config_file", "cancel_autocommit", "output_directory",
         #                    "biometadb_project", "list_file"),
         "MET_ANNOT":      ("directory", "config_file", "cancel_autocommit", "output_directory",
-                           "biometadb_project", "type_file"),
+                           "biometadb_project", "type_file", "docker_path"),
     }
 
     errors = {

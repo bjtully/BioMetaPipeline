@@ -19,11 +19,13 @@ class PSORTb(LuigiTaskClass):
     domain_type = luigi.Parameter()
     prot_file = luigi.Parameter()
     output_directory = luigi.Parameter()
+    docker_path = luigi.Parameter(default="")
 
     def requires(self):
         return []
 
     def run(self):
+        cdef str prot_file
         print("Running PSORTb..........")
         cdef list data_type_flags
         if str(self.data_type).lower() == "gram+":
@@ -35,33 +37,40 @@ class PSORTb(LuigiTaskClass):
         if os.path.exists(str(self.output_directory)):
             shutil.rmtree(str(self.output_directory))
         os.makedirs(str(self.output_directory))
-        subprocess.run(
-            # [
-            #     str(self.calling_script_path),
-            #     *data_type_flags,
-            #     "-i",
-            #     str(self.prot_file),
-            #     "-r",
-            #     str(self.output_directory),
-            #     "-o",
-            #     "terse",
-            # ],
-            [
-                "docker",
-                "run",
-                "--rm",
-                "-v", os.path.abspath(os.path.dirname(os.path.dirname(str(self.prot_file)))) + ":/tmp/results",
-                "-e", "MOUNT='%s'" % str(self.output_directory),
-                "brinkmanlab/psortb_commandline:1.0.2",
-                "/usr/local/psortb/bin/psort",
-                "-o",
-                "terse",
-                "-i",
-                str(self.prot_file),
-            ],
-            check=True,
-            stdout=stderr,
-        )
+        # Version was called from docker installation
+        if str(self.docker_path) != "":
+            prot_file = str(self.prot_file).replace("/root/wdir", str(self.docker_path))
+            subprocess.run(
+                [
+                    "docker",
+                    "run",
+                    "--rm",
+                    "-v", str(self.output_directory) + ":/tmp/results",
+                    "-e", "MOUNT='%s'" % str(self.output_directory),
+                    "brinkmanlab/psortb_commandline:1.0.2",
+                    "/usr/local/psortb/bin/psort",
+                    "-o",
+                    "terse",
+                    "-i",
+                    prot_file,
+                ],
+                check=True,
+                stdout=stderr,
+            )
+        # Version was called from standalone script
+        else:
+            subprocess.run(
+                [
+                    str(self.calling_script_path),
+                    *data_type_flags,
+                    "-i",
+                    str(self.prot_file),
+                    "-r",
+                    str(self.output_directory),
+                    "-o",
+                    "terse",
+                ],
+            )
         # Move results up and rename. Remove docker-created directory and
         shutil.move(
             glob.glob(os.path.join(str(self.output_directory), "*.txt"))[0],
