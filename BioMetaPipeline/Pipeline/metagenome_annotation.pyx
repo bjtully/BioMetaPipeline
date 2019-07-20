@@ -56,7 +56,7 @@ class MetagenomeAnnotationConstants:
 
 
 def metagenome_annotation(str directory, str config_file, bint cancel_autocommit, str output_directory,
-                          str biometadb_project, str type_file, str docker_path):
+                          str biometadb_project, str type_file, str docker_path, bint remove_intermediates):
     """ Function calls the pipeline and is run from pipedm
 
     :param directory:
@@ -66,6 +66,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     :param biometadb_project:
     :param type_file:
     :param docker_path:
+    :param remove_intermediates:
     :return:
     """
     cdef str genome_list_path, alias, table_name, fasta_file, out_prefix, _file, prefix
@@ -641,6 +642,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         # )
     luigi.build(task_list, local_scheduler=True)
     # Remove directories that were added as part of the pipeline
-    shutil.rmtree(directory)
-    shutil.rmtree(os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY))
+    if remove_intermediates:
+        shutil.rmtree(directory)
+        shutil.rmtree(os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY))
     print("MET_ANNOT pipeline complete!")

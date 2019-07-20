@@ -52,6 +52,7 @@ class PSORTb(LuigiTaskClass):
                     "/usr/local/psortb/bin/psort",
                     "-o",
                     "terse",
+                    *data_type_flags,
                     "-i",
                     prot_file,
                 ],

@@ -28,6 +28,8 @@ if __name__ == "__main__":
           "default": "None"}),
         (("-y", "--docker_path"),
          {"help": "For use in docker version", "default": ""}),
+        (("-z", "--remove_intermediates"),
+         {"help": "For use in docker version", "default": True, "action": "store_false"}),
 
     )
 
@@ -44,7 +46,7 @@ if __name__ == "__main__":
         # "EU_PAN":         ("directory", "config_file", "cancel_autocommit", "output_directory",
         #                    "biometadb_project", "list_file"),
         "MET_ANNOT":      ("directory", "config_file", "cancel_autocommit", "output_directory",
-                           "biometadb_project", "type_file", "docker_path"),
+                           "biometadb_project", "type_file", "docker_path", "remove_intermediates"),
     }
 
     errors = {
