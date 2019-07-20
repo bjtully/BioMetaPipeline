@@ -123,8 +123,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="41" column="79" selection-start-line="41" selection-start-column="79" selection-end-line="41" selection-end-column="79" />
+            <state relative-caret-position="385">
+              <caret line="41" column="50" selection-start-line="41" selection-start-column="50" selection-end-line="41" selection-end-column="50" />
               <folding>
                 <element signature="e#27#36#0" expanded="true" />
               </folding>
@@ -524,12 +524,12 @@
       <workItem from="1563381919149" duration="15773000" />
       <workItem from="1563430927984" duration="9000" />
       <workItem from="1563431107289" duration="890000" />
-      <workItem from="1563553443059" duration="10671000" />
+      <workItem from="1563553443059" duration="11352000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="487667000" />
+    <option name="totallyTimeSpent" value="488348000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1017,8 +1017,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="41" column="79" selection-start-line="41" selection-start-column="79" selection-end-line="41" selection-end-column="79" />
+        <state relative-caret-position="385">
+          <caret line="41" column="50" selection-start-line="41" selection-start-column="50" selection-end-line="41" selection-end-column="50" />
           <folding>
             <element signature="e#27#36#0" expanded="true" />
           </folding>
