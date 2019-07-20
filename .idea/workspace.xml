@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="218e6076-48b5-4a87-b494-95f1ba5893b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pipedm.py" beforeDir="false" afterPath="$PROJECT_DIR$/pipedm.py" afterDir="false" />
-    </list>
+    <list default="true" id="218e6076-48b5-4a87-b494-95f1ba5893b8" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,8 +72,8 @@
             <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="202">
-                    <caret line="408" column="18" lean-forward="true" selection-start-line="408" selection-start-column="18" selection-end-line="408" selection-end-column="18" />
+                  <state relative-caret-position="457">
+                    <caret line="425" column="55" lean-forward="true" selection-start-line="425" selection-start-column="55" selection-end-line="425" selection-end-column="55" />
                     <folding>
                       <element signature="e#27#36#0" expanded="true" />
                     </folding>
@@ -527,12 +522,12 @@
       <workItem from="1563381919149" duration="15773000" />
       <workItem from="1563430927984" duration="9000" />
       <workItem from="1563431107289" duration="890000" />
-      <workItem from="1563553443059" duration="8869000" />
+      <workItem from="1563553443059" duration="9585000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="485865000" />
+    <option name="totallyTimeSpent" value="486581000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1007,20 +1002,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx">
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="408" column="18" lean-forward="true" selection-start-line="408" selection-start-column="18" selection-end-line="408" selection-end-column="18" />
+        <state relative-caret-position="670">
+          <caret line="54" column="29" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="29" />
           <folding>
             <element signature="e#27#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx">
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="54" column="29" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="29" />
+        <state relative-caret-position="457">
+          <caret line="425" column="55" lean-forward="true" selection-start-line="425" selection-start-column="55" selection-end-line="425" selection-end-column="55" />
           <folding>
             <element signature="e#27#36#0" expanded="true" />
           </folding>
