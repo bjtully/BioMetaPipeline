@@ -43,17 +43,10 @@ class PSORTb(LuigiTaskClass):
             shutil.copy(str(self.prot_file), str(self.output_directory))
             subprocess.run(
                 [
-                    "docker",
-                    "run",
-                    "--rm",
-                    "-v", str(self.output_directory) + ":/tmp/results",
-                    "-e", "MOUNT='%s'" % str(self.output_directory),
-                    "brinkmanlab/psortb_commandline:1.0.2",
-                    "/usr/local/psortb/bin/psort",
+                    "/usr/bin/psortb",
                     "-o",
                     "terse",
                     *data_type_flags,
-                    "-i",
                     prot_file,
                 ],
                 check=True,
