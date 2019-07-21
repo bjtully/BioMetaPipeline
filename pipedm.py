@@ -27,7 +27,7 @@ if __name__ == "__main__":
          {"help": "/path/to/type_file formatted as 'file_name.fna\\t[Archaea/Bacteria]\\t[gram+/gram-]\\n'",
           "default": "None"}),
         (("-y", "--is_docker"),
-         {"help": "For use in docker version", "default": False}),
+         {"help": "For use in docker version", "default": False, "action": "store_true"}),
         (("-z", "--remove_intermediates"),
          {"help": "For use in docker version", "default": True, "action": "store_false"}),
 
