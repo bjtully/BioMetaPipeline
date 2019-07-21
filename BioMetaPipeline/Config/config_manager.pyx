@@ -66,8 +66,10 @@ class ConfigManager:
             return os.environ.get(value) or self.config.get(_dict, value)
         try:
             return self.config.get(_dict, value)
-        except KeyError or NoOptionError:
+        except KeyError:
             return None
+        except NoOptionError:
+            return "None"
 
     def build_parameter_list_from_dict(self, str _dict, tuple ignore = ()):
         """ Creates list of parameters from given values in given Config dict section

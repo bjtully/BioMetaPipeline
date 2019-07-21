@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="218e6076-48b5-4a87-b494-95f1ba5893b8" name="Default" comment="" />
+    <list default="true" id="218e6076-48b5-4a87-b494-95f1ba5893b8" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Config/config_manager.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Config/config_manager.pyx" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,8 +62,8 @@
             <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="183">
-                    <caret line="601" column="100" selection-start-line="601" selection-start-column="100" selection-end-line="601" selection-end-column="100" />
+                  <state relative-caret-position="693">
+                    <caret line="557" column="56" lean-forward="true" selection-start-line="557" selection-start-column="56" selection-end-line="557" selection-end-column="56" />
                     <folding>
                       <element signature="e#27#36#0" expanded="true" />
                     </folding>
@@ -130,8 +132,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Config/config_manager.pyx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="72" selection-start-line="14" selection-start-column="72" selection-end-line="14" selection-end-column="72" />
+            <state relative-caret-position="525">
+              <caret line="71" column="24" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="24" />
               <folding>
                 <element signature="e#28#37#0" expanded="true" />
               </folding>
@@ -519,12 +521,12 @@
       <workItem from="1563665731210" duration="7000" />
       <workItem from="1563666072723" duration="15000" />
       <workItem from="1563666549022" duration="114000" />
-      <workItem from="1563668671906" duration="782000" />
+      <workItem from="1563668671906" duration="1656000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="498081000" />
+    <option name="totallyTimeSpent" value="498955000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -537,6 +539,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="186" y="38" width="1302" height="1350" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.50114155" side_tool="true" weight="0.21771523" />
       <window_info id="Favorites" order="1" side_tool="true" />
@@ -1001,8 +1004,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Config/config_manager.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="72" selection-start-line="14" selection-start-column="72" selection-end-line="14" selection-end-column="72" />
+        <state relative-caret-position="525">
+          <caret line="71" column="24" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="24" />
           <folding>
             <element signature="e#28#37#0" expanded="true" />
           </folding>
@@ -1011,8 +1014,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="601" column="100" selection-start-line="601" selection-start-column="100" selection-end-line="601" selection-end-column="100" />
+        <state relative-caret-position="693">
+          <caret line="557" column="56" lean-forward="true" selection-start-line="557" selection-start-column="56" selection-end-line="557" selection-end-column="56" />
           <folding>
             <element signature="e#27#36#0" expanded="true" />
           </folding>
