@@ -1,7 +1,7 @@
 # cython: language_level=3
 
 import os
-from configparser import NoSectionError
+from configparser import NoSectionError, NoOptionError
 from BioMetaPipeline.Config.config import Config
 from BioMetaPipeline.Peptidase.cazy import CAZYConstants
 from BioMetaPipeline.Annotation.prokka import PROKKAConstants
@@ -66,7 +66,7 @@ class ConfigManager:
             return os.environ.get(value) or self.config.get(_dict, value)
         try:
             return self.config.get(_dict, value)
-        except KeyError:
+        except KeyError or NoOptionError:
             return None
 
     def build_parameter_list_from_dict(self, str _dict, tuple ignore = ()):
