@@ -38,7 +38,7 @@ class PSORTb(LuigiTaskClass):
             shutil.rmtree(str(self.output_directory))
         os.makedirs(str(self.output_directory))
         # Version was called from docker installation
-        if str(self.docker_path) != "":
+        if str(self.docker_path) != "None":
             prot_file = os.path.join("/tmp/results", os.path.basename(str(self.prot_file)))
             shutil.copy(str(self.prot_file), str(self.output_directory))
             subprocess.run(
