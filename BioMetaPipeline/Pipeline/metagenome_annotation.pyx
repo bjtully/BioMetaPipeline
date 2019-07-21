@@ -56,7 +56,7 @@ class MetagenomeAnnotationConstants:
 
 
 def metagenome_annotation(str directory, str config_file, bint cancel_autocommit, str output_directory,
-                          str biometadb_project, str type_file, str docker_path, bint remove_intermediates):
+                          str biometadb_project, str type_file, bint is_docker, bint remove_intermediates):
     """ Function calls the pipeline and is run from pipedm
 
     :param directory:
@@ -65,7 +65,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     :param output_directory:
     :param biometadb_project:
     :param type_file:
-    :param docker_path:
+    :param is_docker:
     :param remove_intermediates:
     :return:
     """
@@ -415,7 +415,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     prot_file=protein_file,
                     output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, PSORTbConstants.OUTPUT_DIRECTORY, out_prefix),
                     calling_script_path=cfg.get(PSORTbConstants.PSORTB, ConfigManager.PATH),
-                    docker_path=docker_path,
+                    is_docker=is_docker,
                 ),
                 # Parse signalp and psortb through merops to identify peptidases
                 Peptidase(
