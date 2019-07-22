@@ -127,7 +127,7 @@ cdef class FastaParser:
             return return_list
 
     @staticmethod
-    def record_to_string(tuple record, int length = 80, int name_len = 20, string simplify = "", int count = 0):
+    def record_to_string(tuple record, int length = 80, int name_len = -1, string simplify = "", int count = 0):
         """ Method converts tuple c++ string record from (id, desc, seq) to standard fasta format
 
         :param record:
@@ -147,12 +147,6 @@ cdef class FastaParser:
             tmp = (<string>tmp).substr(0, name_len)
         if simplify == "":
             record_name = tmp
-        elif len(simplify) > 20:
-            record_name = <string>"%s%s_%d" % (
-                simplify.substr(0, int(simplify.size() / 4)),
-                simplify.substr(int(3 * simplify.size() / 4)),
-                count
-            )
         else:
             record_name = <string>"%s_%d" % (
                 simplify,
@@ -277,13 +271,14 @@ cdef class FastaParser:
             W.close()
 
     @staticmethod
-    def split(str file_name, str out_dir = "", str header = ">", str delimiter = " "):
+    def split(str file_name, str out_dir = "", str header = ">", str delimiter = " ", int name_len = -1):
         """ Method will split fasta file into individual files per fasta entry
 
         :param out_dir:
         :param file_name:
         :param header:
         :param delimiter:
+        :param name_len:
         :return:
         """
         cdef object fp = FastaParser(file_name, delimiter, header)
@@ -299,7 +294,7 @@ cdef class FastaParser:
                     os.path.join(out_dir, "".join([chr(_c) for _c in record[0]]) + os.path.splitext(file_name)[1])
                 )
                 W = open("".join([chr(_c) for _c in out_file]), "wb")
-                W.write(FastaParser.record_to_string(record))
+                W.write(FastaParser.record_to_string(record, name_len=name_len))
                 W.close()
                 out_files.append(out_file)
         except StopIteration:

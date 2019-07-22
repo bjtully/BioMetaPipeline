@@ -55,7 +55,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
                 FastaParser.write_simple(
                     os.path.join((<object>directory), _file),
                     os.path.join(genome_storage_folder, _f),
-                    simplify=get_prefix(_file),
+                    simplify=get_prefix(_f),
                 )
     # Declarations
     cdef str genome_list_path = os.path.join((<object>output_directory), getattr(CallingClass, LIST_FILE))
