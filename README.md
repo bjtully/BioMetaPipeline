@@ -10,39 +10,12 @@ Adding the last two lines of the above code to a user's `.bashrc` file will main
 
 ### Dependencies
 
-- Python &ge; 3.5
-- Python 2
-- Cython
-- Python packages
-    - argparse
-    - configparser
-    - luigi
-    - pandas
-- External programs and their dependencies
-    - **MET_EVAL**
-        - CheckM
-        - GTDBtk
-        - FastANI
-    - **MET_ANNOT**
-        - diamond
-        - Prodigal
-        - kofamscan
-        - [BioData/KEGGDecoder](https://github.com/bjtully/BioData)
-        - Interproscan
-        - PROKKA
-        - VirSorter
-        - psortb
-        - signalp
-        - hmmer
-        - Required Data:
-            - dbCAN hmm profiles, available [here](http://csbl.bmb.uga.edu/dbCAN/download.php)
-            - MEROPS hmm profiles, available [here](https://www.dropbox.com/s/8pskp3hlkdnt6zm/MEROPS.pfam.hmm?dl=0)
-    - [BioMetaDB](https://github.com/cjneely10/BioMetaDB)
-
-Python dependencies are best maintained within a separate Python virtual environment. `BioMetaDB` and `BioMetaPipeline`
-must be contained and built within the same python environment. However, **BioMetaPipeline** data
-pipelines are managed through config files that allow direct input of the paths to the Python 2/3 environments 
-that house external programs (such as `CheckM`).
+See the [wiki page](https://github.com/cjneely10/BioMetaPipeline/wiki/Installation) for instructions on installing either
+the standalone or docker version of **BioMetaPipeline**.Python dependencies are best maintained within a separate Python 
+virtual environment. `BioMetaDB` and `BioMetaPipeline` must be contained and built within the same python environment. 
+However, **BioMetaPipeline** data pipelines are managed through config files that allow direct input of the paths to the 
+Python 2/3 environments that house external programs (such as `CheckM`). The docker version of this script only relies on
+the database files for these external programs, bypassing the need for the user to download individual programs
 
 ## About
 
@@ -52,6 +25,11 @@ run common evaluation and annotation programs and create a `BioMetaDB` project w
 This wrapper script was built using the `luigi` Python package. 
 
 ## Usage Best Practices
+
+#### Citations
+
+Running a pipeline will output a bibtex citation file and sample in-text citations for use in academic writing and research.
+Users are highly recommended to cite all items that are output in this file.
 
 #### Config default files
 
@@ -82,9 +60,10 @@ Some programs in each pipeline can have very high memory requirements (>100GB) o
 the system used to run the pipeline). Users are advised to use a program such as `screen` or `nohup` to run this pipeline, 
 as well as to redirect stderr to a separate file.
 
-## pipedm
+## pipedm/run_pipedm
 
-**pipedm** is the calling script for running various data pipelines.
+`pipedm.py` is the calling script for the standalone version of **BioMetaPipeline**. `run_pipedm.py` is the calling script
+for the docker installation.
 
 <pre><code>usage: pipedm.py [-h] -d DIRECTORY -c CONFIG_FILE [-a] [-o OUTPUT_DIRECTORY]
                  [-b BIOMETADB_PROJECT] [-t TYPE_FILE]
@@ -122,6 +101,10 @@ file is then used to call the given pipeline by passing to each program any flag
 allows users to customize the calling programs to better fit their needs, as well as provides a useful documentation
 step for researchers.
 
+### Usage differences - standalone script versus docker image
+
+Both `pipedm.py` and `run_pipedm.py` use the same set of command-line arguments to function.
+
 ## Available pipelines
 
 - [MET_EVAL](MET_EVAL.md)
@@ -132,3 +115,8 @@ step for researchers.
     - Structurally and functionally annotate MAGs using several available annotation programs. Identify peptidase proteins,
     determine KEGG pathways, run PROKKA pipeline, predict viral sequences, and run interproscan.
     A final BioMetaDB project is generated, or updated, with a table that provides a summary of the results.
+    
+### Licensing notes
+
+The use of `signalp` and `RNAmmer` requires an additional academic license agreement upon download. Binaries for these
+programs are thus not distributed with **BioMetaPipeline**.

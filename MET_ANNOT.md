@@ -135,8 +135,10 @@ from the user-provided config file and builds its pipeline accordingly.
 ### Configuring a pipeline
 
 The **MET_ANNOT** config file is divided by "pipes" representing available annotation steps. 
+The docker config file sections come pre-populated with the proper path arguments, and should only be modified
+with additional flags or by commenting out unwanted sections. 
 
-- Location: `Examples/Config/MET_ANNOT.ini`
+- Location: `Examples/Config/MET_ANNOT.ini` or `Examples/Config/Docker/MET_ANNOT.ini`
 <pre><code># MET_ANNOT.ini
 # Default config file for running the MET_ANNOT pipeline
 # Users are recommended to edit copies of this file only
@@ -230,8 +232,6 @@ PATH = /path/to/virsorter-data
     - `BioData` requires a valid `pip` installation as well as a downloaded copy of the github repository.
     - As this script will create multiple tables in a **BioMetaDB** project, neither the flag `--table_name` nor `--alias`
      should be provided in the relevant section of the config script. 
-    - `psortb` PERL scripts for command-line versions of the program call `sudo`. Either remove this from the script using
-    `sed -i 's/sudo //g' /path/to/psortb`, or ensure that docker access is available.
     - The `virsorter` pipe offers the ability to pass user info to its calling program, `docker`, thus removing the need to 
     run using root.
 
