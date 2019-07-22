@@ -199,8 +199,10 @@ def sigterm_handler(_signo, _stack_frame):
                 "docker",
                 "kill",
                 "`cat %s`" % docker_pid_filename
-            ]
+            ],
+            check=True,
         )
+        os.remove(docker_pid_filename)
     sys.exit(0)
 
 signal.signal(signal.SIGTERM, sigterm_handler)
@@ -291,8 +293,9 @@ subprocess.run(
         # Don't remove intermediary files
         "-z"
     ],
+    check=True,
 )
-
+os.remove(docker_pid_filename)
 if not ap.args.cancel_autocommit:
     # Primary output file types from MET_ANNOT (with N = number of genomes):
     # Set project name
