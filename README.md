@@ -3,9 +3,12 @@
 ## Installation
 Clone or download this repository.
 <pre><code>cd /path/to/BioMetaPipeline
+pip3 install -r requirements.txt
+chmod +x pipedm.py && chmod +x run_pipedm.py
 python3 setup.py build_ext --inplace
 export PYTHONPATH=/path/to/BioMetaPipeline:$PYTHONPATH
-alias pipedm="python3 /path/to/BioMetaPipeline/pipedm.py"</code></pre>
+# Set alias based on version
+alias pipedm="python3 /path/to/BioMetaPipeline/pipedm.py-or-run_pipedm.py"</code></pre>
 Adding the last two lines of the above code to a user's `.bashrc` file will maintain these settings on next log-in.
 
 ### Dependencies

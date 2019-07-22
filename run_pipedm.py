@@ -37,7 +37,7 @@ INTERPROSCAN_FOLDER = "/path/to/interproscan/data"
 PEPTIDASE_DATA_FOLDER = "/path/to/peptidase_data"
 # Extracted virsorter data from  https://github.com/simroux/VirSorter
 VIRSORTER_DATA_FILDER = "/path/to/virsorter-data"
-# Location of BioMetaDB on system. If not used, ensure to pass `-a` flag to pipedm.py when running
+# Location of BioMetaDB on system. If not used, ensure to pass `-a` flag to run_pipedm.py when running
 BIOMETADB = "/path/to/BioMetaDB/dbdm.py"
 # Signalp software package, including binary, from  http://www.cbs.dtu.dk/cgi-bin/nph-sw_request?signalp
 SIGNALP_FOLDER = "/path/to/signalp-4.1"
@@ -108,70 +108,41 @@ class GetDBDMCall:
 
         """
         # Commit with biometadb, if passed (COPY/PASTE+REFACTOR from dbdm_calls.pyx)
+        to_run = [
+            "python3",
+            self.calling_script_path,
+        ]
         if self.cancel_autocommit:
             return
         if not os.path.isfile(data_file):
             return
         if not os.path.exists(self.db_name):
-            subprocess.run(
-                [
-                    "python3",
-                    self.calling_script_path,
-                    "INIT",
-                    "-n",
-                    self.db_name,
-                    "-t",
-                    table_name.lower(),
-                    "-d",
-                    directory_name,
-                    "-f",
-                    data_file,
-                    "-a",
-                    alias.lower(),
-                    *self.added_flags,
-                ],
-                check=True,
-            )
+            to_run.append("INIT")
+            to_run.append("-n")
+            to_run.append(self.db_name)
         elif os.path.exists(self.db_name) and not os.path.exists(os.path.join(self.db_name, "classes", table_name.lower() + ".json")):
-            subprocess.run(
-                [
-                    "python3",
-                    self.calling_script_path,
-                    "CREATE",
-                    "-c",
-                    self.db_name,
-                    "-t",
-                    table_name.lower(),
-                    "-a",
-                    alias.lower(),
-                    "-f",
-                    data_file,
-                    "-d",
-                    directory_name,
-                    *self.added_flags,
-                ],
-                check=True,
-            )
+            to_run.append("CREATE")
+            to_run.append("-c")
+            to_run.append(self.db_name)
         elif os.path.exists(self.db_name) and os.path.exists(os.path.join(self.db_name, "classes", table_name.lower() + ".json")):
-            subprocess.run(
-                [
-                    "python3",
-                    self.calling_script_path,
-                    "UPDATE",
-                    "-c",
-                    self.db_name,
-                    "-t",
-                    table_name.lower(),
-                    "-a",
-                    alias.lower(),
-                    "-f",
-                    data_file,
-                    "-d",
-                    directory_name,
-                    *self.added_flags,
-                ],
-                check=True,
-            )
+            to_run.append("UPDATE")
+            to_run.append("-c")
+            to_run.append(self.db_name)
+        subprocess.run(
+            [
+                *to_run,
+                "-t",
+                table_name.lower(),
+                "-a",
+                alias.lower(),
+                "-f",
+                data_file,
+                "-d",
+                directory_name,
+                *self.added_flags,
+            ],
+            check=True,
+        )
 
 
 def get_added_flags(config, _dict, ignore = ()):
@@ -307,34 +278,22 @@ if not ap.args.cancel_autocommit:
         db_name = "MetagenomeAnnotation"
 
     dbdm = GetDBDMCall(BIOMETADB, db_name, ap.args.cancel_autocommit, get_added_flags(cfg, "BIOMETADB"))
-    # CAZy (1) - out/peptidase_results/combined_results/combined.cazy
-    dbdm.run(
-        "functions", 
-        os.path.join(ap.args.output_directory, "genomes"),
+    for _file in (
+        # CAZy (1) - out/peptidase_results/combined_results/combined.cazy
         os.path.join(ap.args.output_directory, "peptidase_results/combined_results/combined.cazy"),
-        "functions",
-    )
-    # MEROPS (1) - out/peptidase_results/combined_results/combined.merops
-    dbdm.run(
-        "functions", 
-        os.path.join(ap.args.output_directory, "genomes"),
+        # MEROPS (1) - out/peptidase_results/combined_results/combined.merops
         os.path.join(ap.args.output_directory, "peptidase_results/combined_results/combined.merops"),
-        "functions",
-    )
-    # MEROPS pfam (1) - out/peptidase_results/combined_results/combined.merops.pfam
-    dbdm.run(
-        "functions", 
-        os.path.join(ap.args.output_directory, "genomes"),
+        # MEROPS pfam (1) - out/peptidase_results/combined_results/combined.merops.pfam
         os.path.join(ap.args.output_directory, "peptidase_results/combined_results/combined.merops.pfam"),
-        "functions",
-    )
-    # BioData (1) - out/kegg_results/biodata_results/KEGG.final.tsv
-    dbdm.run(
-        "functions", 
-        os.path.join(ap.args.output_directory, "genomes"),
-        os.path.join(ap.args.output_directory, "kegg_results/biodata_results/KEGG.final.tsv"), 
-        "functions",
-    )
+        # BioData (1) - out/kegg_results/biodata_results/KEGG.final.tsv
+        os.path.join(ap.args.output_directory, "kegg_results/biodata_results/KEGG.final.tsv"),
+    ):   
+        dbdm.run(
+            "functions", 
+            os.path.join(ap.args.output_directory, "genomes"),
+            _file
+            "functions",
+        )
     # Begin commit individual genome info
     # Based on file names in metagenome_annotation.list
     genomes_run = (os.path.splitext(os.path.basename(line.rstrip("\r\n")))[0] 

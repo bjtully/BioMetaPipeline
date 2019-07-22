@@ -147,9 +147,15 @@ cdef class FastaParser:
             tmp = (<string>tmp).substr(0, name_len)
         if simplify == "":
             record_name = tmp
+        elif len(simplify) > 20:
+            record_name = <string>"%s%s-%d" % (
+                simplify.substr(0, int(simplify.size() / 4)),
+                simplify.substr(int(3 * simplify.size() / 4)),
+                count
+            )
         else:
-            record_name = <string>"%s_%d" % (
-                simplify.substr(0, 20),
+            record_name = <string>"%s-%d" % (
+                simplify,
                 count
             )
         if is_python:
