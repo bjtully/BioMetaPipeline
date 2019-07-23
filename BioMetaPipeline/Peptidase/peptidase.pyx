@@ -108,7 +108,7 @@ class Peptidase(LuigiTaskClass):
             for _id, pfam in extracellular_pfams.items():
                 pfam_prot_out.write(_id + <string>PyUnicode_AsUTF8(str(self.protein_suffix)) + b"\t" + pfam + b"\n")
             pfam_prot_out.close()
-            # Write count table of pfam hits for entire genome
+            # Write count table of pfam hits for entire genomes
             extracellular_pfam_counts = <dict>Counter(extracellular_pfams.values())
             pfams = list(extracellular_pfam_counts.keys())
             pfam_count_out.write(b"Genome")

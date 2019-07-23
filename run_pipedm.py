@@ -36,7 +36,7 @@ INTERPROSCAN_FOLDER = "/path/to/interproscan/data"
 # Directory containing 3 files - merops-as-pfams.txt, dbCAN-fam-HMMs.txt, MEROPS.pfam.hmm
 PEPTIDASE_DATA_FOLDER = "/path/to/peptidase_data"
 # Extracted virsorter data from  https://github.com/simroux/VirSorter
-VIRSORTER_DATA_FILDER = "/path/to/virsorter-data"
+VIRSORTER_DATA_FOLDER = "/path/to/virsorter-data"
 # Location of BioMetaDB on system. If not used, ensure to pass `-a` flag to run_pipedm.py when running
 BIOMETADB = "/path/to/BioMetaDB/dbdm.py"
 # Signalp software package, including binary, from  http://www.cbs.dtu.dk/cgi-bin/nph-sw_request?signalp
@@ -199,7 +199,7 @@ ap = ArgParse(
       "default": "None"}),
     ),
     description=ArgParse.description_builder(
-        "pipedm:\tRun meta/genome evaluation and annotation pipelines",
+        "pipedm:\tRun meta/genomes evaluation and annotation pipelines",
         {
             "MET_EVAL":         "Evaluates completion, contamination, and redundancy of MAGs",
             "MET_ANNOT":        "Runs gene callers and annotation programs on MAGs",
@@ -242,7 +242,7 @@ subprocess.run(
         # Interproscan
         "-v", INTERPROSCAN_FOLDER + ":/root/interproscan-5.32-71.0/data",
         # Volume to access genomes
-        "-v", VIRSORTER_DATA_FILDER + ":/root/virsorter-data",
+        "-v", VIRSORTER_DATA_FOLDER + ":/root/virsorter-data",
         # Volume to access signalp binary
         "-v", SIGNALP_FOLDER + ":/root/signalp",
         # Volume to access rnammer binary
@@ -294,7 +294,7 @@ if not ap.args.cancel_autocommit:
             _file
             "functions",
         )
-    # Begin commit individual genome info
+    # Begin commit individual genomes info
     # Based on file names in metagenome_annotation.list
     genomes_run = (os.path.splitext(os.path.basename(line.rstrip("\r\n")))[0] 
                     for line in open(os.path.join(ap.args.output_directory, "metagenome_annotation.list")))

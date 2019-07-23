@@ -164,7 +164,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 out_dir=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, out_prefix),
             ),
         )
-        # Required task - split genome file into separate fasta files
+        # Required task - split genomes file into separate fasta files
         task_list.append(
             SplitFile(
                 fasta_file=fasta_file,
@@ -358,7 +358,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                                           HMMConvertConstants.OUTPUT_DIRECTORY, cfg.get(CAZYConstants.CAZY, ConfigManager.DATA))
 
                 ),
-                # Assign CAZy info for genome
+                # Assign CAZy info for genomes
                 CAZY(
                     hmm_results=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
                                              HMMSearchConstants.OUTPUT_DIRECTORY, out_prefix + "." + CAZYConstants.HMM_FILE),
@@ -391,7 +391,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     hmm_file=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, MEROPSConstants.OUTPUT_DIRECTORY,
                                           HMMConvertConstants.OUTPUT_DIRECTORY, cfg.get(MEROPSConstants.MEROPS, ConfigManager.DATA)),
                 ),
-                # Assign MEROPS info for genome
+                # Assign MEROPS info for genomes
                 MEROPS(
                     calling_script_path="",
                     hmm_results=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, MEROPSConstants.OUTPUT_DIRECTORY,
@@ -454,7 +454,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     # Optional task - Peptidase
     # Combine all results and commit to database
     if cfg.check_pipe_set("peptidase", MetagenomeAnnotationConstants.PIPELINE_NAME):
-        # Combine all genome count results
+        # Combine all genomes count results
         task_list.append(
             CombineOutput(
                 directories=[
@@ -538,7 +538,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                      (),
                      (ProdigalConstants.PROTEIN_FILE_SUFFIX,),
                      CombineOutputConstants.PROT_OUTPUT_FILE),
-                    # All kofamscan default results (e.g. non-amended, which was for genome-specific and not cumulative)
+                    # All kofamscan default results (e.g. non-amended, which was for genomes-specific and not cumulative)
                     (os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, KofamScanConstants.OUTPUT_DIRECTORY),
                      (),
                      (".tsv",),
@@ -588,7 +588,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
             )
         )
 
-    # Final task - combine all results from annotation into single tsv file per genome
+    # Final task - combine all results from annotation into single tsv file per genomes
     if cfg.completed_tests:
         for prefix in out_prefixes:
             task_list.append(
@@ -596,7 +596,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     directories=[
                         # All annotation results
                         (os.path.join(output_directory),
-                        # By genome
+                        # By genomes
                         (prefix,),
                         # All possible suffixes
                         tuple(_v for key, val in pipeline_classes.items() for _v in val if key in cfg.completed_tests and key != "virsorter"),

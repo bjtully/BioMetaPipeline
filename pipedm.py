@@ -55,14 +55,14 @@ if __name__ == "__main__":
 
     _help = {
         "MET_EVAL":         "Evaluates completion, contamination, and redundancy of MAGs",
-        # "EU_PAN":           "Assembles, aligns, annotates, and creates pan-genome for Eukaryotes",
+        # "EU_PAN":           "Assembles, aligns, annotates, and creates pan-genomes for Eukaryotes",
         "MET_ANNOT":        "Runs gene callers and annotation programs on MAGs",
     }
 
     ap = ArgParse(
         args_list,
         description=ArgParse.description_builder(
-            "pipedm:\tRun meta/genome evaluation and annotation pipelines",
+            "pipedm:\tRun meta/genomes evaluation and annotation pipelines",
             _help,
             flags
         )
