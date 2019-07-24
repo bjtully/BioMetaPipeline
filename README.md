@@ -106,7 +106,13 @@ step for researchers.
 
 ### Usage differences - standalone script versus docker image
 
-Both `pipedm.py` and `run_pipedm.py` use the same set of command-line arguments to function.
+Both `pipedm.py` and `run_pipedm.py` use the same set of command-line arguments to function. 
+
+- Docker installation
+    - Users must edit the `run_pipedm.py` script to provide paths to downloaded data. See the [wiki page](https://github.com/cjneely10/BioMetaPipeline/wiki/2-Installation) for instructions.
+    - Users must use the config file templates found in `Sample/Config/Docker`.
+- Source code installation
+    - Users must edit the config file template found in `Sample/Config` to provide paths to working program installations.
 
 ## Available pipelines
 
