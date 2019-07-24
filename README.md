@@ -13,7 +13,7 @@ Adding the last two lines of the above code to a user's `.bashrc` file will main
 
 ### Dependencies
 
-See the [wiki page](https://github.com/cjneely10/BioMetaPipeline/wiki/Installation) for instructions on installing either
+See the [wiki page](https://github.com/cjneely10/BioMetaPipeline/wiki/2-Installation) for instructions on installing either
 the standalone or docker version of **BioMetaPipeline**.Python dependencies are best maintained within a separate Python 
 virtual environment. `BioMetaDB` and `BioMetaPipeline` must be contained and built within the same python environment. 
 However, **BioMetaPipeline** data pipelines are managed through config files that allow direct input of the paths to the 
