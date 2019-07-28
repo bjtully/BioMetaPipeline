@@ -60,13 +60,14 @@ class CombineOutput(LuigiTaskClass):
                     # Gather tsv info
                     files.append(os.path.basename(_f))
                     combined_results.append(pd.read_csv(_f, delimiter=str(self.delimiter), header=0, index_col=0))
-                pd.concat(combined_results, sort=True).to_csv(
-                    os.path.join(str(self.output_directory), output_file),
-                    sep="\t",
-                    na_rep=str(self.na_rep),
-                    index=True,
-                    index_label="ID",
-                )
+                if combined_results:
+                    pd.concat(combined_results, sort=True).to_csv(
+                        os.path.join(str(self.output_directory), output_file),
+                        sep="\t",
+                        na_rep=str(self.na_rep),
+                        index=True,
+                        index_label="ID",
+                    )
 
     # def output(self):
     #     return [
