@@ -56,6 +56,7 @@ class PSORTb(LuigiTaskClass):
                 os.path.join(str(self.output_directory), "psortb_out"),
                 os.path.join(os.path.dirname(str(self.output_directory)), get_prefix(str(self.prot_file)) + ".tbl")
             )
+            shutil.rmtree(str(self.output_directory))
         # Version was called from standalone script
         else:
             subprocess.run(
