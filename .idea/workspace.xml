@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="218e6076-48b5-4a87-b494-95f1ba5893b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Peptidase/psortb.pyx" afterDir="false" />
-    </list>
+    <list default="true" id="218e6076-48b5-4a87-b494-95f1ba5893b8" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -530,12 +528,12 @@
       <workItem from="1563816821466" duration="138000" />
       <workItem from="1563822949422" duration="1176000" />
       <workItem from="1563826229640" duration="1062000" />
-      <workItem from="1564287230870" duration="624000" />
+      <workItem from="1564287230870" duration="682000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="511832000" />
+    <option name="totallyTimeSpent" value="511890000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -548,7 +546,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1113" y="328" width="1302" height="1022" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.50114155" side_tool="true" weight="0.21771523" />
       <window_info id="Favorites" order="1" side_tool="true" />

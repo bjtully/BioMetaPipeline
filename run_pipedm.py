@@ -314,4 +314,5 @@ if not ap.args.cancel_autocommit:
             genome_prefix.lower(),
         )
     print("BioMetaDB project complete!")
-os.remove(docker_pid_filename)
+if os.path.isfile(docker_pid_filename):
+    os.remove(docker_pid_filename)

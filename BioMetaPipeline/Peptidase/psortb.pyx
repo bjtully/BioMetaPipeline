@@ -49,7 +49,7 @@ class PSORTb(LuigiTaskClass):
                     str(self.prot_file),
                 ],
                 check=True,
-                stdout=os.path.join(str(self.output_directory), "psortb_out"),
+                stdout=open(os.path.join(str(self.output_directory), "psortb_out"), "w"),
             )
             # Move results up and rename. Remove docker-created directory and
             shutil.move(
