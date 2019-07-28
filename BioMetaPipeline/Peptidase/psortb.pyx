@@ -39,7 +39,6 @@ class PSORTb(LuigiTaskClass):
         os.makedirs(str(self.output_directory))
         # Version was called from docker installation
         if self.is_docker:
-            prot_file = os.path.join("/tmp/results", os.path.basename(str(self.prot_file)))
             shutil.copy(str(self.prot_file), str(self.output_directory))
             subprocess.run(
                 [
@@ -47,7 +46,7 @@ class PSORTb(LuigiTaskClass):
                     *data_type_flags,
                     "-o",
                     "terse",
-                    prot_file,
+                    str(self.prot_file),
                 ],
                 check=True,
                 stdout=os.path.join(str(self.output_directory), "psortb_out"),
