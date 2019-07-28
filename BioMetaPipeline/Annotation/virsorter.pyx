@@ -20,6 +20,7 @@ class VirSorterConstants:
 class VirSorter(LuigiTaskClass):
     fasta_file = luigi.Parameter()
     wdir = luigi.Parameter()
+    is_docker = luigi.BoolParameter()
 
     def requires(self):
         return []
@@ -36,27 +37,44 @@ class VirSorter(LuigiTaskClass):
             username = ["--user", self.added_flags[index_of_user + 1]]
             del ending_flags[index_of_user + 1]
             del ending_flags[index_of_user]
-        if not os.path.exists(os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.DEFAULT_CSV_OUTFILE)):
-            subprocess.run(
-                [
-                    "docker",
-                    "run",
-                    *username,
-                    "-v",
-                    "%s:/data" % str(self.calling_script_path),
-                    "-v",
-                    "%s:/wdir" % str(self.wdir),
-                    "-w",
-                    "/wdir",
-                    "--rm",
-                    "simroux/virsorter:v1.0.5",
-                    "--fna",
-                    os.path.basename(str(self.fasta_file)),
-                    *ending_flags,
-                    ],
-                check=True,
-                stdout=stderr,
-            )
+        if self.is_docker:
+            if not os.path.exists(os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.DEFAULT_CSV_OUTFILE)):
+                subprocess.run(
+                    [
+                        "virsorter",
+                        "--fna",
+                        os.path.basename(str(self.fasta_file)),
+                        "--data-dir",
+                        str(self.calling_script_path),
+                        "--wdir",
+                        str(self.wdir),
+                        *ending_flags,
+                        ],
+                    check=True,
+                    stdout=stderr,
+                )
+        else:
+            if not os.path.exists(os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.DEFAULT_CSV_OUTFILE)):
+                subprocess.run(
+                    [
+                        "docker",
+                        "run",
+                        *username,
+                        "-v",
+                        "%s:/data" % str(self.calling_script_path),
+                        "-v",
+                        "%s:/wdir" % str(self.wdir),
+                        "-w",
+                        "/wdir",
+                        "--rm",
+                        "simroux/virsorter:v1.0.5",
+                        "--fna",
+                        os.path.basename(str(self.fasta_file)),
+                        *ending_flags,
+                        ],
+                    check=True,
+                    stdout=stderr,
+                )
         parse_virsorter_to_dbdm_tsv(
             os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.DEFAULT_CSV_OUTFILE),
             str(self.fasta_file),

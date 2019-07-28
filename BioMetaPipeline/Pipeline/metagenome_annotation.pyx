@@ -208,6 +208,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     calling_script_path=cfg.get(VirSorterConstants.VIRSORTER, ConfigManager.PATH),
                     added_flags=cfg.build_parameter_list_from_dict(VirSorterConstants.VIRSORTER),
                     wdir=os.path.abspath(os.path.join(output_directory, VirSorterConstants.OUTPUT_DIRECTORY, get_prefix(fasta_file))),
+                    is_docker=is_docker,
                 ),
                 # Store virsorter info to database
                 GetDBDMCall(
