@@ -53,6 +53,12 @@ class VirSorter(LuigiTaskClass):
                     check=True,
                     stdout=stderr,
                 )
+                parse_virsorter_to_dbdm_tsv(
+                    os.path.join(str(self.wdir), VirSorterConstants.DEFAULT_CSV_OUTFILE),
+                    str(self.fasta_file),
+                    os.path.join(str(self.wdir), get_prefix(str(self.fasta_file)) + "." + VirSorterConstants.ADJ_OUT_FILE)
+                )
+                os.remove(os.path.join(str(self.wdir), os.path.basename(str(self.fasta_file))))
         else:
             if not os.path.exists(os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.DEFAULT_CSV_OUTFILE)):
                 subprocess.run(
@@ -75,12 +81,12 @@ class VirSorter(LuigiTaskClass):
                     check=True,
                     stdout=stderr,
                 )
-        parse_virsorter_to_dbdm_tsv(
-            os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.DEFAULT_CSV_OUTFILE),
-            str(self.fasta_file),
-            os.path.join(str(self.wdir), "virsorter-out", get_prefix(str(self.fasta_file)) + "." + VirSorterConstants.ADJ_OUT_FILE)
-        )
-        os.remove(os.path.join(str(self.wdir), os.path.basename(str(self.fasta_file))))
+            parse_virsorter_to_dbdm_tsv(
+                os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.DEFAULT_CSV_OUTFILE),
+                str(self.fasta_file),
+                os.path.join(str(self.wdir), "virsorter-out", get_prefix(str(self.fasta_file)) + "." + VirSorterConstants.ADJ_OUT_FILE)
+            )
+            os.remove(os.path.join(str(self.wdir), os.path.basename(str(self.fasta_file))))
         if not os.listdir(str(self.wdir)):
             os.rmdir(str(self.wdir))
         print("VirSorter complete!")

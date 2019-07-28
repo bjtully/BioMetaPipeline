@@ -165,7 +165,7 @@ def sigterm_handler(_signo, _stack_frame):
 
     """
     print("Exiting...")
-    if docker_pid_filename:
+    if os.path.exists(docker_pid_filename):
         subprocess.run(
             [
                 "docker",
