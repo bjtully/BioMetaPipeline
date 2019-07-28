@@ -43,7 +43,7 @@ class VirSorter(LuigiTaskClass):
                     [
                         "virsorter",
                         "--fna",
-                        os.path.basename(str(self.fasta_file)),
+                        str(self.fasta_file),
                         "--data-dir",
                         str(self.calling_script_path),
                         "--wdir",
