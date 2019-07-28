@@ -38,6 +38,8 @@ class VirSorter(LuigiTaskClass):
             del ending_flags[index_of_user + 1]
             del ending_flags[index_of_user]
         if self.is_docker:
+            if not os.path.exists(os.path.join(str(self.wdir), "virsorter-out")):
+                os.makedirs(os.path.join(str(self.wdir), "virsorter-out"))
             if not os.path.exists(os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.DEFAULT_CSV_OUTFILE)):
                 subprocess.run(
                     [
@@ -47,16 +49,16 @@ class VirSorter(LuigiTaskClass):
                         "--data-dir",
                         str(self.calling_script_path),
                         "--wdir",
-                        str(self.wdir),
+                        os.path.join(str(self.wdir), "virsorter-out"),
                         *ending_flags,
                         ],
                     check=True,
                     stdout=stderr,
                 )
                 parse_virsorter_to_dbdm_tsv(
-                    os.path.join(str(self.wdir), VirSorterConstants.DEFAULT_CSV_OUTFILE),
+                    os.path.join(str(self.wdir), "virsorter-out", VirSorterConstants.DEFAULT_CSV_OUTFILE),
                     str(self.fasta_file),
-                    os.path.join(str(self.wdir), get_prefix(str(self.fasta_file)) + "." + VirSorterConstants.ADJ_OUT_FILE)
+                    os.path.join(str(self.wdir), "virsorter-out", get_prefix(str(self.fasta_file)) + "." + VirSorterConstants.ADJ_OUT_FILE)
                 )
                 os.remove(os.path.join(str(self.wdir), os.path.basename(str(self.fasta_file))))
         else:
