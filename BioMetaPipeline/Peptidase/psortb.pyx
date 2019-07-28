@@ -43,14 +43,19 @@ class PSORTb(LuigiTaskClass):
             shutil.copy(str(self.prot_file), str(self.output_directory))
             subprocess.run(
                 [
-                    "/usr/bin/psortb",
+                    "psortb",
+                    *data_type_flags,
                     "-o",
                     "terse",
-                    *data_type_flags,
                     prot_file,
                 ],
                 check=True,
-                stdout=stderr,
+                stdout=os.path.join(str(self.output_directory), "psortb_out"),
+            )
+            # Move results up and rename. Remove docker-created directory and
+            shutil.move(
+                os.path.join(str(self.output_directory), "psortb_out"),
+                os.path.join(os.path.dirname(str(self.output_directory)), get_prefix(str(self.prot_file)) + ".tbl")
             )
         # Version was called from standalone script
         else:
@@ -66,12 +71,12 @@ class PSORTb(LuigiTaskClass):
                     "terse",
                 ],
             )
-        # Move results up and rename. Remove docker-created directory and
-        shutil.move(
-            glob.glob(os.path.join(str(self.output_directory), "*.txt"))[0],
-            os.path.join(os.path.dirname(str(self.output_directory)), get_prefix(str(self.prot_file)) + ".tbl")
-        )
-        shutil.rmtree(str(self.output_directory))
+            # Move results up and rename. Remove docker-created directory and
+            shutil.move(
+                glob.glob(os.path.join(str(self.output_directory), "*.txt"))[0],
+                os.path.join(os.path.dirname(str(self.output_directory)), get_prefix(str(self.prot_file)) + ".tbl")
+            )
+            shutil.rmtree(str(self.output_directory))
         print("PSORTb complete!")
 
     def output(self):
