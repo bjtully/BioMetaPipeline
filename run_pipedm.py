@@ -24,7 +24,8 @@ Directory contents are never deleted, and are only used to reference stored data
 **********
 
 """
-
+RNAMMER_FOLDER = None
+SIGNALP_FOLDER = None
 # Data downloaded from  https://data.ace.uq.edu.au/public/gtdbtk/
 GTDBTK_FOLDER = "/path/to/gtdbtk/release_##/##.#"
 # Extracted checkm data from  https://data.ace.uq.edu.au/public/CheckM_databases/
@@ -244,9 +245,9 @@ subprocess.run(
         # Volume to access genomes
         "-v", VIRSORTER_DATA_FOLDER + ":/root/virsorter-data",
         # Volume to access signalp binary
-        "-v", SIGNALP_FOLDER + ":/root/signalp",
+        "-v", (SIGNALP_FOLDER or "") + ":/root/signalp",
         # Volume to access rnammer binary
-        "-v", RNAMMER_FOLDER + ":/root/rnammer",
+        "-v", (RNAMMER_FOLDER or "") + ":/root/rnammer",
         # Change output directory here
         "-v", os.getcwd() + ":/root/wdir",
         # "-it",
@@ -268,6 +269,7 @@ subprocess.run(
 )
 os.remove(docker_pid_filename)
 if not ap.args.cancel_autocommit:
+    print("\nStoring results to database..........")
     # Primary output file types from MET_ANNOT (with N = number of genomes):
     # Set project name
     try:

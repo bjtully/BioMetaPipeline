@@ -26,8 +26,8 @@ class GetDBDMCall(luigi.Task):
     def run(self):
         if not os.path.exists(str(self.data_file)):
             return
-        print("Storing %s to database.........." % str(self.storage_string))
         if not bool(self.cancel_autocommit):
+            print("Storing %s to database.........." % str(self.storage_string))
             if not os.path.exists(str(self.db_name)):
                 subprocess.run(
                     [
@@ -48,6 +48,7 @@ class GetDBDMCall(luigi.Task):
                     ],
                     check=True,
                 )
+                print("Database storage complete!")
             elif os.path.exists(str(self.db_name)) and not os.path.exists(os.path.join(str(self.db_name), "classes", str(self.table_name).lower() + ".json")):
                 subprocess.run(
                     [
@@ -68,6 +69,7 @@ class GetDBDMCall(luigi.Task):
                     ],
                     check=True,
                 )
+                print("Database storage complete!")
             elif os.path.exists(str(self.db_name)) and os.path.exists(os.path.join(str(self.db_name), "classes", str(self.table_name).lower() + ".json")):
                 subprocess.run(
                     [
@@ -88,6 +90,6 @@ class GetDBDMCall(luigi.Task):
                     ],
                     check=True,
                 )
+                print("Database storage complete!")
             else:
                 return None
-        print("Database storage complete!")
