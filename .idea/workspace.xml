@@ -109,7 +109,7 @@
         <entry file="file://$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/checkm.pyx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="394">
-              <caret line="41" column="24" lean-forward="true" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
+              <caret line="41" selection-start-line="41" selection-end-line="50" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -559,12 +559,12 @@
       <workItem from="1564326811784" duration="54000" />
       <workItem from="1564334755525" duration="1435000" />
       <workItem from="1564352320998" duration="4015000" />
-      <workItem from="1564360459752" duration="2267000" />
+      <workItem from="1564360459752" duration="2372000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="519751000" />
+    <option name="totallyTimeSpent" value="519856000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1039,7 +1039,7 @@
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/checkm.pyx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="394">
-          <caret line="41" column="24" lean-forward="true" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
+          <caret line="41" selection-start-line="41" selection-end-line="50" selection-end-column="11" />
         </state>
       </provider>
     </entry>

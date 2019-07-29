@@ -39,16 +39,16 @@ class CheckM(LuigiTaskClass):
         print("Running CheckM..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
-        # Setup database
-        subprocess.run(
-            [
-                str(self.calling_script_path),
-                "data",
-                "setRoot",
-                str(self.data_folder),
-            ],
-            check=True,
-        )
+        # # Setup database
+        # subprocess.run(
+        #     [
+        #         str(self.calling_script_path),
+        #         "data",
+        #         "setRoot",
+        #         str(self.data_folder),
+        #     ],
+        #     check=True,
+        # )
         # Run evaluation
         result = subprocess.run(
             [str(self.calling_script_path),
