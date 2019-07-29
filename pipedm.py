@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     flags = {
         "MET_EVAL":       ("directory", "config_file", "cancel_autocommit", "output_directory",
-                           "biometadb_project"),
+                           "biometadb_project", "is_docker", "remove_intermediates"),
         # "EU_PAN":         ("directory", "config_file", "cancel_autocommit", "output_directory",
         #                    "biometadb_project", "list_file"),
         "MET_ANNOT":      ("directory", "config_file", "cancel_autocommit", "output_directory",
