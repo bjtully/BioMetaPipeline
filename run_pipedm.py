@@ -222,6 +222,11 @@ cfg.read(ap.args.config_file)
 # Store docker process id to file for graceful exits
 docker_pid_filename = "%s.%s.pid" % (datetime.today().strftime("%Y%m%d"), str(randint(1, 1001)))
 
+met_list = {
+    "MET_EVAL":     "metagenome_evaluation.list",
+    "MET_ANNOT":    "metagenome_annotation.list"
+}
+
 # Run docker version
 subprocess.run(
     [
@@ -280,40 +285,48 @@ if not ap.args.cancel_autocommit:
         db_name = "MetagenomeAnnotation"
 
     dbdm = GetDBDMCall(BIOMETADB, db_name, ap.args.cancel_autocommit, get_added_flags(cfg, "BIOMETADB"))
-    for _file in (
-        # CAZy (1) - out/peptidase_results/combined_results/combined.cazy
-        os.path.join(ap.args.output_directory, "peptidase_results/combined_results/combined.cazy"),
-        # MEROPS (1) - out/peptidase_results/combined_results/combined.merops
-        os.path.join(ap.args.output_directory, "peptidase_results/combined_results/combined.merops"),
-        # MEROPS pfam (1) - out/peptidase_results/combined_results/combined.merops.pfam
-        os.path.join(ap.args.output_directory, "peptidase_results/combined_results/combined.merops.pfam"),
-        # BioData (1) - out/kegg_results/biodata_results/KEGG.final.tsv
-        os.path.join(ap.args.output_directory, "kegg_results/biodata_results/KEGG.final.tsv"),
-    ):   
+    if ap.args.program == "MET_ANNOT":
+        for _file in (
+            # CAZy (1) - out/peptidase_results/combined_results/combined.cazy
+            os.path.join(ap.args.output_directory, "peptidase_results/combined_results/combined.cazy"),
+            # MEROPS (1) - out/peptidase_results/combined_results/combined.merops
+            os.path.join(ap.args.output_directory, "peptidase_results/combined_results/combined.merops"),
+            # MEROPS pfam (1) - out/peptidase_results/combined_results/combined.merops.pfam
+            os.path.join(ap.args.output_directory, "peptidase_results/combined_results/combined.merops.pfam"),
+            # BioData (1) - out/kegg_results/biodata_results/KEGG.final.tsv
+            os.path.join(ap.args.output_directory, "kegg_results/biodata_results/KEGG.final.tsv"),
+        ):   
+            dbdm.run(
+                "functions", 
+                os.path.join(ap.args.output_directory, "genomes"),
+                _file
+                "functions",
+            )
+        # Begin commit individual genomes info
+        # Based on file names in metagenome_annotation.list
+        genomes_run = (os.path.splitext(os.path.basename(line.rstrip("\r\n")))[0] 
+                        for line in open(os.path.join(ap.args.output_directory, met_list[ap.args.program])))
+        for genome_prefix in genomes_run:
+            # Virsorter out (N) - out/virsorter_results/*/virsorter-out/*.VIRSorter_adj_out.tsv
+            dbdm.run(
+                genome_prefix.lower(),
+                os.path.join(ap.args.output_directory, "splitfiles", genome_prefix),
+                os.path.join(ap.args.output_directory, "virsorter_results", genome_prefix, "virsorter-out", "%s.VIRSorter_adj_out.tsv" % genome_prefix),
+                genome_prefix.lower(),
+            )
+            # Combined Results (N) - out/*.metagenome_annotation.tsv
+            dbdm.run(
+                genome_prefix.lower(),
+                os.path.join(ap.args.output_directory, "splitfiles", genome_prefix),
+                os.path.join(ap.args.output_directory, "%s.metagenome_annotation.tsv" % genome_prefix),
+                genome_prefix.lower(),
+            )
+    elif ap.args.program == "MET_EVAL":
         dbdm.run(
-            "functions", 
+            "evaluation",
             os.path.join(ap.args.output_directory, "genomes"),
-            _file
-            "functions",
-        )
-    # Begin commit individual genomes info
-    # Based on file names in metagenome_annotation.list
-    genomes_run = (os.path.splitext(os.path.basename(line.rstrip("\r\n")))[0] 
-                    for line in open(os.path.join(ap.args.output_directory, "metagenome_annotation.list")))
-    for genome_prefix in genomes_run:
-        # Virsorter out (N) - out/virsorter_results/*/virsorter-out/*.VIRSorter_adj_out.tsv
-        dbdm.run(
-            genome_prefix.lower(),
-            os.path.join(ap.args.output_directory, "splitfiles", genome_prefix),
-            os.path.join(ap.args.output_directory, "virsorter_results", genome_prefix, "virsorter-out", "%s.VIRSorter_adj_out.tsv" % genome_prefix),
-            genome_prefix.lower(),
-        )
-        # Combined Results (N) - out/*.metagenome_annotation.tsv
-        dbdm.run(
-            genome_prefix.lower(),
-            os.path.join(ap.args.output_directory, "splitfiles", genome_prefix),
-            os.path.join(ap.args.output_directory, "%s.metagenome_annotation.tsv" % genome_prefix),
-            genome_prefix.lower(),
+            os.path.join(ap.args.output_directory, "metagenome_evaluation.tsv"),
+            "evaluation",
         )
     print("BioMetaDB project complete!")
 if os.path.isfile(docker_pid_filename):

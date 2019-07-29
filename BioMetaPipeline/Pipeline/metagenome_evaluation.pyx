@@ -28,7 +28,7 @@ class MetagenomeEvaluationConstants:
 
 
 def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit, str output_directory,
-                      str biometadb_project):
+                      str biometadb_project, bint is_docker, bint remove_intermediates):
     """ Function calls the pipeline for evaluating a set of genomes using checkm, gtdbtk, fastANI
     Creates .tsv file of final output, adds to database
 
@@ -105,5 +105,6 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
         )
     )
     luigi.build(task_list, local_scheduler=True)
-    shutil.rmtree(directory)
+    if remove_intermediates:
+        shutil.rmtree(directory)
     print("MET_EVAL pipeline complete!")
