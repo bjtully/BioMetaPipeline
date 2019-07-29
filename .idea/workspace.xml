@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="218e6076-48b5-4a87-b494-95f1ba5893b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/checkm.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/checkm.pyx" afterDir="false" />
-    </list>
+    <list default="true" id="218e6076-48b5-4a87-b494-95f1ba5893b8" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,8 +106,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/checkm.pyx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
+            <state relative-caret-position="450">
+              <caret line="36" column="32" lean-forward="true" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -559,12 +557,12 @@
       <workItem from="1564326811784" duration="54000" />
       <workItem from="1564334755525" duration="1435000" />
       <workItem from="1564352320998" duration="4015000" />
-      <workItem from="1564360459752" duration="306000" />
+      <workItem from="1564360459752" duration="1318000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="517790000" />
+    <option name="totallyTimeSpent" value="518802000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1038,8 +1036,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/AssemblyEvaluation/checkm.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
+        <state relative-caret-position="450">
+          <caret line="36" column="32" lean-forward="true" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
         </state>
       </provider>
     </entry>

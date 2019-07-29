@@ -36,18 +36,27 @@ class CheckM(LuigiTaskClass):
         if not os.path.exists(tmp_dir):
             os.makedirs(tmp_dir)
         cdef object tmp = open(os.path.join(tmp_dir, "tmp.txt"), "w")
+        cdef object p1, p2
         print("Running CheckM..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
         # Setup database
-        subprocess.run(
+        p1 = subprocess.Popen(
+            [
+                "echo",
+                str(self.data_folder),
+                str(self.data_folder),
+
+            ],
+            stdout=subprocess.PIPE,
+        )
+        subprocess.Popen(
             [
                 str(self.calling_script_path),
                 "data",
                 "setRoot",
-                str(self.data_folder),
             ],
-            check=True,
+            stdin=p1.stdout,
         )
         # Run evaluation
         result = subprocess.run(
