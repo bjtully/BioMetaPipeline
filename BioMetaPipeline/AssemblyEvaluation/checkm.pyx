@@ -18,7 +18,6 @@ class CheckMConstants:
 class CheckM(LuigiTaskClass):
     outfile = luigi.Parameter(default=CheckMConstants.OUTFILE)
     output_directory = luigi.Parameter()
-    data_folder = luigi.Parameter()
 
     def requires(self):
         return []

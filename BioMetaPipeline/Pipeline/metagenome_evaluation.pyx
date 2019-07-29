@@ -67,7 +67,6 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
             fasta_folder=directory,
             added_flags=cfg.build_parameter_list_from_dict(CheckMConstants.CHECKM),
             calling_script_path=cfg.get(CheckMConstants.CHECKM, ConfigManager.PATH),
-            data_folder=cfg.get(CheckMConstants.CHECKM, ConfigManager.DATA),
         ),
         # Required task - determine average nucleotide identity among list of genomes
         FastANI(
