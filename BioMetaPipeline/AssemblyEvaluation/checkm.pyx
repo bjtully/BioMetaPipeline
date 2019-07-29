@@ -46,7 +46,8 @@ class CheckM(LuigiTaskClass):
                 "data",
                 "setRoot",
                 str(self.data_folder),
-            ]
+            ],
+            check=True,
         )
         # Run evaluation
         result = subprocess.run(
