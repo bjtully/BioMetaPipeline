@@ -89,13 +89,12 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     cdef dict bact_arch_type = {}
     # For merops conversion
     cdef dict merops_dict
-
+    if type_file != "None":
+            bact_arch_type = {os.path.splitext(key.replace("_", "-"))[0] + ".fna": val
+                              for key, val in TSVParser.parse_dict(type_file).items()}
 
     # Prepare CAZy hmm profiles if set in config
     if cfg.check_pipe_set("peptidase", MetagenomeAnnotationConstants.PIPELINE_NAME):
-        if type_file != "None":
-            bact_arch_type = {os.path.splitext(key.replace("_", "-"))[0] + ".fna": val
-                              for key, val in TSVParser.parse_dict(type_file).items()}
         task_list.append(
             HMMConvert(
                 output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY,
@@ -256,7 +255,6 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 # ),
             ):
                 task_list.append(task)
-
         # Optional task - prokka
         if cfg.check_pipe_set("prokka", MetagenomeAnnotationConstants.PIPELINE_NAME):
             for task in (
@@ -267,6 +265,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     out_prefix=out_prefix,
                     fasta_file=fasta_file,
                     added_flags=cfg.build_parameter_list_from_dict(PROKKAConstants.PROKKA),
+                    domain_type=(bact_arch_type.get(os.path.basename(fasta_file), (PeptidaseConstants.BACTERIA,))[0] if bact_arch_type else PeptidaseConstants.BACTERIA)
                 ),
                 # For PROKKA adjusting
                 DiamondMakeDB(

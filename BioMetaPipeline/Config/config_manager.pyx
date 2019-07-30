@@ -13,7 +13,7 @@ from BioMetaPipeline.Annotation.interproscan import InterproscanConstants
 pipelines = {
     "metagenome_annotation": {
         "required": ["PRODIGAL", "HMMSEARCH", "HMMCONVERT", "HMMPRESS", "DIAMOND"],
-        "peptidase": ["CAZY", "MEROPS", "SIGNALP", "PSORTB",],
+        "peptidase": ["CAZY", "MEROPS", "PSORTB",],
         "kegg": ["KOFAMSCAN", "BIODATA",],
         "prokka": ["PROKKA",],
         "interproscan": ["INTERPROSCAN",],

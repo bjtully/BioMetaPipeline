@@ -19,6 +19,7 @@ class PROKKA(LuigiTaskClass):
     output_directory = luigi.Parameter()
     out_prefix = luigi.Parameter()
     fasta_file = luigi.Parameter()
+    domain_type = luigi.Parameter(default="Bacteria")
 
     def requires(self):
         return []
@@ -34,6 +35,8 @@ class PROKKA(LuigiTaskClass):
                     str(self.calling_script_path),
                     "--prefix",
                     str(self.out_prefix),
+                    "--kingdom",
+                    "%s%s" % (str(self.domain_type)[0].upper(), str(self.domain_type)[1:]),
                     "--outdir",
                     os.path.join(str(self.output_directory), outfile_prefix),
                     str(self.fasta_file),

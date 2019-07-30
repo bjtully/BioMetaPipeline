@@ -21,6 +21,8 @@ class SignalP(LuigiTaskClass):
         return []
 
     def run(self):
+        if str(self.calling_script_path)  == "None":
+            return
         print("Running SignalP..........")
         if not os.path.exists(str(self.output_directory)):
             os.makedirs(str(self.output_directory))
