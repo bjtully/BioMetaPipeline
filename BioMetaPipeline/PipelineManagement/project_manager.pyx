@@ -55,7 +55,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
                 FastaParser.write_simple(
                     os.path.join((<object>directory), _file),
                     os.path.join(genome_storage_folder, _f),
-                    simplify=get_prefix(_f),
+                    simplify=adj_string_to_length(get_prefix(_f), 20, .7),
                 )
     # Declarations
     cdef str genome_list_path = os.path.join((<object>output_directory), getattr(CallingClass, LIST_FILE))
@@ -83,7 +83,7 @@ cdef tuple project_check_and_creation(void* directory, void* config_file, void* 
 
 
 cdef void write_genome_list_to_file(void* directory, void* outfile):
-    """  Function writes
+    """  Function writes list to file
 
     :param directory:
     :param outfile:
@@ -94,3 +94,16 @@ cdef void write_genome_list_to_file(void* directory, void* outfile):
     for _file in os.listdir((<object>directory)):
         W.write("%s\n" % os.path.join((<object>directory), os.path.basename(_file)))
     W.close()
+
+cdef str adj_string_to_length(str to_adjust, int max_length, double split_ratio):
+    """ Function takes a string and shrinks it, retaining ends based on ratio
+    
+    :param to_adjust: 
+    :param max_length: 
+    :param split_ratio: 
+    :return: 
+    """
+    if len(to_adjust) <= max_length:
+        return to_adjust
+    cdef int split_loc = int(max_length * split_ratio)
+    return "%s%s" % (to_adjust[0: split_loc], to_adjust[len(to_adjust) - split_loc:])
