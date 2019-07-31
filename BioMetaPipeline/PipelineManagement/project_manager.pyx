@@ -105,5 +105,6 @@ cdef str adj_string_to_length(str to_adjust, int max_length, double split_ratio)
     """
     if len(to_adjust) <= max_length:
         return to_adjust
-    cdef int split_loc = int(max_length * split_ratio)
-    return "%s%s" % (to_adjust[0: split_loc], to_adjust[len(to_adjust) - split_loc:])
+    cdef int front_split_loc = int(max_length * split_ratio)
+    cdef int end_split_loc = int(max_length * (1 - split_ratio))
+    return "%s%s" % (to_adjust[0: front_split_loc], to_adjust[len(to_adjust) - end_split_loc:])
