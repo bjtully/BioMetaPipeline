@@ -70,6 +70,8 @@ class ConfigManager:
             return None
         except NoOptionError:
             return "None"
+        except NoSectionError:
+            return "None"
 
     def build_parameter_list_from_dict(self, str _dict, tuple ignore = ()):
         """ Creates list of parameters from given values in given Config dict section
@@ -138,7 +140,7 @@ class ConfigManager:
                 value = self.config[program]
                 # Check PATH, DATA, and DATA_DICT paths
                 for key in ("PATH", "DATA", "DATA_DICT"):
-                    if key in value.keys() and value[key] != "docker" and not os.path.exists(value[key]):
+                    if key in value.keys() and not os.path.exists(value[key]):
                         print("%s for %s not found" % (key, program))
                         exit(1)
             except NoSectionError:
