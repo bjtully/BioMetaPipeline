@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <iostream>
 #include "fasta_parser_cpp.h"
+#include "rope.cpp"
+
 
 /*
 Class will parse fasta and return vector string arrays, indices are fasta id,
@@ -25,7 +27,8 @@ namespace fasta_parser {
 
     void FastaParser_cpp::grab(std::vector<std::string>& line_data) {
         std::string line;
-        std::string dataLine;
+        Rope dataLine = Rope("");
+        std::string *longLine = new std::string;
         if (line_data.size() > 0) {
             line_data.clear();
         }
@@ -52,7 +55,8 @@ namespace fasta_parser {
                 getline((*this->fastaFile), line);
                 line.erase(std::remove(line.begin(), line.end(), '\r'), line.end());
             }
-            line_data.push_back(dataLine);
+            *longLine = dataLine.to_string();
+            line_data.push_back(*longLine);
             this->last_line = line;
         }
     }

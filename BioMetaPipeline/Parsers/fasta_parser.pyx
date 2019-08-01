@@ -42,6 +42,7 @@ cdef class FastaParser:
         :return:
         """
         cdef vector[string] record
+        record.reserve(3);
         self.fasta_parser_cpp.grab(record)
         cdef int _c
         cdef str seq
@@ -71,6 +72,7 @@ cdef class FastaParser:
         :return:
         """
         cdef vector[string] record
+        record.reserve(3);
         cdef string record_name
         self.fasta_parser_cpp.grab(record)
         cdef int _c

@@ -13,6 +13,7 @@ build/*
 */*/*/*.c
 */*/*/__pycache__/*
 */*/*.cpp
+!*/*/rope.cpp
 !*/*/*_cpp.cpp
 quick.py
 *.bam
