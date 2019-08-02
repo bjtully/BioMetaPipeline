@@ -22,7 +22,7 @@ Prior to first run:
 
 Ensure that all path arguments below are filled and that all required databases are downloaded.
 If a certain program will not be used, and the database files are not downloaded, provide any valid directory
-or leave the default values. Directory contents are never deleted, and are only used to reference stored data.
+or leave the default values. Directory contents are never deleted and are only used to reference stored data.
 
 **********
 
