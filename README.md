@@ -1,16 +1,16 @@
 # BioMetaPipeline
 
 ## Installation
+### Docker
+<pre><code>wget https://github.com/cjneely10/BioMetaPipeline/blob/master/run_pipedm.py
+alias pipedm="/path/to/run_pipedm.py"
+docker pull cjneely10/biometapipeline:v0.0.1</code></pre>
+### Source code
 Clone or download this repository.
 <pre><code>cd /path/to/BioMetaPipeline
 pip3 install -r requirements.txt
 python3 setup.py build_ext --inplace
 export PYTHONPATH=/path/to/BioMetaPipeline:$PYTHONPATH
-
-# Set alias
-# Docker installation
-alias pipedm="/path/to/BioMetaPipeline/run_pipedm.py"
-# Source code installation
 alias pipedm="/path/to/BioMetaPipeline/pipedm.py"</code></pre>
 Adding the export and alias statements to a user's `.bashrc` file will maintain these settings on next log-in.
 
