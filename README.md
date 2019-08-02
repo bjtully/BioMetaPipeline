@@ -11,7 +11,7 @@ export PYTHONPATH=/path/to/BioMetaPipeline:$PYTHONPATH
 alias pipedm="/path/to/BioMetaPipeline/run_pipedm.py"
 # Source code installation
 alias pipedm="/path/to/BioMetaPipeline/pipedm.py"</code></pre>
-Adding the last two lines of the above code to a user's `.bashrc` file will maintain these settings on next log-in.
+Adding the export and alias statements to a user's `.bashrc` file will maintain these settings on next log-in.
 
 ### Dependencies
 
