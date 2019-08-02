@@ -306,9 +306,8 @@ if not ap.args.cancel_autocommit:
             )
         # Begin commit individual genomes info
         # Based on file names in metagenome_annotation.list
-        genomes_run = (os.path.splitext(os.path.basename(line.rstrip("\r\n")))[0] 
-                        for line in open(os.path.join(ap.args.output_directory, met_list[ap.args.program])))
-        for genome_prefix in genomes_run:
+        for genome_prefix in (os.path.splitext(os.path.basename(line.rstrip("\r\n")))[0] 
+                                for line in open(os.path.join(ap.args.output_directory, met_list[ap.args.program]))):
             # Virsorter out (N) - out/virsorter_results/*/virsorter-out/*.VIRSorter_adj_out.tsv
             dbdm.run(
                 genome_prefix.lower(),
