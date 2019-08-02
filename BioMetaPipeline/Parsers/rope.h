@@ -1,10 +1,6 @@
 #include <cstdlib>
 #include <string>
-
-#include <iostream>
-using namespace std;
-
-const int LEAF_LEN = 3;
+const int LEAF_LEN = 4;
 
 struct Rope_node {
     Rope_node *left, *right, *parent;

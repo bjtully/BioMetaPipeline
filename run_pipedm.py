@@ -50,7 +50,7 @@ RNAMMER_FOLDER = "/path/to/rnammer-1.2.src"
 
 
 # BioMetaPipeline version
-DOCKER_IMAGE = "pipedm"
+DOCKER_IMAGE = "pipedm:v0.0.1"
 docker_pid_filename = None
 
 
