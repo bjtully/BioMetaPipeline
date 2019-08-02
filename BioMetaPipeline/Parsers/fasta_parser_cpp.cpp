@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include "fasta_parser_cpp.h"
-#include "rope.cpp"
+//#include "rope.cpp"
 
 
 /*
@@ -27,7 +27,6 @@ namespace fasta_parser {
 
     void FastaParser_cpp::grab(std::vector<std::string>& line_data) {
         std::string line;
-        Rope dataLine = Rope("");
         std::string *longLine = new std::string;
         if (line_data.size() > 0) {
             line_data.clear();
@@ -51,14 +50,14 @@ namespace fasta_parser {
             getline((*this->fastaFile), line);
             line.erase(std::remove(line.begin(), line.end(), '\r'), line.end());
             while (line.compare(0, this->header.length(), this->header) != 0 && !(*this->fastaFile).eof()) {
-                dataLine.append(line);
+                longLine->append(line);
                 getline((*this->fastaFile), line);
                 line.erase(std::remove(line.begin(), line.end(), '\r'), line.end());
             }
-            *longLine = dataLine.to_string();
             line_data.push_back(*longLine);
             this->last_line = line;
         }
+        delete longLine;
     }
 
 }
