@@ -45,7 +45,7 @@ from the starting contigs.
             num_prophages_3     0.000                   0.000
 ----------------------------------------------------------------------------------------------
 
-        Column Name     Most Frequent           Num             Count Non-Null
+        Column Name     Most Frequent           Frequency       Total Count
 
                cazy     GT41                    40              720
                 cdd     cd06267                 161             1447
