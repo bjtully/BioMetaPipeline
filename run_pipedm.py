@@ -301,7 +301,7 @@ if not ap.args.cancel_autocommit:
             dbdm.run(
                 "functions", 
                 os.path.join(ap.args.output_directory, "genomes"),
-                _file
+                _file,
                 "functions",
             )
         # Begin commit individual genomes info
