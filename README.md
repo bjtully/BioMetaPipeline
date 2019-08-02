@@ -6,6 +6,7 @@ Clone or download this repository.
 pip3 install -r requirements.txt
 python3 setup.py build_ext --inplace
 export PYTHONPATH=/path/to/BioMetaPipeline:$PYTHONPATH
+
 # Set alias
 # Docker installation
 alias pipedm="/path/to/BioMetaPipeline/run_pipedm.py"
