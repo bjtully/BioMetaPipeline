@@ -6,8 +6,11 @@ Clone or download this repository.
 pip3 install -r requirements.txt
 python3 setup.py build_ext --inplace
 export PYTHONPATH=/path/to/BioMetaPipeline:$PYTHONPATH
-# Set alias based on version
-alias pipedm="/path/to/BioMetaPipeline/pipedm.py-or-run_pipedm.py"</code></pre>
+# Set alias
+# Docker installation
+alias pipedm="/path/to/BioMetaPipeline/run_pipedm.py"
+# Source code installation
+alias pipedm="/path/to/BioMetaPipeline/pipedm.py"</code></pre>
 Adding the last two lines of the above code to a user's `.bashrc` file will maintain these settings on next log-in.
 
 ### Dependencies
