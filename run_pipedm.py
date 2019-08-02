@@ -21,8 +21,8 @@ BioMetaPipeline calling script
 Prior to first run:
 
 Ensure that all path arguments below are filled and that all required databases are downloaded.
-If a certain program will not be used, and the database files are not downloaded, provide any valid directory.
-Directory contents are never deleted, and are only used to reference stored data.
+If a certain program will not be used, and the database files are not downloaded, provide any valid directory
+or leave the default values. Directory contents are never deleted and are only used to reference stored data.
 
 **********
 
@@ -301,7 +301,7 @@ if not ap.args.cancel_autocommit:
             dbdm.run(
                 "functions", 
                 os.path.join(ap.args.output_directory, "genomes"),
-                _file
+                _file,
                 "functions",
             )
         # Begin commit individual genomes info
