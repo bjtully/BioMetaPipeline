@@ -13,6 +13,8 @@ build/*
 */*/*/*.c
 */*/*/__pycache__/*
 */*/*.cpp
+BioMetaPipeline/Annotation/FunctionalProfileReader/reader.cpp
+
 !*/*/rope.cpp
 !*/*/*_cpp.cpp
 quick.py
