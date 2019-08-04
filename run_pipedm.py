@@ -9,9 +9,6 @@ from random import randint
 from datetime import datetime
 from configparser import RawConfigParser
 from argparse import RawTextHelpFormatter
-# DO NOT remove the following two lines
-RNAMMER_FOLDER = None
-SIGNALP_FOLDER = None
 
 """
 BioMetaPipeline calling script
