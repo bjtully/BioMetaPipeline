@@ -28,9 +28,9 @@ OUTPUT_ORDER = (
 
 CITATIONS = {
     "$metsanity": {
-        "citation": " Neely C. 2020. METsanity: Pipeline for major biological analyses. https://github.com/cjneely10/BioMetaPipeline.",
+        "citation": "Neely C. 2020. METsanity: Pipeline for major biological analyses. https://github.com/cjneely10/BioMetaPipeline.",
         "dependencies": [],
-        "version:": "latest",
+        "version": "latest",
         "in-text": "The genomic analysis was completed using METsanity $version (Neely 2020)."
     },
     "$checkm": {
@@ -166,6 +166,7 @@ cdef class CitationGenerator:
         self.added_flags = {}
         for name in ("$prodigal", "$hmmer", "$diamond", "$metsanity"):
             self.needed_citations[name] = CITATIONS[name]
+            self.added_flags[name] = []
 
     def add(self, str program, list added_flags):
         """ Adds program name to set of citations
@@ -203,7 +204,7 @@ cdef class CitationGenerator:
             out_dict = self.needed_citations.get(name, None)
             if out_dict:
                 txt_W.write(out_dict["in-text"]
-                            .replace("$version", out_dict.get("version"))
+                            .replace("$version", out_dict.get("version", ""))
                             .replace("$added_flags",
                                      (" (%s)" % ",".join(self.added_flags.get(name, "")).rstrip(","))
                                         if self.added_flags.get(name, "") != [] else "") + "\n\n")
