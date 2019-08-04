@@ -231,17 +231,14 @@ met_list = {
     "MET_ANNOT":    "metagenome_annotation.list"
 }
 
-user_id = []
-if ap.args.user:
-    user_id = ["--user", subprocess.getoutput("id -u")]
-
 # Run docker version
 subprocess.run(
     [
         "docker",
         "run",
-        # user info, if passed
-        *user_id,
+        # user info
+        "--user", 
+        subprocess.getoutput("id -u"),
         # Locale setup required for parsing files
         "-e",
         "LANG=C.UTF-8",
