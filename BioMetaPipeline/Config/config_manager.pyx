@@ -9,6 +9,7 @@ from BioMetaPipeline.Peptidase.peptidase import PeptidaseConstants
 from BioMetaPipeline.Annotation.kofamscan import KofamScanConstants
 from BioMetaPipeline.Annotation.virsorter import VirSorterConstants
 from BioMetaPipeline.Annotation.interproscan import InterproscanConstants
+from BioMetaPipeline.PipelineManagement.citation_generator import CitationGenerator
 
 pipelines = {
     "metagenome_annotation": {
@@ -50,6 +51,7 @@ class ConfigManager:
         self.config.read(config_path)
         self.ignore = ignore
         self.completed_tests = set()
+        self.citation_generator = CitationGenerator()
         # Check pipeline's required paths/data
         if pipeline_name:
             self.check_pipe_set("required", pipeline_name)
@@ -140,6 +142,7 @@ class ConfigManager:
                 value = self.config[program]
                 # Check PATH, DATA, and DATA_DICT paths
                 for key in ("PATH", "DATA", "DATA_DICT"):
+                    self.citation_generator.add(key)
                     if key in value.keys() and not os.path.exists(value[key]):
                         print("%s for %s not found" % (key, program))
                         exit(1)
