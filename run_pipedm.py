@@ -196,8 +196,6 @@ ap = ArgParse(
     (("-t", "--type_file"),
      {"help": "/path/to/type_file formatted as 'file_name.fna\\t[Archaea/Bacteria]\\t[gram+/gram-]\\n'",
       "default": "None"}),
-    (("-u", "--user"),
-     {"help": "Store output as user-owned directory", "default": False, "action": "store_true"}),
     ),
     description=ArgParse.description_builder(
         "pipedm:\tRun meta/genomes evaluation and annotation pipelines",
