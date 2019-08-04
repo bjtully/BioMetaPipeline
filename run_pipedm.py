@@ -48,28 +48,6 @@ RNAMMER_FOLDER = "/path/to/rnammer-1.2.src"
 
 # BioMetaPipeline version
 DOCKER_IMAGE = "cjneely10/biometapipeline:latest"
-docker_pid_filename = None
-
-def sigterm_handler(_signo, _stack_frame):
-    """ Graceful exit
-            End docker process, if running
-            Exit application
-
-    """
-    print("Exiting...")
-    if docker_pid_filename and os.path.exists(docker_pid_filename)::
-        subprocess.run(
-            [
-                "docker",
-                "kill",
-                "`cat %s`" % docker_pid_filename
-            ],
-            check=True,
-        )
-        os.remove(docker_pid_filename)
-    sys.exit(0)
-
-signal.signal(signal.SIGTERM, sigterm_handler)
 
 
 class ArgParse:
@@ -217,63 +195,62 @@ cfg = RawConfigParser()
 cfg.optionxform = str
 cfg.read(ap.args.config_file)
 
-# Store docker process id to file for graceful exits
-docker_pid_filename = "%s.%s.pid" % (datetime.today().strftime("%Y%m%d"), str(randint(1, 1001)))
-
 met_list = {
     "MET_EVAL":     "metagenome_evaluation.list",
     "MET_ANNOT":    "metagenome_annotation.list"
 }
 
 # Run docker version
-subprocess.run(
-    [
-        "docker",
-        "run",
-        # user info
-        "--user", 
-        subprocess.getoutput("id -u"),
-        # Locale setup required for parsing files
-        "-e",
-        "LANG=C.UTF-8",
-        # Docker pid storage
-        '--cidfile="%s"' % docker_pid_filename,
-        # CheckM
-        "-v", CHECKM_FOLDER + ":/home/appuser/checkm",
-        # GTDBtk
-        "-v", GTDBTK_FOLDER + ":/home/appuser/gtdbtk/db",
-        # kofamscan
-        "-v", KOFAM_FOLDER + ":/home/appuser/kofamscan/db",
-        # Peptidase storage
-        "-v", PEPTIDASE_DATA_FOLDER + ":/home/appuser/Peptidase",
-        # Interproscan
-        "-v", INTERPROSCAN_FOLDER + ":/home/appuser/interproscan-5.32-71.0/data",
-        # Volume to access genomes
-        "-v", VIRSORTER_DATA_FOLDER + ":/home/appuser/virsorter-data",
-        # Volume to access signalp binary
-        "-v", (SIGNALP_FOLDER or "") + ":/home/appuser/signalp",
-        # Volume to access rnammer binary
-        "-v", (RNAMMER_FOLDER or "") + ":/home/appuser/rnammer",
-        # Change output directory here
-        "-v", os.getcwd() + ":/home/appuser/wdir",
-        # "-it",
-        "--rm",
-        DOCKER_IMAGE,
-        ap.args.program,
-        "-d", os.path.join("/home/appuser/wdir", ap.args.directory),
-        "-o", os.path.join("/home/appuser/wdir", ap.args.output_directory),
-        "-c", os.path.join("/home/appuser/wdir", ap.args.config_file),
-        "-t", ap.args.type_file,
-        # Notify that this was called from docker
-        "-y",
-        # Cancel autocommit from docker
-        "-a",
-        # Don't remove intermediary files
-        "-z"
-    ],
-    check=True,
-)
-os.remove(docker_pid_filename)
+try:
+    subprocess.run(
+        [
+            "docker",
+            "run",
+            # user info
+            "--user", 
+            subprocess.getoutput("id -u"),
+            # Locale setup required for parsing files
+            "-e",
+            "LANG=C.UTF-8",
+            # CheckM
+            "-v", CHECKM_FOLDER + ":/home/appuser/checkm",
+            # GTDBtk
+            "-v", GTDBTK_FOLDER + ":/home/appuser/gtdbtk/db",
+            # kofamscan
+            "-v", KOFAM_FOLDER + ":/home/appuser/kofamscan/db",
+            # Peptidase storage
+            "-v", PEPTIDASE_DATA_FOLDER + ":/home/appuser/Peptidase",
+            # Interproscan
+            "-v", INTERPROSCAN_FOLDER + ":/home/appuser/interproscan-5.32-71.0/data",
+            # Volume to access genomes
+            "-v", VIRSORTER_DATA_FOLDER + ":/home/appuser/virsorter-data",
+            # Volume to access signalp binary
+            "-v", (SIGNALP_FOLDER or "") + ":/home/appuser/signalp",
+            # Volume to access rnammer binary
+            "-v", (RNAMMER_FOLDER or "") + ":/home/appuser/rnammer",
+            # Change output directory here
+            "-v", os.getcwd() + ":/home/appuser/wdir",
+            # "-it",
+            "--rm",
+            DOCKER_IMAGE,
+            ap.args.program,
+            "-d", os.path.join("/home/appuser/wdir", ap.args.directory),
+            "-o", os.path.join("/home/appuser/wdir", ap.args.output_directory),
+            "-c", os.path.join("/home/appuser/wdir", ap.args.config_file),
+            "-t", ap.args.type_file,
+            # Notify that this was called from docker
+            "-y",
+            # Cancel autocommit from docker
+            "-a",
+            # Don't remove intermediary files
+            "-z"
+        ],
+        check=True,
+    )
+except KeyboardInterrupt:
+    print("\nExiting...")
+    sys.exit(1)
+
 if not ap.args.cancel_autocommit and os.path.exists(os.path.join(ap.args.output_directory, met_list[ap.args.program])):
     print("\nStoring results to database..........")
     # Primary output file types from MET_ANNOT (with N = number of genomes):
@@ -329,5 +306,3 @@ if not ap.args.cancel_autocommit and os.path.exists(os.path.join(ap.args.output_
             "evaluation",
         )
     print("BioMetaDB project complete!")
-if os.path.isfile(docker_pid_filename):
-    os.remove(docker_pid_filename)

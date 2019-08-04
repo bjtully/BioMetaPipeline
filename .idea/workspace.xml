@@ -94,8 +94,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Sample/Config/Docker/MET_ANNOT.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="57" column="25" lean-forward="true" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
+            <state relative-caret-position="180">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
             </state>
           </provider>
         </entry>
@@ -256,7 +256,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="618" />
     <option name="y" value="14" />
     <option name="width" value="1262" />
@@ -495,12 +495,12 @@
       <workItem from="1564875505155" duration="4547000" />
       <workItem from="1564896632871" duration="24000" />
       <workItem from="1564933975065" duration="6181000" />
-      <workItem from="1564942874963" duration="492000" />
+      <workItem from="1564942874963" duration="971000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="558439000" />
+    <option name="totallyTimeSpent" value="558918000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -512,7 +512,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="618" y="14" width="1262" height="1333" extended-state="0" />
+    <frame x="618" y="14" width="1262" height="1333" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.50114155" side_tool="true" weight="0.21771523" />
@@ -968,8 +968,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Sample/Config/Docker/MET_ANNOT.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="57" column="25" lean-forward="true" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
+        <state relative-caret-position="180">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
