@@ -50,6 +50,27 @@ RNAMMER_FOLDER = "/path/to/rnammer-1.2.src"
 DOCKER_IMAGE = "cjneely10/biometapipeline:latest"
 docker_pid_filename = None
 
+def sigterm_handler(_signo, _stack_frame):
+    """ Graceful exit
+            End docker process, if running
+            Exit application
+
+    """
+    print("Exiting...")
+    if docker_pid_filename and os.path.exists(docker_pid_filename)::
+        subprocess.run(
+            [
+                "docker",
+                "kill",
+                "`cat %s`" % docker_pid_filename
+            ],
+            check=True,
+        )
+        os.remove(docker_pid_filename)
+    sys.exit(0)
+
+signal.signal(signal.SIGTERM, sigterm_handler)
+
 
 class ArgParse:
 
@@ -155,28 +176,6 @@ def get_added_flags(config, _dict, ignore = ()):
                 if def_key != ""]
     else:
         return []
-
-
-def sigterm_handler(_signo, _stack_frame):
-    """ Graceful exit
-            End docker process, if running
-            Exit application
-
-    """
-    print("Exiting...")
-    if os.path.exists(docker_pid_filename):
-        subprocess.run(
-            [
-                "docker",
-                "kill",
-                "`cat %s`" % docker_pid_filename
-            ],
-            check=True,
-        )
-        os.remove(docker_pid_filename)
-    sys.exit(0)
-
-signal.signal(signal.SIGTERM, sigterm_handler)
 
 
 # Parsed arguments
