@@ -135,6 +135,9 @@ class ConfigManager:
         # Allows pipe checks to only run once
         if pipe in self.completed_tests:
             return True
+        if pipe == "peptidase" and "SIGNALP" in self.config.keys():
+            value = self.config["SIGNALP"]
+            self.citation_generator.add("signalp", self.build_parameter_list_from_dict("SIGNALP"))
         for program in pipelines[pipeline_name][pipe]:
             # Verify that the [PROGRAM] is present for the given pipe
             try:
