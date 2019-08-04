@@ -248,30 +248,30 @@ subprocess.run(
         # Docker pid storage
         '--cidfile="%s"' % docker_pid_filename,
         # CheckM
-        "-v", CHECKM_FOLDER + ":/root/checkm",
+        "-v", CHECKM_FOLDER + ":/home/appuser/checkm",
         # GTDBtk
-        "-v", GTDBTK_FOLDER + ":/root/gtdbtk/db",
+        "-v", GTDBTK_FOLDER + ":/home/appuser/gtdbtk/db",
         # kofamscan
-        "-v", KOFAM_FOLDER + ":/root/kofamscan/db",
+        "-v", KOFAM_FOLDER + ":/home/appuser/kofamscan/db",
         # Peptidase storage
-        "-v", PEPTIDASE_DATA_FOLDER + ":/root/Peptidase",
+        "-v", PEPTIDASE_DATA_FOLDER + ":/home/appuser/Peptidase",
         # Interproscan
-        "-v", INTERPROSCAN_FOLDER + ":/root/interproscan-5.32-71.0/data",
+        "-v", INTERPROSCAN_FOLDER + ":/home/appuser/interproscan-5.32-71.0/data",
         # Volume to access genomes
-        "-v", VIRSORTER_DATA_FOLDER + ":/root/virsorter-data",
+        "-v", VIRSORTER_DATA_FOLDER + ":/home/appuser/virsorter-data",
         # Volume to access signalp binary
-        "-v", (SIGNALP_FOLDER or "") + ":/root/signalp",
+        "-v", (SIGNALP_FOLDER or "") + ":/home/appuser/signalp",
         # Volume to access rnammer binary
-        "-v", (RNAMMER_FOLDER or "") + ":/root/rnammer",
+        "-v", (RNAMMER_FOLDER or "") + ":/home/appuser/rnammer",
         # Change output directory here
-        "-v", os.getcwd() + ":/root/wdir",
+        "-v", os.getcwd() + ":/home/appuser/wdir",
         # "-it",
         "--rm",
         DOCKER_IMAGE,
         ap.args.program,
-        "-d", os.path.join("/root/wdir", ap.args.directory),
-        "-o", os.path.join("/root/wdir", ap.args.output_directory),
-        "-c", os.path.join("/root/wdir", ap.args.config_file),
+        "-d", os.path.join("/home/appuser/wdir", ap.args.directory),
+        "-o", os.path.join("/home/appuser/wdir", ap.args.output_directory),
+        "-c", os.path.join("/home/appuser/wdir", ap.args.config_file),
         "-t", ap.args.type_file,
         # Notify that this was called from docker
         "-y",

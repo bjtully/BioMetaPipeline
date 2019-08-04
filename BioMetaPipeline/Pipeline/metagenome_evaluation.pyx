@@ -105,6 +105,7 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
         )
     )
     luigi.build(task_list, local_scheduler=True)
+    cfg.citation_generator.write(output_directory + "citations.txt")
     if remove_intermediates:
         shutil.rmtree(directory)
     print("MET_EVAL pipeline complete!")

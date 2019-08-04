@@ -141,8 +141,8 @@ class ConfigManager:
                 # value has PROGRAM:{key:val} structure
                 value = self.config[program]
                 # Check PATH, DATA, and DATA_DICT paths
+                self.citation_generator.add(program, self.build_parameter_list_from_dict(program))
                 for key in ("PATH", "DATA", "DATA_DICT"):
-                    self.citation_generator.add(key, self.get_added_flags(program))
                     if key in value.keys() and not os.path.exists(value[key]):
                         print("%s for %s not found" % (key, program))
                         exit(1)
