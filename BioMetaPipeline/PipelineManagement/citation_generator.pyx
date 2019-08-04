@@ -5,9 +5,25 @@ from libcpp.vector cimport vector
 
 """ Class populates list of citations based on pipeline.
 Outputs a .txt file of sample in-text citations and references.
-Also outputs a .bib file for use in LaTeX
 
 """
+
+OUTPUT_ORDER = (
+    "$checkm",
+    "$fastani",
+    "$gtdbtk",
+    "$prodigal",
+    "$prokka",
+    "$rnammer",
+    "$diamond",
+    "$hmmer",
+    "$kofamscan",
+    "$biodata",
+    "interproscan",
+    "$psortb",
+    "$signalp",
+    "$virsorter"
+)
 
 CITATIONS = {
     "$checkm": {
@@ -131,44 +147,59 @@ CITATIONS = {
 }
 
 cdef class CitationGenerator:
-    cdef set needed_citations
+    cdef dict needed_citations
+    cdef dict added_flags
 
     def __init__(self):
         """ Reads through list of pipes that were run and gathers needed citations
 
         """
         cdef str name
-        self.needed_citations = set()
+        self.needed_citations = {}
+        self.added_flags = {}
         for name in ("$prodigal", "$hmmer", "$diamond"):
-            self.needed_citations.add(CITATIONS[name])
+            self.needed_citations[name] = CITATIONS[name]
 
-    def add(self, str program):
+    def add(self, str program, list added_flags):
         """ Adds program name to set of citations
 
         :param program:
+        :param added_flags:
         :return:
         """
         # Ensure that program name is lower-cased
         cdef str name
         program = ("$%s" % program.replace("$", "")).lower()
-        if program in CITATIONS:
+        if program in CITATIONS.keys():
             # Add citation for program
-            self.needed_citations.add(CITATIONS[program])
+            self.needed_citations[program] = CITATIONS[program]
+            # Store added flags
+            self.added_flags[program] = added_flags
             # Add dependencies if needed
             for name in CITATIONS[program]["dependencies"]:
                 self.add(name)
 
-    def _format_inserted_data(self):
-        pass
-
-
-    def write(self, str txt_out, str bib_out):
+    def write(self, str txt_out):
         """
 
         :param txt_out:
-        :param bib_out:
         :return:
         """
+        # Text output
         cdef object txt_W = open(txt_out, "w")
-        cdef object bib_W = open(bib_out, "w")
-
+        txt_W.write("Sample in-text citations:\n\n")
+        cdef str name
+        cdef dict out_dict, inner_dict
+        cdef list alphabetized_citations = sorted([inner_dict["citation"] for inner_dict in self.needed_citations.keys()])
+        for name in OUTPUT_ORDER:
+            # Write sample in-text citations
+            out_dict = self.needed_citations.get(name, None)
+            if out_dict:
+                txt_W.write(out_dict["in-text"]
+                            .replace("$version", out_dict.get("version"))
+                            .replace("$added_flags", ",".join(self.added_flags[name]).rstrip(",")) + "\n\n")
+        txt_W.write("\nReferences:\n\n")
+        for name in alphabetized_citations:
+            # Write references
+            txt_W.write(name + "\n")
+        txt_W.close()

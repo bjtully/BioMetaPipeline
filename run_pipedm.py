@@ -50,7 +50,7 @@ RNAMMER_FOLDER = "/path/to/rnammer-1.2.src"
 
 
 # BioMetaPipeline version
-DOCKER_IMAGE = "cjneely10/biometapipeline:v0.0.2"
+DOCKER_IMAGE = "cjneely10/biometapipeline:latest"
 docker_pid_filename = None
 
 
@@ -200,6 +200,8 @@ ap = ArgParse(
     (("-t", "--type_file"),
      {"help": "/path/to/type_file formatted as 'file_name.fna\\t[Archaea/Bacteria]\\t[gram+/gram-]\\n'",
       "default": "None"}),
+    (("-u", "--user"),
+     {"help": "Store output as user-owned directory", "default": False, "action": "store_true"}),
     ),
     description=ArgParse.description_builder(
         "pipedm:\tRun meta/genomes evaluation and annotation pipelines",
@@ -229,11 +231,17 @@ met_list = {
     "MET_ANNOT":    "metagenome_annotation.list"
 }
 
+user_id = []
+if ap.args.user:
+    user_id = ["--user", subprocess.getoutput("id -u")]
+
 # Run docker version
 subprocess.run(
     [
         "docker",
         "run",
+        # user info, if passed
+        *user_id,
         # Locale setup required for parsing files
         "-e",
         "LANG=C.UTF-8",
@@ -275,7 +283,7 @@ subprocess.run(
     check=True,
 )
 os.remove(docker_pid_filename)
-if not ap.args.cancel_autocommit:
+if not ap.args.cancel_autocommit and os.path.exists(os.path.join(ap.args.output_directory, met_list[ap.args.program])):
     print("\nStoring results to database..........")
     # Primary output file types from MET_ANNOT (with N = number of genomes):
     # Set project name
