@@ -47,7 +47,7 @@ RNAMMER_FOLDER = "/path/to/rnammer-1.2.src"
 
 
 # BioMetaPipeline version
-DOCKER_IMAGE = "cjneely10/biometapipeline:latest"
+DOCKER_IMAGE = "cjneely10/biometapipeline:v0.0.3"
 
 
 class ArgParse:
@@ -225,9 +225,9 @@ try:
             # Volume to access genomes
             "-v", VIRSORTER_DATA_FOLDER + ":/home/appuser/virsorter-data",
             # Volume to access signalp binary
-            "-v", (SIGNALP_FOLDER or "") + ":/home/appuser/signalp",
+            "-v", SIGNALP_FOLDER + ":/home/appuser/signalp",
             # Volume to access rnammer binary
-            "-v", (RNAMMER_FOLDER or "") + ":/home/appuser/rnammer",
+            "-v", RNAMMER_FOLDER + ":/home/appuser/rnammer",
             # Change output directory here
             "-v", os.getcwd() + ":/home/appuser/wdir",
             # "-it",
