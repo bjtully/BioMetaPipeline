@@ -31,6 +31,8 @@ class Diamond(LuigiTaskClass):
                 [
                     str(self.calling_script_path),
                     str(self.program),
+                    "--tmpdir",
+                    "/dev/shm",
                     "-d",
                     str(self.diamond_db),
                     "-q",
@@ -63,6 +65,8 @@ class DiamondMakeDB(LuigiTaskClass):
                 [
                     str(self.calling_script_path),
                     "makedb",
+                    "--tmpdir",
+                    "/dev/shm",
                     "--in",
                     str(self.prot_file),
                     "-d",
