@@ -41,11 +41,14 @@ class BioData(LuigiTaskClass):
         # Run KEGG-decoder
         subprocess.run(
             [
-                "KEGG-decoder",
+                "python",
+                str(self.calling_script_path) + "KEGG_decoder.py",
                 "-i",
                 str(self.ko_file),
                 "-o",
                 decoder_outfile,
+                "-p",
+                os.path.join(str(self.output_directory), "function_heatmap.svg"),
                 "--vizoption",
                 "static",
             ],
@@ -56,6 +59,8 @@ class BioData(LuigiTaskClass):
             [
                 "python",
                 str(self.calling_script_path) + "KEGG_expander.py",
+                "-p",
+                os.path.join(str(self.output_directory), "hmm_heatmap.svg"),
                 str(self.hmmsearch_file),
                 expander_outfile
             ],
@@ -66,6 +71,8 @@ class BioData(LuigiTaskClass):
             [
                 "python",
                 str(self.calling_script_path) + "Decode_and_Expand.py",
+                "-p",
+                os.path.join(str(self.output_directory), "decode-expand_heatmap.svg"),
                 decoder_outfile,
                 expander_outfile
             ],
