@@ -64,6 +64,7 @@ class HMMConvert(LuigiTaskClass):
             [
                 str(self.calling_script_path),
                 str(self.hmm_file),
+                *self.added_flags,
             ],
             check=True,
             stdout=outfile,
@@ -98,6 +99,7 @@ class HMMPress(LuigiTaskClass):
                 str(self.calling_script_path),
                 "-f",
                 moved_hmmfile,
+                *self.added_flags,
             ],
             check=True,
             stdout=stderr,

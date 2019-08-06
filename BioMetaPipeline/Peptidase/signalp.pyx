@@ -35,6 +35,7 @@ class SignalP(LuigiTaskClass):
             [
                 str(self.calling_script_path),
                 *data_type_flags,
+                *self.added_flags,
                 str(self.prot_file),
             ],
             check=True,

@@ -46,6 +46,7 @@ class PSORTb(LuigiTaskClass):
                     *data_type_flags,
                     "-o",
                     "terse",
+                    *self.added_flags,
                     str(self.prot_file),
                 ],
                 check=True,

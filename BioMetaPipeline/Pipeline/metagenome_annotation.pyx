@@ -101,6 +101,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                                               CAZYConstants.OUTPUT_DIRECTORY, HMMConvertConstants.OUTPUT_DIRECTORY),
                 hmm_file=cfg.get(CAZYConstants.CAZY, ConfigManager.DATA),
                 calling_script_path=cfg.get(HMMConvertConstants.HMMCONVERT, ConfigManager.PATH),
+                added_flags=cfg.build_parameter_list_from_dict(HMMConvertConstants.HMMCONVERT),
             ),
         )
         task_list.append(
@@ -109,6 +110,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                                               CAZYConstants.OUTPUT_DIRECTORY, HMMConvertConstants.OUTPUT_DIRECTORY),
                 hmm_file=cfg.get(CAZYConstants.CAZY, ConfigManager.DATA),
                 calling_script_path=cfg.get(HMMPressConstants.HMMPRESS, ConfigManager.PATH),
+                added_flags=cfg.build_parameter_list_from_dict(HMMPressConstants.HMMPRESS),
             ),
         )
         # Prepare MEROPS hmm profiles
@@ -118,6 +120,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                                               MEROPSConstants.OUTPUT_DIRECTORY, HMMConvertConstants.OUTPUT_DIRECTORY),
                 hmm_file=cfg.get(MEROPSConstants.MEROPS, ConfigManager.DATA),
                 calling_script_path=cfg.get(HMMConvertConstants.HMMCONVERT, ConfigManager.PATH),
+                added_flags=cfg.build_parameter_list_from_dict(HMMConvertConstants.HMMCONVERT),
             ),
         )
         task_list.append(
@@ -126,6 +129,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                                               MEROPSConstants.OUTPUT_DIRECTORY, HMMConvertConstants.OUTPUT_DIRECTORY),
                 hmm_file=cfg.get(MEROPSConstants.MEROPS, ConfigManager.DATA),
                 calling_script_path=cfg.get(HMMPressConstants.HMMPRESS, ConfigManager.PATH),
+                added_flags=cfg.build_parameter_list_from_dict(HMMPressConstants.HMMPRESS),
             ),
         )
 
@@ -186,6 +190,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 query_file=fasta_file,
                 evalue="1e-10",
                 calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
+                added_flags=cfg.build_parameter_list_from_dict(DiamondConstants.DIAMOND),
             ),
             DiamondToFasta(
                 output_directory=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY),
@@ -265,6 +270,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     query_file=os.path.join(output_directory, DiamondConstants.OUTPUT_DIRECTORY, out_prefix + ".subset.fna"),
                     evalue="1e-20",
                     calling_script_path=cfg.get(DiamondConstants.DIAMOND, ConfigManager.PATH),
+                    added_flags=cfg.build_parameter_list_from_dict(DiamondConstants.DIAMOND),
                 ),
                 # Write final prokka annotations
                 PROKKAMatcher(
@@ -304,6 +310,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 # Begin peptidase portion of pipeline
                 # Search for CAZy
                 HMMSearch(
+                    added_flags=cfg.build_parameter_list_from_dict(HMMSearchConstants.HMMSEARCH),
                     calling_script_path=cfg.get(HMMSearchConstants.HMMSEARCH, ConfigManager.PATH),
                     output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, CAZYConstants.OUTPUT_DIRECTORY,
                                                   HMMSearchConstants.OUTPUT_DIRECTORY),
@@ -325,6 +332,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 ),
                 # Search for MEROPS
                 HMMSearch(
+                    added_flags=cfg.build_parameter_list_from_dict(HMMSearchConstants.HMMSEARCH),
                     calling_script_path=cfg.get(HMMSearchConstants.HMMSEARCH, ConfigManager.PATH),
                     output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, MEROPSConstants.OUTPUT_DIRECTORY,
                                                   HMMSearchConstants.OUTPUT_DIRECTORY),
@@ -349,6 +357,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, SignalPConstants.OUTPUT_DIRECTORY),
                     outfile=out_prefix + SignalPConstants.RESULTS_SUFFIX,
                     prot_file=protein_file,
+                    added_flags=cfg.build_parameter_list_from_dict(SignalPConstants.SIGNALP),
                 ),
                 # Run psortb
                 PSORTb(
@@ -358,6 +367,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                     output_directory=os.path.join(output_directory, PeptidaseConstants.OUTPUT_DIRECTORY, PSORTbConstants.OUTPUT_DIRECTORY, out_prefix),
                     calling_script_path=cfg.get(PSORTbConstants.PSORTB, ConfigManager.PATH),
                     is_docker=is_docker,
+                    added_flags=cfg.build_parameter_list_from_dict(PSORTbConstants.PSORTB),
                 ),
                 # Parse signalp and psortb through merops to identify peptidases
                 Peptidase(
@@ -485,7 +495,8 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 out_file=CombineOutputConstants.HMM_OUTPUT_FILE,
                 fasta_file=os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, CombineOutputConstants.OUTPUT_DIRECTORY,
                                         CombineOutputConstants.PROT_OUTPUT_FILE),
-                hmm_file=os.path.join(cfg.get(BioDataConstants.BIODATA, ConfigManager.PATH), BioDataConstants.HMM_PATH)
+                hmm_file=os.path.join(cfg.get(BioDataConstants.BIODATA, ConfigManager.PATH), BioDataConstants.HMM_PATH),
+                added_flags=cfg.build_parameter_list_from_dict(HMMSearchConstants.HMMSEARCH),
             )
         )
         task_list.append(

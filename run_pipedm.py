@@ -31,8 +31,8 @@ GTDBTK_FOLDER = "/path/to/gtdbtk/release_##/##.#"
 CHECKM_FOLDER = "/path/to/checkm_databases"
 # Directory containing extracted ko_list and profiles/ from  ftp://ftp.genome.jp/pub/db/kofam/
 KOFAM_FOLDER = "/path/to/kofam_data"
-# Extracted interproscan data from  https://github.com/ebi-pf-team/interproscan/wiki/HowToDownload
-INTERPROSCAN_FOLDER = "/path/to/interproscan/data"
+# Extracted interproscan package with binary from  https://github.com/ebi-pf-team/interproscan/wiki/HowToDownload
+INTERPROSCAN_FOLDER = "/path/to/interproscan"
 # Directory containing 3 files - merops-as-pfams.txt, dbCAN-fam-HMMs.txt, MEROPS.pfam.hmm
 PEPTIDASE_DATA_FOLDER = "/path/to/peptidase_data"
 # Extracted virsorter data from  https://github.com/simroux/VirSorter
@@ -221,7 +221,7 @@ try:
             # Peptidase storage
             "-v", PEPTIDASE_DATA_FOLDER + ":/home/appuser/Peptidase",
             # Interproscan
-            "-v", INTERPROSCAN_FOLDER + ":/home/appuser/interproscan-5.32-71.0/data",
+            "-v", INTERPROSCAN_FOLDER + ":/home/appuser/interproscan-5.32-71.0",
             # Volume to access genomes
             "-v", VIRSORTER_DATA_FOLDER + ":/home/appuser/virsorter-data",
             # Volume to access signalp binary
@@ -234,7 +234,7 @@ try:
             "--rm",
             DOCKER_IMAGE,
             ap.args.program,
-            "-d", os.path.join("/home/appuser/wdir", ap.args.directory),
+            "-d", os.path.join("/home/appuser/wdir", p.args.directory),
             "-o", os.path.join("/home/appuser/wdir", ap.args.output_directory),
             "-c", os.path.join("/home/appuser/wdir", ap.args.config_file),
             "-t", ap.args.type_file,

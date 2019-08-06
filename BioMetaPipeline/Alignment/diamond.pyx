@@ -42,6 +42,7 @@ class Diamond(LuigiTaskClass):
                     *outfmt,
                     "--evalue",
                     str(self.evalue),
+                    *self.added_flags
                 ],
                 check=True,
                 stdout=stderr,
