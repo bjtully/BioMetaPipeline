@@ -1,6 +1,5 @@
 # cython: language_level=3
 import os
-import glob
 import luigi
 import shutil
 from BioMetaPipeline.Accessories.ops import get_prefix
@@ -9,7 +8,6 @@ from BioMetaPipeline.Peptidase.cazy import CAZY, CAZYConstants
 from BioMetaPipeline.PipelineManagement.print_id import PrintID
 from BioMetaPipeline.Peptidase.psortb import PSORTb, PSORTbConstants
 from BioMetaPipeline.PipelineManagement.project_manager import GENOMES
-from BioMetaPipeline.FileOperations.file_operations import Remove, Move
 from BioMetaPipeline.Peptidase.signalp import SignalP, SignalPConstants
 from BioMetaPipeline.Annotation.biodata import BioData, BioDataConstants
 from BioMetaPipeline.GeneCaller.prodigal import Prodigal, ProdigalConstants
@@ -564,25 +562,9 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                 )
             )
 
-        # # Remove combined output
-        # task_list.append(
-        #     Remove(
-        #         data_folder=os.path.join(
-        #             output_directory,
-        #             KofamScanConstants.KEGG_DIRECTORY,
-        #             CombineOutputConstants.OUTPUT_DIRECTORY
-        #         )
-        #     )
-        # )
-        # # Move the .svg output to output directory
-        # task_list.append(
-        #     Move(
-        #         move_directory=os.path.join(output_directory, BioDataConstants.OUTPUT_DIRECTORY),
-        #         data_files=list(glob.glob("*.svg")),
-        #     )
-        # )
     luigi.build(task_list, local_scheduler=True)
     cfg.citation_generator.write(os.path.join(output_directory, "citations.txt"))
+
     # Remove directories that were added as part of the pipeline
     if remove_intermediates:
         shutil.rmtree(directory)
