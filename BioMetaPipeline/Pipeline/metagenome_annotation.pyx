@@ -22,6 +22,7 @@ from BioMetaPipeline.FileOperations.split_file import SplitFile, SplitFileConsta
 from BioMetaPipeline.Annotation.prokka import PROKKA, PROKKAConstants, PROKKAMatcher
 from BioMetaPipeline.Annotation.interproscan import Interproscan, InterproscanConstants
 from BioMetaPipeline.Peptidase.merops import MEROPS, MEROPSConstants, build_merops_dict
+from BioMetaPipeline.PipelineManagement.citation_generator import CitationManagerConstants
 from BioMetaPipeline.PipelineManagement.project_manager cimport project_check_and_creation
 from BioMetaPipeline.DataPreparation.combine_output import CombineOutput, CombineOutputConstants
 from BioMetaPipeline.Alignment.diamond import Diamond, DiamondMakeDB, DiamondConstants, DiamondToFasta
@@ -582,7 +583,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
         #     )
         # )
     luigi.build(task_list, local_scheduler=True)
-    cfg.citation_generator.write(os.path.join(output_directory, "citations.txt"))
+    cfg.citation_generator.write(os.path.join(output_directory, CitationManagerConstants.OUTPUT_FILE))
     # Remove directories that were added as part of the pipeline
     if remove_intermediates:
         shutil.rmtree(directory)

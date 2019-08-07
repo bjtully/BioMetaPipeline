@@ -153,6 +153,11 @@ CITATIONS = {
     }
 }
 
+
+class CitationManagerConstants:
+    OUTPUT_FILE = "citations.txt"
+
+
 cdef class CitationGenerator:
     cdef dict needed_citations
     cdef dict added_flags
