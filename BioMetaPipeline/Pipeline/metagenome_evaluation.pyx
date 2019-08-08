@@ -32,11 +32,13 @@ def metagenome_evaluation(str directory, str config_file, bint cancel_autocommit
     """ Function calls the pipeline for evaluating a set of genomes using checkm, gtdbtk, fastANI
     Creates .tsv file of final output, adds to database
 
-    :param biometadb_project:
     :param directory:
     :param config_file:
     :param cancel_autocommit:
     :param output_directory:
+    :param biometadb_project:
+    :param remove_intermediates:
+    :param is_docker:
     :return:
     """
     cdef str genome_list_path, alias, table_name

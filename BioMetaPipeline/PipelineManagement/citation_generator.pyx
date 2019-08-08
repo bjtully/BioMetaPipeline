@@ -1,7 +1,4 @@
-# distutils: language = c++
-from io import StringIO
-from libcpp.string cimport string
-from libcpp.vector cimport vector
+# cython: language_level=3
 
 """ Class populates list of citations based on pipeline.
 Outputs a .txt file of sample in-text citations and references.
