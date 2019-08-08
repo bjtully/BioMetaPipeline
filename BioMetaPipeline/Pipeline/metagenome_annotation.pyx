@@ -579,7 +579,8 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
 
     # Remove directories that were added as part of the pipeline
     if remove_intermediates:
-        os.remove(os.path.join(output_directory, prefix + "." + MetagenomeAnnotationConstants.TMP_TSV_OUT))
+        for prefix in out_prefixes:
+            os.remove(os.path.join(output_directory, prefix + "." + MetagenomeAnnotationConstants.TMP_TSV_OUT))
         shutil.rmtree(directory)
         shutil.rmtree(os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY))
     print("MET_ANNOT pipeline complete!")

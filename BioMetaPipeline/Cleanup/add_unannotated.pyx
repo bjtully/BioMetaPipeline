@@ -35,12 +35,13 @@ class AddUnannotated(luigi.Task):
     def run(self):
         cdef list combined_results
         cdef str _file, prot_id, annotation
-        cdef set all_proteins = set(os.listdir(str(self.proteins_directory)))
-        cdef set stored_prots = set(os.listdir(os.path.join(str(self.biometadb_project), "db", correct_val(os.path.basename(str(self.proteins_directory))))))
-        cdef list columns_to_update = next(open(str(self.annotation_tsv_outfile), "r")).rstrip("\r\n").split("\t")[1:]
+        cdef set all_proteins = set([os.path.basename(_file) for _file in os.listdir(str(self.proteins_directory))])
         combined_results = [pandas.read_csv(str(self.annotation_tsv_outfile), delimiter=str(self.delimiter), header=0, index_col=0),]
+        cdef set stored_prots = set(combined_results[0].index.values.tolist())
         for prot_id in all_proteins - stored_prots:
-            combined_results.append(pandas.DataFrame(data={annotation: "None" for annotation in columns_to_update}, columns=columns_to_update, index=[prot_id,]))
+            combined_results.append(pandas.DataFrame.from_dict({prot_id: ["None" for _ in combined_results[0].columns]},
+                                                               orient="index",
+                                                               columns=combined_results[0].columns))
         pandas.concat(combined_results, sort=True).to_csv(
                         os.path.join(str(self.output_directory), str(self.output_file)),
                         sep="\t",
