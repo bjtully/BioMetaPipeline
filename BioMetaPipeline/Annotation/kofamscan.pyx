@@ -53,7 +53,7 @@ class KofamScan(LuigiTaskClass):
                 outfile_path,
                 os.path.splitext(outpath)[0] + KofamScanConstants.AMENDED_RESULTS_SUFFIX,
                 ".faa",
-                "Protein\tKO"
+                "ID\tKO"
             )
         else:
             os.remove(outpath)

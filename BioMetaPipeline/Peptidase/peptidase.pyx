@@ -104,14 +104,14 @@ class Peptidase(LuigiTaskClass):
                 str(self.output_prefix) + PeptidaseConstants.MEROPS_HITS_EXT,
                 ), "wb")
             # Write output table of proteins with extracellular matches
-            pfam_prot_out.write(b"Protein\tMEROPS_Pfam\n")
+            pfam_prot_out.write(b"ID\tMEROPS_Pfam\n")
             for _id, pfam in extracellular_pfams.items():
                 pfam_prot_out.write(_id + <string>PyUnicode_AsUTF8(str(self.protein_suffix)) + b"\t" + pfam + b"\n")
             pfam_prot_out.close()
             # Write count table of pfam hits for entire genomes
             extracellular_pfam_counts = <dict>Counter(extracellular_pfams.values())
             pfams = list(extracellular_pfam_counts.keys())
-            pfam_count_out.write(b"Genome")
+            pfam_count_out.write(b"ID")
             for pfam in pfams:
                 pfam_count_out.write(b"\t" + pfam)
             pfam_count_out.write(b"\n")
@@ -124,7 +124,7 @@ class Peptidase(LuigiTaskClass):
             adj_merops_pfam_dict = {<string>PyUnicode_AsUTF8(key): <string>PyUnicode_AsUTF8(val) for key, val in self.pfam_to_merops_dict.items()}
             merops_counts = <dict>Counter({adj_merops_pfam_dict[pfam]: count for pfam, count in extracellular_pfam_counts.items()})
             merops = list(merops_counts.keys())
-            merops_count_out.write(b"Genome")
+            merops_count_out.write(b"ID")
             for merop in merops:
                 merops_count_out.write(b"\t" + merop)
             merops_count_out.write(b"\n")

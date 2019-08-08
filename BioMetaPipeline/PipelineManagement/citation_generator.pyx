@@ -170,7 +170,7 @@ cdef class CitationGenerator:
             self.needed_citations[name] = CITATIONS[name]
             self.added_flags[name] = []
 
-    def add(self, str program, list added_flags):
+    def add(self, str program, list added_flags = []):
         """ Adds program name to set of citations
 
         :param program:
@@ -184,10 +184,11 @@ cdef class CitationGenerator:
             # Add citation for program
             self.needed_citations[program] = CITATIONS[program]
             # Store added flags
-            self.added_flags[program] = added_flags
+            if added_flags != [] and self.added_flags.get(program, None):
+                self.added_flags[program] = added_flags
             # Add dependencies if needed
             for name in CITATIONS[program]["dependencies"]:
-                self.add(name, added_flags)
+                self.add(name)
 
     def write(self, str txt_out):
         """

@@ -143,7 +143,7 @@ cdef void match_prokka_to_prodigal_and_write_tsv(str diamond_file, str prokka_an
     cdef dict matches = {}
     cdef object W = open(outfile, "w")
     cdef dict prokka_data = TSVParser.parse_dict(prokka_annotation_tsv)
-    W.write("protein\tprokka\n")
+    W.write("ID\tprokka\n")
     cdef bytes _line
     cdef list line
     cdef object R = open(diamond_file, "rb")

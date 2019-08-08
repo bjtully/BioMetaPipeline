@@ -98,7 +98,7 @@ cdef void write_interproscan_amended(str interproscan_results, str outfile, list
     cdef dict condensed_results
     if interpro_ids:
         W = open(outfile, "w")
-        W.write("Protein")
+        W.write("ID")
         for app in applications:
             W.write("\t" + app)
         W.write("\n")

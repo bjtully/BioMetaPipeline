@@ -113,7 +113,7 @@ def write_final_output_file(str koala_list, str hmm_list, str output_file):
     cols.insert(sulfitereductase_index+1, cols.pop(int(cols.index('DsrD dissimilatory sulfite reductase'))))
     output_df = output_df[cols]
     output_df.index = [idx.replace(".protein", "") + ".fna" for idx in output_df.index]
-    output_df.index.name = "Genome"
+    output_df.index.name = "ID"
     print(output_df)
     output_df.to_csv(output_file, sep="\t")
 

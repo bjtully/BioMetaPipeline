@@ -54,7 +54,7 @@ class CAZY(LuigiTaskClass):
                              str(self.outfile).replace(CAZYConstants.ASSIGNMENTS, CAZYConstants.ASSIGNMENTS_BY_PROTEIN)),
                 "wb"
             )
-            W.write(<string>"Genome")
+            W.write(<string>"ID")
             for cazy in cazy_ids:
                 W.write(<string>"\t" + cazy)
             W.write(<string>"\n")
@@ -64,7 +64,7 @@ class CAZY(LuigiTaskClass):
                 W.write(<string>"\t" + val)
             W.write(<string>"\n")
             # Write individual protein data
-            WP.write(<string>"Protein\tCAZy\n")
+            WP.write(<string>"ID\tCAZy\n")
             for genome, cazy in cazy_data.items():
                 WP.write(genome + prot_suffix + <string>"\t" + cazy + <string>"\n")
             W.close()

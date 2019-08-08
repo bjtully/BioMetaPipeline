@@ -1,3 +1,4 @@
+# cython: language_level=3
 import os
 import luigi
 import pandas as pd
@@ -36,7 +37,7 @@ class CombineOutput(LuigiTaskClass):
         cdef object R
         cdef object _file
         cdef bint is_first = True
-        cdef list combined_results, files
+        cdef list files
         for directory, prefixes, suffixes, output_file, in self.directories:
             # Assumes that header lines are identical for all files
             if not self.join_header:
@@ -54,14 +55,21 @@ class CombineOutput(LuigiTaskClass):
                 _file.close()
             # Gathers headers by first lines, minus first value, to write final output.
             else:
-                combined_results = []
+                combined_results = pd.DataFrame()
                 files = []
                 for _f in filter_complete_list_with_prefixes(build_complete_file_list(directory, suffixes), prefixes):
                     # Gather tsv info
                     files.append(os.path.basename(_f))
-                    combined_results.append(pd.read_csv(_f, delimiter=str(self.delimiter), header=0, index_col=0))
-                if combined_results:
-                    pd.concat(combined_results, sort=True).to_csv(
+                    print(_f)
+                    if combined_results.empty:
+                        combined_results = pd.read_csv(_f, delimiter=str(self.delimiter), header=0, index_col="ID")
+                    else:
+                        combined_results = combined_results.join(
+                            pd.read_csv(_f, delimiter=str(self.delimiter), header=0, index_col="ID"),
+                            lsuffix="_1", rsuffix="_2"
+                        )
+                if not combined_results.empty:
+                    combined_results.to_csv(
                         os.path.join(str(self.output_directory), output_file),
                         sep="\t",
                         na_rep=str(self.na_rep),
