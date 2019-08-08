@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="218e6076-48b5-4a87-b494-95f1ba5893b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Annotation/biodata.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Annotation/biodata.pyx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/DataPreparation/combine_output.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/DataPreparation/combine_output.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BioMetaPipeline/PipelineManagement/citation_generator.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/BioMetaPipeline/PipelineManagement/citation_generator.pyx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +66,7 @@
             <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/BioMetaPipeline/PipelineManagement/citation_generator.pyx">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="245">
+                  <state relative-caret-position="200">
                     <caret line="169" column="57" selection-start-line="169" selection-start-column="57" selection-end-line="169" selection-end-column="57" />
                   </state>
                 </provider>
@@ -161,16 +160,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BioMetaPipeline/DataPreparation/combine_output.pyx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="604">
-              <caret line="70" column="45" selection-start-line="70" selection-start-column="45" selection-end-line="70" selection-end-column="45" />
+            <state relative-caret-position="469">
+              <caret line="61" column="54" selection-start-line="61" selection-start-column="54" selection-end-line="61" selection-end-column="54" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/biodata.pyx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="335">
@@ -280,10 +279,10 @@
         <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/prokka.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Peptidase/cazy.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Peptidase/peptidase.pyx" />
-        <option value="$PROJECT_DIR$/BioMetaPipeline/PipelineManagement/citation_generator.pyx" />
-        <option value="$PROJECT_DIR$/BioMetaPipeline/DataPreparation/combine_output.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_annotation.pyx" />
         <option value="$PROJECT_DIR$/BioMetaPipeline/Annotation/biodata.pyx" />
+        <option value="$PROJECT_DIR$/BioMetaPipeline/DataPreparation/combine_output.pyx" />
+        <option value="$PROJECT_DIR$/BioMetaPipeline/PipelineManagement/citation_generator.pyx" />
       </list>
     </option>
   </component>
@@ -526,12 +525,12 @@
       <workItem from="1565230947020" duration="2879000" />
       <workItem from="1565234020540" duration="30000" />
       <workItem from="1565236116776" duration="5794000" />
-      <workItem from="1565277892728" duration="1800000" />
+      <workItem from="1565277892728" duration="2852000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="583787000" />
+    <option name="totallyTimeSpent" value="584839000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -544,6 +543,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="25" y="34" width="1262" height="1333" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.50114155" side_tool="true" weight="0.21771523" />
       <window_info id="Favorites" order="1" side_tool="true" />
@@ -954,13 +954,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/DataPreparation/combine_output.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="604">
-          <caret line="70" column="45" selection-start-line="70" selection-start-column="45" selection-end-line="70" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Pipeline/metagenome_evaluation.pyx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -988,17 +981,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/PipelineManagement/citation_generator.pyx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="169" column="57" selection-start-line="169" selection-start-column="57" selection-end-line="169" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BioMetaPipeline/Annotation/biodata.pyx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="335">
           <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/DataPreparation/combine_output.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="61" column="54" selection-start-line="61" selection-start-column="54" selection-end-line="61" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BioMetaPipeline/PipelineManagement/citation_generator.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="169" column="57" selection-start-line="169" selection-start-column="57" selection-end-line="169" selection-end-column="57" />
         </state>
       </provider>
     </entry>

@@ -60,7 +60,6 @@ class CombineOutput(LuigiTaskClass):
                 for _f in filter_complete_list_with_prefixes(build_complete_file_list(directory, suffixes), prefixes):
                     # Gather tsv info
                     files.append(os.path.basename(_f))
-                    print(_f)
                     if combined_results.empty:
                         combined_results = pd.read_csv(_f, delimiter=str(self.delimiter), header=0, index_col="ID")
                     else:

@@ -168,7 +168,6 @@ cdef class CitationGenerator:
         self.added_flags = {}
         for name in ("$prodigal", "$hmmer", "$diamond", "$metsanity"):
             self.needed_citations[name] = CITATIONS[name]
-            self.added_flags[name] = []
 
     def add(self, str program, list added_flags = []):
         """ Adds program name to set of citations
@@ -184,7 +183,7 @@ cdef class CitationGenerator:
             # Add citation for program
             self.needed_citations[program] = CITATIONS[program]
             # Store added flags
-            if added_flags != [] and self.added_flags.get(program, None):
+            if program not in self.added_flags.keys() and added_flags:
                 self.added_flags[program] = added_flags
             # Add dependencies if needed
             for name in CITATIONS[program]["dependencies"]:
@@ -210,7 +209,7 @@ cdef class CitationGenerator:
                             .replace("$version", out_dict.get("version", ""))
                             .replace("$added_flags",
                                      (" (%s)" % ",".join(self.added_flags.get(name, "")).rstrip(","))
-                                        if self.added_flags.get(name, "") != [] else "") + "\n\n")
+                                        if name in self.added_flags.keys() else "") + "\n\n")
         txt_W.write("\nReferences:\n\n")
         for name in alphabetized_citations:
             # Write references
