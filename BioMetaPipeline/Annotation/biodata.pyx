@@ -25,6 +25,7 @@ class BioData(LuigiTaskClass):
     hmmsearch_file = luigi.Parameter()
     out_prefix = luigi.Parameter()
     ko_file = luigi.Parameter()
+    is_docker = luigi.BoolParameter(default=False)
 
 
     def requires(self):
@@ -37,42 +38,49 @@ class BioData(LuigiTaskClass):
         cdef str decoder_outfile = os.path.join(str(self.output_directory), str(self.out_prefix) + ".decoder.tsv")
         cdef str expander_outfile = os.path.join(str(self.output_directory), str(self.out_prefix) + ".expander.tsv")
         cdef str final_outfile = os.path.join(str(self.output_directory), str(self.out_prefix) + BioDataConstants.OUTPUT_SUFFIX)
+        cdef list out_path = []
+        cdef list calling_head = []
+        if self.is_docker:
+            out_path = ["-p", os.path.join(str(self.output_directory), "function_heatmap.svg")]
+            calling_head = ["python", str(self.calling_script_path) + "KEGG_decoder.py"]
+        else:
+            calling_head = ["KEGG-decoder",]
         # Combine mrna results
         # Run KEGG-decoder
         subprocess.run(
             [
-                "python",
-                str(self.calling_script_path) + "KEGG_decoder.py",
+                *calling_head,
                 "-i",
                 str(self.ko_file),
                 "-o",
                 decoder_outfile,
-                "-p",
-                os.path.join(str(self.output_directory), "function_heatmap.svg"),
+                *out_path,
                 "--vizoption",
                 "static",
             ],
             check=True,
         )
+        if self.is_docker:
+            out_path = ["-p", os.path.join(str(self.output_directory), "hmm_heatmap.svg")]
         # Run KEGG-expander
         subprocess.run(
             [
                 "python",
                 str(self.calling_script_path) + "KEGG_expander.py",
-                "-p",
-                os.path.join(str(self.output_directory), "hmm_heatmap.svg"),
+                *out_path,
                 str(self.hmmsearch_file),
                 expander_outfile
             ],
             check=True,
         )
+        if self.is_docker:
+            out_path = ["-p", os.path.join(str(self.output_directory), "decode-expand_heatmap.svg")]
         # Run Decode_and_Expand.py
         subprocess.run(
             [
                 "python",
                 str(self.calling_script_path) + "Decode_and_Expand.py",
-                "-p",
-                os.path.join(str(self.output_directory), "decode-expand_heatmap.svg"),
+                *out_path,
                 decoder_outfile,
                 expander_outfile
             ],

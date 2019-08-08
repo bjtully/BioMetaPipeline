@@ -509,6 +509,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                                      CombineOutputConstants.KO_OUTPUT_FILE),
                 hmmsearch_file=os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, HMMSearchConstants.OUTPUT_DIRECTORY,
                                             CombineOutputConstants.HMM_OUTPUT_FILE),
+                is_docker=is_docker,
             )
         )
         task_list.append(
