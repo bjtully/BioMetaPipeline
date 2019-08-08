@@ -6,6 +6,7 @@ from BioMetaPipeline.Accessories.ops import get_prefix
 from BioMetaPipeline.Parsers.tsv_parser import TSVParser
 from BioMetaPipeline.Peptidase.cazy import CAZY, CAZYConstants
 from BioMetaPipeline.PipelineManagement.print_id import PrintID
+from BioMetaPipeline.Cleanup.add_unannotated import AddUnannotated
 from BioMetaPipeline.Peptidase.psortb import PSORTb, PSORTbConstants
 from BioMetaPipeline.PipelineManagement.project_manager import GENOMES
 from BioMetaPipeline.Peptidase.signalp import SignalP, SignalPConstants
@@ -45,6 +46,7 @@ metagenome_annotation consists of:
 
 class MetagenomeAnnotationConstants:
     TABLE_NAME = "Functions"
+    TMP_TSV_OUT = "metagenome_annotation_tmp.tsv"
     TSV_OUT = "metagenome_annotation.tsv"
     LIST_FILE = "metagenome_annotation.list"
     PROJECT_NAME = "MetagenomeAnnotation"
@@ -67,7 +69,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
     :param remove_intermediates:
     :return:
     """
-    cdef str genome_list_path, alias, table_name, fasta_file, out_prefix, _file, prefix
+    cdef str genome_list_path, alias, table_name, fasta_file, out_prefix, _file, prefix, protein_outdir
     cdef object cfg
     genome_list_path, alias, table_name, cfg, biometadb_project = project_check_and_creation(
         <void* >directory,
@@ -539,12 +541,22 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                         (prefix,),
                         # All possible suffixes
                         tuple(_v for key, val in pipeline_classes.items() for _v in val if key in cfg.completed_tests and key != "virsorter"),
-                        prefix + "." + MetagenomeAnnotationConstants.TSV_OUT),
+                        prefix + "." + MetagenomeAnnotationConstants.TMP_TSV_OUT),
                     ],
                     calling_script_path="",
-                    output_directory=os.path.join(output_directory),
+                    output_directory=output_directory,
                     na_rep="None",
                     join_header=True,
+                )
+            )
+            task_list.append(
+                AddUnannotated(
+                    fasta_prefix=prefix,
+                    biometadb_project=biometadb_project,
+                    proteins_directory=os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY, prefix),
+                    annotation_tsv_outfile=os.path.join(output_directory, prefix + "." + MetagenomeAnnotationConstants.TMP_TSV_OUT),
+                    output_file=prefix + "." + MetagenomeAnnotationConstants.TSV_OUT,
+                    output_directory=output_directory,
                 )
             )
             # Store combined data to database
@@ -567,6 +579,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
 
     # Remove directories that were added as part of the pipeline
     if remove_intermediates:
+        os.remove(os.path.join(output_directory, prefix + "." + MetagenomeAnnotationConstants.TMP_TSV_OUT))
         shutil.rmtree(directory)
         shutil.rmtree(os.path.join(output_directory, SplitFileConstants.OUTPUT_DIRECTORY))
     print("MET_ANNOT pipeline complete!")
