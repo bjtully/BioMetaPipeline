@@ -37,7 +37,7 @@ class CombineOutput(LuigiTaskClass):
         cdef object R
         cdef object _file
         cdef bint is_first = True
-        cdef list files
+        cdef list files, output_results = []
         for directory, prefixes, suffixes, output_file, in self.directories:
             # Assumes that header lines are identical for all files
             if not self.join_header:
@@ -55,20 +55,22 @@ class CombineOutput(LuigiTaskClass):
                 _file.close()
             # Gathers headers by first lines, minus first value, to write final output.
             else:
-                combined_results = pd.DataFrame()
-                files = []
+                # combined_results = pd.DataFrame(index="ID")
+                # files = []
+                _df = False
                 for _f in filter_complete_list_with_prefixes(build_complete_file_list(directory, suffixes), prefixes):
                     # Gather tsv info
-                    files.append(os.path.basename(_f))
-                    if combined_results.empty:
-                        combined_results = pd.read_csv(_f, delimiter=str(self.delimiter), header=0, index_col="ID")
+                    # files.append(os.path.basename(_f))
+                    if not _df:
+                        df = pd.read_csv(_f, delimiter=str(self.delimiter), header=0, index_col="ID")
+                        _df = True
                     else:
-                        combined_results = combined_results.join(
-                            pd.read_csv(_f, delimiter=str(self.delimiter), header=0, index_col="ID"),
-                            lsuffix="_1", rsuffix="_2"
-                        )
-                if not combined_results.empty:
-                    combined_results.to_csv(
+                        df = df.combine_first(pd.read_csv(_f, delimiter=str(self.delimiter), header=0, index_col="ID"))
+                    # output_results.append()
+                # combined_results = combined_results.join(output_results)
+                if _df:
+                    # new_df = pd.concat(output_results, axis=1, sort=False)
+                    df.to_csv(
                         os.path.join(str(self.output_directory), output_file),
                         sep="\t",
                         na_rep=str(self.na_rep),

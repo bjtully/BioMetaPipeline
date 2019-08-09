@@ -486,6 +486,7 @@ def metagenome_annotation(str directory, str config_file, bint cancel_autocommit
                      CombineOutputConstants.KO_OUTPUT_FILE),
                 ],
                 calling_script_path="",
+                na_rep="0",
                 output_directory=os.path.join(output_directory, KofamScanConstants.KEGG_DIRECTORY, CombineOutputConstants.OUTPUT_DIRECTORY),
             )
         )
